@@ -1,0 +1,17 @@
+{
+    "name": "root/www",
+    "description": "PMU dzio",
+    "require": {
+        "laravel/laravel": "^5.5"
+    },
+    "authors": [
+        {
+            "name": "Nicolas Cramail",
+            "email": "nicolas.cramail@gmail.com"
+        },
+        {
+            "name": "Artashes Grigoryan",
+            "email": "formyfreelance@gmail.com"
+        }
+    ]
+}
