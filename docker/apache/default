@@ -1,7 +1,7 @@
 ServerName localhost
 <VirtualHost *:80>
         ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/core/
+        DocumentRoot /var/www/
 
         DirectoryIndex index.php
         <Directory /var/www/core/>
