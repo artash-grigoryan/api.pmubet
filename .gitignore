@@ -1,0 +1,7 @@
+.idea
+*.log
+*.csv
+
+vitrine
+instance
+vendor

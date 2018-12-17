@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+    www:
+        image: nimmis/apache-php7
+        #build: "./docker/apache"
+        volumes:
+          - ".:/var/www"
+        working_dir: "/var/www"
+        #command : "bash -c 'source /etc/apache2/envvars; apache2 -DFOREGROUND'"
+        ports:
+          - 80:80
+          - 443:443
+        links:
+          - mysql
+
+    mysql:
+        image: mysql
+        command: --lower_case_table_names=1
+        restart: always
+        environment:
+          MYSQL_ROOT_PASSWORD: admin
+        ports:
+          - 3306:3306
+
+    pma:
+        image: phpmyadmin/phpmyadmin
+        environment:
+         - PMA_ARBITRARY=1
+        restart: always
+        ports:
+         - 8080:80
+        volumes:
+         - /sessions
