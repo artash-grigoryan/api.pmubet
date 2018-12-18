@@ -1,17 +1,25 @@
-FROM nimmis/apache
+FROM php:7.1.2-apache
+RUN a2enmod rewrite
+RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install mysqli
 
-MAINTAINER nimmis <kjell.havneskold@gmail.com>
+RUN apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng-dev \
+        zip unzip \
+    && docker-php-ext-install -j$(nproc) iconv mcrypt \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd
 
-# disable interactive functions
-ENV DEBIAN_FRONTEND noninteractive
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+#cd /tmp && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-RUN apt-get update && \
-apt-get install -y php libapache2-mod-php  \
-php-fpm php-cli php-mysqlnd php-pgsql php-sqlite3 php-redis \
-php-apcu php-intl php-imagick php-mcrypt php-json php-gd php-curl && \
-phpenmod mcrypt && \
-rm -rf /var/lib/apt/lists/* && \
-cd /tmp && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+RUN apt-get install -y --force-yes make git locales gcc g++
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+RUN locale-gen
+ENV LC_ALL en_US.UTF-8
 
 RUN rm /etc/apache2/sites-*/*
 COPY default /etc/apache2/sites-available/default.conf
