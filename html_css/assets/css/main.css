@@ -1,0 +1,429 @@
+
+.container {
+    max-width: 1370px;
+}
+.primary-color {
+    color: #218850 !important;
+}
+.banner {
+    position: relative;
+    background-size: cover;
+    background-image: url(https://www.equidia.fr/assets/img/header-course/Trot_Attele_946_x_533_px.jpg);
+}
+.banner:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: .8;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3b679e+0,2b88d9+50,207cca+51,7db9e8+100;Blue+Gloss+%232 */
+    background: #3b679e; /* Old browsers */
+    background: -moz-linear-gradient(top, #3b679e 0%, #2b88d9 50%, #207cca 51%, #7db9e8 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #3b679e 0%,#2b88d9 50%,#207cca 51%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #3b679e 0%,#2b88d9 50%,#207cca 51%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b679e', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+}
+.banner.inner-banner .container {
+    min-height: 400px;
+}
+.banner .container {
+    padding-top: 35px;
+    padding-bottom: 35px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+.banner .btn-holder {
+    margin-top: 50px;
+}
+.banner .btn {
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    display: inline-block;
+    padding: 5px 20px;
+    text-align: center;
+    border-radius: 30px;
+    margin: 0 10px;
+    font-size: 14px;
+    font-weight: 300;
+}
+.banner .btn:hover,
+.banner .btn:focus {
+    background: #218850;
+    border-color: #218850;
+    color: #fff;
+}
+.banner.inner-banner time {
+    display: block;
+    font-size: 19px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+.info-section {
+    background: #eaedf1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 50px 0;
+}
+.bg-section {
+    background-image: url(https://www.equidia.fr/assets/img/table-bg.jpg);
+    position: relative;
+    padding: 50px 0;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+}
+.block-race-condition {
+    margin-top: -120px;
+}
+.block-race-condition table{
+    width: 100%;
+    background-color: #fff;
+}
+.block-race-condition table td{
+    padding: 20px;
+}
+.picto-meteo {
+    float: left;
+    margin: 0 25px 0 0;
+    display: block;
+}
+.bet-selector {
+    text-align: center;
+    background-color: #f5f5f5;
+}
+.bet-selector img{
+    width: 80px;
+    margin: 0 5px;
+}
+.navbar .container {
+    margin-top: 15px;
+}
+.navbar {}
+.navbar.navbar-dark {}
+.navbar.navbar-light {
+    background-color: #fff;
+    padding-bottom: 27px;
+}
+.navbar-nav li.nav-item{
+    margin: 0 15px;
+}
+.navbar-nav li.nav-item a.nav-link{
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #000;
+}
+.navbar-nav.navbar-dark li.nav-item a.nav-link{
+    color: #fff;
+}
+
+#today-container {
+	background-image: url(https://jeux.loro.ch/static/images/react/images/Hub-Page-Header-@x2.min.png);
+    height: 500px;
+    width: 100%;
+}
+
+.navbar-nav li.nav-item a.nav-link.btn-skew:before, .navbar-nav li.nav-item a.nav-link.btn-skew:after {
+    -webkit-transition: border .3s ease-in-out;
+    transition: border .3s ease-in-out;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -12px;
+    bottom: 0;
+    width: 20px;
+    background: inherit;
+    -webkit-transform: skew(-10deg, 0);
+    -ms-transform: skew(-10deg, 0);
+    transform: skew(-10deg, 0);
+}
+.navbar-nav li.nav-item a.nav-link.btn-skew:after {
+    background: none;
+    left: auto;
+    right: -12px;
+    bottom: -10px;
+    border-right: 20px solid #218850;
+    border-bottom: 10px solid transparent;
+}
+.navbar-nav li.nav-item a.nav-link.btn-skew {
+    background: #218850;
+    color: #fff;
+    border: 0;
+    border-radius: 0;
+    position: relative;
+    margin: 0 12px;
+}
+.navbar-nav li.nav-item a.nav-link.btn-skew i {
+    margin-left: 10px;
+}
+.navbar-nav li.nav-item a.nav-link.drop-opener {
+    background: #1d1e56;
+    padding-top: 6px;
+    padding-bottom: 7px;
+}
+.navbar-nav li.nav-item a.nav-link.drop-opener:after {
+    border-bottom-width: 0;
+    border-color: #1d1e56;
+    bottom: 0;
+}
+.container-fluid {
+    overflow: hidden;
+}
+#wrapper {
+    margin: 90px 215px;
+    width: calc(100% - 200px);
+    height: 2000px;
+    overflow: hidden;
+}
+#sidebar {
+    background-color: #1d1e56;
+    position: fixed;
+    width: 230px;
+    height: 100%;
+    padding-top: 60px;
+    left: 0;
+}
+#sidebar ul{
+    list-style: none;
+    padding: 0;
+}
+#sidebar ul li{
+}
+#sidebar ul li a{
+    padding: 15px 30px;
+    align-items: center;
+    font-size: 14px;
+    color: #ccc;
+    width: 100%;
+    display: inline-block;
+    text-decoration: none;
+}
+#sidebar ul li i{
+    font-size: 26px;
+    float: left;
+    width: 40px;
+    margin-right: 18px;
+}
+#sidebar ul li a.active,
+#sidebar ul li a:hover{
+    transition: color .3s ease-in-out;
+    background-color: #fff;
+    color: #000;
+}
+
+#main {}
+#main .bar-selector{
+    background: #efefef;
+    font-size: 14px;
+}
+#main .bar-selector ul.date-selector,
+#main .bar-selector ul.place-selector,
+#main .bar-selector .race-selector ul,
+#main .bar-selector ul.calendar-selector{
+    padding: 0;
+    display: inline;
+    list-style: none;
+}
+#main .bar-selector ul.date-selector li,
+#main .bar-selector ul.place-selector li,
+#main .bar-selector .race-selector ul li,
+#main .bar-selector ul.calendar-selector li{
+    display: inline;
+}
+#main .bar-selector ul.date-selector li a{
+    display: inline-block;
+    padding: 20px 30px;
+    color: #000;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+#main .bar-selector ul.date-selector li a.active,
+#main .bar-selector .race-selector ul li a.active,
+#main .bar-selector ul.date-selector li a:hover,
+#main .bar-selector .race-selector ul li a:hover{
+    background-color: #218850;
+    color: #fff;
+}
+#main .bar-selector ul.calendar-selector li a {
+    padding: 15px 10px;
+    text-align: center;
+    width: 70px;
+    vertical-align: sub;
+    display: inline-block;
+}
+#main .bar-selector ul.calendar-selector li a i{
+    color: #000;
+    font-size: 25px;
+}
+#main .bar-selector ul.place-selector li a {
+    display: inline-block;
+    padding: 13px 30px 11px;
+    color: #000;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 400px;
+    vertical-align: text-top;
+}
+#main .bar-selector ul.place-selector li a img{
+    margin-right: 10px;
+}
+#main .bar-selector .race-selector {
+    display: inline;
+}
+#main .bar-selector .race-selector ul {
+    list-style: none;
+}
+#main .bar-selector .race-selector ul li {
+
+}
+#main .bar-selector .race-selector ul li a {
+    display: inline-block;
+    padding: 20px 20px;
+    color: #000;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.title h1, .title h2, .title h3, .title h4, .title strong {
+    background: #1d1e56;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    padding: 14px 20px;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+.title h1:before, .title h1:after, .title h2:before, .title h2:after, .title h3:before, .title h3:after, .title h4:before, .title h4:after, .title strong:before, .title strong:after {
+    -webkit-transition: border .3s ease-in-out;
+    transition: border .3s ease-in-out;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -12px;
+    bottom: 0;
+    width: 30px;
+    background: inherit;
+    -webkit-transform: skew(-10deg, 0);
+    -ms-transform: skew(-10deg, 0);
+    transform: skew(-10deg, 0);
+    z-index: 10;
+}
+.title h1:after, .title h2:after, .title h3:after, .title h4:after, .title strong:after {
+    background: none;
+    left: auto;
+    right: -12px;
+    bottom: -10px;
+    border-right: 30px solid #1d1e56;
+    border-bottom: 10px solid transparent;
+}
+.title {
+
+    margin: 40px 0px;
+}
+.title h3 {
+    font-weight: bold;
+}
+
+.previsions {}
+.previsions .previsions-header{
+    background-image: url(https://www.equidia.fr/assets/img/blur-img2.jpg);
+    padding: 42px 30px;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    padding: 30px 15px;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+}
+.previsions .previsions-header ul{
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: flex;
+    list-style: none;
+}
+.previsions .previsions-header ul li{
+    font-size: 24px;
+    padding: 0 15px;
+    position: relative;
+}
+.previsions .previsions-header ul li.active:before {
+    content: "";
+    position: absolute;
+    bottom: -46px;
+    border-width: 13px !important;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #fff;
+}
+.previsions .previsions-header ul li a{
+    color: #1d1e56;
+    background: #f5f5f5;
+    width: 66px;
+    height: 66px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: 100%;
+    text-decoration: none;
+}
+.previsions .previsions-header ul li.active a,
+.previsions .previsions-header ul li a:hover {
+    background: #218850;
+    color: #fff;
+}
+.previsions .previsions-body {
+    padding: 30px;
+    background-color: #FFF;
+}
+.previsions .previsions-body h2{}
+.previsions .previsions-body h2 a{
+    color: #000;
+}
+.previsions .previsions-body p{
+    font-size: 14px;
+    padding: 10px 0;
+}
+footer {
+    margin: 20px 40px;
+    font-size: 14px;
+    color: #888;
+}
