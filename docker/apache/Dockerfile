@@ -24,7 +24,7 @@ ENV LC_ALL en_US.UTF-8
 COPY --chown=www-data:www-data . /var/www
 
 RUN rm /etc/apache2/sites-*/*
-COPY default /etc/apache2/sites-available/default.conf
+COPY docker/apache/default /etc/apache2/sites-available/default.conf
 RUN a2ensite default
 
 #CMD "source /etc/apache2/envvars && apache2 -DFOREGROUND"
