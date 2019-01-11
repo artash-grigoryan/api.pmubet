@@ -21,8 +21,10 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 RUN locale-gen
 ENV LC_ALL en_US.UTF-8
 
+COPY --chown=www-data:www-data . /var/www
+
 RUN rm /etc/apache2/sites-*/*
-COPY ./default /etc/apache2/sites-available/default.conf
+COPY default /etc/apache2/sites-available/default.conf
 RUN a2ensite default
 
 #CMD "source /etc/apache2/envvars && apache2 -DFOREGROUND"
