@@ -16,7 +16,7 @@ pipelines:
           #- export IMAGE_NAME=agrigoryan/laravel:$BITBUCKET_COMMIT
           - export IMAGE_NAME=agrigoryan/laravel:1.0
           # build the Docker image (this will use the Dockerfile in the root of the repo)
-          - docker build -t $IMAGE_NAME .
+          - docker build -t $IMAGE_NAME -f ./docker/apache/Dockerfile .
           # authenticate with the Docker Hub registry
           - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
           # push the new Docker image to the Docker registry
