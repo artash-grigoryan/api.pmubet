@@ -18,6 +18,6 @@ pipelines:
           - docker build -t $IMAGE_NAME -f ./docker/apache/Dockerfile .
           # authenticate with the Docker Hub registry
           - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
-          - docker run --rm -w /var/www $IMAGE_NAME bash -c "composer install;"
+          - docker run --rm -w /var/www/dzio_api $IMAGE_NAME bash -c "composer install;cp .env.example .env;"
           # push the new Docker image to the Docker registry
           - docker push $IMAGE_NAME
