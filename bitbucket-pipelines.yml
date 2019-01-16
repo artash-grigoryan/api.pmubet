@@ -18,7 +18,7 @@ pipelines:
           # authenticate with the Docker Hub registry
           - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
           # build the Docker image (this will use the Dockerfile in the root of the repo)
-          - docker pull LATEST_IMAGE_NAME
+          - docker pull $LATEST_IMAGE_NAME
           - docker run --rm -v $(pwd)/:/var/www/ -w /var/www/dzio_api $IMAGE_NAME bash -c "composer install;"
           - docker build -t $IMAGE_NAME -f ./docker/apache/Dockerfile .
           # push the new Docker image to the Docker registry
