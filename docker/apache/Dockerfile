@@ -27,7 +27,7 @@ RUN a2ensite default
 
 #CMD "source /etc/apache2/envvars && apache2 -DFOREGROUND"
 ENV LANG en_US.UTF-8
-
+COPY --chown=www-data:www-data . /var/www
 # forward request and error logs to docker log collector
 
 EXPOSE 80
