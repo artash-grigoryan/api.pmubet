@@ -14,13 +14,12 @@ pipelines:
         script: # Modify the commands below to build your repository.
           # Set $DOCKER_HUB_USERNAME and $DOCKER_HUB_PASSWORD as environment variables in repository settings
           - export IMAGE_NAME=agrigoryan/laravel:$BITBUCKET_COMMIT
-          - export LATEST_IMAGE_NAME=agrigoryan/laravel:1.0
+          - export LATEST_IMAGE_NAME=agrigoryan/laravel:latest
           # authenticate with the Docker Hub registry
           - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
-          - docker pull $LATEST_IMAGE_NAME
-          - docker run --rm -v $(pwd)/:/var/www/ -w /var/www/dzio_api $LATEST_IMAGE_NAME bash -c "ls -la;"
           # build the Docker image (this will use the Dockerfile in the root of the repo)
-          #- docker build -t $IMAGE_NAME -f ./docker/apache/Dockerfile .
+          - docker build -t $IMAGE_NAME -f ./docker/apache/Dockerfile ./docker/apache
+          - docker run --rm -v $(pwd)/:/var/www/ -w /var/www/dzio_api $LATEST_IMAGE_NAME bash -c "ls -la;"
           # push the new Docker image to the Docker registry
           - docker push $IMAGE_NAME
-          - docker push $LATEST_IMAGE_NAME
+          #- docker push $LATEST_IMAGE_NAME
