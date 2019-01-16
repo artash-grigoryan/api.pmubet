@@ -35,4 +35,7 @@ COPY --chown=www-data:www-data . /var/www
 
 WORKDIR /var/www/
 RUN ls -la
+
+RUN cd dzio_api && composer install
+
 EXPOSE 80
