@@ -22,15 +22,17 @@ RUN locale-gen
 ENV LC_ALL en_US.UTF-8
 
 RUN rm /etc/apache2/sites-*/*
-RUN ls -la
+
 COPY docker/apache/default /etc/apache2/sites-available/default.conf
 RUN a2ensite default
 
 #CMD "source /etc/apache2/envvars && apache2 -DFOREGROUND"
 ENV LANG en_US.UTF-8
 
-COPY --chown=www-data:www-data ../../ /var/www
+RUN ls -la
+COPY --chown=www-data:www-data . /var/www
+
 
 WORKDIR /var/www/
-
+RUN ls -la
 EXPOSE 80
