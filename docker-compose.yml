@@ -13,7 +13,7 @@ services:
           - 443:443
         links:
           - mysql
-          - recXML
+          - recxml
 
     mysql:
         image: mysql
@@ -24,8 +24,8 @@ services:
         ports:
           - 3306:3306
 
-    recXML:
-        build: "./docker/recXML"
+    recxml:
+        build: "./docker/recxml"
         ports:
           - 7008:80
 
