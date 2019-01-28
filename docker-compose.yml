@@ -13,6 +13,7 @@ services:
           - 443:443
         links:
           - mysql
+          - recXML
 
     mysql:
         image: mysql
@@ -22,6 +23,11 @@ services:
           MYSQL_ROOT_PASSWORD: admin
         ports:
           - 3306:3306
+
+    recXML:
+        build: "./docker/recXML"
+        ports:
+          - 7008:80
 
     pma:
         image: phpmyadmin/phpmyadmin
