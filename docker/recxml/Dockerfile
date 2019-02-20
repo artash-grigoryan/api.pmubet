@@ -6,17 +6,16 @@ RUN apt-get update && apt-get install -y \
         psmisc \
         zip unzip
 
-COPY ./RecXML_V7_0_0_PROD.zip .
+COPY RecXML_V7_0_0_PROD.zip /
 
-RUN unzip RecXML_V7_0_0_PROD.zip -d /opt/
-RUN mkdir -pv /opt/recxml_root/
+RUN mkdir -pv /opt/recxml_root
+RUN unzip RecXML_V7_0_0_PROD.zip -d /opt
 
 #RUN ls -la
-#WORKDIR "/"
 
-COPY ./recXML_start /usr/local/bin/recXML_start
-COPY ./recXML_stop /usr/local/bin/recXML_stop
-COPY ./recxml.properties /opt/RecXML_V7_0_0_PROD/recxml.properties
+COPY recXML_start /usr/local/bin/recXML_start
+COPY recXML_stop /usr/local/bin/recXML_stop
+COPY recxml.properties /opt/RecXML_V7_0_0_PROD/recxml.properties
 
 RUN chmod 755 /usr/local/bin/recXML_st*
 

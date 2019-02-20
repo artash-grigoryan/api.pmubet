@@ -29,8 +29,8 @@ services:
         #command : "bash -c '/usr/local/bin/recXML_start'"
         ports:
           - 7008:80
-        volumes:
-          - "./opt:/opt"
+        #volumes:
+          #- "./opt:/opt"
         tty: true
 
     pma:
