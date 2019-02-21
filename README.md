@@ -30,7 +30,7 @@ Next, you’ll add a new file to this repository.
 
 If you see this error
 *No Application Encryption Key Has Been Specified*
-Try to generate the key with this command **docker exec -it dzio_www_1 php artisan key:generate** .
+Try to generate the key with this command **docker exec -it dzio_www_1 /bin/sh -c 'cd dzio_api/;php artisan key:generate'** 
 
 Enjoy in [localhost](http://localhost/)!
 
