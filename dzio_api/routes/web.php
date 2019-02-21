@@ -18,9 +18,9 @@ Route::get('/', function () {
 });
 
 
-Route::get('/flux/{date}/XML/{folder}/{subFolder}/{fileName}', function ($date, $folder, $subFolder, $fileName) {
+Route::get('/flux/{date}/XML/{folder}/{fileName}', function ($date, $folder, $fileName) {
 
-    $path = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/XML/" .$folder . "/".$subFolder. "/".$fileName. "";
+    $path = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/XML/" .$folder . "/" . $fileName. "";
 
     if (file_exists($path)) {
         $xmlFile = fopen();
