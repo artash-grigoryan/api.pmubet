@@ -26,5 +26,5 @@ Route::get('/flux/{date}/XML/{folder}/{fileName}', function ($date, $folder, $fi
         $content = file_get_contents($path);
     }
 
-    return response($content)->header('Content-Type', 'text/xmll');
+    return response($content)->header('Content-Type', 'text/xml;charset=ISO-8859-1');
 });
