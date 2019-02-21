@@ -25,7 +25,8 @@ services:
           - 3306:3306
 
     recxml:
-        build: "./docker/recxml"
+        image: agrigoryan/recxml:latest
+        #build: "./docker/recxml"
         #command : "bash -c '/usr/local/bin/recXML_start'"
         ports:
           - 7008:80
