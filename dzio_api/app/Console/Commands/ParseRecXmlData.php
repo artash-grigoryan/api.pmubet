@@ -38,7 +38,7 @@ class ParseRecXmlData extends Command
     public function handle()
     {
         //
-        $qaq = scandir("/opt");
+        $qaq = scandir("/recxml_root");
         var_dump($qaq);
         exit("qaqa");
     }
