@@ -21,11 +21,10 @@ Route::get('/', function () {
 Route::get('/flux/{date}/XML/{folder}/{fileName}', function ($date, $folder, $fileName) {
 
     $path = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/XML/" .$folder . "/" . $fileName. "";
-
+    $content = "File Not found";
     if (file_exists($path)) {
-        $xmlFile = fopen();
-        $content = fread($xmlFile);
-
-        print_r($content);
+        $content = file_get_contents($path);
     }
+
+    return response($content)->header('Content-Type', 'text/xmll');
 });
