@@ -14,6 +14,13 @@ use Illuminate\Http\Request;
 */
 
 
-Route::get('/qaq', function ($date) {
-    var_dump($date);exit;
+Route::get('/{date}/XML/{folder}/{fileName}', function ($date, $folder, $fileName) {
+
+    $path = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/XML/" .$folder . "/" . $fileName. "";
+    $content = "File Not found";
+    if (file_exists($path)) {
+        $content = file_get_contents($path);
+    }
+
+    return response($content)->header('Content-Type', 'text/xml;charset=ISO-8859-1');
 });

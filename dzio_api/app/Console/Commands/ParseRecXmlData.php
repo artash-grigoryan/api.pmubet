@@ -18,7 +18,7 @@ class ParseRecXmlData extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Will parse data sent from PMU Infocentre';
 
     /**
      * Create a new command instance.
