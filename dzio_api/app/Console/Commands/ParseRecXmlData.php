@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\Interfaces\DataServiceInterface;
 use Illuminate\Console\Command;
 
 class ParseRecXmlData extends Command
@@ -35,11 +36,9 @@ class ParseRecXmlData extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(DataServiceInterface $dataService)
     {
-        //
-        $qaq = scandir("/recxml_root");
-        var_dump($qaq);
-        exit("qaqa");
+        $dataService->scanRacesFolder();
+
     }
 }
