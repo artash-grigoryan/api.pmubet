@@ -34,11 +34,18 @@ class ParseRecXmlData extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @param DataServiceInterface $dataService
      */
     public function handle(DataServiceInterface $dataService)
     {
-        $dataService->scanRacesFolder();
+        $filesInfo = $dataService->scanRacesFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                var_dump($fileName);
+                var_dump($dataService->parseXMLFileByPath($filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName));
+                exit("qaq");
+            }
+        }
 
     }
 }

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\Interfaces\DataServiceInterface;
 use App\Services\RecXMLService;
 use Illuminate\Support\ServiceProvider;
+use Sabre\Xml\Service;
 
 class DataServiceProvider extends ServiceProvider
 {
@@ -26,7 +27,8 @@ class DataServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(DataServiceInterface::class, function ($app) {
-            return new RecXMLService();
+
+            return new RecXMLService(new Service());
         });
     }
 }

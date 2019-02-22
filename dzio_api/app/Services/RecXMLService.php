@@ -9,8 +9,8 @@
 namespace App\Services;
 
 
-
 use App\Services\Interfaces\DataServiceInterface;
+use Sabre\Xml\Service;
 
 class RecXMLService implements DataServiceInterface
 {
@@ -19,9 +19,67 @@ class RecXMLService implements DataServiceInterface
     const RUNNERS_FOLDER = "6_RUNNERS";
     const BETS_FOLDER = "16_BETS";
 
-    public function scanRacesFolder ()
+    public $xmlParser;
+
+    public function __construct(Service $xmlParser)
     {
-        $qaq = scandir("/var/www/recxml_root");
-        var_dump($qaq);
+        $this->xmlParser = $xmlParser;
+    }
+
+    /**
+     * @return array
+     */
+    public function scanRacesFolder()
+    {
+        $dayFolder = (new \DateTime())->format("Ymd");
+        $folderPath = "/var/www/recxml_root" . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RACES_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanRunnersFolder()
+    {
+        $dayFolder = (new \DateTime())->format("Ymd");
+        $folderPath = "/var/www/recxml_root" . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RUNNERS_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanBetsFolder()
+    {
+        $dayFolder = (new \DateTime())->format("Ymd");
+        $folderPath = "/var/www/recxml_root" . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::BETS_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @param $path
+     * @return array
+     */
+    private function scanFolder($path)
+    {
+
+        return [
+            "path" => $path,
+            "files" => scandir($path)
+        ];
+    }
+
+    /**
+     * @param $filePath
+     * @return array of Parsed XML file
+     * @throws \Sabre\Xml\ParseException
+     */
+    public function parseXMLFileByPath($filePath)
+    {
+
+        return $this->xmlParser->parse(file_get_contents($filePath));
     }
 }
