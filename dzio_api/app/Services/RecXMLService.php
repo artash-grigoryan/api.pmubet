@@ -68,7 +68,7 @@ class RecXMLService implements DataServiceInterface
 
         return [
             "path" => $path,
-            "files" => scandir($path)
+            "files" => file_exists($path) ? scandir($path) : []
         ];
     }
 
@@ -77,9 +77,9 @@ class RecXMLService implements DataServiceInterface
      * @return array of Parsed XML file
      * @throws \Sabre\Xml\ParseException
      */
-    public function parseXMLFileByPath($filePath)
+    public function parseXMLFileByPath($filePath, $mappedFields)
     {
-
+        $this->xmlParser->elementMap = $mappedFields;
         return $this->xmlParser->parse(file_get_contents($filePath));
     }
 }
