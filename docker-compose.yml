@@ -16,7 +16,7 @@ services:
           - recxml
 
     mysql:
-        image: mysql
+        image: mysql:5.7.21
         command: --lower_case_table_names=1
         restart: always
         environment:
