@@ -14,6 +14,6 @@ class Race extends Model
      * @var array
      */
     protected $fillable = [
-        'raceId', 'date', 'time'
+        'raceId', 'raceDescription', 'raceGender', 'raceNumber', 'label', 'labelLong', 'distance', 'raceType', 'discipline', 'date'
     ];
 }

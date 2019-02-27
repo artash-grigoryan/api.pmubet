@@ -12,10 +12,10 @@ services:
           - 80:80
           - 443:443
         links:
-          - mysql
+          - db
           - recxml
 
-    mysql:
+    db:
         image: mysql:5.7.21
         command: --lower_case_table_names=1
         restart: always

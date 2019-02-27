@@ -74,7 +74,7 @@ class ParseRecXmlData extends Command
                     foreach ($reunion["{}courses"] as $race) {
 
                         $races[] = new Race([
-                            'raceId' => $race["{}id_nav_course"],
+                            'id' => $race["{}id_nav_course"],
                             'raceDescription' => $race["{}conditions_course"]["{}conditions_txt_course"],
                             'raceGender' => $race["{}conditions_course"]["{}conditions_txt_course"],
                             'raceNumber' => $race["{}num_course_pmu"],
@@ -83,9 +83,10 @@ class ParseRecXmlData extends Command
                             'distance' => $race["{}distance_course"],
                             'raceType' => $race["{}lib_corde_course"],
                             'discipline' => $race["{}discipline_course"],
+                            //"date" => time($race["{}date_reunion"] . " ".$race["{}heure_reunion"]),
                         ]);
                     }
-                    $reunionObj->races()->saveMany($races);
+                    var_dump($reunionObj->races()->saveMany($races));
                 }
 
 
