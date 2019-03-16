@@ -17,29 +17,53 @@ body {
 .primary-color {
     color: #218850 !important;
 }
+
+.navbar-brand {
+    
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+    width: 50px;
+    
+}
+
+.header-logo {
+    
+    width: 41px;
+    position: absolute;
+    top: 12px;
+    left: 30px;
+    
+}
 .banner {
     position: relative;
     background-size: cover;
-    background-image: url(https://www.equidia.fr/assets/img/header-course/Trot_Attele_946_x_533_px.jpg);
+    background-image: url('https://www.rp-assets.com/images/news/2017/07/27/26377-large.jpeg');
+    background-repeat: no-repeat;
 }
-.banner:before {
+
+.banner::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    opacity: .8;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3b679e+0,2b88d9+50,207cca+51,7db9e8+100;Blue+Gloss+%232 */
-    background-color: #00000087;
-    background-image: linear-gradient(-45deg, transparent 25%, transparent 25%, transparent 75%, currentColor 75%, currentColor), linear-gradient(-45deg, currentColor 25%, transparent 25%, transparent 75%, transparent 75%, transparent);
-    background-size: 10px 10px;
+    opacity: .3;
+    background-color: #303030;
+    /*background-image: linear-gradient(-45deg, transparent 25%, transparent 25%, transparent 75%, currentColor 75%, currentColor), linear-gradient(-45deg, currentColor 25%, transparent 25%, transparent 75%, transparent 75%, transparent);*/
 }
+
 .banner.inner-banner .container {
-    min-height: 400px;
+    min-height: 500px;
 }
+
 .banner .container {
-    padding-bottom: 100px;
+    padding-bottom: 30px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -59,26 +83,26 @@ body {
     color: #fff;
 }
 .banner .btn-holder {
-    margin-top: 50px;
+    margin-top: 100px;
+    font-size: 27px;
 }
 .banner .btn {
-    -webkit-transition: all .3s ease-in-out;
+    
     transition: all .3s ease-in-out;
-    background: transparent;
-    border: 2px solid #fff;
-    color: #fff;
+    background: #218850;
+    border: 2px solid #218850;
     display: inline-block;
     padding: 5px 20px;
     text-align: center;
     border-radius: 30px;
     margin: 0 10px;
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 18px;
+    
 }
 .banner .btn:hover,
 .banner .btn:focus {
-    background: #218850;
-    border-color: #218850;
+    background: #f6a800;
+    border-color: #f6a800;
     color: #fff;
 }
 .banner.inner-banner time {
@@ -88,9 +112,7 @@ body {
     margin-bottom: 15px;
 }
 .info-section {
-    background-color: #e0f3ff;
-    background-image: -webkit-linear-gradient( -28deg, #054a00 0%, #ebffef 50%, #e8eaf1 60%, #ffffff 100%);
-    background-image: linear-gradient( -28deg, #054a00 0%, #ebffef 50%, #e8eaf1 60%, #ffffff 100%);
+    background-color: #f0f0f0;
 }
 .bg-section {
     background-image: url(https://www.equidia.fr/assets/img/table-bg.jpg);
@@ -103,17 +125,17 @@ body {
     text-align: center;
     text-transform: uppercase;
 }
-.block-race-condition{
-    margin: -100px auto 0;
+.block-race-condition {
+    margin: 0px auto 0;
     max-width: 100%;
     position: relative;
-    background-color: #fff;
     padding: 20px;
-    width: 600px;
+    width: 100%;
+    color: #333;
 }
 .picto-meteo {
     position: absolute;
-    top: -50px;
+    top: -20px;
     right: 60px;
 }
 .picto-meteo img{
@@ -123,9 +145,9 @@ body {
     position: relative;
     text-align: center;
 }
-.bet-selector img{
-    width: 80px;
-    margin: 20px 10px 0;
+.bet-selector img {
+    width: 65px;
+    margin: 0px 7px 20px;
 }
 .navbar .container {
     margin-top: 15px;
@@ -191,7 +213,7 @@ body {
     margin-left: 10px;
 }
 .navbar-nav li.nav-item a.nav-link.drop-opener {
-    background: #f62741;
+    background: #f6a800;
     padding-top: 6px;
     padding-bottom: 7px;
 }
@@ -369,7 +391,7 @@ body {
     border-right: 20px solid #218850;
 }
 .double-title {
-    background: #f62741;
+    background: #f6a800;
     color: #fff;
 }
 .double-title .add-value {
@@ -384,17 +406,15 @@ body {
 }
 
 .previsions {}
-.previsions .previsions-header{
-    background-image: url(https://www.equidia.fr/assets/img/blur-img2.jpg);
-    padding: 42px 30px;
-    background-color: #fff;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% 50%;
+.previsions .previsions-header {
+    
     padding: 30px 15px;
     overflow: hidden;
     text-align: center;
     position: relative;
+    /*background: linear-gradient(-70deg, transparent 25%, transparent 25%, transparent 80%, currentColor 75%, currentColor), linear-gradient(-45deg, currentColor 25%, transparent 25%, transparent 75%, transparent 75%, transparent);*/
+    background-color: #BFBFBF;
+    
 }
 .previsions .previsions-header ul{
     -webkit-box-pack: center;
@@ -405,6 +425,7 @@ body {
     align-items: center;
     display: flex;
     list-style: none;
+    padding: 0;
 }
 .previsions .previsions-header ul li{
     font-size: 24px;
@@ -424,11 +445,12 @@ body {
     border-right: 5px solid transparent;
     border-bottom: 5px solid #fff;
 }
-.previsions .previsions-header ul li a{
+.previsions .previsions-header ul li a {
+    
     color: #1d1e56;
     background: #f5f5f5;
-    width: 66px;
-    height: 66px;
+    width: 60px;
+    height: 60px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -438,9 +460,12 @@ body {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    border-radius: 100%;
+    border-radius: 19%;
     text-decoration: none;
+    box-shadow: 2px 2px 6px 0px;
+    
 }
+
 .previsions .previsions-header ul li.active a,
 .previsions .previsions-header ul li a:hover {
     background: #218850;
@@ -449,26 +474,29 @@ body {
 .previsions .previsions-body {
     padding: 30px;
     background-color: #FFF;
+    min-height: 363px;
+    max-height: 363px;
 }
 .previsions .previsions-body h2{}
 .previsions .previsions-body h2 a{
     color: #000;
 }
-.previsions .previsions-body p{
-    font-size: 14px;
+.previsions .previsions-body p {
+    font-size: 18px;
     padding: 10px 0;
 }
 .runners-tab {
     background: #fff;
-    padding: 20px 0px;
+    padding: 0px 0px;
+    margin: 0 0 20px 0;
     max-height: 500px;
     overflow-y: auto;
 }
 .runners-tab table{
     width: 100%;
 }
-.runners-tab table td{
-    padding: 5px 10px;
+.runners-tab table td {
+    padding: 10px 10px 5px;
 }
 .runners-tab .runner-rank{
     width: 50px;
@@ -557,9 +585,11 @@ body {
     text-align: center;
     font-weight: 500;
     margin-bottom: 10px;
-    color: #218750;
+    color: #fff;
     font-size: 14px;
     border-radius: 30px;
+    background: #218750;
+    
 }
 .btn-info {
     background-color: #fff;
@@ -597,9 +627,13 @@ body {
     text-transform: none;
 }
 .btn:hover, .btn:focus {
-    background: #f62741;
-    border-color: #f62741;
+    background: #f6a800;
+    border-color: #f6a800;
     color: #fff;
+}
+
+.adv-1 {
+    margin: 40px 0 50px 0;
 }
 
 .result-table {
@@ -619,7 +653,7 @@ body {
     padding: 0 0 10px;
 }
 .result-table .sort {
-    background: #090a3a;
+    background: #218750;
     color: #fff !important;
     display: block;
     font-weight: 300;
@@ -628,7 +662,7 @@ body {
     position: relative;
 }
 .result-table .sort:hover, .result-table .sort.active {
-    background: #f62741;
+    background: #f6a800;
 }
 .result-table th {
     background: none;
@@ -845,6 +879,84 @@ body {
     display: block;
 }
 
+.widget, .widget:active, .widget:focus, .widget:hover, .widget:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+.widget__quinte {
+    background-image: url(https://jeux.loro.ch/static/images/react/images/promos/quinte_promo_mobile.min.jpg);
+    background-size: cover;
+    -ms-flex-order: 0;
+    order: 0;
+}
+.widget {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.widget__sub-txt, .widget__top {
+    z-index: 1;
+    position: relative;
+    margin-bottom: 15px;
+}
+.widget__sub-title {
+    z-index: 1;
+    position: relative;
+    font-size: 1.125em;
+    line-height: .8;
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: -.4px;
+    margin: 0;
+}
+.widget__top {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.widget__link {
+    font-size: .75em;
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: -.3px;
+    color: #fff;
+    text-decoration: none;
+    z-index: 1;
+    position: relative;
+}
+.widget__link-icon svg {
+    width: 15px;
+    height: 12px;
+    fill: #fff;
+    top: 0;
+    left: 0;
+}
+.widget__icon--quinte {
+    background-image: url(https://jeux.loro.ch/static/images/react/images/bet-types/quinte.min.svg);
+    background-size: contain;
+}
+
+.widget__icon {
+    width: 87px;
+    height: 33px;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.arrow--right {
+    top: -5px;
+    left: -5px;
+    transform: rotate(180deg);
+}
+
 a {
     -webkit-transition: color .3s ease-in-out;
     transition: color .3s ease-in-out;
@@ -858,6 +970,11 @@ footer {
     font-size: 14px;
     color: #888;
 }
+
+.info-line-1 {
+    height: 65px;
+}
+
 
 
 
@@ -873,6 +990,16 @@ footer {
     .navbar.navbar-light {
         background-color: #fff;
         padding-bottom: 10px;
+    }
+    .navbar-nav li.nav-item a.nav-link.btn-skew i {
+        display: none;
+    }
+    .navbar-nav li.nav-item a.nav-link.btn-skew {
+        color: #000;
+        background: none;
+    }
+    .navbar-nav li.nav-item a.nav-link.btn-skew:before, .navbar-nav li.nav-item a.nav-link.btn-skew:after {
+        content: none;
     }
     #wrapper {
         margin: 58px 0 0 0;
