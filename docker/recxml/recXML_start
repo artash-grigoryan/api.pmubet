@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /opt/RecXML_V7_0_0_PROD/
+java -classpath RecXML.zip recxml.RecXML &

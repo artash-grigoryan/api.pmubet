@@ -22,12 +22,20 @@ RUN locale-gen
 ENV LC_ALL en_US.UTF-8
 
 RUN rm /etc/apache2/sites-*/*
-COPY default /etc/apache2/sites-available/default.conf
+
+COPY docker/apache/default /etc/apache2/sites-available/default.conf
 RUN a2ensite default
 
 #CMD "source /etc/apache2/envvars && apache2 -DFOREGROUND"
 ENV LANG en_US.UTF-8
 
-# forward request and error logs to docker log collector
+RUN ls -la
+COPY --chown=www-data:www-data . /var/www
+
+
+WORKDIR /var/www/
+RUN ls -la
+
+RUN cd dzio_api && composer install
 
 EXPOSE 80
