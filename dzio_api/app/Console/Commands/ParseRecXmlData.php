@@ -77,6 +77,17 @@ class ParseRecXmlData extends Command
                             'id' => $race["{}id_nav_course"],
                             'raceDescription' => $race["{}conditions_course"]["{}conditions_txt_course"],
                             'raceGender' => $race["{}conditions_course"]["{}conditions_txt_course"],
+                            'valnom_prix_course' => $race["{}valnom_prix_course"]["{}conditions_txt_course"],
+
+                            'totalAllocation' => $race["{}allocations_course"]["{}montant_total_allocation"],
+                            'firstAllocation' => $race["{}allocations_course"]["{}allocation_premier_partant"],
+                            'secondAllocation' => $race["{}allocations_course"]["{}allocation_deuxieme_partant"],
+                            'thirdAllocation' => $race["{}allocations_course"]["{}allocation_troisieme_partant"],
+                            'fourthAllocation' => $race["{}allocations_course"]["{}allocation_quatrieme_partant"],
+                            'fifthAllocation' => $race["{}allocations_course"]["{}allocation_cinquieme_partant"],
+                            'sixthAllocation' => $race["{}allocations_course"]["{}allocation_sixieme_partant"],
+                            'seventhAllocation' => $race["{}allocations_course"]["{}allocation_septieme_partant"],
+
                             'raceNumber' => $race["{}num_course_pmu"],
                             'label' => $race["{}libcourt_prix_course"],
                             'labelLong' => $race["{}liblong_prix_course"],
@@ -86,7 +97,9 @@ class ParseRecXmlData extends Command
                             //"date" => time($race["{}date_reunion"] . " ".$race["{}heure_reunion"]),
                         ]);
                     }
+                    //var_dump($races);exit;
                     var_dump($reunionObj->races()->saveMany($races));
+                    exit;
                 }
 
 

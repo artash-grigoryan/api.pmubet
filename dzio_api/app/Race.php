@@ -14,6 +14,23 @@ class Race extends Model
      * @var array
      */
     protected $fillable = [
-        'raceId', 'raceDescription', 'raceGender', 'raceNumber', 'label', 'labelLong', 'distance', 'raceType', 'discipline', 'date'
+        'raceId',
+        'raceDescription',
+        'raceGender',
+        'totalAllocation',
+        'raceNumber',
+        'label',
+        'labelLong',
+        'distance',
+        'raceType',
+        'discipline',
+        'date',
+        'countryCode',
+        'distance'
     ];
+
+    public function runners()
+    {
+        return $this->hasMany('App\Runner');
+    }
 }

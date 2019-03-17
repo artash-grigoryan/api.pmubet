@@ -15,7 +15,7 @@ class Reunion extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'date', 'time'
+        'id', 'label', 'type', 'code', 'date', 'externNumber', 'number'
     ];
 
     public function races()
