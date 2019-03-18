@@ -6,7 +6,6 @@ const extractSass = new ExtractTextPlugin({
     filename: "css/style.css"
 });
 
-console.log(__dirname + "/../dzio_api/public");
 const config = {
     entry: [
         'babel-polyfill',
