@@ -148,7 +148,9 @@ class MainMenu extends React.Component {
         const {messages, showDropDown, showSignInPage, showSignUpPage, showSignUpDialogPage, fixedTop, showMessageNotifications, showNotifications} = this.state;
 
         return <nav className="navbar fixed-top navbar-expand-lg navbar-light">
-            <a className="navbar-brand" href="#"><img className="header-logo" src="./assets/img/logo-Dzio-final.jpg"/></a>
+            <a className="navbar-brand" href="#">
+                <img className="header-logo" src="./assets/img/logo-Dzio-final.jpg"/>
+            </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -180,12 +182,12 @@ class MainMenu extends React.Component {
                     </li>
                     <li className="nav-item active">
                         <a className="nav-link" href="#">
-                            <i style="font-size: 20px;" className="fas fa-search"></i>
+                            <i style={{fontSize: "20px"}} className="fas fa-search"></i>
                         </a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">
-                            <i style="font-size: 20px;" className="far fa-user"></i>
+                            <i style={{fontSize: "20px"}} className="far fa-user"></i>
                         </a>
                     </li>
                 </ul>

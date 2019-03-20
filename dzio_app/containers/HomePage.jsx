@@ -12,12 +12,12 @@ export default class HomePage extends Component {
             </header>
 
             <div id="main">
-                <div class="bar-selector">
-                    <div class="day-selector">
+                <div className="bar-selector">
+                    <div className="day-selector">
                         <ul>
 
                             <li>
-                                <a class="active" href="#">Yesterday</a>
+                                <a className="active" href="#">Yesterday</a>
                             </li>
                             <li>
                                 <a href="#">Today</a>
@@ -26,13 +26,13 @@ export default class HomePage extends Component {
                                 <a href="#">Tomorrow</a>
                             </li>
                         </ul>
-                        <ul class="calendar-selector">
+                        <ul className="calendar-selector">
                             <li>
-                                <a href="#"><i class="far fa-calendar-alt"></i></a>
+                                <a href="#"><i className="far fa-calendar-alt"></i></a>
                             </li>
                         </ul>
                     </div>
-                    <div class="meeting-selector">
+                    <div className="meeting-selector">
                         <ul>
                             <li>
                                 <a href="#">
@@ -41,10 +41,10 @@ export default class HomePage extends Component {
                             </li>
                         </ul>
                     </div>
-                    <div class="race-selector">
-                        <ul class="">
+                    <div className="race-selector">
+                        <ul className="">
                             <li>
-                                <a class="active" href="#">C1</a>
+                                <a className="active" href="#">C1</a>
                             </li>
                             <li>
                                 <a href="#">C2</a>
@@ -71,60 +71,59 @@ export default class HomePage extends Component {
                     </div>
                 </div>
 
-                <div class="banner inner-banner">
+                <div className="banner inner-banner">
 
-                    <div class="container">
-                        <div class="text-holder">
+                    <div className="container">
+                        <div className="text-holder">
                             <h1>
-                                <time datetime="2018-12-20">
+                                <time>
                                     13:47 - 20 décembre 2018
                                 </time>
                                 <b>R1C1</b>
                                 PRIX DES SAPONAIRES
                             </h1>
 
-                            <div class="btn-holder">
+                            <div className="btn-holder">
                                 Départ dans 5 minutes
 
                             </div>
 
-                            <div style="margin-top: 30px;"><a class="btn btn-md" href="#">Parier sur Vivaro</a></div>
+                            <div style={{marginTop: "30px"}}><a className="btn btn-md" href="#">Parier sur Vivaro</a></div>
                         </div>
                     </div>
                 </div>
+                <section className="info-section" style={{background: "#fff"}}>
+                    <div className="container">
 
-                <section class="info-section" style="background:#fff">
-                    <div class="container">
+                        <div className="block-race-condition">
 
-                        <div class="block-race-condition">
-
-                            <div class="picto-meteo">
+                            <div className="picto-meteo">
                                 <img src="https://www.equidia.fr/assets/img/meteo/P4_grand.png"/>
                             </div>
 
-                            <div class="row m-b-10">
-                                <div class="col-md-3">
-                                    <div class="info-line-1">
+                            <div className="row m-b-10">
+                                <div className="col-md-3">
+                                    <div className="info-line-1">
                                         Participants :<br/>
                                         <b>16 Partants</b>
                                     </div>
-                                    <div class="info-line-2">
+                                    <div className="info-line-2">
                                         Distance :<br/>
                                         <b>2750m</b>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="info-line-1">
+                                <div className="col-md-3">
+                                    <div className="info-line-1">
                                         Discipline :<br/>
                                         <b>Attelé</b>
                                     </div>
-                                    <div class="info-line-2">
+                                    <div className="info-line-2">
                                         Diffusion :<br/>
                                         <b>Equidia Racing 1</b>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="bet-selector">
+                                <div className="col-md-3">
+                                    <div className="bet-selector">
                                         <img src="https://www.equidia.fr/assets/img/paris/simple.png" alt=""/>
                                         <img src="https://www.equidia.fr/assets/img/paris/couple.png" alt=""/>
                                         <img src="https://www.equidia.fr/assets/img/paris/couple-ordre.png" alt=""/>
@@ -136,11 +135,11 @@ export default class HomePage extends Component {
                                         <img src="https://www.equidia.fr/assets/img/paris/quinte-plus.png" alt=""/>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="info-line-1">
+                                <div className="col-md-3">
+                                    <div className="info-line-1">
                                     </div>
-                                    <div class="info-line-2">
-                                        <div class="text-right">
+                                    <div className="info-line-2">
+                                        <div className="text-right">
                                             <b>12° Peu Nuageux / 27km/h<br/>
                                                 Sud-Ouest</b>
                                         </div>
@@ -154,224 +153,224 @@ export default class HomePage extends Component {
                 </section>
 
 
-                <section class="info-section">
-                    <div class="container">
+                <section className="info-section">
+                    <div className="container">
 
-                        <div class="row">
+                        <div className="row">
 
-                            <div class="col-lg-4 col-md-12">
-                                <div class="title double-title m-b-0">
+                            <div className="col-lg-4 col-md-12">
+                                <div className="title double-title m-b-0">
                                     <h3>The runners</h3>
-                                    <span class="add-value"><img src="https://www.equidia.fr/assets/img/icons-png/discipline_trot.png" alt="Monté"/><span>R1 C2</span></span>
+                                    <span className="add-value"><img src="https://www.equidia.fr/assets/img/icons-png/discipline_trot.png" alt="Monté"/><span>R1 C2</span></span>
                                 </div>
-                                <div class="runners-tab">
-                                    <table class="table-striped">
+                                <div className="runners-tab">
+                                    <table className="table-striped">
                                         <tbody>
-                                        <tr class="runner">
-                                            <td class="runner-rank">1</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">1</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">2</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">2</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">3</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">3</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">4</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">4</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">5</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">5</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">6</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">6</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">7</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">7</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">8</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">8</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">9</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">9</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">10</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">10</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">11</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">11</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">12</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">12</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">13</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">13</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">14</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">14</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">15</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">15</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
-                                        <tr class="runner">
-                                            <td class="runner-rank">16</td>
-                                            <td class="runner-img">
+                                        <tr className="runner">
+                                            <td className="runner-rank">16</td>
+                                            <td className="runner-img">
                                                 <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
                                             </td>
-                                            <td class="runner-name">
+                                            <td className="runner-name">
                                                 <a href="#">FULL STAR VOIRONS</a>
                                                 <span>JULIEN RAFFESTIN</span>
                                             </td>
-                                            <td class="runner-cote">
+                                            <td className="runner-cote">
                                                 <span>5.6</span>
                                             </td>
                                         </tr>
@@ -381,25 +380,25 @@ export default class HomePage extends Component {
                             </div>
 
 
-                            <div class="col-lg-5 col-md-12">
-                                <div class="title" style="margin-bottom: 0;">
+                            <div className="col-lg-5 col-md-12">
+                                <div className="title" style={{marginBottom: 0}}>
                                     <h3>DZIO Predictions</h3>
                                 </div>
-                                <div class="previsions">
-                                    <div class="previsions-header">
+                                <div className="previsions">
+                                    <div className="previsions-header">
                                         <ul>
                                             <li><a href="#">7</a></li>
-                                            <li class="active"><a href="#">12</a></li>
+                                            <li className="active"><a href="#">12</a></li>
                                             <li><a href="#">3</a></li>
                                             <li><a href="#">4</a></li>
                                             <li><a href="#">19</a></li>
                                         </ul>
                                     </div>
-                                    <div class="previsions-body tab-content">
+                                    <div className="previsions-body tab-content">
 
 
-                                        <h2 class="text-uppercase">
-                                            <b class="primary-color">12</b> -
+                                        <h2 className="text-uppercase">
+                                            <b className="primary-color">12</b> -
                                             <a href="/chevaux/carla-du-houlme">CARLA DU HOULME</a>
                                         </h2>
                                         <p><span>Pieds nues, Carla du Houlme fait face à son objectif. Ses dernières sorties sont bonnes et sur sa forme, elle devrait jouer les premiers rôles. </span></p>
@@ -408,38 +407,38 @@ export default class HomePage extends Component {
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-md-12" style="margin-top: 61px;">
-                                <div class="adv-1">
-                                    <a class="widget widget__quinte" href="#">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="widget__top">
-                                                    <p class="widget__sub-title" data-reactid="1067">aujourd'hui</p>
-                                                    <i class="widget__icon widget__icon--quinte" data-reactid="1068"></i>
+                            <div className="col-lg-3 col-md-12" style={{marginTop: "61px"}}>
+                                <div className="adv-1">
+                                    <a className="widget widget__quinte" href="#">
+                                        <div className="row">
+                                            <div className="col-md-12">
+                                                <div className="widget__top">
+                                                    <p className="widget__sub-title" data-reactid="1067">aujourd'hui</p>
+                                                    <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i>
                                                 </div>
-                                                <header class="widget-flex-wrap">
-                                                    <p class="widget-race__text">R1 C3 PRIX DE MAUREPAS - 15:15</p>
+                                                <header className="widget-flex-wrap">
+                                                    <p className="widget-race__text">R1 C3 PRIX DE MAUREPAS - 15:15</p>
                                                 </header>
-                                                <div class="widget__link">Pariez maintenant
-                                                    <i class="widget__link-icon"></i>
+                                                <div className="widget__link">Pariez maintenant
+                                                    <i className="widget__link-icon"></i>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-                                <div class="adv-1">
-                                    <a class="widget widget__quinte" href="#">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="widget__top">
-                                                    <p class="widget__sub-title" data-reactid="1067">aujourd'hui</p>
-                                                    <i class="widget__icon widget__icon--quinte" data-reactid="1068"></i>
+                                <div className="adv-1">
+                                    <a className="widget widget__quinte" href="#">
+                                        <div className="row">
+                                            <div className="col-md-12">
+                                                <div className="widget__top">
+                                                    <p className="widget__sub-title" data-reactid="1067">aujourd'hui</p>
+                                                    <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i>
                                                 </div>
-                                                <header class="widget-flex-wrap">
-                                                    <p class="widget-race__text">R1 C3 PRIX DE MAUREPAS - 15:15</p>
+                                                <header className="widget-flex-wrap">
+                                                    <p className="widget-race__text">R1 C3 PRIX DE MAUREPAS - 15:15</p>
                                                 </header>
-                                                <div class="widget__link">Pariez maintenant
-                                                    <i class="widget__link-icon"></i>
+                                                <div className="widget__link">Pariez maintenant
+                                                    <i className="widget__link-icon"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -451,60 +450,60 @@ export default class HomePage extends Component {
                     </div>
                 </section>
 
-                <section class="results-section">
-                    <div class="container">
+                <section className="results-section">
+                    <div className="container">
 
-                        <div class="row">
+                        <div className="row">
 
-                            <div class="col-md-12 m-b-10">
-                                <div class="title m-b-0">
+                            <div className="col-md-12 m-b-10">
+                                <div className="title m-b-0">
                                     <h3>Results</h3>
                                 </div>
-                                <div class="">
-                                    <table class="results-selection-tab">
+                                <div className="">
+                                    <table className="results-selection-tab">
                                         <tbody>
-                                        <tr class="">
-                                            <td class="result-selector">
+                                        <tr className="">
+                                            <td className="result-selector">
                                                 <a href="#">
                                                     <img src="https://www.equidia.fr/assets/img/paris/simple.png" alt=""/>
                                                 </a>
                                             </td>
-                                            <td class="result-selector">
+                                            <td className="result-selector">
                                                 <a href="#">
                                                     <img src="https://www.equidia.fr/assets/img/paris/couple.png" alt=""/>
                                                 </a>
                                             </td>
-                                            <td class="result-selector">
+                                            <td className="result-selector">
                                                 <a href="#">
                                                     <img src="https://www.equidia.fr/assets/img/paris/couple-ordre.png" alt=""/>
                                                 </a>
                                             </td>
-                                            <td class="result-selector">
+                                            <td className="result-selector">
                                                 <a href="#">
                                                     <img src="https://www.equidia.fr/assets/img/paris/trio.png" alt=""/>
                                                 </a>
                                             </td>
-                                            <td class="result-selector active">
+                                            <td className="result-selector active">
                                                 <a href="#">
                                                     <img src="https://www.equidia.fr/assets/img/paris/2sur4.png" alt=""/>
                                                 </a>
                                             </td>
-                                            <td class="result-selector">
+                                            <td className="result-selector">
                                                 <a href="#">
                                                     <img src="https://www.equidia.fr/assets/img/paris/multi.png" alt=""/>
                                                 </a>
                                             </td>
-                                            <td class="result-selector">
+                                            <td className="result-selector">
                                                 <a href="#">
                                                     <img src="https://www.equidia.fr/assets/img/paris/tierce.png" alt=""/>
                                                 </a>
                                             </td>
-                                            <td class="result-selector">
+                                            <td className="result-selector">
                                                 <a href="#">
                                                     <img src="https://www.equidia.fr/assets/img/paris/quarte.png" alt=""/>
                                                 </a>
                                             </td>
-                                            <td class="result-selector">
+                                            <td className="result-selector">
                                                 <a href="#">
                                                     <img src="https://www.equidia.fr/assets/img/paris/quinte-plus.png" alt=""/>
                                                 </a>
@@ -512,36 +511,36 @@ export default class HomePage extends Component {
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <table class="results">
-                                        <thead class="double">
+                                    <table className="results">
+                                        <thead className="double">
                                         <tr>
-                                            <td class="arrivee" rowspan="2">Arrivée</td>
-                                            <td colspan="2">Gagnant</td>
-                                            <td colspan="2">Placé</td>
+                                            <td className="arrivee" rowSpan="2">Arrivée</td>
+                                            <td colSpan="2">Gagnant</td>
+                                            <td colSpan="2">Placé</td>
                                         </tr>
                                         <tr>
-                                            <td class="forceLeftBorder">Rapport</td>
+                                            <td className="forceLeftBorder">Rapport</td>
                                             <td>Nb mises gagnantes</td>
-                                            <td class="forceLeftBorder">Rapport</td>
+                                            <td className="forceLeftBorder">Rapport</td>
                                             <td>Nb mises gagnantes</td>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="odd">
+                                        <tr className="odd">
                                             <td>1</td>
                                             <td>6,80 ?</td>
                                             <td>3 425,63 </td>
                                             <td>2,10 ?</td>
                                             <td>4 930,23 </td>
                                         </tr>
-                                        <tr class="even">
+                                        <tr className="even">
                                             <td>5</td>
                                             <td>-</td>
                                             <td>-</td>
                                             <td>1,50 ?</td>
                                             <td>9 569,92 </td>
                                         </tr>
-                                        <tr class="odd">
+                                        <tr className="odd">
                                             <td>6</td>
                                             <td>-</td>
                                             <td>-</td>
