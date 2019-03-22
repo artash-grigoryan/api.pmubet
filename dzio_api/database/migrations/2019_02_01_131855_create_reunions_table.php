@@ -14,11 +14,10 @@ class CreateReunionsTable extends Migration
     public function up()
     {
         Schema::create('reunions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();;
             $table->string('statusLabel');
             $table->string('label');
             $table->char('speciality', 50);
-            $table->char('audience', 1);
             $table->text('category');
             $table->char('type', 1);
             $table->char('code', 3);
@@ -29,7 +28,6 @@ class CreateReunionsTable extends Migration
             $table->char("progvalid", 1);
             $table->text("hippodromeName");
             $table->tinyInteger('racesNumber');
-            $table->timestamps();
         });
     }
 

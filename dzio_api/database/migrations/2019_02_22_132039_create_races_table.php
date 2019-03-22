@@ -36,8 +36,13 @@ class CreateRacesTable extends Migration
             $table->text('discipline');
             $table->date('date');
             $table->date('countryCode');
-            $table->foreign('reunionId');
-            $table->timestamps();
+            $table->integer('reunionId')->unsigned();;
+
+            $table->foreign('reunionId')
+                ->references('id')
+                ->on('reunions')
+                ->onDelete('cascade');
+//            $table->timestamps();
         });
     }
 
