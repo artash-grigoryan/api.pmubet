@@ -17,7 +17,17 @@ class Race extends Model
         'raceId',
         'raceDescription',
         'raceGender',
+
+        'valnomPrixCourse',
         'totalAllocation',
+        'firstAllocation',
+        'secondAllocation',
+        'thirdAllocation',
+        'fourthAllocation',
+        'fifthAllocation',
+        'sixthAllocation',
+        'seventhAllocation',
+
         'raceNumber',
         'label',
         'labelLong',
@@ -27,6 +37,7 @@ class Race extends Model
         'date',
         'countryCode',
         'distance'
+
     ];
 
     public function runners()

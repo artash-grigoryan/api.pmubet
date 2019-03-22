@@ -77,7 +77,7 @@ class ParseRecXmlData extends Command
                             'id' => $race["{}id_nav_course"],
                             'raceDescription' => $race["{}conditions_course"]["{}conditions_txt_course"],
                             'raceGender' => $race["{}conditions_course"]["{}conditions_txt_course"],
-                            'valnom_prix_course' => $race["{}valnom_prix_course"]["{}conditions_txt_course"],
+                            'valnomPrixCourse' => $race["{}valnom_prix_course"],
 
                             'totalAllocation' => $race["{}allocations_course"]["{}montant_total_allocation"],
                             'firstAllocation' => $race["{}allocations_course"]["{}allocation_premier_partant"],
