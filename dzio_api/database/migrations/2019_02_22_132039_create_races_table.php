@@ -16,17 +16,33 @@ class CreateRacesTable extends Migration
         Schema::create('races', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('raceDescription');
-            $table->integer('raceGender');
+            $table->integer('valnomPrixCourse');
+
+            $table->string('totalAllocation');
+            $table->string('firstAllocation');
+            $table->string('secondAllocation');
+            $table->string('thirdAllocation');
+            $table->string('fourthAllocation');
+            $table->string('fifthAllocation');
+            $table->string('sixthAllocation');
+            $table->string('seventhAllocation');
+
             $table->integer('raceNumber');
+            $table->integer('raceExternNumber');
             $table->longText('label');
             $table->text('labelLong');
             $table->integer('distance');
             $table->tinyInteger('raceType');
             $table->text('discipline');
             $table->date('date');
+            $table->date('countryCode');
+            $table->foreign('reunionId');
             $table->timestamps();
         });
     }
+
+
+//countryCode
 
     /**
      * Reverse the migrations.

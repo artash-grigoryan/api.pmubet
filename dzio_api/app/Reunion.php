@@ -15,11 +15,25 @@ class Reunion extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'label', 'type', 'code', 'date', 'externNumber', 'number'
+        'id',
+        'statusLabel',
+        'label',
+        'speciality',
+        'audience',
+        'category',
+        'type',
+        'code',
+        'date',
+        'externNumber',
+        'number',
+        "audience",
+        "progvalid",
+        "hippodromeName",
+        "racesNumber",
     ];
 
     public function races()
     {
-        return $this->hasMany('App\Race');
+        return $this->hasMany('App\Race', "reunionId");
     }
 }

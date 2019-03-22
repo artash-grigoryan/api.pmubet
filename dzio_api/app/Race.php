@@ -17,7 +17,6 @@ class Race extends Model
         'raceId',
         'raceDescription',
         'raceGender',
-
         'valnomPrixCourse',
         'totalAllocation',
         'firstAllocation',
@@ -27,8 +26,8 @@ class Race extends Model
         'fifthAllocation',
         'sixthAllocation',
         'seventhAllocation',
-
         'raceNumber',
+        'raceExternNumber',
         'label',
         'labelLong',
         'distance',
@@ -36,12 +35,10 @@ class Race extends Model
         'discipline',
         'date',
         'countryCode',
-        'distance'
-
     ];
 
     public function runners()
     {
-        return $this->hasMany('App\Runner');
+        return $this->hasMany('App\Runner', "runnerId");
     }
 }

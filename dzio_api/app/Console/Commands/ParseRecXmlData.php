@@ -80,27 +80,32 @@ class ParseRecXmlData extends Command
                 foreach ($parsedXml["{}jour"]["{}reunions"] as $reunion) {
 
                     $reunionObj = new Reunion([
-                        "reunionId" => $reunion["{}id_nav_reunion"],
+                        "id" => $reunion["{}id_nav_reunion"],
                         "label" => $reunion["{}lib_reunion"],
+                        "statusLabel" => $reunion["{}libelle_status_infos"],
+                        "speciality" => $reunion["{}specialite_reunion"],
+                        "category" => $reunion["{}categorie_reunion"],
                         "type" => $reunion["{}type_reunion"],
+                        "audience" => $reunion["{}audience_gpe_reunion"],
+                        "progvalid" => $reunion["{}progvalide_reunion"],
+                        "hippodromeName" => $reunion["{}lib_hippo_reunion"],
                         "code" => $reunion["{}code_hippo"],
-                        "date" => time($reunion["{}date_reunion"] . " ".$reunion["{}heure_reunion"]),
+                        "date" => strtotime($reunion["{}date_reunion"] . " ".$reunion["{}heure_reunion"] . ":00"),
+                        "racesNumber" => $reunion["{}nbcourse_reunion"],
                         "number" => $reunion["{}num_reunion"],
                         "externNumber" => $reunion["{}num_externe_reunion"],
                     ]);
 
 
-                    var_dump($reunionObj);
-                    exit;
                     $races = [];
                     foreach ($reunion["{}courses"] as $race) {
 
                         $races[] = new Race([
                             'id' => $race["{}id_nav_course"],
+                            "date" => strtotime($reunion["{}date_reunion"] . " ".$race["{}heure_depart_course"] . ":00"),
                             'raceDescription' => $race["{}conditions_course"]["{}conditions_txt_course"],
-                            'raceGender' => $race["{}conditions_course"]["{}conditions_txt_course"],
+                            'raceGender' => $race["{}conditions_course"]["{}sexe_cond_course"],
                             'valnomPrixCourse' => $race["{}valnom_prix_course"],
-
                             'totalAllocation' => $race["{}allocations_course"]["{}montant_total_allocation"],
                             'firstAllocation' => $race["{}allocations_course"]["{}allocation_premier_partant"],
                             'secondAllocation' => $race["{}allocations_course"]["{}allocation_deuxieme_partant"],
@@ -109,14 +114,13 @@ class ParseRecXmlData extends Command
                             'fifthAllocation' => $race["{}allocations_course"]["{}allocation_cinquieme_partant"],
                             'sixthAllocation' => $race["{}allocations_course"]["{}allocation_sixieme_partant"],
                             'seventhAllocation' => $race["{}allocations_course"]["{}allocation_septieme_partant"],
-
                             'raceNumber' => $race["{}num_course_pmu"],
+                            'raceExternNumber' => $race["{}num_externe_course"],
                             'label' => $race["{}libcourt_prix_course"],
                             'labelLong' => $race["{}liblong_prix_course"],
                             'distance' => $race["{}distance_course"],
                             'raceType' => $race["{}lib_corde_course"],
                             'discipline' => $race["{}discipline_course"],
-                            //"date" => time($race["{}date_reunion"] . " ".$race["{}heure_reunion"]),
                         ]);
                     }
                     //var_dump($races);exit;
@@ -184,10 +188,11 @@ class ParseRecXmlData extends Command
                             'distance' => $race["{}distance_course"],
                             'raceType' => $race["{}lib_corde_course"],
                             'discipline' => $race["{}discipline_course"],
-                            //"date" => time($race["{}date_reunion"] . " ".$race["{}heure_reunion"]),
+                            'countryCode' => $race["{}code_pays"],
+                            "date" => strtotime($reunion["{}date_reunion"] . " ".$race["{}heure_reunion"]),
                         ]);
                     }
-                    //var_dump($races);exit;
+
                     var_dump($reunionObj->races()->saveMany($races));
                     exit;
                 }
