@@ -12,12 +12,28 @@ namespace App\Services;
 use App\Services\Interfaces\DataServiceInterface;
 use Sabre\Xml\Service;
 
-class RecXMLService implements DataServiceInterface
-{
+class RecXMLService implements DataServiceInterface {
 
-    const RACES_FOLDER = "4_RACE";
-    const RUNNERS_FOLDER = "6_RUNNERS";
-    const BETS_FOLDER = "16_BETS";
+    const RECTXML_FOLDER_PATH = "./recxml_root";
+
+    const MONTH_MEETINGS = "1_MONTH_MEETINGS"; // Toutes les réunions du mois
+    const DAY_MEETENGS = "2_DAY_MEETENGS"; // Toutes les réunions du jour
+    const REUNIONS_FOLDER = "3_MEETING"; //Toutes les courses d'une réunion
+    const RACES_FOLDER = "4_RACE"; // Détail de la course
+    const RUNNERS_FOLDER = "6_RUNNERS"; // Tous les partants d'une course
+    const BETS_FOLDER = "16_BETS"; //Tous les paris d'une course
+
+    const RACE_DETAILS = "171"; //Conditions de course, Image parcours et liste de tous les partants détaillée et de tous les paris
+    const DEFINITIVE_DIVIDENDS_RAP = "20_DEFINITIVE_DIVIDENDS_RAP"; //Détails des gains
+    const RESULT = "21_RESULT"; //description detaillée des arrivés
+    const REPORT_CHASES = "23_REPORT_CHASES"; //Liste des arrivés non detaillé
+    const COMPARED_PERFORMANCES = "27_COMPARED_PERFORMANCES/"; //
+    const STATS_RUNNERS1 = "673"; //Statistiques detailées des partants, nb de victoires etc...
+    const STATS_RUNNERS2 = "690"; //Statistiques detailées des partants, nb de victoires etc...
+    const STATS_RUNNERS3 = "691"; //Statistiques detailées des partants en pourcentage
+    const LAST_PERFORMANCES = "7_LAST_PERFORMANCES"; //Dernières perfs des partants
+    const PRIZE_LIST = "8_PRIZE_LIST"; //Nombres de victoires par partants
+    const RUNNERS_PRESENTATION = "11_RUNNERS_PRESENTATION"; //classement si course terminée
 
     public $xmlParser;
 
@@ -29,10 +45,21 @@ class RecXMLService implements DataServiceInterface
     /**
      * @return array
      */
+    public function scanReunionsFolder()
+    {
+        $dayFolder = (new \DateTime())->format("Ymd");
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::REUNIONS_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
     public function scanRacesFolder()
     {
         $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = "/var/www/recxml_root" . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RACES_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RACES_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -43,7 +70,7 @@ class RecXMLService implements DataServiceInterface
     public function scanRunnersFolder()
     {
         $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = "/var/www/recxml_root" . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RUNNERS_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RUNNERS_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -54,7 +81,7 @@ class RecXMLService implements DataServiceInterface
     public function scanBetsFolder()
     {
         $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = "/var/www/recxml_root" . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::BETS_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::BETS_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
