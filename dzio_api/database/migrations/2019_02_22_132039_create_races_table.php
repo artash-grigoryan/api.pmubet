@@ -16,14 +16,14 @@ class CreateRacesTable extends Migration
         Schema::create('races', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('raceDescription');
-            $table->longText('raceGender');
-            $table->longText('raceNumber');
+            $table->integer('raceGender');
+            $table->integer('raceNumber');
             $table->longText('label');
-            $table->longText('labelLong');
-            $table->longText('distance');
-            $table->longText('raceType');
-            $table->longText('discipline');
-            $table->longText('date');
+            $table->text('labelLong');
+            $table->integer('distance');
+            $table->tinyInteger('raceType');
+            $table->text('discipline');
+            $table->date('date');
             $table->timestamps();
         });
     }
