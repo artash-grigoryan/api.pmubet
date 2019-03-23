@@ -15,7 +15,14 @@ class CreateBetsTable extends Migration
     {
         Schema::create('bets', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('lib')->nullable();
+            $table->string('libLong')->nullable();
+            $table->integer('raceId')->unsigned();
+
+            $table->foreign('raceId')
+                ->references('id')
+                ->on('races')
+                ->onDelete('cascade');
         });
     }
 

@@ -15,29 +15,29 @@ class CreateRacesTable extends Migration
     {
         Schema::create('races', function (Blueprint $table) {
             $table->increments('id');
-            $table->longText('raceDescription');
-            $table->string('raceGender');
-            $table->integer('valnomPrixCourse');
+            $table->longText('description')->nullable();;
+            $table->string('gender')->nullable();;
+            $table->integer('valnomPrixCourse')->nullable();;
 
-            $table->string('totalAllocation');
-            $table->string('firstAllocation');
-            $table->string('secondAllocation');
-            $table->string('thirdAllocation');
-            $table->string('fourthAllocation');
-            $table->string('fifthAllocation');
-            $table->string('sixthAllocation');
-            $table->string('seventhAllocation');
+            $table->string('totalAllocation')->nullable();;
+            $table->string('firstAllocation')->nullable();;
+            $table->string('secondAllocation')->nullable();;
+            $table->string('thirdAllocation')->nullable();;
+            $table->string('fourthAllocation')->nullable();;
+            $table->string('fifthAllocation')->nullable();;
+            $table->string('sixthAllocation')->nullable();;
+            $table->string('seventhAllocation')->nullable();;
 
-            $table->integer('raceNumber');
-            $table->integer('raceExternNumber');
-            $table->longText('label');
-            $table->text('labelLong');
-            $table->integer('distance');
-            $table->text('raceType');
-            $table->text('discipline');
-            $table->date('date');
+            $table->integer('number')->nullable();;
+            $table->integer('externNumber')->nullable();;
+            $table->longText('label')->nullable();;
+            $table->text('labelLong')->nullable();;
+            $table->integer('distance')->nullable();;
+            $table->text('type')->nullable();;
+            $table->text('discipline')->nullable();;
+            $table->date('date')->nullable();;
             $table->char('countryCode', 3)->nullable();
-            $table->integer('reunionId')->unsigned();;
+            $table->integer('reunionId')->unsigned();
 
             $table->foreign('reunionId')
                 ->references('id')

@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Runner extends Model
 {
     //
-    protected $table = 'runner';
+    protected $table = 'runners';
+
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +17,7 @@ class Runner extends Model
      * @var array
      */
     protected $fillable = [
-        'runnerId',
+        'id',
         'name',
         'number',
         'breed',

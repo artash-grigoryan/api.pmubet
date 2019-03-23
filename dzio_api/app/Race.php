@@ -16,7 +16,7 @@ class Race extends Model
      * @var array
      */
     protected $fillable = [
-        'raceId',
+        'id',
         'raceDescription',
         'raceGender',
         'valnomPrixCourse',
@@ -42,5 +42,10 @@ class Race extends Model
     public function runners()
     {
         return $this->hasMany('App\Runner', "runnerId");
+    }
+
+    public function bets()
+    {
+        return $this->hasMany('App\Bet', "betId");
     }
 }

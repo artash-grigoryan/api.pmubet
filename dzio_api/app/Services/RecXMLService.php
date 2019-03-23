@@ -16,14 +16,19 @@ class RecXMLService implements DataServiceInterface {
 
     const RECTXML_FOLDER_PATH = "./recxml_root";
 
+    //UNUSED
     const MONTH_MEETINGS = "1_MONTH_MEETINGS"; // Toutes les réunions du mois
     const DAY_MEETENGS = "2_DAY_MEETENGS"; // Toutes les réunions du jour
-    const REUNIONS_FOLDER = "3_MEETING"; //Toutes les courses d'une réunion
-    const RACES_FOLDER = "4_RACE"; // Détail de la course
+
+    //USED
+    const REUNIONS_FOLDER = "3_MEETING"; //Toutes les courses d'une réunion mais réunion detaillée
+    const RACE_DETAILS = "171"; //Conditions de course, Image parcours et liste de tous les partants détaillée et de tous les paris
+
+
+    const RACES_FOLDER = "4_RACE"; // Détails de la course
     const RUNNERS_FOLDER = "6_RUNNERS"; // Tous les partants d'une course
     const BETS_FOLDER = "16_BETS"; //Tous les paris d'une course
 
-    const RACE_DETAILS = "171"; //Conditions de course, Image parcours et liste de tous les partants détaillée et de tous les paris
     const DEFINITIVE_DIVIDENDS_RAP = "20_DEFINITIVE_DIVIDENDS_RAP"; //Détails des gains
     const RESULT = "21_RESULT"; //description detaillée des arrivés
     const REPORT_CHASES = "23_REPORT_CHASES"; //Liste des arrivés non detaillé
@@ -101,12 +106,19 @@ class RecXMLService implements DataServiceInterface {
 
     /**
      * @param $filePath
-     * @return array of Parsed XML file
+     * @param $mappedFields
+     * @return array|object|string
      * @throws \Sabre\Xml\ParseException
      */
     public function parseXMLFileByPath($filePath, $mappedFields)
     {
-        $this->xmlParser->elementMap = $mappedFields;
+        $map = [];
+        foreach ($mappedFields as $mappedField) {
+            $map[$mappedField] = function(\Sabre\Xml\Reader $reader) {
+                return \Sabre\Xml\Deserializer\keyValue($reader, '');
+            };
+        }
+        $this->xmlParser->elementMap = $map;
         return $this->xmlParser->parse(file_get_contents($filePath));
     }
 }

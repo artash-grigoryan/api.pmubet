@@ -16,19 +16,26 @@ class CreateRunnersTable extends Migration
         //@TODO fix types
         Schema::create('runners', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('breed');
-            $table->char('sex', 1);
-            $table->tinyInteger('age');
-            $table->string('dress');
-            $table->string('birthday');
-            $table->string('color');
-            $table->string('father');
-            $table->string('mother');
-            $table->string('owner');
-            $table->string('coach');
-            $table->string('jokey');
-            $table->string('farmer');
+            $table->string('name')->nullable();;
+            $table->tinyInteger('number')->nullable();;
+            $table->string('breed')->nullable();;
+            $table->char('sex', 1)->nullable();;
+            $table->tinyInteger('age')->nullable();;
+            $table->string('dress')->nullable();;
+            $table->date('birthday')->nullable();;
+            $table->string('color')->nullable();;
+            $table->string('father')->nullable();;
+            $table->string('mother')->nullable();;
+            $table->string('owner')->nullable();;
+            $table->string('coach')->nullable();;
+            $table->string('jokey')->nullable();;
+            $table->string('farmer')->nullable();;
+            $table->integer('raceId')->unsigned();
+
+            $table->foreign('raceId')
+                ->references('id')
+                ->on('races')
+                ->onDelete('cascade');
 //            $table->timestamps();
         });
     }
