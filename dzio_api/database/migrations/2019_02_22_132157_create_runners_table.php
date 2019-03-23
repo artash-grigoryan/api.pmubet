@@ -18,8 +18,8 @@ class CreateRunnersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('breed');
-            $table->string('sex');
-            $table->string('age');
+            $table->char('sex', 1);
+            $table->tinyInteger('age');
             $table->string('dress');
             $table->string('birthday');
             $table->string('color');
@@ -29,7 +29,7 @@ class CreateRunnersTable extends Migration
             $table->string('coach');
             $table->string('jokey');
             $table->string('farmer');
-            $table->timestamps();
+//            $table->timestamps();
         });
     }
 

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<jours>
+    <jour>
+        <code_statut_infos>DEF</code_statut_infos>
+        <libelle_statut_infos>Réunion</libelle_statut_infos>
+        <date_heure_generation>22-03-2019 14:55:45</date_heure_generation>
+        <type_document>Réunion</type_document>
+        <date_jour_reunion>22-03-2019</date_jour_reunion>
+        <reunions>
+            <reunion>
+                <code_hippo>CAE</code_hippo>
+                <type_reunion>D</type_reunion>
+                <date_reunion>22-03-2019</date_reunion>
+                <specialite_reunion translate="yes">Trotting</specialite_reunion>
+                <categorie_reunion/>
+                <lib_hippo_reunion>HIPPODROME DE CAEN</lib_hippo_reunion>
+                <num_reunion>4</num_reunion>
+                <num_externe_reunion>4</num_externe_reunion>
+                <lib_reunion>CAEN</lib_reunion>
+                <audience_gpe_reunion>N</audience_gpe_reunion>
+                <progvalide_reunion>N</progvalide_reunion>
+                <ind_reu_csi>N</ind_reu_csi>
+                <heure_reunion>13:30</heure_reunion>
+                <nbcourse_reunion>9</nbcourse_reunion>
+                <nbcourse_nploc>9</nbcourse_nploc>
+                <pays_site_reunion/>
+                <devise_reunion>EUR</devise_reunion>
+                <org_reunion/>
+                <gnt_reunion>N</gnt_reunion>
+                <paris_exception>00000 00000 00000 00000 00000</paris_exception>
+                <url_hippodrome/>
+                <ind_evenement/>
+                <meteo_carte/>
+                <meteo_texte/>
+                <id_nav_reunion>28360761</id_nav_reunion>
+                <courses>
+                    <course>
+                        <code_evenement/>
+                        <heure_depart_course>13:50</heure_depart_course>
+                        <num_course_pmu>1</num_course_pmu>
+                        <libcourt_prix_course>LION-SUR-MER</libcourt_prix_course>
+                        <nbdeclare_course>13</nbdeclare_course>
+                        <id_nav_course>28500016</id_nav_course>
+                        <discipline translate="yes">Ridden</discipline>
+                        <dist_course>2450</dist_course>
+                        <statut_course translate="yes">End of race</statut_course>
+                        <ind_pmu_course>*</ind_pmu_course>
+                        <ind_spot_quinte>N</ind_spot_quinte>
+                        <ind_spot_2sur4>O</ind_spot_2sur4>
+                        <ind_spot_multi>N</ind_spot_multi>
+                        <code_pays>FRA</code_pays>
+                        <ind_quadrio>N</ind_quadrio>
+                        <nom_pays/>
+                        <lib_hippo_reel/>
+                        <enquete_reclamation_statut>0</enquete_reclamation_statut>
+                        <enquete_reclamation_libelle translate="yes"/>
+                    </course>
+                    <course>
+                        <code_evenement/>
+                        <heure_depart_course>14:20</heure_depart_course>
+                        <num_course_pmu>2</num_course_pmu>
+                        <libcourt_prix_course>D'AUBERVILLE</libcourt_prix_course>
+                        <nbdeclare_course>16</nbdeclare_course>
+                        <id_nav_course>28500015</id_nav_course>
+                        <discipline translate="yes">Harnessed</discipline>
+                        <dist_course>2450</dist_course>
+                        <statut_course translate="yes">End of race</statut_course>
+                        <ind_pmu_course>*</ind_pmu_course>
+                        <ind_spot_quinte>N</ind_spot_quinte>
+                        <ind_spot_2sur4>O</ind_spot_2sur4>
+                        <ind_spot_multi>O</ind_spot_multi>
+                        <code_pays>FRA</code_pays>
+                        <ind_quadrio>N</ind_quadrio>
+                        <nom_pays/>
+                        <lib_hippo_reel/>
+                        <enquete_reclamation_statut>0</enquete_reclamation_statut>
+                        <enquete_reclamation_libelle translate="yes"/>
+                    </course>
+                    <course>
+                        <code_evenement/>
+                        <heure_depart_course>14:55</heure_depart_course>
+                        <num_course_pmu>3</num_course_pmu>
+                        <libcourt_prix_course>PLANQUERY</libcourt_prix_course>
+                        <nbdeclare_course>19</nbdeclare_course>
+                        <id_nav_course>28500014</id_nav_course>
+                        <discipline translate="yes">Ridden</discipline>
+                        <dist_course>2450</dist_course>
+                        <statut_course translate="yes">Horses are under orders</statut_course>
+                        <ind_pmu_course>*</ind_pmu_course>
+                        <ind_spot_quinte>N</ind_spot_quinte>
+                        <ind_spot_2sur4>O</ind_spot_2sur4>
+                        <ind_spot_multi>O</ind_spot_multi>
+                        <code_pays>FRA</code_pays>
+                        <ind_quadrio>N</ind_quadrio>
+                        <nom_pays/>
+                        <lib_hippo_reel/>
+                        <enquete_reclamation_statut>0</enquete_reclamation_statut>
+                        <enquete_reclamation_libelle translate="yes"/>
+                    </course>
+                    <course>
+                        <code_evenement/>
+                        <heure_depart_course>15:30</heure_depart_course>
+                        <num_course_pmu>4</num_course_pmu>
+                        <libcourt_prix_course>BENERVILLE</libcourt_prix_course>
+                        <nbdeclare_course>18</nbdeclare_course>
+                        <id_nav_course>28500017</id_nav_course>
+                        <discipline translate="yes">Harnessed</discipline>
+                        <dist_course>2200</dist_course>
+                        <statut_course translate="yes"/>
+                        <ind_pmu_course>*</ind_pmu_course>
+                        <ind_spot_quinte>N</ind_spot_quinte>
+                        <ind_spot_2sur4>O</ind_spot_2sur4>
+                        <ind_spot_multi>O</ind_spot_multi>
+                        <code_pays>FRA</code_pays>
+                        <ind_quadrio>N</ind_quadrio>
+                        <nom_pays/>
+                        <lib_hippo_reel/>
+                        <enquete_reclamation_statut>0</enquete_reclamation_statut>
+                        <enquete_reclamation_libelle translate="yes"/>
+                    </course>
+                    <course>
+                        <code_evenement/>
+                        <heure_depart_course>16:05</heure_depart_course>
+                        <num_course_pmu>5</num_course_pmu>
+                        <libcourt_prix_course>HEROUVILLETTE</libcourt_prix_course>
+                        <nbdeclare_course>14</nbdeclare_course>
+                        <id_nav_course>28500022</id_nav_course>
+                        <discipline translate="yes">Harnessed</discipline>
+                        <dist_course>2200</dist_course>
+                        <statut_course translate="yes"/>
+                        <ind_pmu_course>*</ind_pmu_course>
+                        <ind_spot_quinte>N</ind_spot_quinte>
+                        <ind_spot_2sur4>O</ind_spot_2sur4>
+                        <ind_spot_multi>O</ind_spot_multi>
+                        <code_pays>FRA</code_pays>
+                        <ind_quadrio>N</ind_quadrio>
+                        <nom_pays/>
+                        <lib_hippo_reel/>
+                        <enquete_reclamation_statut>0</enquete_reclamation_statut>
+                        <enquete_reclamation_libelle translate="yes"/>
+                    </course>
+                    <course>
+                        <code_evenement/>
+                        <heure_depart_course>16:40</heure_depart_course>
+                        <num_course_pmu>6</num_course_pmu>
+                        <libcourt_prix_course>DE BAVENT</libcourt_prix_course>
+                        <nbdeclare_course>13</nbdeclare_course>
+                        <id_nav_course>28500021</id_nav_course>
+                        <discipline translate="yes">Harnessed</discipline>
+                        <dist_course>2200</dist_course>
+                        <statut_course translate="yes"/>
+                        <ind_pmu_course>*</ind_pmu_course>
+                        <ind_spot_quinte>N</ind_spot_quinte>
+                        <ind_spot_2sur4>O</ind_spot_2sur4>
+                        <ind_spot_multi>N</ind_spot_multi>
+                        <code_pays>FRA</code_pays>
+                        <ind_quadrio>N</ind_quadrio>
+                        <nom_pays/>
+                        <lib_hippo_reel/>
+                        <enquete_reclamation_statut>0</enquete_reclamation_statut>
+                        <enquete_reclamation_libelle translate="yes"/>
+                    </course>
+                    <course>
+                        <code_evenement/>
+                        <heure_depart_course>17:15</heure_depart_course>
+                        <num_course_pmu>7</num_course_pmu>
+                        <libcourt_prix_course>DE CAMBES</libcourt_prix_course>
+                        <nbdeclare_course>17</nbdeclare_course>
+                        <id_nav_course>28500020</id_nav_course>
+                        <discipline translate="yes">Harnessed</discipline>
+                        <dist_course>2450</dist_course>
+                        <statut_course translate="yes"/>
+                        <ind_pmu_course>*</ind_pmu_course>
+                        <ind_spot_quinte>N</ind_spot_quinte>
+                        <ind_spot_2sur4>O</ind_spot_2sur4>
+                        <ind_spot_multi>O</ind_spot_multi>
+                        <code_pays>FRA</code_pays>
+                        <ind_quadrio>N</ind_quadrio>
+                        <nom_pays/>
+                        <lib_hippo_reel/>
+                        <enquete_reclamation_statut>0</enquete_reclamation_statut>
+                        <enquete_reclamation_libelle translate="yes"/>
+                    </course>
+                    <course>
+                        <code_evenement/>
+                        <heure_depart_course>17:50</heure_depart_course>
+                        <num_course_pmu>8</num_course_pmu>
+                        <libcourt_prix_course>BOUGUENAIS</libcourt_prix_course>
+                        <nbdeclare_course>20</nbdeclare_course>
+                        <id_nav_course>28500018</id_nav_course>
+                        <discipline translate="yes">Ridden</discipline>
+                        <dist_course>2450</dist_course>
+                        <statut_course translate="yes"/>
+                        <ind_pmu_course>*</ind_pmu_course>
+                        <ind_spot_quinte>N</ind_spot_quinte>
+                        <ind_spot_2sur4>O</ind_spot_2sur4>
+                        <ind_spot_multi>O</ind_spot_multi>
+                        <code_pays>FRA</code_pays>
+                        <ind_quadrio>N</ind_quadrio>
+                        <nom_pays/>
+                        <lib_hippo_reel/>
+                        <enquete_reclamation_statut>0</enquete_reclamation_statut>
+                        <enquete_reclamation_libelle translate="yes"/>
+                    </course>
+                    <course>
+                        <code_evenement/>
+                        <heure_depart_course>18:25</heure_depart_course>
+                        <num_course_pmu>9</num_course_pmu>
+                        <libcourt_prix_course>DAMMARIE</libcourt_prix_course>
+                        <nbdeclare_course>18</nbdeclare_course>
+                        <id_nav_course>28500019</id_nav_course>
+                        <discipline translate="yes">Harnessed</discipline>
+                        <dist_course>2450</dist_course>
+                        <statut_course translate="yes"/>
+                        <ind_pmu_course>*</ind_pmu_course>
+                        <ind_spot_quinte>N</ind_spot_quinte>
+                        <ind_spot_2sur4>O</ind_spot_2sur4>
+                        <ind_spot_multi>O</ind_spot_multi>
+                        <code_pays>FRA</code_pays>
+                        <ind_quadrio>N</ind_quadrio>
+                        <nom_pays/>
+                        <lib_hippo_reel/>
+                        <enquete_reclamation_statut>0</enquete_reclamation_statut>
+                        <enquete_reclamation_libelle translate="yes"/>
+                    </course>
+                </courses>
+            </reunion>
+        </reunions>
+    </jour>
+</jours>

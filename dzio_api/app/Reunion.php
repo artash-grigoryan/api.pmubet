@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reunion extends Model
 {
-    //
-    protected $table = 'reunion';
+    /** @var string  */
+    protected $table = 'reunions';
+
+    public $timestamps = false;
+
 
     /**
      * The attributes that are mass assignable.

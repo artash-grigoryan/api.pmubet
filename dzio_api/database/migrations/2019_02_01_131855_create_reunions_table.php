@@ -15,19 +15,19 @@ class CreateReunionsTable extends Migration
     {
         Schema::create('reunions', function (Blueprint $table) {
             $table->increments('id')->unsigned();;
-            $table->string('statusLabel');
-            $table->string('label');
-            $table->char('speciality', 50);
-            $table->text('category');
-            $table->char('type', 1);
-            $table->char('code', 3);
+            $table->string('statusLabel' )->nullable();
+            $table->string('label')->nullable();
+            $table->char('speciality', 50)->nullable();
+            $table->text('category')->nullable();
+            $table->char('type', 1)->nullable();
+            $table->char('code', 3)->nullable();
             $table->timestamp('date');
-            $table->tinyInteger('externNumber');
-            $table->tinyInteger('number');
-            $table->char("audience", 1);
-            $table->char("progvalid", 1);
-            $table->text("hippodromeName");
-            $table->tinyInteger('racesNumber');
+            $table->tinyInteger('externNumber')->nullable();
+            $table->tinyInteger('number')->nullable();
+            $table->char("audience", 10)->nullable();
+            $table->char("progvalid", 1)->nullable();
+            $table->text("hippodromeName")->nullable();
+            $table->tinyInteger('racesNumber')->nullable();
         });
     }
 
