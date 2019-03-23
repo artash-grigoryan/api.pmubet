@@ -16,6 +16,7 @@ class CreateRacesTable extends Migration
         Schema::create('races', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('raceDescription');
+            $table->string('raceGender');
             $table->integer('valnomPrixCourse');
 
             $table->string('totalAllocation');
@@ -32,10 +33,10 @@ class CreateRacesTable extends Migration
             $table->longText('label');
             $table->text('labelLong');
             $table->integer('distance');
-            $table->tinyInteger('raceType');
+            $table->text('raceType');
             $table->text('discipline');
             $table->date('date');
-            $table->date('countryCode');
+            $table->char('countryCode', 3)->nullable();
             $table->integer('reunionId')->unsigned();;
 
             $table->foreign('reunionId')

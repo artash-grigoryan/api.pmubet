@@ -8,6 +8,8 @@ class Race extends Model
 {
     protected $table = 'races';
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
