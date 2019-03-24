@@ -28,6 +28,8 @@ Next, you’ll add a new file to this repository.
 3. **composer install**.
 4. **cp .env.example .env**.
 
+artisan migrate:fresh --seed to migrate database
+
 If you see this error
 *No Application Encryption Key Has Been Specified*
 Try to generate the key with this command **docker exec -it dzio_www_1 /bin/sh -c 'cd dzio_api/;php artisan key:generate'** 
