@@ -1,15 +1,15 @@
 version: '2'
 
 services:
-    www:
-        #image: nimmis/apache-php7
-        build: "./docker/apache"
+    api:
+        image: agrigoryan/laravel:17b39b8a41ae86d63d248f61856242c681eaab96
+        #build: "./docker/apache"
         volumes:
           - ".:/var/www"
         working_dir: "/var/www"
         #command : "bash -c 'source /etc/apache2/envvars; apache2 -DFOREGROUND'"
         ports:
-          - 80:80
+          - 9200:80
           - 443:443
         links:
           - db
@@ -32,6 +32,15 @@ services:
           - 7008:80
         #volumes:
           #- "./opt:/opt"
+        tty: true
+
+    react:
+        build: "./docker/nodejs"
+        #command : "bash -c '/usr/local/bin/recXML_start'"
+        ports:
+          - 80:80
+        volumes:
+          - "./dzio_app:/var/www"
         tty: true
 
     pma:

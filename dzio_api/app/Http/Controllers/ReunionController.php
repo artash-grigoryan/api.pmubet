@@ -40,7 +40,7 @@ class ReunionController extends Controller
         $today = date('Y-m-d');
         $tomorrow = date('Y-m-d', strtotime('+1 DAY'));
         $afterTomorrow = date('Y-m-d', strtotime('+2 DAY'));
-        $data = array();
+        $data = [];
 
         $data[$yesterday] = Reunion::where([['date', '>', $yesterday], ['date', '<', $today]])->with('races')->get();
 
