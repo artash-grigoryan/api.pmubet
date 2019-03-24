@@ -35,8 +35,15 @@ class Reunion extends Model
         "racesNumber",
     ];
 
-    public function races()
+    public function racesLite()
     {
         return $this->hasMany('App\Race', "reunionId");
     }
+
+    public function races()
+    {
+        return $this->hasMany('App\Race', "reunionId")->with("bets")->with("runners")->with("betResults");
+    }
+
+
 }

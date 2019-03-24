@@ -42,29 +42,11 @@ class ReunionController extends Controller
         $afterTomorrow = date('Y-m-d', strtotime('+2 DAY'));
         $data = array();
 
-        $data[$yesterday] = Reunion::where([['date', '>', $yesterday], ['date', '<', $today]])->get()->each(function($group) {
-            foreach ($group->races as $keyRace => $race) {
-                $race->runners;
-                $race->bets;
-                $race->betResults;
-            }
-        });
+        $data[$yesterday] = Reunion::where([['date', '>', $yesterday], ['date', '<', $today]])->with('races')->get();
 
-        $data[$today] = Reunion::where([['date', '>', $today], ['date', '<', $tomorrow]])->get()->each(function($group) {
-            foreach ($group->races as $keyRace => $race) {
-                $race->runners;
-                $race->bets;
-                $race->betResults;
-            }
-        });
+        $data[$today] = Reunion::where([['date', '>', $today], ['date', '<', $tomorrow]])->with('races')->get();
 
-        $data[$tomorrow] = Reunion::where([['date', '>', $tomorrow], ['date', '<', $afterTomorrow]])->get()->each(function($group) {
-            foreach ($group->races as $keyRace => $race) {
-                $race->runners;
-                $race->bets;
-                $race->betResults;
-            }
-        });
+        $data[$tomorrow] = Reunion::where([['date', '>', $tomorrow], ['date', '<', $afterTomorrow]])->with('races')->get();
 
         return response()->json($data);
     }
