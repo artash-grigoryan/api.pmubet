@@ -16,13 +16,14 @@ ENV LC_ALL fr_FR.UTF-8
 #    cd / && rm -rf sassc libsass
 
 #sass
-RUN apt-get install make ruby ruby-dev -y && \
-    gem install sass
+#RUN apt-get install make ruby ruby-dev -y && \
+#    gem install sass
 
 #Install nodejs
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 RUN npm install -g webpack
+RUN npm install sass
 
 COPY --chown=www-data:www-data ./dzio_app /var/www
 
