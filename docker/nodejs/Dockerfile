@@ -24,4 +24,10 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 RUN npm install -g webpack
 
+COPY --chown=www-data:www-data ./dzio_app /var/www
+
+
+WORKDIR /var/www/
+RUN ls -la
+
 EXPOSE 80
