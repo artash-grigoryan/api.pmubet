@@ -32,5 +32,9 @@ class Runner extends Model
         'coach',
         'jokey',
         'farmer',
+        'rank',
+        'textRank',
+        'reductionKm',
+        'time',
     ];
 }

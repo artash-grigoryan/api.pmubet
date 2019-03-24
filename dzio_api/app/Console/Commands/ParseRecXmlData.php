@@ -47,6 +47,7 @@ class ParseRecXmlData extends Command
         $this->parseRacesXML($dataService);
         $this->parseRunnersXML($dataService);
         $this->parseBetsXML($dataService);
+        $this->parseResultsXML($dataService);
     }
 
     private function parseReunionsXML($dataService) {
@@ -255,6 +256,84 @@ class ParseRecXmlData extends Command
                                 'coach' => iconv('UTF-8', 'ISO-8859-1', $runner['value']["entraineur_partant"]["nom_entraineur"]),
                                 'jokey' => iconv('UTF-8', 'ISO-8859-1', $runner['value']["monte_partant"]["nom_monte"]),
                                 'farmer' => iconv('UTF-8', 'ISO-8859-1', $runner['value']["eleveur_partant"]["nom_eleveur"]),
+                                "raceId" => $race['value']["id_nav_course"],
+                            ];
+
+                            Runner::updateOrInsert(
+                                ['id' => $runner['value']["id_nav_partant"]],
+                                $runnerArr
+                            );
+                        }
+                    }
+                    //@TODO DELETE THE FILE
+                }
+            }
+        }
+    }
+
+    private function parseResultsXML($dataService) {
+
+        $filesInfo = $dataService->scanResultsFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $dataService->parseXMLFileByPath(
+                    $filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "conditions_course",
+                        "allocations_course",
+                        "etat_terrain_reunion",
+                        "partant",
+                        "genealogie_partant",
+                        "proprietaire_partant",
+                        "entraineur_partant",
+                        "eleveur_partant",
+                        "monte_partant",
+                    ]
+                );
+
+                foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                    $reunionArr = [
+                        "id" => $reunion['value']["id_nav_reunion"],
+                        "code" => $reunion['value']["code_hippo"],
+                        "number" => $reunion['value']["num_reunion"],
+                        "externNumber" => $reunion['value']["num_externe_reunion"],
+                    ];
+                    try {
+                        Reunion::insert(
+                            $reunionArr
+                        );
+                    } catch (\Exception $e) {}
+                    $reunionObj = new Reunion(array('id'=>$reunion['value']["id_nav_reunion"]));
+
+                    foreach ($reunion['value']["courses"] as $race) {
+
+                        $raceArr = [
+                            'id' => $race['value']["id_nav_course"],
+                            'number' => $race['value']["num_course_pmu"],
+                            "reunionId" => $reunion['value']["id_nav_reunion"]
+                        ];
+
+                        try {
+                            Race::insert(
+                                $raceArr
+                            );
+                        } catch (\Exception $e) {}
+                        $raceObj = new Race(array('id'=>$race['value']["id_nav_course"]));
+
+                        foreach ($race['value']["partants"] as $runner) {
+
+                            $runnerArr = [
+                                'name' => iconv('UTF-8', 'ISO-8859-1', $runner['value']["nom_cheval"]),
+                                'number' => $runner['value']["num_partant"],
+                                'rank' => $runner['value']['num_place_arrivee'],
+                                'textRank' => $runner['value']['texte_place_arrivee'],
+                                'reductionKm' => $runner['value']['reduction_km'],
+                                'time' => $runner['value']['temps_part'],
                                 "raceId" => $race['value']["id_nav_course"],
                             ];
 
