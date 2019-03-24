@@ -22,9 +22,4 @@ class Bet extends Model {
         'libLong',
     ];
 
-    public function betResults()
-    {
-        return $this->hasMany('App\BetResults', "betId");
-    }
-
 }

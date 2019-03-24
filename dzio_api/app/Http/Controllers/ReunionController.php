@@ -30,6 +30,46 @@ class ReunionController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAll()
+    {
+        $yesterday = date('Y-m-d', strtotime('-1 DAY'));
+        $today = date('Y-m-d');
+        $tomorrow = date('Y-m-d', strtotime('+1 DAY'));
+        $afterTomorrow = date('Y-m-d', strtotime('+2 DAY'));
+        $data = array();
+
+        $data[$yesterday] = Reunion::where([['date', '>', $yesterday], ['date', '<', $today]])->get()->each(function($group) {
+            foreach ($group->races as $keyRace => $race) {
+                $race->runners;
+                $race->bets;
+                $race->betResults;
+            }
+        });
+
+        $data[$today] = Reunion::where([['date', '>', $today], ['date', '<', $tomorrow]])->get()->each(function($group) {
+            foreach ($group->races as $keyRace => $race) {
+                $race->runners;
+                $race->bets;
+                $race->betResults;
+            }
+        });
+
+        $data[$tomorrow] = Reunion::where([['date', '>', $tomorrow], ['date', '<', $afterTomorrow]])->get()->each(function($group) {
+            foreach ($group->races as $keyRace => $race) {
+                $race->runners;
+                $race->bets;
+                $race->betResults;
+            }
+        });
+
+        return response()->json($data);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

@@ -48,4 +48,9 @@ class Race extends Model
     {
         return $this->hasMany('App\Bet', "raceId");
     }
+
+    public function betResults()
+    {
+        return $this->hasMany('App\BetResult', 'raceId');
+    }
 }
