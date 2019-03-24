@@ -17,8 +17,14 @@ class Bet extends Model {
      */
     protected $fillable = [
         'id',
+        'code',
         'lib',
         'libLong',
     ];
+
+    public function betResults()
+    {
+        return $this->hasMany('App\BetResults', "betId");
+    }
 
 }

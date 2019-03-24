@@ -19,26 +19,30 @@ class RecXMLService implements DataServiceInterface {
     //UNUSED
     const MONTH_MEETINGS_FOLDER = "1_MONTH_MEETINGS"; // Toutes les réunions du mois
     const DAY_MEETENGS_FOLDER = "2_DAY_MEETENGS"; // Toutes les réunions du jour
-
-    //USED
-    const REUNIONS_FOLDER = "3_MEETING"; //Toutes les courses d'une réunion mais réunion detaillée
-    const RACE_DETAILS_FOLDER = "171"; //Conditions de course, Image parcours et liste de tous les partants détaillée et de tous les paris
-
-
-    const RACES_FOLDER = "4_RACE"; // Détails de la course
-    const RUNNERS_FOLDER = "6_RUNNERS"; // Tous les partants d'une course
-    const BETS_FOLDER = "16_BETS"; //Tous les paris d'une course
-
-    const DEFINITIVE_DIVIDENDS_RAP_FOLDER = "20_DEFINITIVE_DIVIDENDS_RAP"; //Détails des gains
-    const RESULT_FOLDER = "21_RESULT"; //description detaillée des arrivés
-    const REPORT_CHASES_FOLDER = "23_REPORT_CHASES"; //Liste des arrivés non detaillé
-    const COMPARED_PERFORMANCES_FOLDER = "27_COMPARED_PERFORMANCES/"; //
-    const STATS_RUNNERS1_FOLDER = "673"; //Statistiques detailées des partants, nb de victoires etc...
-    const STATS_RUNNERS2_FOLDER = "690"; //Statistiques detailées des partants, nb de victoires etc...
-    const STATS_RUNNERS3_FOLDER = "691"; //Statistiques detailées des partants en pourcentage
     const LAST_PERFORMANCES_FOLDER = "7_LAST_PERFORMANCES"; //Dernières perfs des partants
     const PRIZE_LIST_FOLDER = "8_PRIZE_LIST"; //Nombres de victoires par partants
     const RUNNERS_PRESENTATION_FOLDER = "11_RUNNERS_PRESENTATION"; //classement si course terminée
+    const REPORT_CHASES_FOLDER = "23_REPORT_CHASES"; //Liste des arrivés non detaillé
+    const STATS_RUNNERS1_FOLDER = "673"; //Statistiques detailées des partants, nb de victoires etc...
+    const STATS_RUNNERS2_FOLDER = "690"; //Statistiques detailées des partants, nb de victoires etc...
+    const STATS_RUNNERS3_FOLDER = "691"; //Statistiques detailées des partants en pourcentage
+    const RACE_DETAILS_FOLDER = "171"; //Conditions de course, Image parcours et liste de tous les partants détaillée et de tous les paris
+
+    //USED
+    const REUNIONS_FOLDER = "3_MEETING"; //Toutes les courses d'une réunion mais réunion detaillée
+    const RACES_FOLDER = "4_RACE"; // Détails de la course
+    const RUNNERS_FOLDER = "6_RUNNERS"; // Tous les partants d'une course
+    const BETS_FOLDER = "16_BETS"; //Tous les paris d'une course
+    const RESULT_FOLDER = "21_RESULT"; //description detaillée des arrivés
+    const DEFINITIVE_DIVIDENDS_RAP_FOLDER = "20_DEFINITIVE_DIVIDENDS_RAP"; //Détails des gains
+    const COMPARED_PERFORMANCES_FOLDER = "27_COMPARED_PERFORMANCES"; //
+
+
+
+    const GNY_SELECTION_PRESS_Q5_FOLDER = "103_GNY_SELECTION_PRESS_Q5"; //JOURNAUX PRONOSTICS
+    const GNY_SYNTHESE_PRESS_Q5_FOLDER = "104_GNY_SYNTHESE_PRESS_Q5"; //SOMME DES JOURNAUX AVEC POINTS EN FONCTION DU CLASSEMENT
+    const GNY_PRONO_NAT_FOLDER = "108_GNY_PRONO_NAT"; //GET RUNNERS COMMENTS FROM THERE
+    const GNY_PRONO_Q5_FOLDER = "110_GNY_PRONO_Q5"; //GET RACE COMMENTS FROM THERE
 
     public $xmlParser;
 
@@ -87,6 +91,17 @@ class RecXMLService implements DataServiceInterface {
     {
         $dayFolder = (new \DateTime())->format("Ymd");
         $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::BETS_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanBetResultsFolder()
+    {
+        $dayFolder = (new \DateTime())->format("Ymd");
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DEFINITIVE_DIVIDENDS_RAP_FOLDER;
 
         return $this->scanFolder($folderPath);
     }

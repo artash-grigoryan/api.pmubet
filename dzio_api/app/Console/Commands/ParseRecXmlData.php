@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Bet;
+use App\BetResult;
 use App\Race;
 use App\Runner;
 use App\Reunion;
@@ -46,8 +47,9 @@ class ParseRecXmlData extends Command
         $this->parseReunionsXML($dataService);
         $this->parseRacesXML($dataService);
         $this->parseRunnersXML($dataService);
-        $this->parseBetsXML($dataService);
         $this->parseResultsXML($dataService);
+        $this->parseBetsXML($dataService);
+        $this->parseBetResultsXML($dataService);
     }
 
     private function parseReunionsXML($dataService) {
@@ -404,16 +406,113 @@ class ParseRecXmlData extends Command
 
                             $betArr = [
                                 'lib' => iconv('UTF-8', 'ISO-8859-1', $bet['value']["libcourt_pari_course"]),
-                                'libLong' => iconv('UTF-8', 'ISO-8859-1', $bet['value']["liblong_pari_course"]),
+                                'libLong' => iconv('UTF-8', 'ISO-8859-1', $bet['value']["liblong_pari_course"])
+                            ];
+
+                            try {
+                                Bet::updateOrInsert([
+                                        'code' => $bet['value']["code_pari"],
+                                        "raceId" => $race['value']["id_nav_course"]
+                                    ],
+                                    $betArr
+                                );
+                            } catch (\Exception $e) {}
+                        }
+                    }
+                    //@TODO DELETE THE FILE
+                }
+            }
+        }
+    }
+
+    private function parseBetResultsXML($dataService) {
+
+        $filesInfo = $dataService->scanBetResultsFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $dataService->parseXMLFileByPath(
+                    $filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "pari_course",
+                        "combinaison",
+                    ]
+                );
+
+                foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                    $reunionArr = [
+                        "id" => $reunion['value']["id_nav_reunion"],
+                        "code" => $reunion['value']["code_hippo"],
+                        "number" => $reunion['value']["num_reunion"],
+                        "externNumber" => $reunion['value']["num_externe_reunion"],
+                    ];
+                    try {
+                        Reunion::insert(
+                            $reunionArr
+                        );
+                    } catch (\Exception $e) {}
+                    $reunionObj = new Reunion(array('id'=>$reunion['value']["id_nav_reunion"]));
+
+                    foreach ($reunion['value']["courses"] as $race) {
+
+                        $raceArr = [
+                            'id' => $race['value']["id_nav_course"],
+                            'number' => $race['value']["num_course_pmu"],
+                            "reunionId" => $reunion['value']["id_nav_reunion"]
+                        ];
+
+                        try {
+                            Race::insert(
+                                $raceArr
+                            );
+                        } catch (\Exception $e) {}
+                        $raceObj = new Race(array('id'=>$race['value']["id_nav_course"]));
+
+                        foreach ($race['value']["paris_course"] as $bet) {
+
+                            $betArr = [
+                                'code' => $bet['value']["code_pari_generique"],
                                 "raceId" => $race['value']["id_nav_course"],
                             ];
 
                             try {
-                                Bet::updateOrInsert(
-                                    ['id' => $bet['value']["code_pari"]],
+                                Bet::insert(
                                     $betArr
                                 );
                             } catch (\Exception $e) {}
+                            $betObj = new Race(array(
+                                'code' => $bet['value']["code_pari_generique"],
+                                "raceId" => $race['value']["id_nav_course"]
+                            ));
+
+                            foreach ($bet['value']["combinaisons"] as $betResult) {
+
+                                $betResultArr = [
+                                    'gagnant' => $betResult['value']['gagnant'],
+                                    'gagnantMb' => $betResult['value']['gagnant_mb'],
+                                    'place' => $betResult['value']['place'],
+                                    'placeMb' => $betResult['value']['place_mb'],
+                                    'typeReserveRapDef' => iconv('UTF-8', 'ISO-8859-1', $betResult['value']['type_reserve_rap_def']),
+                                    'sumMisesGagn' => $betResult['value']['sum_mises_gagn'],
+                                    'sumMisesPlace' => $betResult['value']['sum_mises_place'],
+                                    'sumMisesGagnTypeResRapDef' => $betResult['value']['sum_mises_gagn_type_res_rap_def'],
+                                    'sumMisesWPlaceTypeResRapDef' => $betResult['value']['sum_mises_place_type_res_rap_def'],
+                                ];
+
+                                try {
+                                    BetResult::updateOrInsert([
+                                        'combinaisonRapDef' => $betResult['value']['combinaison_rap_def'],
+                                        'code' => $bet['value']["code_pari_generique"],
+                                        "raceId" => $race['value']["id_nav_course"],
+                                    ],
+                                        $betResultArr
+                                    );
+                                } catch (\Exception $e) {}
+                            }
                         }
                     }
                     //@TODO DELETE THE FILE

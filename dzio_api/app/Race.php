@@ -41,11 +41,11 @@ class Race extends Model
 
     public function runners()
     {
-        return $this->hasMany('App\Runner', "runnerId");
+        return $this->hasMany('App\Runner', "raceId");
     }
 
     public function bets()
     {
-        return $this->hasMany('App\Bet', "betId");
+        return $this->hasMany('App\Bet', "raceId");
     }
 }
