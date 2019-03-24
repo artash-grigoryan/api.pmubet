@@ -9,11 +9,11 @@ RUN locale-gen
 ENV LC_ALL fr_FR.UTF-8
 
 #sassc
-RUN git clone https://github.com/sass/libsass.git && \
-    export SASS_LIBSASS_PATH=/libsass && \
-    git clone https://github.com/sass/sassc.git && \
-    cd ./sassc && make -j $(nproc) && make install && \
-    cd / && rm -rf sassc libsass
+#RUN git clone https://github.com/sass/libsass.git && \
+#    export SASS_LIBSASS_PATH=/libsass && \
+#    git clone https://github.com/sass/sassc.git && \
+#    cd ./sassc && make -j $(nproc) && make install && \
+#    cd / && rm -rf sassc libsass
 
 #sass
 RUN apt-get install make ruby ruby-dev -y && \
