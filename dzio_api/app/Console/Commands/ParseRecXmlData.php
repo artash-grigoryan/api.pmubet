@@ -513,6 +513,7 @@ class ParseRecXmlData extends Command
                                     );
                                 } catch (\Exception $e) {}
                             }
+
                         }
                     }
                     //@TODO DELETE THE FILE
