@@ -18,7 +18,6 @@ ENV LC_ALL fr_FR.UTF-8
 #sass
 #RUN apt-get install make ruby ruby-dev -y && \
 #    gem install sass
-
 #Install nodejs
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
