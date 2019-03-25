@@ -26,9 +26,11 @@ RUN npm install -g webpack
 RUN npm install sass
 
 COPY --chown=www-data:www-data ./dzio_app /var/www
+COPY --chown=www-data:www-data ./html_css3 /var/www/html_css3
 
 
 WORKDIR /var/www/
 RUN ls -la
+RUN npm install
 
 EXPOSE 80
