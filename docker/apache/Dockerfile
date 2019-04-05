@@ -3,7 +3,7 @@ RUN a2enmod rewrite
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install mysqli
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
