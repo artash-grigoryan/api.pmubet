@@ -1,4 +1,5 @@
-FROM php:7.1.2-apache
+FROM php:7
+#FROM php:7.1.2-apache
 
 #RUN apt-get update -y && apt-get install -y openssl zip unzip git
 RUN apt-get update -y && apt-get install -y \
