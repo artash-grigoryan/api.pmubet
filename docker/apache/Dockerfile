@@ -1,4 +1,4 @@
-FROM php:7
+FROM php:7.1.2-apache
 
 #RUN apt-get update -y && apt-get install -y openssl zip unzip git
 RUN apt-get update -y && apt-get install -y \
@@ -19,7 +19,7 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 RUN locale-gen
 ENV LC_ALL en_US.UTF-8
 
-RUN rm /etc/apache2/sites-*/*
+#RUN rm /etc/apache2/sites-*/*
 
 COPY docker/apache/default /etc/apache2/sites-available/default.conf
 RUN a2ensite default
