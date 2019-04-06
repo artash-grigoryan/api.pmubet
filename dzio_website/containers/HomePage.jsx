@@ -19,7 +19,7 @@ export default class HomePage extends Component {
         this.state = {
 
             race: '',
-            departure: new Date('2019-03-23 17:35:00'),
+            departure: new Date('2019-04-23 17:35:00'),
             participants: [
                 {
                     'rank'  : 1,
