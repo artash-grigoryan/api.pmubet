@@ -57,6 +57,6 @@ class Race extends Model
 
     public function reporters()
     {
-        return $this->hasMany('App\Reporter', 'raceId');
+        return $this->hasMany('App\Reporter', 'raceId')->with('predictions');
     }
 }
