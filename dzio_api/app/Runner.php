@@ -36,5 +36,6 @@ class Runner extends Model
         'textRank',
         'reductionKm',
         'time',
+        'comment',
     ];
 }

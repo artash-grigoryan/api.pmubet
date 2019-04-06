@@ -34,6 +34,7 @@ class CreateRunnersTable extends Migration
             $table->string('textRank')->nullable();
             $table->string('reductionKm')->nullable();
             $table->string('time')->nullable();
+            $table->text('comment')->nullable();
             $table->integer('raceId')->unsigned();
 
             $table->foreign('raceId')

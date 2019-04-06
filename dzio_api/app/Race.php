@@ -37,6 +37,7 @@ class Race extends Model
         'discipline',
         'date',
         'countryCode',
+        'comment',
     ];
 
     public function runners()
@@ -52,5 +53,10 @@ class Race extends Model
     public function betResults()
     {
         return $this->hasMany('App\BetResult', 'raceId');
+    }
+
+    public function reporters()
+    {
+        return $this->hasMany('App\Reporter', 'raceId');
     }
 }

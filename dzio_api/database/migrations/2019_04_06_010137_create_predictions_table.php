@@ -15,7 +15,15 @@ class CreatePredictionsTable extends Migration
     {
         Schema::create('predictions', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('number');
+            $table->string('runner');
+            $table->string('rank');
+            $table->integer("reporterId")->unsigned();
+
+            $table->foreign('reporterId')
+                ->references('id')
+                ->on('reporters')
+                ->onDelete('cascade');
         });
     }
 
