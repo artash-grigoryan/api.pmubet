@@ -1,6 +1,14 @@
 #FROM php:7
 FROM php:7.2-apache
 
+RUN apt-get clean
+RUN apt-get update
+
+RUN apt-get install -y \
+        libzip-dev \
+        zip unzip git\
+  && docker-php-ext-configure zip --with-libzip \
+  && docker-php-ext-install zip
 #RUN apt-get update -y && apt-get install -y openssl zip unzip git
 #RUN apt-get update -y && apt-get install -y \
 #        libfreetype6-dev \
