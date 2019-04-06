@@ -17,8 +17,8 @@ class RecXMLService implements DataServiceInterface {
     const RECTXML_FOLDER_PATH = "./recxml_root";
 
     //UNUSED
-    const MONTH_MEETINGS_FOLDER = "1_MONTH_MEETINGS"; // Toutes les réunions du mois
-    const DAY_MEETENGS_FOLDER = "2_DAY_MEETENGS"; // Toutes les réunions du jour
+    const MONTH_REUNIONS_FOLDER = "1_MONTH_MEETINGS"; // Toutes les réunions du mois
+    const DAY_REUNIONS_FOLDER = "2_DAY_MEETENGS"; // Toutes les réunions du jour
     const LAST_PERFORMANCES_FOLDER = "7_LAST_PERFORMANCES"; //Dernières perfs des partants
     const PRIZE_LIST_FOLDER = "8_PRIZE_LIST"; //Nombres de victoires par partants
     const RUNNERS_PRESENTATION_FOLDER = "11_RUNNERS_PRESENTATION"; //classement si course terminée
@@ -49,6 +49,28 @@ class RecXMLService implements DataServiceInterface {
     public function __construct(Service $xmlParser)
     {
         $this->xmlParser = $xmlParser;
+    }
+
+    /**
+     * @return array
+     */
+    public function scanDayReunionsFolder()
+    {
+        $dayFolder = (new \DateTime())->format("Ymd");
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DAY_REUNIONS_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanMonthReunionsFolder()
+    {
+        $dayFolder = (new \DateTime())->format("Ymd");
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::MONTH_REUNIONS_FOLDER;
+
+        return $this->scanFolder($folderPath);
     }
 
     /**

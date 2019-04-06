@@ -44,12 +44,61 @@ class ParseRecXmlData extends Command
      */
     public function handle(DataServiceInterface $dataService) {
 
+        $this->parseDayReunionsXML($dataService);
         $this->parseReunionsXML($dataService);
         $this->parseRacesXML($dataService);
         $this->parseRunnersXML($dataService);
         $this->parseResultsXML($dataService);
         $this->parseBetsXML($dataService);
         $this->parseBetResultsXML($dataService);
+    }
+
+    private function parseDayReunionsXML($dataService) {
+
+        $filesInfo = $dataService->scanDayReunionsFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $dataService->parseXMLFileByPath(
+                    $filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "conditions_course",
+                        "allocations_course",
+                        "etat_terrain_reunion",
+                    ]
+
+                );
+
+                foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                    $reunionArr = [
+                        "id" => $reunion['value']["id_nav_reunion"],
+                        "label" => iconv('UTF-8', 'ISO-8859-1',$reunion['value']["lib_reunion"]),
+                        "statusLabel" => iconv('UTF-8', 'ISO-8859-1',$parsedXml["jour"]["libelle_statut_infos"]),
+                        "speciality" => iconv('UTF-8', 'ISO-8859-1',$reunion['value']["specialite_reunion"]),
+                        "category" => $reunion['value']["categorie_reunion"],
+                        "type" => $reunion['value']["type_reunion"],
+                        "audience" => $reunion['value']["audience_gpe_reunion"],
+                        "progvalid" => $reunion['value']["progvalide_reunion"],
+                        "hippodromeName" => iconv('UTF-8', 'ISO-8859-1',$reunion['value']["lib_hippo_reunion"]),
+                        "code" => $reunion['value']["code_hippo"],
+                        "date" => date("Y-m-d H:i:s", strtotime($reunion['value']["date_reunion"] . " ".(!empty($reunion['value']["heure_reunion"])?$reunion['value']["heure_reunion"]:'00:00') . ":00")),
+                        "racesNumber" => $reunion['value']["nbcourse_reunion"],
+                        "number" => $reunion['value']["num_reunion"],
+                        "externNumber" => $reunion['value']["num_externe_reunion"],
+                    ];
+
+                    try {
+                        Reunion::insert($reunionArr);
+                    } catch (\Exception $e) {
+                    }
+                }
+                //@TODO DELETE THE FILE
+            }
+        }
     }
 
     private function parseReunionsXML($dataService) {
@@ -83,7 +132,7 @@ class ParseRecXmlData extends Command
                         "progvalid" => $reunion['value']["progvalide_reunion"],
                         "hippodromeName" => iconv('UTF-8', 'ISO-8859-1',$reunion['value']["lib_hippo_reunion"]),
                         "code" => $reunion['value']["code_hippo"],
-                        "date" => date("Y-m-d H:i:s", strtotime($reunion['value']["date_reunion"] . " ".$reunion['value']["heure_reunion"] . ":00")),
+                        "date" => date("Y-m-d H:i:s", strtotime($reunion['value']["date_reunion"] . " ".(!empty($reunion['value']["heure_reunion"])?$reunion['value']["heure_reunion"]:'00:00') . ":00")),
                         "racesNumber" => $reunion['value']["nbcourse_reunion"],
                         "number" => $reunion['value']["num_reunion"],
                         "externNumber" => $reunion['value']["num_externe_reunion"],
@@ -164,7 +213,7 @@ class ParseRecXmlData extends Command
                             'type' => iconv('UTF-8', 'ISO-8859-1',$race['value']["lib_corde_course"]),
                             'discipline' => iconv('UTF-8', 'ISO-8859-1',$race['value']["discipline_course"]),
                             'countryCode' => $race['value']["code_pays"],
-                            "date" => date("Y-m-d H:i:s", strtotime($reunion['value']["date_reunion"] . " ".$reunion['value']["heure_reunion"] . ":00")),
+                            "date" => date("Y-m-d H:i:s", strtotime($reunion['value']["date_reunion"] . " ".$race['value']["heure_depart_course"] . ":00")),
                             "reunionId" => $reunion['value']["id_nav_reunion"]
                         ];
 
