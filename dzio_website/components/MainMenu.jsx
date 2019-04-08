@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import '@fortawesome/fontawesome';
 
 import {userActions} from "./../actions/user";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 
 
 class MainMenu extends React.Component {
@@ -177,17 +178,17 @@ class MainMenu extends React.Component {
                     <li className="nav-item m-0">
                         <a className="btn-skew nav-link" href="#">
                             Lives
-                            <i className="far fa-play-circle"></i>
+                            <FontAwesomeIcon style={{marginLeft: '5px'}} icon="play-circle" />
                         </a>
                     </li>
                     <li className="nav-item active">
                         <a className="nav-link" href="#">
-                            <i style={{fontSize: "20px"}} className="fas fa-search"></i>
+                            <FontAwesomeIcon icon="search" />
                         </a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">
-                            <i style={{fontSize: "20px"}} className="far fa-user"></i>
+                            <FontAwesomeIcon icon="user" />
                         </a>
                     </li>
                 </ul>

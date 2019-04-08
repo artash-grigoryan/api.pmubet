@@ -42,11 +42,9 @@ class ReunionController extends Controller
         $afterTomorrow = date('Y-m-d', strtotime('+2 DAY'));
         $data = [];
 
-        $data[$yesterday] = Reunion::where([['date', '>', $yesterday], ['date', '<', $today]])->with('races')->get();
-
-        $data[$today] = Reunion::where([['date', '>', $today], ['date', '<', $tomorrow]])->with('races')->get();
-
-        $data[$tomorrow] = Reunion::where([['date', '>', $tomorrow], ['date', '<', $afterTomorrow]])->with('races')->get();
+        $data[$yesterday] = Reunion::where([['date', '>=', $yesterday], ['date', '<', $today]])->with('races')->get();
+        $data[$today] = Reunion::where([['date', '>=', $today], ['date', '<', $tomorrow]])->with('races')->get();
+        $data[$tomorrow] = Reunion::where([['date', '>=', $tomorrow], ['date', '<', $afterTomorrow]])->with('races')->get();
 
         return response()->json($data);
     }

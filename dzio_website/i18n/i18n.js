@@ -1,43 +1,31 @@
-import i18n from 'i18next';
-// import Backend from 'i18next-xhr-backend';
-// import LanguageDetector from 'i18next-browser-languagedetector';
-import { reactI18nextModule } from 'react-i18next';
-import translationEn from "./locales/en/translation.json";
-import translationFr from "./locales/fr/translation.json";
+import i18n from "i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import { initReactI18next } from "react-i18next";
+
+import am from './locales/am';
 
 i18n
-// load translation using xhr -> see /public/locales
-// learn more: https://github.com/i18next/i18next-xhr-backend
-//     .use(Backend)
-    // detect user language
-    // learn more: https://github.com/i18next/i18next-browser-languageDetector
-    // .use(LanguageDetector)
-    // pass the i18n instance to the react-i18next components.
-    // Alternative use the I18nextProvider: https://react.i18next.com/components/i18nextprovider
-    .use(reactI18nextModule)
-    // init i18next
-    // for all options read: https://www.i18next.com/overview/configuration-options
+    .use(LanguageDetector)
+    .use(initReactI18next)
     .init({
-        // fallbackLng: 'en',
-        debug: true,
-        lng: 'en',
-        interpolation: {
-            escapeValue: false, // not needed for react as it escapes by default
-        },
+        // we init with resources
         resources: {
-            en: {
-                common: translationEn               // 'common' is our custom namespace
-            },
-            de: {
-                common: translationFr
-            },
+            am: {
+                translations: am
+            }
         },
-        // special options for react-i18next
-        // learn more: https://react.i18next.com/components/i18next-instance
-        react: {
-            wait: true
+        fallbackLng: "am",
+        debug: true,
+
+        // have a common namespace used around the full app
+        ns: ["translations"],
+        defaultNS: "translations",
+
+        keySeparator: false, // we use content as keys
+
+        interpolation: {
+            escapeValue: false
         }
     });
-
 
 export default i18n;

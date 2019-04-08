@@ -4,7 +4,9 @@ namespace App\Console\Commands;
 
 use App\Bet;
 use App\BetResult;
+use App\Prediction;
 use App\Race;
+use App\reporter;
 use App\Runner;
 use App\Reunion;
 use App\Services\Interfaces\DataServiceInterface;
@@ -44,12 +46,66 @@ class ParseRecXmlData extends Command
      */
     public function handle(DataServiceInterface $dataService) {
 
+        $this->parseDayReunionsXML($dataService);
         $this->parseReunionsXML($dataService);
         $this->parseRacesXML($dataService);
         $this->parseRunnersXML($dataService);
         $this->parseResultsXML($dataService);
         $this->parseBetsXML($dataService);
         $this->parseBetResultsXML($dataService);
+
+        $this->parsePressReunionXML($dataService);
+        $this->parsePressQ5XML($dataService);
+        $this->parseForcesPresenceXML($dataService);
+        $this->parsePronoQ5XML($dataService);
+    }
+
+    private function parseDayReunionsXML($dataService) {
+
+        $filesInfo = $dataService->scanDayReunionsFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $dataService->parseXMLFileByPath(
+                    $filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "conditions_course",
+                        "allocations_course",
+                        "etat_terrain_reunion",
+                    ]
+
+                );
+
+                foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                    $reunionArr = [
+                        "id" => $reunion['value']["id_nav_reunion"],
+                        "label" => iconv('UTF-8', 'ISO-8859-1',$reunion['value']["lib_reunion"]),
+                        "statusLabel" => iconv('UTF-8', 'ISO-8859-1',$parsedXml["jour"]["libelle_statut_infos"]),
+                        "speciality" => iconv('UTF-8', 'ISO-8859-1',$reunion['value']["specialite_reunion"]),
+                        "category" => $reunion['value']["categorie_reunion"],
+                        "type" => $reunion['value']["type_reunion"],
+                        "audience" => $reunion['value']["audience_gpe_reunion"],
+                        "progvalid" => $reunion['value']["progvalide_reunion"],
+                        "hippodromeName" => iconv('UTF-8', 'ISO-8859-1',$reunion['value']["lib_hippo_reunion"]),
+                        "code" => $reunion['value']["code_hippo"],
+                        "date" => date("Y-m-d H:i:s", strtotime($reunion['value']["date_reunion"] . " ".(!empty($reunion['value']["heure_reunion"])?$reunion['value']["heure_reunion"]:'00:00') . ":00")),
+                        "racesNumber" => $reunion['value']["nbcourse_reunion"],
+                        "number" => $reunion['value']["num_reunion"],
+                        "externNumber" => $reunion['value']["num_externe_reunion"],
+                    ];
+
+                    try {
+                        Reunion::insert($reunionArr);
+                    } catch (\Exception $e) {
+                    }
+                }
+                //@TODO DELETE THE FILE
+            }
+        }
     }
 
     private function parseReunionsXML($dataService) {
@@ -83,7 +139,7 @@ class ParseRecXmlData extends Command
                         "progvalid" => $reunion['value']["progvalide_reunion"],
                         "hippodromeName" => iconv('UTF-8', 'ISO-8859-1',$reunion['value']["lib_hippo_reunion"]),
                         "code" => $reunion['value']["code_hippo"],
-                        "date" => date("Y-m-d H:i:s", strtotime($reunion['value']["date_reunion"] . " ".$reunion['value']["heure_reunion"] . ":00")),
+                        "date" => date("Y-m-d H:i:s", strtotime($reunion['value']["date_reunion"] . " ".(!empty($reunion['value']["heure_reunion"])?$reunion['value']["heure_reunion"]:'00:00') . ":00")),
                         "racesNumber" => $reunion['value']["nbcourse_reunion"],
                         "number" => $reunion['value']["num_reunion"],
                         "externNumber" => $reunion['value']["num_externe_reunion"],
@@ -140,7 +196,7 @@ class ParseRecXmlData extends Command
                     } catch (\Exception $e) {
 
                     }
-                    $reunionObj = new Reunion(array('id'=>$reunion['value']["id_nav_reunion"]));
+                    $reunionObj = new Reunion($reunionArr);
 
                     foreach ($reunion['value']["courses"] as $race) {
 
@@ -164,8 +220,8 @@ class ParseRecXmlData extends Command
                             'type' => iconv('UTF-8', 'ISO-8859-1',$race['value']["lib_corde_course"]),
                             'discipline' => iconv('UTF-8', 'ISO-8859-1',$race['value']["discipline_course"]),
                             'countryCode' => $race['value']["code_pays"],
-                            "date" => date("Y-m-d H:i:s", strtotime($reunion['value']["date_reunion"] . " ".$reunion['value']["heure_reunion"] . ":00")),
-                            "reunionId" => $reunion['value']["id_nav_reunion"]
+                            "date" => date("Y-m-d H:i:s", strtotime($reunion['value']["date_reunion"] . " ".$race['value']["heure_depart_course"] . ":00")),
+                            "reunionId" => $reunionObj->id
                         ];
 
                         Race::updateOrInsert(
@@ -218,7 +274,7 @@ class ParseRecXmlData extends Command
                             $reunionArr
                         );
                     } catch (\Exception $e) {}
-                    $reunionObj = new Reunion(array('id'=>$reunion['value']["id_nav_reunion"]));
+                    $reunionObj = new Reunion($reunionArr);
 
                     foreach ($reunion['value']["courses"] as $race) {
 
@@ -231,7 +287,7 @@ class ParseRecXmlData extends Command
                             'labelLong' => iconv('UTF-8', 'ISO-8859-1', $race['value']["liblong_prix_course"]),
                             'distance' => $race['value']["distance_course"],
                             "date" => date("Y-m-d 00:00:00", strtotime($reunion['value']["date_reunion"])),
-                            "reunionId" => $reunion['value']["id_nav_reunion"]
+                            "reunionId" => $reunionObj->id
                         ];
 
                         try {
@@ -239,7 +295,7 @@ class ParseRecXmlData extends Command
                                 $raceArr
                             );
                         } catch (\Exception $e) {}
-                        $raceObj = new Race(array('id'=>$race['value']["id_nav_course"]));
+                        $raceObj = new Race($raceArr);
 
                         foreach ($race['value']["partants"] as $runner) {
 
@@ -258,7 +314,7 @@ class ParseRecXmlData extends Command
                                 'coach' => iconv('UTF-8', 'ISO-8859-1', $runner['value']["entraineur_partant"]["nom_entraineur"]),
                                 'jokey' => iconv('UTF-8', 'ISO-8859-1', $runner['value']["monte_partant"]["nom_monte"]),
                                 'farmer' => iconv('UTF-8', 'ISO-8859-1', $runner['value']["eleveur_partant"]["nom_eleveur"]),
-                                "raceId" => $race['value']["id_nav_course"],
+                                "raceId" => $raceObj->id,
                             ];
 
                             Runner::updateOrInsert(
@@ -310,14 +366,14 @@ class ParseRecXmlData extends Command
                             $reunionArr
                         );
                     } catch (\Exception $e) {}
-                    $reunionObj = new Reunion(array('id'=>$reunion['value']["id_nav_reunion"]));
+                    $reunionObj = new Reunion($reunionArr);
 
                     foreach ($reunion['value']["courses"] as $race) {
 
                         $raceArr = [
                             'id' => $race['value']["id_nav_course"],
                             'number' => $race['value']["num_course_pmu"],
-                            "reunionId" => $reunion['value']["id_nav_reunion"]
+                            "reunionId" => $reunionObj->id
                         ];
 
                         try {
@@ -325,7 +381,7 @@ class ParseRecXmlData extends Command
                                 $raceArr
                             );
                         } catch (\Exception $e) {}
-                        $raceObj = new Race(array('id'=>$race['value']["id_nav_course"]));
+                        $raceObj = new Race($raceArr);
 
                         foreach ($race['value']["partants"] as $runner) {
 
@@ -336,7 +392,7 @@ class ParseRecXmlData extends Command
                                 'textRank' => $runner['value']['texte_place_arrivee'],
                                 'reductionKm' => $runner['value']['reduction_km'],
                                 'time' => $runner['value']['temps_part'],
-                                "raceId" => $race['value']["id_nav_course"],
+                                "raceId" => $raceObj->id,
                             ];
 
                             Runner::updateOrInsert(
@@ -384,7 +440,7 @@ class ParseRecXmlData extends Command
                             $reunionArr
                         );
                     } catch (\Exception $e) {}
-                    $reunionObj = new Reunion(array('id'=>$reunion['value']["id_nav_reunion"]));
+                    $reunionObj = new Reunion($reunionArr);
 
                     foreach ($reunion['value']["courses"] as $race) {
 
@@ -392,7 +448,7 @@ class ParseRecXmlData extends Command
                             'id' => $race['value']["id_nav_course"],
                             'number' => $race['value']["num_course_pmu"],
                             'label' => iconv('UTF-8', 'ISO-8859-1', $race['value']["libcourt_prix_course"]),
-                            "reunionId" => $reunion['value']["id_nav_reunion"]
+                            "reunionId" => $reunionObj->id
                         ];
 
                         try {
@@ -400,7 +456,7 @@ class ParseRecXmlData extends Command
                                 $raceArr
                             );
                         } catch (\Exception $e) {}
-                        $raceObj = new Race(array('id'=>$race['value']["id_nav_course"]));
+                        $raceObj = new Race($raceArr);
 
                         foreach ($race['value']["paris_course"] as $bet) {
 
@@ -412,7 +468,7 @@ class ParseRecXmlData extends Command
                             try {
                                 Bet::updateOrInsert([
                                         'code' => $bet['value']["code_pari"],
-                                        "raceId" => $race['value']["id_nav_course"]
+                                        "raceId" => $raceObj->id
                                     ],
                                     $betArr
                                 );
@@ -455,14 +511,14 @@ class ParseRecXmlData extends Command
                             $reunionArr
                         );
                     } catch (\Exception $e) {}
-                    $reunionObj = new Reunion(array('id'=>$reunion['value']["id_nav_reunion"]));
+                    $reunionObj = new Reunion($reunionArr);
 
                     foreach ($reunion['value']["courses"] as $race) {
 
                         $raceArr = [
                             'id' => $race['value']["id_nav_course"],
                             'number' => $race['value']["num_course_pmu"],
-                            "reunionId" => $reunion['value']["id_nav_reunion"]
+                            "reunionId" => $reunionObj->id
                         ];
 
                         try {
@@ -470,24 +526,16 @@ class ParseRecXmlData extends Command
                                 $raceArr
                             );
                         } catch (\Exception $e) {}
-                        $raceObj = new Race(array('id'=>$race['value']["id_nav_course"]));
+                        $raceObj = new Race($raceArr);
 
                         foreach ($race['value']["paris_course"] as $bet) {
 
                             $betArr = [
                                 'code' => $bet['value']["code_pari_generique"],
-                                "raceId" => $race['value']["id_nav_course"],
+                                "raceId" => $raceObj->id,
                             ];
 
-                            try {
-                                Bet::insert(
-                                    $betArr
-                                );
-                            } catch (\Exception $e) {}
-                            $betObj = new Race(array(
-                                'code' => $bet['value']["code_pari_generique"],
-                                "raceId" => $race['value']["id_nav_course"]
-                            ));
+                            $betObj = new Bet($betArr);
 
                             foreach ($bet['value']["combinaisons"] as $betResult) {
 
@@ -506,13 +554,330 @@ class ParseRecXmlData extends Command
                                 try {
                                     BetResult::updateOrInsert([
                                         'combinaisonRapDef' => $betResult['value']['combinaison_rap_def'],
-                                        'code' => $bet['value']["code_pari_generique"],
-                                        "raceId" => $race['value']["id_nav_course"],
+                                        'code' => $betObj->code,
+                                        "raceId" => $raceObj->id,
                                     ],
                                         $betResultArr
                                     );
                                 } catch (\Exception $e) {}
                             }
+
+                        }
+                    }
+                    //@TODO DELETE THE FILE
+                }
+            }
+        }
+    }
+
+    private function parsePressReunionXML($dataService) {
+
+        $filesInfo = $dataService->scanPressReunionFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $dataService->parseXMLFileByPath(
+                    $filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "journal",
+                        "journalistes",
+                        "journaliste",
+                        "pronostic"
+                    ]
+                );
+
+                foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                    $reunionArr = [
+                        "id" => $reunion['value']["id_nav_reunion"],
+                        "code" => $reunion['value']["code_hippo"],
+                        "number" => $reunion['value']["num_reunion"],
+                        "externNumber" => $reunion['value']["num_externe_reunion"],
+                    ];
+                    try {
+                        Reunion::insert(
+                            $reunionArr
+                        );
+                    } catch (\Exception $e) {}
+                    $reunionObj = new Reunion($reunionArr);
+
+                    foreach ($reunion['value']["courses"] as $race) {
+
+                        $raceArr = [
+                            'id' => $race['value']["id_nav_course"],
+                            'number' => $race['value']["num_course_pmu"],
+                            "reunionId" => $reunionObj->id
+                        ];
+
+                        try {
+                            Race::insert(
+                                $raceArr
+                            );
+                        } catch (\Exception $e) {}
+                        $raceObj = new Race($raceArr);
+
+                        if(!empty($race['value']["journals"])) {
+                            foreach ($race['value']["journals"] as $journal) {
+
+                                $journalArr = [
+                                    "societe" => iconv('UTF-8', 'ISO-8859-1', $journal['value']['societe']),
+                                    "reporter" => iconv('UTF-8', 'ISO-8859-1', $journal['value']['journalistes']['journaliste']['nom_journaliste']),
+                                    "raceId" => $raceObj->id,
+                                ];
+
+                                try {
+                                    $ReporterObj = Reporter::where([
+                                        ["societe", '=', iconv('UTF-8', 'ISO-8859-1', $journal['value']['societe'])],
+                                        ["reporter", '=', iconv('UTF-8', 'ISO-8859-1', $journal['value']['journalistes']['journaliste']['nom_journaliste'])],
+                                        ["raceId", '=', $raceObj->id],
+                                    ])->first();
+
+                                    if(empty($ReporterObj->id)) {
+
+                                        $ReporterObj = new Reporter($journalArr);
+                                        $ReporterObj->save();
+                                    }
+
+                                } catch (\Exception $e) {
+                                    var_dump($e->getMessage());
+                                }
+
+                                if(!empty($journal['value']['journalistes']['journaliste']["pronostics"])) {
+                                    foreach ($journal['value']['journalistes']['journaliste']["pronostics"] as $pronostic) {
+
+                                        $predictionArr = [
+                                            "number" => $pronostic['value']['num_partant'],
+                                            "runner" => iconv('UTF-8', 'ISO-8859-1', $pronostic['value']['nom_cheval']),
+                                        ];
+
+                                        try {
+                                            Prediction::updateOrInsert([
+                                                "rank" => $pronostic['value']['rang'],
+                                                "reporterId" => $ReporterObj->id
+                                            ],
+                                                $predictionArr
+                                            );
+                                        } catch (\Exception $e) {
+                                            var_dump($e->getMessage());
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    //@TODO DELETE THE FILE
+                }
+            }
+        }
+    }
+
+    private function parsePressQ5XML($dataService) {
+
+        $filesInfo = $dataService->scanPressQ5Folder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $dataService->parseXMLFileByPath(
+                    $filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "journal",
+                        "selection"
+                    ]
+                );
+
+                foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                    $reunionArr = [
+                        "id" => $reunion['value']["id_nav_reunion"],
+                        "code" => $reunion['value']["code_hippo"],
+                        "number" => $reunion['value']["num_reunion"],
+                        "externNumber" => $reunion['value']["num_externe_reunion"],
+                    ];
+                    try {
+                        Reunion::insert(
+                            $reunionArr
+                        );
+                    } catch (\Exception $e) {}
+                    $reunionObj = new Reunion($reunionArr);
+
+                    foreach ($reunion['value']["courses"] as $race) {
+
+                        $raceArr = [
+                            'id' => $race['value']["id_nav_course"],
+                            'number' => $race['value']["num_course_pmu"],
+                            "reunionId" => $reunionObj->id
+                        ];
+
+                        try {
+                            Race::insert(
+                                $raceArr
+                            );
+                        } catch (\Exception $e) {}
+                        $raceObj = new Race($raceArr);
+
+                        if(!empty($race['value']["journals"])) {
+                            foreach ($race['value']["journals"] as $journal) {
+
+                                $journalArr = [
+                                    "societe" => iconv('UTF-8', 'ISO-8859-1', $journal['value']['societe']),
+                                    "reporter" => iconv('UTF-8', 'ISO-8859-1', $journal['value']['journaliste']),
+                                    "reporter_rank" => $journal['value']['rg_journaliste'],
+                                    "nb_pts" => $journal['value']['nb_pts'],
+                                    "raceId" => $raceObj->id,
+                                ];
+
+                                try {
+
+                                    $ReporterObj = Reporter::where([
+                                        ["societe", '=', iconv('UTF-8', 'ISO-8859-1', $journal['value']['societe'])],
+                                        ["reporter", '=', iconv('UTF-8', 'ISO-8859-1', $journal['value']['journaliste'])],
+                                        ["raceId", '=', $raceObj->id],
+                                    ])->first();
+
+                                    if(empty($ReporterObj->id)) {
+
+                                        $ReporterObj = new Reporter($journalArr);
+                                        $ReporterObj->save();
+                                    }
+
+                                } catch (\Exception $e) {
+                                    var_dump($e->getMessage());
+                                }
+
+                                foreach ($journal['value']['selections'] as $pronostic) {
+
+                                    $predictionArr = [
+                                        "number" => $pronostic['value']['num_partant'],
+                                        "runner" => iconv('UTF-8', 'ISO-8859-1', $pronostic['value']['nom_cheval']),
+                                    ];
+
+                                    try {
+                                        Prediction::updateOrInsert([
+                                            "rank" => $pronostic['value']['rg_partant'],
+                                            "reporterId" => $ReporterObj->id
+                                        ],
+                                            $predictionArr
+                                        );
+                                    } catch (\Exception $e) {
+                                        var_dump($e->getMessage());
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    //@TODO DELETE THE FILE
+                }
+            }
+        }
+    }
+
+    private function parseForcesPresenceXML($dataService) {
+
+        $filesInfo = $dataService->scanForcesPresenceFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $dataService->parseXMLFileByPath(
+                    $filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "partant"
+                    ]
+                );
+
+                foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                    $reunionArr = [
+                        "id" => $reunion['value']["id_nav_reunion"],
+                        "code" => $reunion['value']["code_hippo"],
+                        "number" => $reunion['value']["num_reunion"],
+                        "externNumber" => $reunion['value']["num_externe_reunion"],
+                    ];
+                    try {
+                        Reunion::insert(
+                            $reunionArr
+                        );
+                    } catch (\Exception $e) {}
+                    $reunionObj = new Reunion($reunionArr);
+
+                    foreach ($reunion['value']["courses"] as $race) {
+
+                        $raceArr = [
+                            'id' => $race['value']["id_nav_course"],
+                            'number' => $race['value']["num_course_pmu"],
+                            "reunionId" => $reunionObj->id
+                        ];
+
+                        try {
+                            Race::insert(
+                                $raceArr
+                            );
+                        } catch (\Exception $e) {}
+                        $raceObj = new Reunion($raceArr);
+
+                        foreach ($race['value']['partants'] as $partant) {
+
+                            $RunnerObj = Runner::where([
+                                ['number', '=', $partant['value']["num_partant"]],
+                                ['raceId', '=', $raceObj->id],
+                            ])->first();
+
+                            $RunnerObj->comment = $partant['value']['commentaire'];
+                            $RunnerObj->save();
+                        }
+                    }
+                    //@TODO DELETE THE FILE
+                }
+            }
+        }
+    }
+
+    private function parsePronoQ5XML($dataService) {
+
+        $filesInfo = $dataService->scanPronoQ5Folder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $dataService->parseXMLFileByPath(
+                    $filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                    ]
+                );
+
+                foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                    $reunionArr = [
+                        "id" => $reunion['value']["id_nav_reunion"],
+                        "code" => $reunion['value']["code_hippo"],
+                        "number" => $reunion['value']["num_reunion"],
+                        "externNumber" => $reunion['value']["num_externe_reunion"],
+                    ];
+                    try {
+                        Reunion::insert(
+                            $reunionArr
+                        );
+                    } catch (\Exception $e) {}
+                    $reunionObj = new Reunion($reunionArr);
+
+                    foreach ($reunion['value']["courses"] as $race) {
+
+                        $RaceObj = Race::where('id', $race['value']["id_nav_course"])->first();
+                        if(!empty($RaceObj)) {
+                            $RaceObj->comment = $race['value']['commentaire'];
+                            $RaceObj->save();
                         }
                     }
                     //@TODO DELETE THE FILE
