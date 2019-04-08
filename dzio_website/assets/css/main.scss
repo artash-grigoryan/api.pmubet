@@ -285,11 +285,26 @@ body {
     list-style: none;
     margin: 0;
 }
+#main .bar-selector .meeting-selector a.meeting-selected {
+    display: inline-block;
+    padding: 13px 30px 3px;
+    color: #000;
+    vertical-align: super;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 400px;
+}
+#main .bar-selector .meeting-selector .meeting-selected a img{
+    margin-right: 10px;
+}
 #main .bar-selector .day-selector  ul li,
 #main .bar-selector .meeting-selector ul li,
 #main .bar-selector .race-selector ul li,
 #main .bar-selector ul.calendar-selector li{
     display: inline;
+}
+#main .bar-selector .meeting-selector ul.metting-selector-list {
+    display: none;
 }
 #main .bar-selector .day-selector ul li a{
     display: inline-block;
@@ -412,86 +427,41 @@ body {
     font-weight: bold;
 }
 
-.previsions {}
-.previsions .previsions-header {
-    
-    padding: 30px 15px;
-    overflow: hidden;
+.previsions-container {}
+.previsions-container .previsions {
+    border-bottom: 1px solid #228650;
+    display: inline-block;
+    width: 100%;
+}
+.previsions-container .previsions .reporter {
+    float: left;
+    line-height: 20px;
+    color: #555;
+    padding: 10px;
+    font-size: 14px;
+    margin: 0;
+}
+.previsions-container .previsions .reporter b{
+    font-size: 16px;
+}
+.previsions-container .previsions ul{
+    float: right;
+    padding: 10px;
+    margin: 0;
+}
+.previsions-container .previsions ul li{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #218750;
+    border-radius: 50%;
     text-align: center;
-    position: relative;
-    /*background: linear-gradient(-70deg, transparent 25%, transparent 25%, transparent 80%, currentColor 75%, currentColor), linear-gradient(-45deg, currentColor 25%, transparent 25%, transparent 75%, transparent 75%, transparent);*/
-    background-color: #BFBFBF;
-    
+    line-height: 36px;
+    font-size: 20px;
+    color: #218750;
+    margin-left: 5px;
 }
-.previsions .previsions-header ul{
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: flex;
-    list-style: none;
-    padding: 0;
-}
-.previsions .previsions-header ul li{
-    font-size: 24px;
-    padding: 0 15px;
-    position: relative;
-}
-.previsions .previsions-header ul li.active:before {
-    content: "";
-    position: absolute;
-    bottom: -46px;
-    border-width: 13px !important;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid #fff;
-}
-.previsions .previsions-header ul li a {
-    
-    color: #1d1e56;
-    background: #f5f5f5;
-    width: 60px;
-    height: 60px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    border-radius: 19%;
-    text-decoration: none;
-    box-shadow: 2px 2px 6px 0px;
-    
-}
-
-.previsions .previsions-header ul li.active a,
-.previsions .previsions-header ul li a:hover {
-    background: #218850;
-    color: #fff;
-}
-.previsions .previsions-body {
-    padding: 30px;
-    background-color: #FFF;
-    min-height: 363px;
-    max-height: 363px;
-}
-.previsions .previsions-body h2{}
-.previsions .previsions-body h2 a{
-    color: #000;
-}
-.previsions .previsions-body p {
-    font-size: 18px;
-    padding: 10px 0;
-}
+.previsions-container .previsions ul li span{}
 .runners-tab {
     background: #fff;
     padding: 0px 0px;
