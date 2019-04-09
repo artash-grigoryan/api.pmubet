@@ -32,8 +32,8 @@ RUN rm /etc/apache2/sites-*/*
 COPY docker/apache/default /etc/apache2/sites-available/default.conf
 RUN a2ensite default
 
-CMD "source /etc/apache2/envvars && apache2 -DFOREGROUND"
-ENV LANG en_US.UTF-8
+#CMD "source /etc/apache2/envvars && apache2 -DFOREGROUND"
+#ENV LANG en_US.UTF-8
 
 RUN ls -la
 COPY --chown=www-data:www-data . /var/www
