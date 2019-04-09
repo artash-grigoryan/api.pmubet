@@ -40,11 +40,20 @@ class ReunionController extends Controller
         $today = date('Y-m-d');
         $tomorrow = date('Y-m-d', strtotime('+1 DAY'));
         $afterTomorrow = date('Y-m-d', strtotime('+2 DAY'));
-        $data = [];
 
-        $data[$yesterday] = Reunion::where([['date', '>=', $yesterday], ['date', '<', $today]])->with('races')->get();
-        $data[$today] = Reunion::where([['date', '>=', $today], ['date', '<', $tomorrow]])->with('races')->get();
-        $data[$tomorrow] = Reunion::where([['date', '>=', $tomorrow], ['date', '<', $afterTomorrow]])->with('races')->get();
+        $reunions = [];
+        $reunions['yesterday']  = Reunion::where([['date', '>=', $yesterday], ['date', '<', $today]])->get();
+        $reunions['today']      = Reunion::where([['date', '>=', $today], ['date', '<', $tomorrow]])->get();
+        $reunions['tomorrow']   = Reunion::where([['date', '>=', $tomorrow], ['date', '<', $afterTomorrow]])->get();
+
+        return response()->json(array('reunions'=>$reunions));
+    }
+
+    public function getByDate($date) {
+
+        $date = date('Y-m-d 00:00:00', strtotime($date));
+        $dateAfter1Day = date('Y-m-d 00:00:00', strtotime($date.' +1 DAY'));
+        $data = Reunion::where([['date', '>=', $date], ['date', '<', $dateAfter1Day]])->with('races')->get();
 
         return response()->json($data);
     }

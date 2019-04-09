@@ -45,10 +45,14 @@ class RecXMLService implements DataServiceInterface {
 
 
     public $xmlParser;
+    public $dayFolder;
 
     public function __construct(Service $xmlParser)
     {
         $this->xmlParser = $xmlParser;
+
+        $this->dayFolder = (new \DateTime())->format("Ymd");
+        //$this->dayFolder = '20190406';
     }
 
     /**
@@ -56,8 +60,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanDayReunionsFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DAY_REUNIONS_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DAY_REUNIONS_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -67,8 +70,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanMonthReunionsFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::MONTH_REUNIONS_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::MONTH_REUNIONS_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -78,8 +80,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanReunionsFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::REUNIONS_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::REUNIONS_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -89,8 +90,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanRacesFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RACES_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RACES_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -100,8 +100,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanRunnersFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RUNNERS_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RUNNERS_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -111,8 +110,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanBetsFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::BETS_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::BETS_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -122,8 +120,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanBetResultsFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DEFINITIVE_DIVIDENDS_RAP_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DEFINITIVE_DIVIDENDS_RAP_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -133,8 +130,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanResultsFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RESULT_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RESULT_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -144,8 +140,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanPressReunionFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_PRESS_REUNION_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_PRESS_REUNION_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -155,8 +150,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanPressQ5Folder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_SELECTION_PRESS_Q5_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_SELECTION_PRESS_Q5_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -166,8 +160,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanForcesPresenceFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_FORCES_PRESENCE_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_FORCES_PRESENCE_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -177,8 +170,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanPronoQ5Folder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_PRONO_Q5_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_PRONO_Q5_FOLDER;
 
         return $this->scanFolder($folderPath);
     }

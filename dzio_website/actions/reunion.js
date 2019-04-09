@@ -1,0 +1,26 @@
+import { reunionService } from './../services/reunion';
+import {constants} from './../reducers/constants';
+import cookie from 'js-cookie';
+
+export const reunionActions = {
+    getAll,
+};
+
+function getAll() {
+
+    return new Promise((resolve, reject) => {
+        reunionService.getAll()
+            .then((response) => {
+
+                if(response.data) {
+                    resolve(response.data);
+                }
+                else {
+                    reject();
+                }
+            })
+            .catch((error) => {
+
+            });
+    });
+}
