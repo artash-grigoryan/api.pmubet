@@ -45,6 +45,6 @@ RUN cd dzio_api && composer install
 
 RUN a2enmod rewrite
 
-CMD "source /etc/apache2/envvars && apache2 -DFOREGROUND"
+#CMD "source /etc/apache2/envvars && apache2 -DFOREGROUND"
 
 EXPOSE 80
