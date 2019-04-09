@@ -32,7 +32,6 @@ RUN rm /etc/apache2/sites-*/*
 COPY docker/apache/default /etc/apache2/sites-available/default.conf
 RUN a2ensite default
 
-#CMD "source /etc/apache2/envvars && apache2 -DFOREGROUND"
 #ENV LANG en_US.UTF-8
 
 RUN ls -la
@@ -43,5 +42,9 @@ WORKDIR /var/www/
 RUN ls -la
 
 RUN cd dzio_api && composer install
+
+RUN a2enmod rewrite
+
+CMD "source /etc/apache2/envvars && apache2 -DFOREGROUND"
 
 EXPOSE 80
