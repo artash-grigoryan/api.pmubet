@@ -3,7 +3,7 @@ FROM php:7.2-apache
 RUN apt-get clean
 RUN apt-get update
 
-RUN apt-get install -y \
+RUN apt-get sudo install -y \
         libzip-dev \
         zip unzip git\
   && docker-php-ext-configure zip --with-libzip \
