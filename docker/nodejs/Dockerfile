@@ -35,6 +35,6 @@ WORKDIR /var/www/
 
 RUN cd dzio_api && composer install
 
-RUN cd dzio_website && npm install
+RUN cd dzio_website && npm install && npm run build
 
 EXPOSE 80
