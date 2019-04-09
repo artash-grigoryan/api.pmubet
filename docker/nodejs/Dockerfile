@@ -24,7 +24,7 @@ RUN sudo apt-get install -y nodejs
 RUN npm install -g webpack
 RUN npm install sass
 
-COPY --chown=www-data:www-data ./dzio_app /var/www
+COPY --chown=www-data:www-data ./dzio_website /var/www
 COPY --chown=www-data:www-data ./html_css3 /var/html_css3
 
 WORKDIR /var/www/
