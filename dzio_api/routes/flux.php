@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 */
 
 
-Route::get('/{date}/XML/{folder}/{fileName}', function ($date, $folder, $fileName) {
+Route::get('/{date}/{parent}/{folder}/{fileName}', function ($date, $parent, $folder, $fileName) {
 
-    $path = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/XML/" .$folder . "/" . $fileName. "";
+    $path = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/" .$parent . "/" .$folder . "/" . $fileName. "";
     $content = "File Not found";
     if (file_exists($path)) {
         $content = file_get_contents($path);

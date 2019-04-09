@@ -17,8 +17,8 @@ class RecXMLService implements DataServiceInterface {
     const RECTXML_FOLDER_PATH = "./recxml_root";
 
     //UNUSED
-    const MONTH_MEETINGS_FOLDER = "1_MONTH_MEETINGS"; // Toutes les réunions du mois
-    const DAY_MEETENGS_FOLDER = "2_DAY_MEETENGS"; // Toutes les réunions du jour
+    const MONTH_REUNIONS_FOLDER = "1_MONTH_MEETINGS"; // Toutes les réunions du mois
+    const DAY_REUNIONS_FOLDER = "2_DAY_MEETENGS"; // Toutes les réunions du jour
     const LAST_PERFORMANCES_FOLDER = "7_LAST_PERFORMANCES"; //Dernières perfs des partants
     const PRIZE_LIST_FOLDER = "8_PRIZE_LIST"; //Nombres de victoires par partants
     const RUNNERS_PRESENTATION_FOLDER = "11_RUNNERS_PRESENTATION"; //classement si course terminée
@@ -27,6 +27,8 @@ class RecXMLService implements DataServiceInterface {
     const STATS_RUNNERS2_FOLDER = "690"; //Statistiques detailées des partants, nb de victoires etc...
     const STATS_RUNNERS3_FOLDER = "691"; //Statistiques detailées des partants en pourcentage
     const RACE_DETAILS_FOLDER = "171"; //Conditions de course, Image parcours et liste de tous les partants détaillée et de tous les paris
+    const GNY_SYNTHESE_PRESS_Q5_FOLDER = "104_GNY_SYNTHESE_PRESS_Q5"; //SOMME DES JOURNAUX AVEC POINTS EN FONCTION DU CLASSEMENT
+    const GNY_PRONO_NAT_FOLDER = "108_GNY_PRONO_NAT"; //GET RUNNERS COMMENTS FROM THERE
 
     //USED
     const REUNIONS_FOLDER = "3_MEETING"; //Toutes les courses d'une réunion mais réunion detaillée
@@ -36,19 +38,41 @@ class RecXMLService implements DataServiceInterface {
     const RESULT_FOLDER = "21_RESULT"; //description detaillée des arrivés
     const DEFINITIVE_DIVIDENDS_RAP_FOLDER = "20_DEFINITIVE_DIVIDENDS_RAP"; //Détails des gains
     const COMPARED_PERFORMANCES_FOLDER = "27_COMPARED_PERFORMANCES"; //
+    const GNY_PRESS_REUNION_FOLDER = "102_GNY_PRESS_REUNION"; //JOURNAUX PRONOSTICS
+    const GNY_SELECTION_PRESS_Q5_FOLDER = "103_GNY_SELECTION_PRESS_Q5"; //JOURNAUX PRONOSTICS Q5
+    const GNY_FORCES_PRESENCE_FOLDER = "111_GNY_FORCES_PRESENCE"; //GET RUNNER COMMENTS FROM THERE
+    const GNY_PRONO_Q5_FOLDER = "110_GNY_PRONO_Q5"; //GET BIG Q5 COMMENT
 
-
-
-    const GNY_SELECTION_PRESS_Q5_FOLDER = "103_GNY_SELECTION_PRESS_Q5"; //JOURNAUX PRONOSTICS
-    const GNY_SYNTHESE_PRESS_Q5_FOLDER = "104_GNY_SYNTHESE_PRESS_Q5"; //SOMME DES JOURNAUX AVEC POINTS EN FONCTION DU CLASSEMENT
-    const GNY_PRONO_NAT_FOLDER = "108_GNY_PRONO_NAT"; //GET RUNNERS COMMENTS FROM THERE
-    const GNY_PRONO_Q5_FOLDER = "110_GNY_PRONO_Q5"; //GET RACE COMMENTS FROM THERE
 
     public $xmlParser;
+    public $dayFolder;
 
     public function __construct(Service $xmlParser)
     {
         $this->xmlParser = $xmlParser;
+
+        $this->dayFolder = (new \DateTime())->format("Ymd");
+        //$this->dayFolder = '20190406';
+    }
+
+    /**
+     * @return array
+     */
+    public function scanDayReunionsFolder()
+    {
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DAY_REUNIONS_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanMonthReunionsFolder()
+    {
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::MONTH_REUNIONS_FOLDER;
+
+        return $this->scanFolder($folderPath);
     }
 
     /**
@@ -56,8 +80,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanReunionsFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::REUNIONS_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::REUNIONS_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -67,8 +90,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanRacesFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RACES_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RACES_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -78,8 +100,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanRunnersFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RUNNERS_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RUNNERS_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -89,8 +110,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanBetsFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::BETS_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::BETS_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -100,8 +120,7 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanBetResultsFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DEFINITIVE_DIVIDENDS_RAP_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DEFINITIVE_DIVIDENDS_RAP_FOLDER;
 
         return $this->scanFolder($folderPath);
     }
@@ -111,8 +130,47 @@ class RecXMLService implements DataServiceInterface {
      */
     public function scanResultsFolder()
     {
-        $dayFolder = (new \DateTime())->format("Ymd");
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RESULT_FOLDER;
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RESULT_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanPressReunionFolder()
+    {
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_PRESS_REUNION_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanPressQ5Folder()
+    {
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_SELECTION_PRESS_Q5_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanForcesPresenceFolder()
+    {
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_FORCES_PRESENCE_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanPronoQ5Folder()
+    {
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_PRONO_Q5_FOLDER;
 
         return $this->scanFolder($folderPath);
     }

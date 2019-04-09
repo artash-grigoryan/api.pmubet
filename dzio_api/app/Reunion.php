@@ -42,7 +42,7 @@ class Reunion extends Model
 
     public function races()
     {
-        return $this->hasMany('App\Race', "reunionId")->with("bets")->with("runners")->with("betResults");
+        return $this->hasMany('App\Race', "reunionId")->with("bets")->with("runners")->with("betResults")->with('reporters');
     }
 
 
