@@ -6,7 +6,7 @@ class ReactLogo extends React.Component {
 	render() {
 		let { type } = this.props;
 		let url = {
-			"gif": require("./Loader/loader.gif"),
+			// "gif": require("./Loader/loader.gif"),
 			"svg": require("./ReactLogo/logo.jpg"),
 			"png": require("./ReactLogo/logo.jpg"),
 			"jpg": require("./ReactLogo/logo.jpg")
