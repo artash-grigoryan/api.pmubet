@@ -1,34 +1,39 @@
-FROM  debian:jessie
+FROM php:7.2-apache
 
+RUN apt-get clean
 RUN apt-get update
-RUN apt-get install -y --force-yes curl sudo
 
-RUN apt-get install -y make git locales gcc g++
-RUN echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
+RUN apt-get install -y \
+        libzip-dev \
+        zip unzip git\
+  && docker-php-ext-configure zip --with-libzip \
+  && docker-php-ext-install zip
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN apt-get install -y --force-yes make git locales gcc g++
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 RUN locale-gen
-ENV LC_ALL fr_FR.UTF-8
+ENV LC_ALL en_US.UTF-8
 
-#sassc
-#RUN git clone https://github.com/sass/libsass.git && \
-#    export SASS_LIBSASS_PATH=/libsass && \
-#    git clone https://github.com/sass/sassc.git && \
-#    cd ./sassc && make -j $(nproc) && make install && \
-#    cd / && rm -rf sassc libsass
+RUN rm /etc/apache2/sites-*/*
 
-#sass
-#RUN apt-get install make ruby ruby-dev -y && \
-#    gem install sass
-#Install nodejs
+COPY docker/apache/default /etc/apache2/sites-available/default.conf
+RUN a2ensite default
+RUN a2enmod rewrite
+
+#Nodejs install
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 RUN npm install -g webpack
 RUN npm install sass
 
-COPY --chown=www-data:www-data ./dzio_website /var/www
-COPY --chown=www-data:www-data ./html_css3 /var/html_css3
+COPY --chown=www-data:www-data . /var/www
 
 WORKDIR /var/www/
-RUN ls -la
-RUN npm install
+
+RUN cd dzio_api && composer install
+
+RUN cd dzio_website && npm install
 
 EXPOSE 80

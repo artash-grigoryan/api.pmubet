@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-require('dotenv').config()
+require('dotenv').config();
 
 const extractSass = new ExtractTextPlugin({
     filename: "css/style.css"
@@ -14,11 +14,11 @@ const config = {
     output: {
         path: __dirname + "/../dzio_api/public",
         filename: 'js/bundle.js',
-        publicPath: "http://127.0.0.1:2992/_assets/",
+        // publicPath: "http://0.0.0.0:2992/_assets/",
     },
     devtool: 'source-map',
     devServer: {
-        headers: { "Access-Control-Allow-Origin": "http://127.0.0.1" },
+        headers: { "Access-Control-Allow-Origin": "http://0.0.0.0" },
         inline: true,
         port: 2992
     },
