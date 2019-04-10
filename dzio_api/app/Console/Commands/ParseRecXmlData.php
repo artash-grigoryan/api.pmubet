@@ -6,7 +6,7 @@ use App\Bet;
 use App\BetResult;
 use App\Prediction;
 use App\Race;
-use App\reporter;
+use App\Reporter;
 use App\Runner;
 use App\Reunion;
 use App\Services\Interfaces\DataServiceInterface;
