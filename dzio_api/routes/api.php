@@ -12,11 +12,14 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::options('reunion/all', "ReunionController@getAll");
 Route::get('reunion/all', "ReunionController@getAll");
 Route::get('reunion/{date}', "ReunionController@getByDate");
 Route::get('race/all', "RaceController@getAll");
 Route::get('race/next', "RaceController@getNext");
+Route::options('race/next', "RaceController@getNext");
 Route::get('race/nextQ5', "RaceController@getNextQ5");
+Route::options('race/nextQ5', "RaceController@getNextQ5");
 Route::get('race/2next', "RaceController@get2Next");
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
