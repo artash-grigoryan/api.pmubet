@@ -16,7 +16,7 @@ $app = new Illuminate\Foundation\Application(
 );
 
 if (!file_exists("../.env")) {
-    $dotenv = new Dotenv\Dotenv('/run/secrets/', "envfile");
+    $dotenv = new \Dotenv\Dotenv('/run/secrets/', "envfile");
     $dotenv->overload();
 }
 /*
