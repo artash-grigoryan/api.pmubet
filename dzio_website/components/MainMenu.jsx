@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import '@fortawesome/fontawesome';
 
+import ReactLogo from "./../elements/ReactLogo";
 import {userActions} from "./../actions/user";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 
@@ -149,9 +150,7 @@ class MainMenu extends React.Component {
         const {messages, showDropDown, showSignInPage, showSignUpPage, showSignUpDialogPage, fixedTop, showMessageNotifications, showNotifications} = this.state;
 
         return <nav className="navbar fixed-top navbar-expand-lg navbar-light">
-            <a className="navbar-brand" href="#">
-                <img className="header-logo" src="./assets/img/logo-Dzio-final.jpg"/>
-            </a>
+            <ReactLogo type={'jpg'} />
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
