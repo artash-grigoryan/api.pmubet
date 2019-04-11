@@ -15,6 +15,10 @@ $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
 
+if (!file_exists("../.env")) {
+    $dotenv = new Dotenv\Dotenv('/run/secrets/', "envfile");
+    $dotenv->overload();
+}
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
