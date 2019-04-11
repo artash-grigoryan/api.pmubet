@@ -30,7 +30,4 @@ RUN cd dzio_api && composer install
 
 RUN a2enmod rewrite
 
-RUN php artisan key:generate
-
-
 EXPOSE 80
