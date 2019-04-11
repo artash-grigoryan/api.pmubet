@@ -15,7 +15,7 @@ $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
 
-if (!file_exists("../.env")) {
+if (!file_exists("../.env") && file_exists("/run/secrets/envfile")) {
     $dotenv = new \Dotenv\Dotenv('/run/secrets/', "envfile");
     $dotenv->overload();
 }
