@@ -1,6 +1,6 @@
-import _ from "lodash";
 import React from "react";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 class ReactLogo extends React.Component {
 	render() {
@@ -11,7 +11,9 @@ class ReactLogo extends React.Component {
 			"jpg": require("./ReactLogo/logo.jpg")
 		}[type];
 
-		return <img src={url} height="40" width="50" />;
+		return <Link className={"navbar-brand"} to="/">
+			<img className={"header-logo"} src={url} height="40" width="50" />;
+		</Link>
 	}
 }
 function mapStateToProps(state) {

@@ -182,9 +182,9 @@ export default class HomePage extends Component {
             let tierce = false;
             let quarte = false;
             let quintePlus = false;
-            
+
             this.state.race.bets.map((bet) => {
-                
+
                 switch (bet.lib) {
 
                     case 'SG':
@@ -229,47 +229,47 @@ export default class HomePage extends Component {
 
             if(simple) {
                 listBets.push(
-                    <img key="SG" src="/assets/img/bets/SG.png" alt=""/>
+                    <img key="SG" src="/img/bets/SG.png" alt=""/>
                 );
             }
             if(couple) {
                 listBets.push(
-                    <img key="CG" src="/assets/img/bets/CG.png" alt=""/>
+                    <img key="CG" src="/img/bets/CG.png" alt=""/>
                 );
             }
             if(coupleOrdre) {
                 listBets.push(
-                    <img key="CP" src="/assets/img/bets/CP.png" alt=""/>
+                    <img key="CP" src="/img/bets/CP.png" alt=""/>
                 );
             }
             if(trio) {
                 listBets.push(
-                    <img key="TR" src="/assets/img/bets/TR.png" alt=""/>
+                    <img key="TR" src="/img/bets/TR.png" alt=""/>
                 );
             }
             if(twoOnFour) {
                 listBets.push(
-                    <img key="C4" src="/assets/img/bets/C4.png" alt=""/>
+                    <img key="C4" src="/img/bets/C4.png" alt=""/>
                 );
             }
             if(multi) {
                 listBets.push(
-                    <img key="MI" src="/assets/img/bets/MI.png" alt=""/>
+                    <img key="MI" src="/img/bets/MI.png" alt=""/>
                 );
             }
             if(tierce) {
                 listBets.push(
-                    <img key="T" src="/assets/img/bets/T.png" alt=""/>
+                    <img key="T" src="/img/bets/T.png" alt=""/>
                 );
             }
             if(quarte) {
                 listBets.push(
-                    <img key="QP" src="/assets/img/bets/QP.png" alt=""/>
+                    <img key="QP" src="/img/bets/QP.png" alt=""/>
                 );
             }
             if(quintePlus) {
                 listBets.push(
-                    <img key="QN" src="/assets/img/bets/QN.png" alt=""/>
+                    <img key="QN" src="/img/bets/QN.png" alt=""/>
                 );
             }
         }

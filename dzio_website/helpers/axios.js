@@ -11,9 +11,9 @@ function getAxios() {
 
     return axios.create({
         baseURL: API_URL,
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
+        // headers: {
+        //     "Authorization": `Bearer ${token}`
+        // }
     })
 }
 

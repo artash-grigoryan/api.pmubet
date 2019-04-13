@@ -30,5 +30,4 @@ RUN cd dzio_api && composer install
 
 RUN a2enmod rewrite
 
-
 EXPOSE 80

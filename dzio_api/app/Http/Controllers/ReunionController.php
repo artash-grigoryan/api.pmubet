@@ -25,8 +25,7 @@ class ReunionController extends Controller
      */
     public function create()
     {
-        exit("qaqqaqaqa");
-        //
+
     }
 
     /**
@@ -46,7 +45,7 @@ class ReunionController extends Controller
         $reunions['today']      = Reunion::where([['date', '>=', $today], ['date', '<', $tomorrow]])->get();
         $reunions['tomorrow']   = Reunion::where([['date', '>=', $tomorrow], ['date', '<', $afterTomorrow]])->get();
 
-        return response()->json(array('reunions'=>$reunions));
+        return response()->json(['reunions'=>$reunions]);
     }
 
     public function getByDate($date) {
