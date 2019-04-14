@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import MainMenu from "../components/MainMenu.jsx";
 import Footer from "../components/shared/footer/footer";
+import _ from "lodash";
 import { faCalendarAlt } from '@fortawesome/fontawesome-free-solid'
 import { useTranslation, Trans } from "react-i18next";
 import { raceActions } from '../actions/race';
@@ -26,43 +27,7 @@ export default class HomePage extends Component {
             day: 'today',
             reunion: false,
             race: false,
-
-
-            departure: new Date('2019-04-23 17:35:00'),
-            participants: [
-                {
-                    'rank'  : 1,
-                    'odds'  : 3.5,
-                    'horse' : 'PHILIPPE CAMURAC',
-                    'rider' : 'JULIEN'
-                },
-                {
-                    'rank'  : 2,
-                    'odds'  : 4.5,
-                    'horse' : 'NICOLAS CRAMAIL',
-                    'rider' : 'JULIEN RAFFESTIN'
-                },
-                {
-                    'rank'  : 3,
-                    'odds'  : 4,
-                    'horse' : 'ARTASH GRIGORYAN',
-                    'rider' : 'JULIEN RAFFESTIN'
-                },
-                {
-                    'rank'  : 4,
-                    'odds'  : 4,
-                    'horse' : 'NARE CAMURAC',
-                    'rider' : 'JULIEN RAFFESTIN'
-                },
-                {
-                    'rank'  : 5,
-                    'odds'  : 4,
-                    'horse' : 'TRUC MUCH',
-                    'rider' : 'JULIEN RAFFESTIN'
-                },
-            ],
-            distance: 1250,
-            sport: 'atelé',
+            reunionSelectorOpened: false,
             weather: {
                 wind : {
                     speed : '35km/h',
@@ -72,32 +37,6 @@ export default class HomePage extends Component {
                 state : 'Peu nuageux'
 
             },
-            predictions: {
-                list : [12, 8, 24],
-                details : [
-                    {
-                        number : 12,
-                        runner : {
-                            horse : 'CARLA DU HOULME',
-                        },
-                        description : 'Pieds nues, Carla du Houlme fait face é son objectif. Ses derniéres sorties sont bonnes et sur sa forme, elle devrait jouer les premiers réles.'
-                    },
-                    {
-                        number : 8,
-                        runner : {
-                            horse : 'TRUC',
-                        },
-                        description : 'description 2'
-                    },
-                    {
-                        number : 24,
-                        runner : {
-                            horse : 'MUCH',
-                        },
-                        description : 'description 3'
-                    },
-                ]
-            }
 
         };
     }
@@ -121,13 +60,43 @@ export default class HomePage extends Component {
         });
     }
 
+    setReunion(reunionID) {
+
+        let reunion = _.find(this.state.reunions[this.state.day], function(reunion){ return reunion.id === reunionID; });
+
+        this.setState({reunion : reunion, race : null});
+        this.setRace(reunionID, 1);
+        this.toggleReunionSelector();
+    }
+
+    setRace(reunionID, raceNumber) {
+
+        raceActions.get(reunionID, raceNumber).then((response) => {
+
+            this.setState({race : response.race})
+            this.setState({reunion : response.race.reunion})
+        });
+    }
+
+    toggleReunionSelector() {
+
+        this.setState({reunionSelectorOpened:!this.state.reunionSelectorOpened});
+    }
+
+    setDay(day) {
+
+        this.setState({day : day});
+        this.setState({race : null});
+        this.setState({reunion : null});
+    }
+
     renderer = ({ hours, minutes, seconds, completed }) => {
         if (completed) {
             // Render a completed state
             return null;
         } else {
             // Render a countdown
-            return <span><Trans i18nKey="Departure in">Departure in</Trans> {hours} {hours>1?<Trans i18nKey="hours">hours</Trans>:<Trans i18nKey="hour">hour</Trans>} {minutes} {hours>1?<Trans i18nKey="minutes">minutes</Trans>:<Trans i18nKey="minute">minute</Trans>}</span>;
+            return <span><Trans i18nKey="Departure in">Departure in</Trans> {hours} {hours>1?<Trans i18nKey="hours">hours</Trans>:<Trans i18nKey="hour">hour</Trans>} {minutes} {minutes>1?<Trans i18nKey="minutes">minutes</Trans>:<Trans i18nKey="minute">minute</Trans>}</span>;
         }
     };
 
@@ -151,7 +120,7 @@ export default class HomePage extends Component {
             }
 	        listReunions = reunions.map((reunion) =>
                 <li key={reunion.id} className={this.reunion && this.reunion.id === reunion.id ? 'active' : ''}>
-                    <a href="#">
+                    <a href="#" onClick={() => this.setReunion(reunion.id)}>
                         <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{reunion.externNumber}</b> - {reunion.hippodromeName}
                     </a>
                 </li>
@@ -159,12 +128,12 @@ export default class HomePage extends Component {
         }
 
         let listRaces = [];
-	    if(this.state.reunion) {
+	    if(this.state.reunion && this.state.race) {
 
             for (let raceNumber = 1; raceNumber <= this.state.reunion.racesNumber; ++raceNumber) {
                 listRaces.push(
                     <li key={raceNumber}>
-                        <a className={this.state.race.number && this.state.race.number===raceNumber?'active':''} href="#">C{raceNumber}</a>
+                        <a className={this.state.race.number && this.state.race.number===raceNumber?'active':''} href="#" onClick={() => this.setRace(this.state.reunion.id, raceNumber)}>C{raceNumber}</a>
                     </li>
                 );
             }
@@ -310,7 +279,6 @@ export default class HomePage extends Component {
                     </ul>
                 </div>
             );
-            console.log(listPredictions);
         }
 
 		return <div>
@@ -326,13 +294,13 @@ export default class HomePage extends Component {
                                 <ul>
 
                                     <li>
-                                        <a className={this.state.race.yesterday ? 'active' : ''} href="#"><Trans i18nKey="Yesterday">Yesterday</Trans></a>
+                                        <a className={this.state.day === 'yesterday' ? 'active' : ''} href="#" onClick={() => this.setDay('yesterday')}><Trans i18nKey="Yesterday">Yesterday</Trans></a>
                                     </li>
                                     <li>
-                                        <a className={this.state.race.today ? 'active' : ''} href="#"><Trans i18nKey="Today">Today</Trans></a>
+                                        <a className={this.state.day === 'today' ? 'active' : ''} href="#" onClick={() => this.setDay('today')}><Trans i18nKey="Today">Today</Trans></a>
                                     </li>
                                     <li>
-                                        <a className={this.state.race.tomorrow ? 'active' : ''} href="#"><Trans i18nKey="Tomorrow">Tomorrow</Trans></a>
+                                        <a className={this.state.day === 'tomorrow' ? 'active' : ''} href="#" onClick={() => this.setDay('tomorrow')}><Trans i18nKey="Tomorrow">Tomorrow</Trans></a>
                                     </li>
                                 </ul>
                                 <ul className="calendar-selector">
@@ -351,19 +319,19 @@ export default class HomePage extends Component {
                                             this.state.reunion
                                             ?
                                                 <div className="meeting-selector">
-                                                    <a className="meeting-selected" href="#">
+                                                    <a className="meeting-selected" href="#" onClick={() => this.toggleReunionSelector()}>
                                                         <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{this.state.reunion.externNumber}</b> - {this.state.reunion.hippodromeName}
                                                     </a>
-                                                    <ul className="metting-selector-list">
+                                                    <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
                                                         {listReunions}
                                                     </ul>
                                                 </div>
                                             :
                                                 <div className="meeting-selector">
-                                                    <a className="meeting-selected" href="#">
+                                                    <a className="meeting-selected" href="#" onClick={() => this.toggleReunionSelector()}>
                                                         <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <Trans i18nKey="Select a Reunion">Select a Reunion</Trans>
                                                     </a>
-                                                    <ul className="metting-selector-list">
+                                                    <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
                                                         {listReunions}
                                                     </ul>
                                                 </div>
@@ -387,7 +355,7 @@ export default class HomePage extends Component {
                         </div>
 
                         {
-                            this.state.race
+                            this.state.race && this.state.reunion
                             ?
                                 <div>
                                     <div className="banner inner-banner">

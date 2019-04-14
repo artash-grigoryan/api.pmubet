@@ -33,6 +33,18 @@ class RaceController extends Controller
         return response()->json(array('race'=>$race));
     }
 
+    public function get($reunionId, $raceNumber)
+    {
+        $race = Race::where([['reunionId', '=', $reunionId], ['number', '=', $raceNumber]])->with("bets")->with("runners")->with("betResults")->with('reporters')->first();
+        $race->reunion = Reunion::where('id', $race->reunionId)->first();
+        $race->day = date('Y-m-d', strtotime($race->date));
+        $race->time = date('H:i', strtotime($race->date));
+        $race->yesterday = $race->day == date('Y-m-d', strtotime('- 1DAY'));
+        $race->today = $race->day == date('Y-m-d');
+        $race->tomorrow = $race->day == date('Y-m-d', strtotime('+ 1DAY'));
+        return response()->json(array('race'=>$race));
+    }
+
     public function getNextQ5()
     {
         $now = date('Y-m-d H:m:s');
