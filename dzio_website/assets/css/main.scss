@@ -275,6 +275,7 @@ body {
 #main .bar-selector .meeting-selector,
 #main .bar-selector .race-selector {
     float: left;
+    position: relative;
 }
 #main .bar-selector .day-selector ul,
 #main .bar-selector .meeting-selector ul ,
@@ -303,8 +304,15 @@ body {
 #main .bar-selector ul.calendar-selector li{
     display: inline;
 }
-#main .bar-selector .meeting-selector ul.metting-selector-list {
+#main .bar-selector .meeting-selector ul.meeting-selector-list {
     display: none;
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    top: 56px;
+    height: 200px;
+    background: #efefef;
+    overflow: auto;
 }
 #main .bar-selector .day-selector ul li a{
     display: inline-block;
@@ -337,9 +345,11 @@ body {
     color: #000;
     vertical-align: super;
     text-transform: uppercase;
+    white-space: nowrap;
     text-decoration: none;
     width: 400px;
 }
+#main .bar-selector .meeting-selected img,
 #main .bar-selector .meeting-selector ul li a img{
     margin-right: 10px;
 }
