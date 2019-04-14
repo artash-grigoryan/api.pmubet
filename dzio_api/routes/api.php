@@ -18,6 +18,7 @@ Route::middleware(['cors'])->group(function () {
     Route::get('reunion/{date}', "ReunionController@getByDate");
     Route::options('race/all', "RaceController@getAll");
     Route::get('race/all', "RaceController@getAll");
+    Route::get('race/get/{reunionId}/{raceNumber}', "RaceController@get");
     Route::options('race/next', "RaceController@getNext");
     Route::get('race/next', "RaceController@getNext");
     Route::options('race/nextQ5', "RaceController@getNextQ5");
