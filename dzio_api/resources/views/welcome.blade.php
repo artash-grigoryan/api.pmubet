@@ -3,7 +3,7 @@
 <head>
 <title>Dzio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="http://localhost:2992/css/style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div id = "app"></div>
@@ -12,6 +12,6 @@
     // http://redux.js.org/recipes/ServerRendering.html#security-considerations
     window.__PRELOADED_STATE__ = '{}'.replace(/</g, '\\u003c');
 </script>
-<script src = "http://localhost:2992/js/bundle.js"></script>
+<script src = "js/bundle.js"></script>
 </body>
 </html>
