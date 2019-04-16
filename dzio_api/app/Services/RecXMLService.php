@@ -52,7 +52,7 @@ class RecXMLService implements DataServiceInterface {
         $this->xmlParser = $xmlParser;
 
         $this->dayFolder = (new \DateTime())->format("Ymd");
-        $this->dayFolder = '20190414';
+        //$this->dayFolder = '20190415';
     }
 
     /**

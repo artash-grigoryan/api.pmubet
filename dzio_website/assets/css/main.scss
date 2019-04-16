@@ -292,7 +292,9 @@ body {
     color: #000;
     vertical-align: super;
     text-transform: uppercase;
+    white-space: nowrap;
     text-decoration: none;
+    overflow: hidden;
     width: 400px;
 }
 #main .bar-selector .meeting-selector .meeting-selected a img{

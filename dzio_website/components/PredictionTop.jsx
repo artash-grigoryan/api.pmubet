@@ -13,9 +13,13 @@ export default class PredictionTop extends React.Component {
     constructor(props) {
 
         super(props);
+
+        let runnerRank = _.find(props.predictionTop.predictions, function(runner){ return parseInt(runner.rank) === parseInt(1); });
+        let runnerSelected = _.find(props.race.runners, function(runner){ return parseInt(runner.number) === parseInt(runnerRank.number); });
+
         this.state = {
 
-            runnerSelected : false
+            runnerSelected : runnerSelected
         }
     }
 
