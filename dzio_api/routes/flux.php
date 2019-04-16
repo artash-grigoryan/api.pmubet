@@ -16,12 +16,12 @@ use Illuminate\Http\Request;
 Route::get('/{date}/BINARY/photos', function ($date) {
 
     $folderPath = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/BINARY/photos";
-    $content = "File Not found";
+    $content = ["message" => "File Not found" ] ;
     if (is_dir($folderPath)) {
         $content = scandir($folderPath);
     }
 
-    return response($content)->header('Content-Type', 'text/xml;charset=ISO-8859-1');
+    return response()->json($content);
 });
 
 Route::get('/{date}/BINARY/photos/{file}', function ($date, $file) {
