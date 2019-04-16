@@ -13,6 +13,26 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/{date}/BINARY/photos', function ($date) {
+
+    $folderPath = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/BINARY/photos";
+    $content = "File Not found";
+    if (is_dir($folderPath)) {
+        $content = scandir($folderPath);
+    }
+
+    return response($content)->header('Content-Type', 'text/xml;charset=ISO-8859-1');
+});
+
+Route::get('/{date}/BINARY/photos/{file}', function ($date, $file) {
+
+    $filePath = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/BINARY/photos/" .$file;
+    $content = "File Not found";
+    if (file_exists($filePath)) {
+        return response()->file($filePath);
+    }
+    return response($content)->header('Content-Type', 'text/xml;charset=ISO-8859-1');
+});
 
 Route::get('/{date}/{parent}/{folder}/{fileName}', function ($date, $parent, $folder, $fileName) {
 
