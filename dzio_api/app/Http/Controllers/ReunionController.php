@@ -41,9 +41,15 @@ class ReunionController extends Controller
         $afterTomorrow = date('Y-m-d', strtotime('+2 DAY'));
 
         $reunions = [];
-        $reunions['yesterday']  = Reunion::where([['date', '>=', $yesterday], ['date', '<', $today]])->get();
-        $reunions['today']      = Reunion::where([['date', '>=', $today], ['date', '<', $tomorrow]])->get();
-        $reunions['tomorrow']   = Reunion::where([['date', '>=', $tomorrow], ['date', '<', $afterTomorrow]])->get();
+        $reunions['yesterday']  = Reunion::where([['date', '>=', $yesterday], ['date', '<', $today]])
+            ->whereHas('races')
+            ->get();
+        $reunions['today']      = Reunion::where([['date', '>=', $today], ['date', '<', $tomorrow]])
+            ->whereHas('races')
+            ->get();
+        $reunions['tomorrow']   = Reunion::where([['date', '>=', $tomorrow], ['date', '<', $afterTomorrow]])
+            ->whereHas('races')
+            ->get();
 
         return response()->json(['reunions'=>$reunions]);
     }

@@ -832,7 +832,7 @@ class ParseRecXmlData extends Command
                                 ['raceId', '=', $raceObj->id],
                             ])->first();
 
-                            $RunnerObj->comment = $partant['value']['commentaire'];
+                            $RunnerObj->comment = iconv('UTF-8', 'ISO-8859-1', $partant['value']['commentaire']);
                             $RunnerObj->save();
                         }
                     }
@@ -876,7 +876,7 @@ class ParseRecXmlData extends Command
 
                         $RaceObj = Race::where('id', $race['value']["id_nav_course"])->first();
                         if(!empty($RaceObj)) {
-                            $RaceObj->comment = $race['value']['commentaire'];
+                            $RaceObj->comment = iconv('UTF-8', 'ISO-8859-1', $race['value']['commentaire']);
                             $RaceObj->save();
                         }
                     }
