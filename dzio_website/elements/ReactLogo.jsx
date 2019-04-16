@@ -12,7 +12,7 @@ class ReactLogo extends React.Component {
 		}[type];
 
 		return <Link className={"navbar-brand"} to="/">
-			<img className={"header-logo"} src={url} height="40" width="50" />;
+			<img className={"header-logo"} src={url} height="40" width="50" />
 		</Link>
 	}
 }

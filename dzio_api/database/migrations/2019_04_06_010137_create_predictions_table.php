@@ -17,7 +17,7 @@ class CreatePredictionsTable extends Migration
             $table->increments('id');
             $table->string('number');
             $table->string('runner');
-            $table->string('rank');
+            $table->tinyInteger('rank');
             $table->integer("reporterId")->unsigned();
 
             $table->foreign('reporterId')

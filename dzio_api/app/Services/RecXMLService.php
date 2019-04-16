@@ -18,7 +18,6 @@ class RecXMLService implements DataServiceInterface {
 
     //UNUSED
     const MONTH_REUNIONS_FOLDER = "1_MONTH_MEETINGS"; // Toutes les réunions du mois
-    const DAY_REUNIONS_FOLDER = "2_DAY_MEETENGS"; // Toutes les réunions du jour
     const LAST_PERFORMANCES_FOLDER = "7_LAST_PERFORMANCES"; //Dernières perfs des partants
     const PRIZE_LIST_FOLDER = "8_PRIZE_LIST"; //Nombres de victoires par partants
     const RUNNERS_PRESENTATION_FOLDER = "11_RUNNERS_PRESENTATION"; //classement si course terminée
@@ -31,6 +30,7 @@ class RecXMLService implements DataServiceInterface {
     const GNY_PRONO_NAT_FOLDER = "108_GNY_PRONO_NAT"; //GET RUNNERS COMMENTS FROM THERE
 
     //USED
+    const DAY_REUNIONS_FOLDER = "2_DAY_MEETENGS"; // Toutes les réunions du jour
     const REUNIONS_FOLDER = "3_MEETING"; //Toutes les courses d'une réunion mais réunion detaillée
     const RACES_FOLDER = "4_RACE"; // Détails de la course
     const RUNNERS_FOLDER = "6_RUNNERS"; // Tous les partants d'une course
@@ -52,7 +52,7 @@ class RecXMLService implements DataServiceInterface {
         $this->xmlParser = $xmlParser;
 
         $this->dayFolder = (new \DateTime())->format("Ymd");
-        //$this->dayFolder = '20190411';
+        //$this->dayFolder = '20190415';
     }
 
     /**

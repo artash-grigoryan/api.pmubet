@@ -21,9 +21,20 @@ class RaceController extends Controller
 
     public function getNext()
     {
-        $now = date('Y-m-d H:m:s');
+        $now = date('Y-m-d H:m:s', strtotime('+2 HOUR'));
 
-        $race = Race::where([['date', '>=', $now]])->with("bets")->with("runners")->with("betResults")->with('reporters')->first();
+        $race = Race::where([['date', '>=', $now]])
+            ->orderBy('date', 'ASC')
+            ->with("bets")
+            ->with("runners")
+            ->with("betResults")
+            ->with(array('reporters' => function($query) {
+                $query
+                    ->orderBy('nb_pts', 'DESC')
+                    ->orderBy('id', 'DESC')
+                    ->where('societe', 'AIP')->orWhere('societe', 'geny.com');
+            }))
+            ->first();
         $race->reunion = Reunion::where('id', $race->reunionId)->first();
         $race->day = date('Y-m-d', strtotime($race->date));
         $race->time = date('H:i', strtotime($race->date));
@@ -35,7 +46,17 @@ class RaceController extends Controller
 
     public function get($reunionId, $raceNumber)
     {
-        $race = Race::where([['reunionId', '=', $reunionId], ['number', '=', $raceNumber]])->with("bets")->with("runners")->with("betResults")->with('reporters')->first();
+        $race = Race::where([['reunionId', '=', $reunionId], ['number', '=', $raceNumber]])
+            ->with("bets")
+            ->with("runners")
+            ->with("betResults")
+            ->with(array('reporters' => function($query) {
+                $query
+                    ->orderBy('nb_pts', 'DESC')
+                    ->orderBy('id', 'DESC')
+                    ->where('societe', 'AIP')->orWhere('societe', 'geny.com');
+            }))
+            ->first();
         $race->reunion = Reunion::where('id', $race->reunionId)->first();
         $race->day = date('Y-m-d', strtotime($race->date));
         $race->time = date('H:i', strtotime($race->date));
@@ -47,9 +68,23 @@ class RaceController extends Controller
 
     public function getNextQ5()
     {
-        $now = date('Y-m-d H:m:s');
+        $now = date('Y-m-d H:m:s', strtotime('+2 HOUR'));
 
-        $race = Race::where([['date', '>=', $now]])->whereNotNull('comment')->with("bets")->with("runners")->with("betResults")->with('reporters')->first();
+        $race = Race::where([['date', '>=', $now]])
+            ->whereHas('bets', function($query){
+                  $query->whereLib('QN');
+              })
+            ->orderBy('date', 'ASC')
+            ->with("bets")
+            ->with("runners")
+            ->with("betResults")
+            ->with(array('reporters' => function($query) {
+                $query
+                    ->orderBy('nb_pts', 'DESC')
+                    ->orderBy('id', 'DESC')
+                    ->where('societe', 'AIP')->orWhere('societe', 'geny.com');
+            }))
+            ->first();
         if($race) {
 
             $race->reunion = Reunion::where('id', $race->reunionId)->first();
