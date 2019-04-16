@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { Link } from 'react-router-dom'
 import MainMenu from "../components/MainMenu.jsx";
 import Footer from "../components/shared/footer/footer";
 import _ from "lodash";
@@ -154,7 +155,7 @@ export default class HomePage extends Component {
             for (let raceNumber = 1; raceNumber <= this.state.reunion.racesNumber; ++raceNumber) {
                 listRaces.push(
                     <li key={raceNumber}>
-                        <a className={this.state.race.number && this.state.race.number===raceNumber?'active':''} href="#" onClick={() => this.setRace(this.state.reunion.id, raceNumber)}>C{raceNumber}</a>
+                        <Link className={this.state.race.number && this.state.race.number===raceNumber?'active':''} to={"/" + this.state.reunion.id + "/" + this.state.race.number} onClick={() => this.setRace(this.state.reunion.id, raceNumber)}>C{raceNumber}</Link>
                     </li>
                 );
             }
