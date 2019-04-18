@@ -1,3 +1,5 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
 body {
     color: #858487;
     background: #fff;
@@ -28,7 +30,6 @@ body {
     line-height: inherit;
     white-space: nowrap;
     width: 50px;
-    
 }
 
 .header-logo {
