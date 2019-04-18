@@ -5,9 +5,66 @@ import '@fortawesome/fontawesome';
 
 export default class BetResults extends React.Component {
 
+    constructor(props) {
+
+        super(props);
+        this.state = {
+
+            betSelected : 'Simple'
+        }
+    }
+
     render() {
 
-        console.log(this.props.race.bet_results)
+        let listBets = [];
+
+        if(this.props.race.betResults) {
+
+            this.props.race.betResults.map((bet) => {
+
+                let imgPath;
+                switch (bet.name) {
+
+                    //TODO Désordre, Super 4, Super 4, 1NP, Bonus, Bonus 4, Bonus 3, Pick 5, Spécial Pick 5
+                    case('Simple'):
+                        imgPath = "/img/bets/SG.png";
+                        break;
+                    case('Couplé'):
+                        imgPath = "/img/bets/CG.png";
+                        break;
+                    case('Couplé ordre'):
+                        imgPath = "/img/bets/CP.png";
+                        break;
+                    case('Trio Ordre'):
+                        imgPath = "/img/bets/TR.png";
+                        break;
+                    case('2 sur 4'):
+                        imgPath = "/img/bets/C4.png";
+                        break;
+                    case('Mini Multi en 6'):
+                    case('Multi en 7'):
+                        imgPath = "/img/bets/MI.png";
+                        break;
+                    case('tierce'):
+                        imgPath = "/img/bets/T.png";
+                        break;
+                    case('quarte'):
+                        imgPath = "/img/bets/QP.png";
+                        break;
+                    case('quintePlus'):
+                        imgPath = "/img/bets/QN.png";
+                        break;
+                }
+                listBets.push(
+                    <td key={bet.name} className={"result-selector" +' '+ (this.state.betSelected === bet.name ? ' active' : '')}>
+                        <a href="javascript:;" onClick={()=>this.setState({betSelected:bet.name})}>
+                            <img src={imgPath} alt=""/>
+                        </a>
+                    </td>
+                )
+            });
+        }
+
         return <section className="results-section">
             <div className="container">
 
@@ -21,51 +78,7 @@ export default class BetResults extends React.Component {
                             <table className="results-selection-tab">
                                 <tbody>
                                 <tr className="">
-                                    <td className="result-selector">
-                                        <a href="#">
-                                            <img src="https://www.equidia.fr/assets/img/paris/simple.png" alt=""/>
-                                        </a>
-                                    </td>
-                                    <td className="result-selector">
-                                        <a href="#">
-                                            <img src="https://www.equidia.fr/assets/img/paris/couple.png" alt=""/>
-                                        </a>
-                                    </td>
-                                    <td className="result-selector">
-                                        <a href="#">
-                                            <img src="https://www.equidia.fr/assets/img/paris/couple-ordre.png" alt=""/>
-                                        </a>
-                                    </td>
-                                    <td className="result-selector">
-                                        <a href="#">
-                                            <img src="https://www.equidia.fr/assets/img/paris/trio.png" alt=""/>
-                                        </a>
-                                    </td>
-                                    <td className="result-selector active">
-                                        <a href="#">
-                                            <img src="https://www.equidia.fr/assets/img/paris/2sur4.png" alt=""/>
-                                        </a>
-                                    </td>
-                                    <td className="result-selector">
-                                        <a href="#">
-                                            <img src="https://www.equidia.fr/assets/img/paris/multi.png" alt=""/>
-                                        </a>
-                                    </td>
-                                    <td className="result-selector">
-                                        <a href="#">
-                                            <img src="https://www.equidia.fr/assets/img/paris/tierce.png" alt=""/>
-                                        </a>
-                                    </td>
-                                    <td className="result-selector">
-                                        <a href="#">
-                                            <img src="https://www.equidia.fr/assets/img/paris/quarte.png" alt=""/>
-                                        </a>
-                                    </td>
-                                    <td className="result-selector">
-                                        <a href="#">
-                                            <img src="https://www.equidia.fr/assets/img/paris/quinte-plus.png" alt=""/>
-                                        </a>
-                                    </td>
+                                    {listBets}
                                 </tr>
                                 </tbody>
                             </table>

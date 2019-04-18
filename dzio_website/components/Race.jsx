@@ -44,7 +44,7 @@ export default class Race extends React.Component {
 
                         <div className="col-lg-5 col-md-12">
                         {
-                            !this.props.race.bet_results
+                            !this.props.race.betResults.length
                                 ?
 
                                     <PredictionTop {...this.props}/>
@@ -65,7 +65,7 @@ export default class Race extends React.Component {
                         </div>
 
                         {
-                            new Date(this.props.race.date).getTime() > Date.now()
+                            !this.props.race.betResults.length
                                 ?
                                 <div className="col-lg-12">
                                     <Predictions {...this.props}/>
@@ -78,7 +78,7 @@ export default class Race extends React.Component {
             </section>
 
             {
-                this.props.race.bet_results
+                this.props.race.betResults.length
                     ?
                     <BetResults {...this.props}/>
                     :

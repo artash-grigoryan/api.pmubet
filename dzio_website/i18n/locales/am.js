@@ -17,9 +17,9 @@ export default {
     "Select a Reunion":"Select a Reunion",
     "Bet on Vivaro":"Bet on Vivaro",
     "Top Predictions":"Top Predictions",
-    "Programs":"Programs Programs",
+    "Programs":"Programs",
     "Calendar & Results":"Calendar & Results",
     "How to bet":"How to bet",
     "News":"News",
-    "Best Predictions":"Best Predictions"
+    "Best Predictions":"Լավագույն կանխատեսումներ"
 };
