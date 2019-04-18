@@ -15,6 +15,7 @@ class CreateBetResultsTable extends Migration
     {
         Schema::create('bet_results', function (Blueprint $table) {
 
+            $table->increments('id');
             $table->string('combinaisonRapDef');
             $table->string('code');
             $table->string('gagnant')->nullable();
@@ -27,8 +28,6 @@ class CreateBetResultsTable extends Migration
             $table->string('sumMisesGagnTypeResRapDef')->nullable();
             $table->string('sumMisesWPlaceTypeResRapDef')->nullable();
             $table->integer("raceId")->unsigned();
-
-            $table->primary(array('combinaisonRapDef', 'code', 'raceId'));
 
             $table->foreign('raceId')
                 ->references('id')

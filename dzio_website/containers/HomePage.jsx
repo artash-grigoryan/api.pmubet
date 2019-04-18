@@ -52,33 +52,42 @@ export default class HomePage extends Component {
             this.setState({reunions : response.reunions})
         });
 
-        raceActions.getNext().then((response) => {
-
-            let predictions = response.race.reporters;
-            let predictionTop = response.race.reporters.shift();
-            this.setState({
-                reunion : response.race.reunion,
-                race : response.race,
-                predictionTop : predictionTop,
-                predictions : predictions
-            });
-            let day = 'today';
-            if(response.race.yesterday) {
-                day = 'yesterday';
-            }
-            if(response.race.today) {
-                day = 'today';
-            }
-            if(response.race.tomorrow) {
-                day = 'tomorrow';
-            }
-            this.setState({day : day});
-        });
-
         raceActions.getNextQ5().then((response) => {
 
             this.setState({nextQ5 : response.race})
         });
+
+        if(typeof this.props.match.params.reunionId !== 'undefined' && typeof this.props.match.params.raceNumber !== 'undefined') {
+
+            this.setRace(this.props.match.params.reunionId, this.props.match.params.raceNumber);
+        }
+        else if(typeof this.props.match.params.reunionId !== 'undefined') {
+
+            this.setReunion(this.props.match.params.reunionId);
+        }
+        else {
+
+            raceActions.getNext().then((response) => {
+
+                this.setState({
+                    reunion : response.race.reunion,
+                    race : response.race,
+                    predictionTop : response.race.reporters_top,
+                    predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others))
+                });
+                let day = 'today';
+                if(response.race.yesterday) {
+                    day = 'yesterday';
+                }
+                if(response.race.today) {
+                    day = 'today';
+                }
+                if(response.race.tomorrow) {
+                    day = 'tomorrow';
+                }
+                this.setState({day : day});
+            });
+        }
     }
 
     setReunion(reunionID) {
@@ -99,14 +108,13 @@ export default class HomePage extends Component {
 
         raceActions.get(reunionID, raceNumber).then((response) => {
 
-            let predictions = response.race.reporters;
-            let predictionTop = response.race.reporters.shift();
             this.setState({
                 reunion : response.race.reunion,
                 race : response.race,
-                predictionTop : predictionTop,
-                predictions : predictions
+                predictionTop : response.race.reporters_top,
+                predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others))
             });
+            this.props.history.push("/"+reunionID+"/R"+response.race.reunion.externNumber+"/C"+raceNumber);
         });
     }
 
@@ -142,9 +150,9 @@ export default class HomePage extends Component {
             }
 	        listReunions = reunions.map((reunion) =>
                 <li key={reunion.id} className={this.reunion && this.reunion.id === reunion.id ? 'active' : ''}>
-                    <a href="#" onClick={() => this.setReunion(reunion.id)}>
+                    <Link to={"/" + reunion.id + "/R"+reunion.externNumber} onClick={() => this.setReunion(reunion.id)}>
                         <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{reunion.externNumber}</b> - {reunion.hippodromeName}
-                    </a>
+                    </Link>
                 </li>
             );
         }
@@ -155,7 +163,7 @@ export default class HomePage extends Component {
             for (let raceNumber = 1; raceNumber <= this.state.reunion.racesNumber; ++raceNumber) {
                 listRaces.push(
                     <li key={raceNumber}>
-                        <Link className={this.state.race.number && this.state.race.number===raceNumber?'active':''} to={"/" + this.state.reunion.id + "/" + this.state.race.number} onClick={() => this.setRace(this.state.reunion.id, raceNumber)}>C{raceNumber}</Link>
+                        <Link className={this.state.race.number && this.state.race.number===raceNumber?'active':''} to={"/" + this.state.reunion.id + "/R"+this.state.reunion.externNumber+"/C" + raceNumber} onClick={() => this.setRace(this.state.reunion.id, raceNumber)}>C{raceNumber}</Link>
                     </li>
                 );
             }

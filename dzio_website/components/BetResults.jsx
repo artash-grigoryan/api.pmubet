@@ -7,6 +7,7 @@ export default class BetResults extends React.Component {
 
     render() {
 
+        console.log(this.props.race.bet_results)
         return <section className="results-section">
             <div className="container">
 
@@ -14,7 +15,7 @@ export default class BetResults extends React.Component {
 
                     <div className="col-md-12 m-b-10">
                         <div className="title m-b-0">
-                            <h3>Results</h3>
+                            <h3>Reports</h3>
                         </div>
                         <div className="">
                             <table className="results-selection-tab">

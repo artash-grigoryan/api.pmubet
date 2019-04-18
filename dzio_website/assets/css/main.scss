@@ -534,6 +534,10 @@ body {
     font-size: 18px;
     padding: 10px 0;
 }
+.prediction-top .prediction-body .prediction-info{
+    float: right;
+}
+.prediction-top .prediction-body .prediction-info .reporter{}
 .predictions-container {}
 .predictions-container .predictions {
     border-bottom: 1px solid #228650;
@@ -573,7 +577,7 @@ body {
     background: #fff;
     padding: 0px 0px;
     margin: 0 0 20px 0;
-    max-height: 500px;
+    height: 500px;
     overflow-y: auto;
 }
 .runners-tab table{
