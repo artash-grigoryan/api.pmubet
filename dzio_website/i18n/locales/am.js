@@ -14,5 +14,12 @@ export default {
     minute:"minute",
     minutes:"minutes",
     "Bet now":"Bet now",
-    "Select a Reunion":"Select a Reunion"
+    "Select a Reunion":"Select a Reunion",
+    "Bet on Vivaro":"Bet on Vivaro",
+    "Top Predictions":"Top Predictions",
+    "Programs":"Programs Programs",
+    "Calendar & Results":"Calendar & Results",
+    "How to bet":"How to bet",
+    "News":"News",
+    "Best Predictions":"Best Predictions"
 };

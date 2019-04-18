@@ -27,13 +27,12 @@ class RaceController extends Controller
             ->orderBy('date', 'ASC')
             ->with("bets")
             ->with("runners")
+            ->with("results")
             ->with("betResults")
-            ->with(array('reporters' => function($query) {
-                $query
-                    ->orderBy('nb_pts', 'DESC')
-                    ->orderBy('id', 'DESC')
-                    ->where('societe', 'AIP')->orWhere('societe', 'geny.com');
-            }))
+            ->with('reportersTop')
+            ->with('reportersGeny')
+            ->with('reportersBest')
+            ->with('reportersOthers')
             ->first();
         $race->reunion = Reunion::where('id', $race->reunionId)->first();
         $race->day = date('Y-m-d', strtotime($race->date));
@@ -49,13 +48,12 @@ class RaceController extends Controller
         $race = Race::where([['reunionId', '=', $reunionId], ['number', '=', $raceNumber]])
             ->with("bets")
             ->with("runners")
+            ->with("results")
             ->with("betResults")
-            ->with(array('reporters' => function($query) {
-                $query
-                    ->orderBy('nb_pts', 'DESC')
-                    ->orderBy('id', 'DESC')
-                    ->where('societe', 'AIP')->orWhere('societe', 'geny.com');
-            }))
+            ->with('reportersTop')
+            ->with('reportersGeny')
+            ->with('reportersBest')
+            ->with('reportersOthers')
             ->first();
         $race->reunion = Reunion::where('id', $race->reunionId)->first();
         $race->day = date('Y-m-d', strtotime($race->date));
@@ -77,13 +75,12 @@ class RaceController extends Controller
             ->orderBy('date', 'ASC')
             ->with("bets")
             ->with("runners")
+            ->with("results")
             ->with("betResults")
-            ->with(array('reporters' => function($query) {
-                $query
-                    ->orderBy('nb_pts', 'DESC')
-                    ->orderBy('id', 'DESC')
-                    ->where('societe', 'AIP')->orWhere('societe', 'geny.com');
-            }))
+            ->with('reportersTop')
+            ->with('reportersGeny')
+            ->with('reportersBest')
+            ->with('reportersOthers')
             ->first();
         if($race) {
 

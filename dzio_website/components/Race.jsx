@@ -10,6 +10,7 @@ import Runners from "./Runners";
 import Predictions from "./Predictions";
 import PredictionTop from "./PredictionTop";
 import NextQ5 from "./NextQ5";
+import Results from "./Results";
 import BetResults from "./BetResults";
 
 
@@ -41,15 +42,16 @@ export default class Race extends React.Component {
                             <Runners {...this.props}/>
                         </div>
 
+                        <div className="col-lg-5 col-md-12">
                         {
-                            new Date(this.props.race.date).getTime() > Date.now()
+                            !this.props.race.bet_results
                                 ?
-                                <div className="col-lg-5 col-md-12">
+
                                     <PredictionTop {...this.props}/>
-                                </div>
                                 :
-                                null
+                                    <Results {...this.props}/>
                         }
+                        </div>
 
                         <div className="col-lg-3 col-md-12" style={{marginTop: "61px"}}>
                             {
@@ -76,7 +78,7 @@ export default class Race extends React.Component {
             </section>
 
             {
-                this.props.race.betResults
+                this.props.race.bet_results
                     ?
                     <BetResults {...this.props}/>
                     :
