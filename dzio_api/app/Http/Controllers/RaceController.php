@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Race;
+use App\BetResult;
 use App\Reunion;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,6 @@ class RaceController extends Controller
             ->with("bets")
             ->with("runners")
             ->with("results")
-            ->with("betResults")
             ->with('reportersTop')
             ->with('reportersGeny')
             ->with('reportersBest')
@@ -40,6 +40,13 @@ class RaceController extends Controller
         $race->yesterday = $race->day == date('Y-m-d', strtotime('- 1DAY'));
         $race->today = $race->day == date('Y-m-d');
         $race->tomorrow = $race->day == date('Y-m-d', strtotime('+ 1DAY'));
+        $bet_results_names = BetResult::where('raceId', $race->id)->distinct()->pluck('typeReserveRapDef');
+        $betResults = [];
+        foreach($bet_results_names as $key=>$bet_results_name) {
+            $betResults[$key]['name'] = $bet_results_name;
+            $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('typeReserveRapDef', $bet_results_name)->get();
+        }
+        $race->betResults = $betResults;
         return response()->json(array('race'=>$race));
     }
 
@@ -49,7 +56,6 @@ class RaceController extends Controller
             ->with("bets")
             ->with("runners")
             ->with("results")
-            ->with("betResults")
             ->with('reportersTop')
             ->with('reportersGeny')
             ->with('reportersBest')
@@ -61,6 +67,13 @@ class RaceController extends Controller
         $race->yesterday = $race->day == date('Y-m-d', strtotime('- 1DAY'));
         $race->today = $race->day == date('Y-m-d');
         $race->tomorrow = $race->day == date('Y-m-d', strtotime('+ 1DAY'));
+        $bet_results_names = BetResult::where('raceId', $race->id)->distinct()->pluck('typeReserveRapDef');
+        $betResults = [];
+        foreach($bet_results_names as $key=>$bet_results_name) {
+            $betResults[$key]['name'] = $bet_results_name;
+            $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('typeReserveRapDef', $bet_results_name)->get();
+        }
+        $race->betResults = $betResults;
         return response()->json(array('race'=>$race));
     }
 
@@ -73,14 +86,6 @@ class RaceController extends Controller
                   $query->whereLib('QN');
               })
             ->orderBy('date', 'ASC')
-            ->with("bets")
-            ->with("runners")
-            ->with("results")
-            ->with("betResults")
-            ->with('reportersTop')
-            ->with('reportersGeny')
-            ->with('reportersBest')
-            ->with('reportersOthers')
             ->first();
         if($race) {
 
