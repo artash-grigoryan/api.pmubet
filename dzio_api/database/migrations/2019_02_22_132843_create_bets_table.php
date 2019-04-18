@@ -14,12 +14,13 @@ class CreateBetsTable extends Migration
     public function up()
     {
         Schema::create('bets', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('code');
             $table->string('lib')->nullable();
             $table->string('libLong')->nullable();
             $table->integer('raceId')->unsigned();
 
-            $table->primary(array('code', 'raceId'));
+            $table->unique(array('code', 'raceId'));
 
             $table->foreign('raceId')
                 ->references('id')

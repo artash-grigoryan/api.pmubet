@@ -535,7 +535,13 @@ class ParseRecXmlData extends Command
                                 "raceId" => $raceObj->id,
                             ];
 
-                            $betObj = new Bet($betArr);
+                            /*
+                                $BetObj = Bet::where([
+                                    ["code", '=', $bet['value']["code_pari_generique"]],
+                                    ["raceId", '=', $raceObj->id],
+                                ])->first();
+                            */
+                            $BetObj = new Bet($betArr);
 
                             foreach ($bet['value']["combinaisons"] as $betResult) {
 
@@ -554,14 +560,13 @@ class ParseRecXmlData extends Command
                                 try {
                                     BetResult::updateOrInsert([
                                         'combinaisonRapDef' => $betResult['value']['combinaison_rap_def'],
-                                        'code' => $betObj->code,
+                                        'code' => $BetObj->code,
                                         "raceId" => $raceObj->id,
                                     ],
                                         $betResultArr
                                     );
                                 } catch (\Exception $e) {}
                             }
-
                         }
                     }
                     //@TODO DELETE THE FILE

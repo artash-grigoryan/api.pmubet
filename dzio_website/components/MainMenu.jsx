@@ -7,6 +7,7 @@ import '@fortawesome/fontawesome';
 import ReactLogo from "./../elements/ReactLogo";
 import {userActions} from "./../actions/user";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import {Trans} from "react-i18next";
 
 
 class MainMenu extends React.Component {
@@ -158,19 +159,19 @@ class MainMenu extends React.Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <a className="nav-link" href="quinte.html">Programs</a>
+                        <a className="nav-link" href="/"><Trans i18nKey="Programs">Programs</Trans></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Predictions</a>
+                        <a className="nav-link" href="/predictions"><Trans i18nKey="Predictions">Predictions</Trans></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="calendar-results.html">Calendar & Results</a>
+                        <a className="nav-link" href="/calendar-results"><Trans i18nKey="Calendar & Results">Calendar & Results</Trans></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="how-to-bet.html">How to bet</a>
+                        <a className="nav-link" href="/how-to-bet"><Trans i18nKey="How to bet">How to bet</Trans></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="news.html">News</a>
+                        <a className="nav-link" href="/news"><Trans i18nKey="News">News</Trans></a>
                     </li>
                 </ul>
                 <ul className="navbar-nav">

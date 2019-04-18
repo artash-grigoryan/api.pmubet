@@ -17,7 +17,7 @@ export default class Predictions extends React.Component {
                 <div key={reporter.id} className="predictions">
                     <p className="reporter">
                         <b>{reporter.reporter}</b> <br/>
-                        <a href={reporter.societe === 'AIP' ? 'http://www.turf-fr.com/' : (reporter.societe === 'geny.com' ? 'http://www.geny.com/' : '')}>{reporter.societe === 'AIP' ? 'www.turf-fr.com' : (reporter.societe === 'geny.com' ? 'www.geny.com' : '')}</a>
+                        <a href={reporter.societe === 'AIP' ? 'http://www.turf-fr.com/' : (reporter.societe === 'geny.com' ? 'http://www.geny.com/' : 'javascript:;')}>{reporter.societe === 'AIP' ? 'www.turf-fr.com' : (reporter.societe === 'geny.com' ? 'www.geny.com' : reporter.societe)}</a>
                     </p>
                     <ul>
                         {
@@ -32,7 +32,7 @@ export default class Predictions extends React.Component {
         
         return <div className="predictions">
             <div className="title" style={{marginBottom: 0}}>
-                <h3><Trans i18nKey="Predictions">Predictions</Trans>
+                <h3>{this.props.predictions.length} <Trans i18nKey="Best Predictions"> Best Predictions</Trans>
                 </h3>
             </div>
             <div className="predictions-container">

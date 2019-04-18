@@ -62,8 +62,13 @@ export default class PredictionTop extends React.Component {
                                     <b className="primary-color">{this.state.runnerSelected.number}</b> -
                                     <a href="">{this.state.runnerSelected.name}</a>
                                 </h2>
-                                <p><span>{this.state.runnerSelected.comment}</span>
-                                </p>
+                                <p><span>{this.state.runnerSelected.comment}</span></p>
+                                <div className="prediction-info">
+                                    <p className="reporter">
+                                        <b>{this.props.predictionTop.reporter}</b> <br/>
+                                        <a href={this.props.predictionTop.societe === 'AIP' ? 'http://www.turf-fr.com/' : (this.props.predictionTop.societe === 'geny.com' ? 'http://www.geny.com/' : 'javascript:;')}>{this.props.predictionTop.societe === 'AIP' ? 'www.turf-fr.com' : (this.props.predictionTop.societe === 'geny.com' ? 'www.geny.com' : this.props.predictionTop.societe)}</a>
+                                    </p>
+                                </div>
                             </div>
                         :
                             null

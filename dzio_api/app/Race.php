@@ -45,6 +45,14 @@ class Race extends Model
         return $this->hasMany('App\Runner', "raceId");
     }
 
+    public function results()
+    {
+        return $this->hasMany('App\Runner', "raceId")
+            ->whereNotNull('rank')
+            ->orderBy('rank')
+            ->limit(8);
+    }
+
     public function bets()
     {
         return $this->hasMany('App\Bet', "raceId");
@@ -57,6 +65,40 @@ class Race extends Model
 
     public function reporters()
     {
-        return $this->hasMany('App\Reporter', 'raceId')->with('predictions');
+        return $this->hasMany('App\Reporter', 'raceId')
+            ->orderBy('nb_pts', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->with('predictions');
+    }
+
+    public function reportersTop()
+    {
+        return $this->hasOne('App\Reporter', 'raceId')
+            ->where('societe', 'geny.com')
+            ->orWhere('societe', 'AIP')
+            ->orderBy('nb_pts', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->with('predictions');
+    }
+
+    public function reportersGeny()
+    {
+        return $this->reporters()
+            ->where('societe', 'geny.com')
+            ->skip(1)
+            ->take(100);
+    }
+
+    public function reportersBest()
+    {
+        return $this->reporters()
+            ->where('societe', 'AIP');
+    }
+
+    public function reportersOthers()
+    {
+        return $this->reporters()
+            ->where('societe', '!=', 'AIP')
+            ->where('societe', '!=', 'geny.com');
     }
 }

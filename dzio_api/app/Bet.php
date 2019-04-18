@@ -21,5 +21,4 @@ class Bet extends Model {
         'lib',
         'libLong',
     ];
-
 }
