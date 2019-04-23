@@ -37,5 +37,15 @@ class Runner extends Model
         'reductionKm',
         'time',
         'comment',
+        'nbRaces',
+        'nbRacesWon',
+        'nbPlaces',
+        'reportRef',
+        'reportEvol',
+        'favorite',
+        'signs',
+        'tendency',
+        'tendencySign',
+        'doNotRun',
     ];
 }

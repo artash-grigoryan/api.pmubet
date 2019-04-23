@@ -21,5 +21,13 @@ export default {
     "Calendar & Results":"Calendar & Results",
     "How to bet":"How to bet",
     "News":"News",
-    "Best Predictions":"Լավագույն կանխատեսումներ"
+    "Best Predictions":"Լավագույն կանխատեսումներ",
+
+    "Results":"Results",
+    "Reports":"Reports",
+    "Report":"Report",
+    "Arrival":"Arrival",
+    "Winner":"Winner",
+    "Placed":"Placed",
+    "Nb winning bets":"Nb winning bets",
 };

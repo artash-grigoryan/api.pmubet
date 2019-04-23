@@ -9,9 +9,6 @@ import { raceActions } from '../actions/race';
 import { reunionActions } from '../actions/reunion';
 import Countdown from 'react-countdown-now';
 
-import "./../assets/css/bootstrap.min.css";
-import "./../assets/css/main.scss";
-
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import Race from "../components/Race";
 const { t, i18n } = useTranslation();

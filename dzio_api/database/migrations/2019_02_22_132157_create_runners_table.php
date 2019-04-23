@@ -35,6 +35,16 @@ class CreateRunnersTable extends Migration
             $table->string('reductionKm')->nullable();
             $table->string('time')->nullable();
             $table->text('comment')->nullable();
+            $table->integer('nbRaces')->nullable();
+            $table->integer('nbRacesWon')->nullable();
+            $table->integer('nbPlaces')->nullable();
+            $table->text('reportRef')->nullable();
+            $table->text('reportEvol')->nullable();
+            $table->text('favorite')->nullable();
+            $table->text('signs')->nullable();
+            $table->text('tendency')->nullable();
+            $table->text('tendencySign')->nullable();
+            $table->tinyInteger('doNotRun')->default('0');
             $table->integer('raceId')->unsigned();
 
             $table->foreign('raceId')

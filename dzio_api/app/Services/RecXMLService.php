@@ -19,7 +19,6 @@ class RecXMLService implements DataServiceInterface {
     //UNUSED
     const MONTH_REUNIONS_FOLDER = "1_MONTH_MEETINGS"; // Toutes les réunions du mois
     const LAST_PERFORMANCES_FOLDER = "7_LAST_PERFORMANCES"; //Dernières perfs des partants
-    const PRIZE_LIST_FOLDER = "8_PRIZE_LIST"; //Nombres de victoires par partants
     const RUNNERS_PRESENTATION_FOLDER = "11_RUNNERS_PRESENTATION"; //classement si course terminée
     const REPORT_CHASES_FOLDER = "23_REPORT_CHASES"; //Liste des arrivés non detaillé
     const STATS_RUNNERS1_FOLDER = "673"; //Statistiques detailées des partants, nb de victoires etc...
@@ -42,6 +41,9 @@ class RecXMLService implements DataServiceInterface {
     const GNY_SELECTION_PRESS_Q5_FOLDER = "103_GNY_SELECTION_PRESS_Q5"; //JOURNAUX PRONOSTICS Q5
     const GNY_FORCES_PRESENCE_FOLDER = "111_GNY_FORCES_PRESENCE"; //GET RUNNER COMMENTS FROM THERE
     const GNY_PRONO_Q5_FOLDER = "110_GNY_PRONO_Q5"; //GET BIG Q5 COMMENT
+    const NON_RUNNER_FOLDER = "24_NON_RUNNER";
+    const LIVE_ODDS_SG_FOLDER = "51_LIVE_ODDS_SG";
+    const PRIZE_LIST_FOLDER = "8_PRIZE_LIST"; //Nombres de victoires par partants
 
 
     public $xmlParser;
@@ -52,7 +54,7 @@ class RecXMLService implements DataServiceInterface {
         $this->xmlParser = $xmlParser;
 
         $this->dayFolder = (new \DateTime())->format("Ymd");
-        //$this->dayFolder = '20190417';
+        //$this->dayFolder = '20190422';
     }
 
     /**
@@ -174,6 +176,37 @@ class RecXMLService implements DataServiceInterface {
 
         return $this->scanFolder($folderPath);
     }
+
+    /**
+     * @return array
+     */
+    public function scanNonRunnerFolder()
+    {
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::NON_RUNNER_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanLiveOddSSGFolder()
+    {
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::LIVE_ODDS_SG_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanPrizeListFolder()
+    {
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::PRIZE_LIST_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
 
     /**
      * @param $path

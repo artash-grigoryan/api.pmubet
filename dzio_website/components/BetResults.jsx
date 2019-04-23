@@ -1,6 +1,9 @@
 import _ from "lodash";
 import React from "react";
 import '@fortawesome/fontawesome';
+import {Trans} from "react-i18next";
+
+import BetResultsDetails from "./BetResultsDetails"
 
 
 export default class BetResults extends React.Component {
@@ -42,16 +45,16 @@ export default class BetResults extends React.Component {
                         imgPath = "/img/bets/C4.png";
                         break;
                     case('Mini Multi en 6'):
-                    case('Multi en 7'):
+                    case('Multi'):
                         imgPath = "/img/bets/MI.png";
                         break;
-                    case('tierce'):
+                    case('Tiercé'):
                         imgPath = "/img/bets/T.png";
                         break;
-                    case('quarte'):
+                    case('Quarté'):
                         imgPath = "/img/bets/QP.png";
                         break;
-                    case('quintePlus'):
+                    case('Quinté+'):
                         imgPath = "/img/bets/QN.png";
                         break;
                 }
@@ -72,7 +75,7 @@ export default class BetResults extends React.Component {
 
                     <div className="col-md-12 m-b-10">
                         <div className="title m-b-0">
-                            <h3>Reports</h3>
+                            <h3><Trans i18nKey="Reports">Reports</Trans></h3>
                         </div>
                         <div className="">
                             <table className="results-selection-tab">
@@ -82,45 +85,7 @@ export default class BetResults extends React.Component {
                                 </tr>
                                 </tbody>
                             </table>
-                            <table className="results">
-                                <thead className="double">
-                                <tr>
-                                    <td className="arrivee" rowSpan="2">Arrivée</td>
-                                    <td colSpan="2">Gagnant</td>
-                                    <td colSpan="2">Placé</td>
-                                </tr>
-                                <tr>
-                                    <td className="forceLeftBorder">Rapport</td>
-                                    <td>Nb mises gagnantes</td>
-                                    <td className="forceLeftBorder">Rapport</td>
-                                    <td>Nb mises gagnantes</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr className="odd">
-                                    <td>1</td>
-                                    <td>6,80 ?</td>
-                                    <td>3 425,63 </td>
-                                    <td>2,10 ?</td>
-                                    <td>4 930,23 </td>
-                                </tr>
-                                <tr className="even">
-                                    <td>5</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>1,50 ?</td>
-                                    <td>9 569,92 </td>
-                                </tr>
-                                <tr className="odd">
-                                    <td>6</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>2,80 ?</td>
-                                    <td>2 930,28 </td>
-                                </tr>
-                                </tbody>
-
-                            </table>
+                            <BetResultsDetails betSelected={this.state.betSelected} {...this.props} />
                         </div>
 
                     </div>

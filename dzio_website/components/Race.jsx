@@ -26,15 +26,9 @@ export default class Race extends React.Component {
             <section className="info-section">
                 <div className="container">
 
-                    {
-                        this.props.race.comment
-                            ?
-                            <div className="race-comment">
-                                <p>{this.props.race.comment}</p>
-                            </div>
-                            :
-                            null
-                    }
+                    <div className="race-comment">
+                        <p style={{textAlign:'justify'}}>{this.props.race.comment || this.props.race.description}</p>
+                    </div>
 
                     <div className="row">
 
