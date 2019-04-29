@@ -58,6 +58,10 @@ class ParseRecXmlData extends Command
         $this->parsePressQ5XML($dataService);
         $this->parseForcesPresenceXML($dataService);
         $this->parsePronoQ5XML($dataService);
+
+        $this->parseNonRunnerXML($dataService);
+        $this->parseLiveOddSSGXML($dataService);
+        $this->parsePrizeListXML($dataService);
     }
 
     private function parseDayReunionsXML($dataService) {
@@ -407,6 +411,234 @@ class ParseRecXmlData extends Command
         }
     }
 
+    private function parseNonRunnerXML($dataService) {
+
+
+        $filesInfo = $dataService->scanNonRunnerFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $dataService->parseXMLFileByPath(
+                    $filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "partant",
+                    ]
+                );
+
+                foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                    $reunionArr = [
+                        "id" => $reunion['value']["id_nav_reunion"],
+                        "code" => $reunion['value']["code_hippo"],
+                        "number" => $reunion['value']["num_reunion"],
+                        "externNumber" => $reunion['value']["num_externe_reunion"],
+                    ];
+                    try {
+                        Reunion::insert(
+                            $reunionArr
+                        );
+                    } catch (\Exception $e) {}
+                    $reunionObj = new Reunion($reunionArr);
+
+                    foreach ($reunion['value']["courses"] as $race) {
+
+                        $raceArr = [
+                            'id' => $race['value']["id_nav_course"],
+                            'number' => $race['value']["num_course_pmu"],
+                            "reunionId" => $reunionObj->id
+                        ];
+
+                        try {
+                            Race::insert(
+                                $raceArr
+                            );
+                        } catch (\Exception $e) {}
+                        $raceObj = new Race($raceArr);
+
+                        foreach ($race['value']["non_partants"] as $runner) {
+
+                            $runnerArr = [
+                                'doNotRun' => 1,
+                            ];
+
+                            $runnerObj = Runner::where(['id' => $runner['value']["id_nav_partant"]])->first();
+
+                            try {
+                                if(!empty($runnerObj)) {
+
+                                    $runnerObj->update(
+                                        $runnerArr
+                                    );
+                                }
+
+                            }
+                            catch (\Exception $e) {}
+                        }
+                    }
+                    //@TODO DELETE THE FILE
+                }
+            }
+        }
+    }
+
+    private function parseLiveOddSSGXML($dataService) {
+
+        $filesInfo = $dataService->scanLiveOddSSGFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $dataService->parseXMLFileByPath(
+                    $filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "conditions_course",
+                        "allocations_course",
+                        "etat_terrain_reunion",
+                        "rapps_probs",
+                        "rapp_prob_part",
+                    ]
+                );
+
+                foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                    $reunionArr = [
+                        "id" => $reunion['value']["id_nav_reunion"],
+                        "code" => $reunion['value']["code_hippo"],
+                        "number" => $reunion['value']["num_reunion"],
+                        "externNumber" => $reunion['value']["num_externe_reunion"],
+                    ];
+                    try {
+                        Reunion::insert(
+                            $reunionArr
+                        );
+                    } catch (\Exception $e) {}
+                    $reunionObj = new Reunion($reunionArr);
+
+                    foreach ($reunion['value']["courses"] as $race) {
+
+                        $raceArr = [
+                            'id' => $race['value']["id_nav_course"],
+                            'number' => $race['value']["num_course_pmu"],
+                            "reunionId" => $reunionObj->id
+                        ];
+
+                        try {
+                            Race::insert(
+                                $raceArr
+                            );
+                        } catch (\Exception $e) {}
+                        $raceObj = new Race($raceArr);
+
+                        foreach ($race['value']["rapps_probs"]["rapps_probs_part"] as $runner) {
+
+                            $runnerArr = [
+                                'reportRef' => !empty($runner['value']['rapp_ref']) ?$runner['value']['rapp_ref'] : '',
+                                'reportEvol' => !empty($runner['value']['rapp_evol']) ?$runner['value']['rapp_evol'] : '',
+                                'favorite' => !empty($runner['value']['favori']) ?$runner['value']['favori'] : '',
+                                'signs' => !empty($runner['value']['signes']) ?$runner['value']['signes'] : '',
+                                'tendency' => !empty($runner['value']['tendance']) ?$runner['value']['tendance'] : '',
+                                'tendencySign' => !empty($runner['value']['tendance_signe']) ?$runner['value']['tendance_signe'] : '',
+                            ];
+
+                            $runnerObj = Runner::where([
+                                ['number', $runner['value']['num_partant']],
+                                ["raceId", $raceObj->id],
+                            ])->first();
+
+                            $runnerObj->update(
+                                $runnerArr
+                            );
+                        }
+                    }
+                    //@TODO DELETE THE FILE
+                }
+            }
+        }
+    }
+
+    private function parsePrizeListXML($dataService) {
+
+        $filesInfo = $dataService->scanPrizeListFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $dataService->parseXMLFileByPath(
+                    $filesInfo["path"]. DIRECTORY_SEPARATOR. $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "conditions_course",
+                        "allocations_course",
+                        "etat_terrain_reunion",
+                        "partant",
+                        "carriere_partant",
+                    ]
+                );
+
+                foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                    $reunionArr = [
+                        "id" => $reunion['value']["id_nav_reunion"],
+                        "code" => $reunion['value']["code_hippo"],
+                        "number" => $reunion['value']["num_reunion"],
+                        "externNumber" => $reunion['value']["num_externe_reunion"],
+                    ];
+                    try {
+                        Reunion::insert(
+                            $reunionArr
+                        );
+                    } catch (\Exception $e) {}
+                    $reunionObj = new Reunion($reunionArr);
+
+                    foreach ($reunion['value']["courses"] as $race) {
+
+                        $raceArr = [
+                            'id' => $race['value']["id_nav_course"],
+                            'number' => $race['value']["num_course_pmu"],
+                            "reunionId" => $reunionObj->id
+                        ];
+
+                        try {
+                            Race::insert(
+                                $raceArr
+                            );
+                        } catch (\Exception $e) {}
+                        $raceObj = new Race($raceArr);
+
+                        foreach ($race['value']["partants"] as $runner) {
+
+                            $runnerArr = [
+                                'nbRaces' => $runner['value']['carriere_partant']['nb_courses_partant'],
+                                'nbRacesWon' => $runner['value']['carriere_partant']['nb_vict_partant'],
+                                'nbPlaces' => $runner['value']['carriere_partant']['nb_places_partant'],
+                            ];
+
+                            $runnerObj = Runner::where(['id' => $runner['value']["id_nav_partant"]])->first();
+
+                            try {
+                                if(!empty($runnerObj)) {
+
+                                    $runnerObj->update(
+                                        $runnerArr
+                                    );
+                                }
+
+                            }
+                            catch (\Exception $e) {}
+                        }
+                    }
+                    //@TODO DELETE THE FILE
+                }
+            }
+        }
+    }
+
     private function parseBetsXML($dataService) {
 
         $filesInfo = $dataService->scanBetsFolder();
@@ -550,7 +782,6 @@ class ParseRecXmlData extends Command
                                     'gagnantMb' => $betResult['value']['gagnant_mb'],
                                     'place' => $betResult['value']['place'],
                                     'placeMb' => $betResult['value']['place_mb'],
-                                    'typeReserveRapDef' => iconv('UTF-8', 'ISO-8859-1', $betResult['value']['type_reserve_rap_def']),
                                     'sumMisesGagn' => $betResult['value']['sum_mises_gagn'],
                                     'sumMisesPlace' => $betResult['value']['sum_mises_place'],
                                     'sumMisesGagnTypeResRapDef' => $betResult['value']['sum_mises_gagn_type_res_rap_def'],
@@ -560,6 +791,7 @@ class ParseRecXmlData extends Command
                                 try {
                                     BetResult::updateOrInsert([
                                         'combinaisonRapDef' => $betResult['value']['combinaison_rap_def'],
+                                        'typeReserveRapDef' => iconv('UTF-8', 'ISO-8859-1', $betResult['value']['type_reserve_rap_def']),
                                         'code' => $BetObj->code,
                                         "raceId" => $raceObj->id,
                                     ],

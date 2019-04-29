@@ -28,9 +28,9 @@ export default class Results extends React.Component {
         this.setState({runnerSelected : runnerSelected});
     }
 
-    setRunnerSelected(rank) {
+    setRunnerSelected(number) {
 
-        let runnerSelected = _.find(this.props.race.results, function(runner){ return parseInt(runner.rank) === parseInt(rank); });
+        let runnerSelected = _.find(this.props.race.results, function(runner){ return parseInt(runner.number) === parseInt(number); });
         this.setState({runnerSelected : runnerSelected});
     }
 
@@ -45,7 +45,7 @@ export default class Results extends React.Component {
                     <ul className={this.props.race.results.length > 6 ? 'minimize' : ''}>
                         {
                             this.props.race.results.map((runner) =>
-                                <li key={parseInt(runner.rank)} className={parseInt(runner.number)===parseInt(this.state.runnerSelected.number)?'active' : '' }><a onClick={() => this.setRunnerSelected(runner.rank)}>{runner.number}</a></li>
+                                <li key={parseInt(runner.number)} className={parseInt(runner.number)===parseInt(this.state.runnerSelected.number)?'active' : '' }><a onClick={() => this.setRunnerSelected(runner.number)}>{runner.number}</a></li>
                             )
                         }
                     </ul>
@@ -53,7 +53,7 @@ export default class Results extends React.Component {
                 <div className="prediction-body tab-content">
 
                     {
-                        this.props.predictionTop
+                        this.state.runnerSelected
                         ?
                             <div>
                                 <h2 className="text-uppercase">

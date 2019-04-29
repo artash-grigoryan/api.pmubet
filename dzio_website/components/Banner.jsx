@@ -15,7 +15,7 @@ export default class Banner extends React.Component {
             return null;
         } else {
             // Render a countdown
-            return <span><Trans i18nKey="Departure in">Departure in</Trans> {hours>0?hours:null} {hours>1? <Trans i18nKey="hours">hours</Trans>:(hours===1?<Trans i18nKey="hour">hour</Trans>:null)} {minutes} {minutes>0 ? (minutes>1?<Trans i18nKey="minutes">minutes</Trans>:<Trans i18nKey="minute">minute</Trans>):null}</span>;
+            return <span><Trans i18nKey="Departure in">Departure in</Trans> {hours>0?hours:null} {hours>1? <Trans i18nKey="hours">hours</Trans>:(hours===1?<Trans i18nKey="hour">hour</Trans>:null)} {minutes>0?minutes:null} {minutes>0 ? (minutes>1?<Trans i18nKey="minutes">minutes</Trans>:<Trans i18nKey="minute">minute</Trans>):null}</span>;
         }
     };
 

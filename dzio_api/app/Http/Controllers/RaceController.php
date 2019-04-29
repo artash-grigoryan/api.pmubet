@@ -40,13 +40,7 @@ class RaceController extends Controller
         $race->yesterday = $race->day == date('Y-m-d', strtotime('- 1DAY'));
         $race->today = $race->day == date('Y-m-d');
         $race->tomorrow = $race->day == date('Y-m-d', strtotime('+ 1DAY'));
-        $bet_results_names = BetResult::where('raceId', $race->id)->distinct()->pluck('typeReserveRapDef');
-        $betResults = [];
-        foreach($bet_results_names as $key=>$bet_results_name) {
-            $betResults[$key]['name'] = $bet_results_name;
-            $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('typeReserveRapDef', $bet_results_name)->get();
-        }
-        $race->betResults = $betResults;
+        $race->betResults = [];
         return response()->json(array('race'=>$race));
     }
 
@@ -67,12 +61,48 @@ class RaceController extends Controller
         $race->yesterday = $race->day == date('Y-m-d', strtotime('- 1DAY'));
         $race->today = $race->day == date('Y-m-d');
         $race->tomorrow = $race->day == date('Y-m-d', strtotime('+ 1DAY'));
-        $bet_results_names = BetResult::where('raceId', $race->id)->distinct()->pluck('typeReserveRapDef');
+        $betResultsGroups = BetResult::where('raceId', $race->id)->distinct()->pluck('code');
         $betResults = [];
-        foreach($bet_results_names as $key=>$bet_results_name) {
-            $betResults[$key]['name'] = $bet_results_name;
-            $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('typeReserveRapDef', $bet_results_name)->get();
+        foreach($betResultsGroups as $key=>$code) {
+            switch($code) {
+                case 1:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Simple';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->get();
+                    break;
+                case 2:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Couplé';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->get();
+                    break;
+                case 4:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = '2 sur 4';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->orderBy('typeReserveRapDef', 'ASC')->get();
+                    break;
+                    $betResults[$key]['code'] = $code;
+                case 7:
+                    $betResults[$key]['name'] = 'Tiercé';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->orderBy('typeReserveRapDef', 'DESC')->get();
+                    break;
+                case 8:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Quarté';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->orderBy('typeReserveRapDef', 'DESC')->get();
+                    break;
+                case 10:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Multi';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->orderBy('typeReserveRapDef', 'ASC')->get();
+                    break;
+                case 14:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Quinté+';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->orderBy('typeReserveRapDef', 'DESC')->get();
+                    break;
+            }
         }
+        sort($betResults);
         $race->betResults = $betResults;
         return response()->json(array('race'=>$race));
     }

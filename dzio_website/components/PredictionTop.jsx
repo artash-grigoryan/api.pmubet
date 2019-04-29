@@ -29,9 +29,9 @@ export default class PredictionTop extends React.Component {
         this.setState({runnerSelected : runnerSelected});
     }
 
-    setRunnerSelected(rank) {
+    setRunnerSelected(number) {
 
-        let runnerRank = _.find(this.props.predictionTop.predictions, function(runner){ return parseInt(runner.rank) === parseInt(rank); });
+        let runnerRank = _.find(this.props.predictionTop.predictions, function(runner){ return parseInt(runner.number) === parseInt(number); });
         let runnerSelected = _.find(this.props.race.runners, function(runner){ return parseInt(runner.number) === parseInt(runnerRank.number); });
         this.setState({runnerSelected : runnerSelected});
     }
@@ -47,7 +47,7 @@ export default class PredictionTop extends React.Component {
                     <ul className={this.props.predictionTop.predictions.length > 6 ? 'minimize' : ''}>
                         {
                             this.props.predictionTop.predictions.map((runner) =>
-                                <li key={parseInt(runner.rank)} className={parseInt(runner.number)===parseInt(this.state.runnerSelected.number)?'active' : '' }><a onClick={() => this.setRunnerSelected(runner.rank)}>{runner.number}</a></li>
+                                <li key={parseInt(runner.number)} className={parseInt(runner.number)===parseInt(this.state.runnerSelected.number)?'active' : '' }><a onClick={() => this.setRunnerSelected(runner.number)}>{runner.number}</a></li>
                             )
                         }
                     </ul>
