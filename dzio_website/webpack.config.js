@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-require('dotenv').config();
+require('dotenv').config({ path: '/run/secrets/envfile' });
 
 const extractSass = new ExtractTextPlugin({
     filename: "css/style.css"
@@ -93,5 +93,5 @@ const config = {
     ]
 
 };
-console.log(process.env.API_URL);
+
 module.exports = config;
