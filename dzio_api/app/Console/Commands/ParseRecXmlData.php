@@ -86,7 +86,6 @@ class ParseRecXmlData extends Command
                 foreach ($parsedXml["jour"]["reunions"] as $reunion) {
 
                     $reunionArr = [
-                        "id" => $reunion['value']["id_nav_reunion"],
                         "label" => iconv('UTF-8', 'ISO-8859-1',$reunion['value']["lib_reunion"]),
                         "statusLabel" => iconv('UTF-8', 'ISO-8859-1',$parsedXml["jour"]["libelle_statut_infos"]),
                         "speciality" => iconv('UTF-8', 'ISO-8859-1',$reunion['value']["specialite_reunion"]),
@@ -103,8 +102,16 @@ class ParseRecXmlData extends Command
                     ];
 
                     try {
-                        Reunion::insert($reunionArr);
+                        Reunion::updateOrInsert(
+                            ["id" => $reunion['value']["id_nav_reunion"]],
+                            $reunionArr
+                        );
                     } catch (\Exception $e) {
+                        print_r('
+parseDayReunionsXML => 
+');
+                        print_r(array_merge($reunionArr, ["id" => $reunion['value']["id_nav_reunion"]]));
+                        print_r($e->getMessage());
                     }
                 }
                 //@TODO DELETE THE FILE
@@ -155,7 +162,11 @@ class ParseRecXmlData extends Command
                             $reunionArr
                         );
                     } catch (\Exception $e) {
-                        var_dump($e->getMessage());
+                        print_r('
+parseReunionsXML => 
+');
+                        print_r(array_merge($reunionArr, ["id" => $reunion['value']["id_nav_reunion"]]));
+                        print_r($e->getMessage());
                     }
                 }
                 //@TODO DELETE THE FILE
@@ -194,9 +205,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {
 
                     }
@@ -228,10 +239,18 @@ class ParseRecXmlData extends Command
                             "reunionId" => $reunionObj->id
                         ];
 
-                        Race::updateOrInsert(
-                            ['id' => $race['value']["id_nav_course"]],
-                            $raceArr
-                        );
+                        try {
+                            Race::updateOrInsert(
+                                ['id' => $race['value']["id_nav_course"]],
+                                $raceArr
+                            );
+                        } catch (\Exception $e) {
+                            print_r('
+parseRacesXML => 
+');
+                            print_r(array_merge($raceArr, ['id' => $race['value']["id_nav_course"]]));
+                            print_r($e->getMessage());
+                        }
                     }
                     //@TODO DELETE THE FILE
                 }
@@ -274,9 +293,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {}
                     $reunionObj = new Reunion($reunionArr);
 
@@ -295,9 +314,9 @@ class ParseRecXmlData extends Command
                         ];
 
                         try {
-                            Race::insert(
-                                $raceArr
-                            );
+                            //Race::insert(
+                            //    $raceArr
+                            //);
                         } catch (\Exception $e) {}
                         $raceObj = new Race($raceArr);
 
@@ -321,10 +340,18 @@ class ParseRecXmlData extends Command
                                 "raceId" => $raceObj->id,
                             ];
 
-                            Runner::updateOrInsert(
-                                ['id' => $runner['value']["id_nav_partant"]],
-                                $runnerArr
-                            );
+                            try {
+                                Runner::updateOrInsert(
+                                    ['id' => $runner['value']["id_nav_partant"]],
+                                    $runnerArr
+                                );
+                            } catch (\Exception $e) {
+                                print_r('
+parseRunnersXML => 
+');
+                                print_r(array_merge($runnerArr, ['id' => $runner['value']["id_nav_partant"]]));
+                                print_r($e->getMessage());
+                            }
                         }
                     }
                     //@TODO DELETE THE FILE
@@ -366,9 +393,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {}
                     $reunionObj = new Reunion($reunionArr);
 
@@ -381,9 +408,9 @@ class ParseRecXmlData extends Command
                         ];
 
                         try {
-                            Race::insert(
-                                $raceArr
-                            );
+                            //Race::insert(
+                            //    $raceArr
+                            //);
                         } catch (\Exception $e) {}
                         $raceObj = new Race($raceArr);
 
@@ -399,10 +426,18 @@ class ParseRecXmlData extends Command
                                 "raceId" => $raceObj->id,
                             ];
 
-                            Runner::updateOrInsert(
-                                ['id' => $runner['value']["id_nav_partant"]],
-                                $runnerArr
-                            );
+                            try {
+                                Runner::updateOrInsert(
+                                    ['id' => $runner['value']["id_nav_partant"]],
+                                    $runnerArr
+                                );
+                            } catch (\Exception $e) {
+                                print_r('
+parseResultsXML => 
+');
+                                print_r(array_merge($runnerArr, ['id' => $runner['value']["id_nav_partant"]]));
+                                print_r($e->getMessage());
+                            }
                         }
                     }
                     //@TODO DELETE THE FILE
@@ -437,9 +472,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {}
                     $reunionObj = new Reunion($reunionArr);
 
@@ -452,9 +487,9 @@ class ParseRecXmlData extends Command
                         ];
 
                         try {
-                            Race::insert(
-                                $raceArr
-                            );
+                            //Race::insert(
+                            //    $raceArr
+                            //);
                         } catch (\Exception $e) {}
                         $raceObj = new Race($raceArr);
 
@@ -474,8 +509,13 @@ class ParseRecXmlData extends Command
                                     );
                                 }
 
+                            } catch (\Exception $e) {
+                                print_r('
+parseNonRunnerXML => 
+');
+                                print_r($runnerArr);
+                                print_r($e->getMessage());
                             }
-                            catch (\Exception $e) {}
                         }
                     }
                     //@TODO DELETE THE FILE
@@ -513,9 +553,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {}
                     $reunionObj = new Reunion($reunionArr);
 
@@ -528,9 +568,9 @@ class ParseRecXmlData extends Command
                         ];
 
                         try {
-                            Race::insert(
-                                $raceArr
-                            );
+                            //Race::insert(
+                            //    $raceArr
+                            //);
                         } catch (\Exception $e) {}
                         $raceObj = new Race($raceArr);
 
@@ -550,9 +590,17 @@ class ParseRecXmlData extends Command
                                 ["raceId", $raceObj->id],
                             ])->first();
 
-                            $runnerObj->update(
-                                $runnerArr
-                            );
+                            try {
+                                $runnerObj->update(
+                                    $runnerArr
+                                );
+                            } catch (\Exception $e) {
+                                print_r('
+parseLiveOddSSGXML => 
+');
+                                print_r($runnerArr);
+                                print_r($e->getMessage());
+                            }
                         }
                     }
                     //@TODO DELETE THE FILE
@@ -590,9 +638,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {}
                     $reunionObj = new Reunion($reunionArr);
 
@@ -605,9 +653,9 @@ class ParseRecXmlData extends Command
                         ];
 
                         try {
-                            Race::insert(
-                                $raceArr
-                            );
+                            //Race::insert(
+                            //    $raceArr
+                            //);
                         } catch (\Exception $e) {}
                         $raceObj = new Race($raceArr);
 
@@ -629,8 +677,13 @@ class ParseRecXmlData extends Command
                                     );
                                 }
 
+                            } catch (\Exception $e) {
+                                print_r('
+parsePrizeListXML => 
+');
+                                print_r($runnerArr);
+                                print_r($e->getMessage());
                             }
-                            catch (\Exception $e) {}
                         }
                     }
                     //@TODO DELETE THE FILE
@@ -668,9 +721,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {}
                     $reunionObj = new Reunion($reunionArr);
 
@@ -684,9 +737,9 @@ class ParseRecXmlData extends Command
                         ];
 
                         try {
-                            Race::insert(
-                                $raceArr
-                            );
+                            //Race::insert(
+                            //    $raceArr
+                            //);
                         } catch (\Exception $e) {}
                         $raceObj = new Race($raceArr);
 
@@ -704,7 +757,16 @@ class ParseRecXmlData extends Command
                                     ],
                                     $betArr
                                 );
-                            } catch (\Exception $e) {}
+                            } catch (\Exception $e) {
+                                print_r('
+parseBetsXML => 
+');
+                                print_r(array_merge($betArr, [
+                                     'code' => $bet['value']["code_pari"],
+                                     "raceId" => $raceObj->id
+                                ]));
+                                print_r($e->getMessage());
+                            }
                         }
                     }
                     //@TODO DELETE THE FILE
@@ -739,9 +801,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {}
                     $reunionObj = new Reunion($reunionArr);
 
@@ -754,9 +816,9 @@ class ParseRecXmlData extends Command
                         ];
 
                         try {
-                            Race::insert(
-                                $raceArr
-                            );
+                            //Race::insert(
+                            //    $raceArr
+                            //);
                         } catch (\Exception $e) {}
                         $raceObj = new Race($raceArr);
 
@@ -797,7 +859,18 @@ class ParseRecXmlData extends Command
                                     ],
                                         $betResultArr
                                     );
-                                } catch (\Exception $e) {}
+                                } catch (\Exception $e) {
+                                    print_r('
+parseBetResultsXML => 
+');
+                                    print_r(array_merge($betResultArr, [
+                                       'combinaisonRapDef' => $betResult['value']['combinaison_rap_def'],
+                                       'typeReserveRapDef' => iconv('UTF-8', 'ISO-8859-1', $betResult['value']['type_reserve_rap_def']),
+                                       'code' => $BetObj->code,
+                                       "raceId" => $raceObj->id,
+                                    ]));
+                                    print_r($e->getMessage());
+                                }
                             }
                         }
                     }
@@ -835,9 +908,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {}
                     $reunionObj = new Reunion($reunionArr);
 
@@ -850,9 +923,9 @@ class ParseRecXmlData extends Command
                         ];
 
                         try {
-                            Race::insert(
-                                $raceArr
-                            );
+                            //Race::insert(
+                            //    $raceArr
+                            //);
                         } catch (\Exception $e) {}
                         $raceObj = new Race($raceArr);
 
@@ -898,7 +971,14 @@ class ParseRecXmlData extends Command
                                                 $predictionArr
                                             );
                                         } catch (\Exception $e) {
-                                            var_dump($e->getMessage());
+                                            print_r('
+parsePressReunionXML => 
+');
+                                            print_r(array_merge($predictionArr, [
+                                                "rank" => $pronostic['value']['rang'],
+                                                "reporterId" => $ReporterObj->id
+                                            ]));
+                                            print_r($e->getMessage());
                                         }
                                     }
                                 }
@@ -938,9 +1018,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {}
                     $reunionObj = new Reunion($reunionArr);
 
@@ -953,9 +1033,9 @@ class ParseRecXmlData extends Command
                         ];
 
                         try {
-                            Race::insert(
-                                $raceArr
-                            );
+                            //Race::insert(
+                            //    $raceArr
+                            //);
                         } catch (\Exception $e) {}
                         $raceObj = new Race($raceArr);
 
@@ -1041,9 +1121,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {}
                     $reunionObj = new Reunion($reunionArr);
 
@@ -1056,9 +1136,9 @@ class ParseRecXmlData extends Command
                         ];
 
                         try {
-                            Race::insert(
-                                $raceArr
-                            );
+                            //Race::insert(
+                            //    $raceArr
+                            //);
                         } catch (\Exception $e) {}
                         $raceObj = new Reunion($raceArr);
 
@@ -1103,9 +1183,9 @@ class ParseRecXmlData extends Command
                         "externNumber" => $reunion['value']["num_externe_reunion"],
                     ];
                     try {
-                        Reunion::insert(
-                            $reunionArr
-                        );
+                        //Reunion::insert(
+                        //    $reunionArr
+                        //);
                     } catch (\Exception $e) {}
                     $reunionObj = new Reunion($reunionArr);
 

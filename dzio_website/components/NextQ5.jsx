@@ -11,7 +11,7 @@ export default class NextQ5 extends React.Component {
     render() {
 
         return <div className="adv-1">
-            <a className="widget widget__quinte" href="#">
+            <a className="widget widget__quinte" href={"/" + this.props.nextQ5.reunion.id + "/R"+this.props.nextQ5.reunion.externNumber+"/C" + this.props.nextQ5.externNumber}>
                 <div className="row">
                     <div className="col-md-12">
                         <div className="widget__top">

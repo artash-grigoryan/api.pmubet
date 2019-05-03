@@ -18,6 +18,20 @@ body {
   color: #218850 !important;
 }
 
+.btn {
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  display: inline-block;
+  padding: 0.77em 1em;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 30px;
+  background: #218750;
+}
+
 .navbar-brand {
 
   display: inline-block;
@@ -522,8 +536,7 @@ body {
 .prediction-top .prediction-body {
   padding: 30px;
   background-color: #FFF;
-  min-height: 363px;
-  max-height: 363px;
+  height: 371px;
 }
 .prediction-top .prediction-body h2{}
 .prediction-top .prediction-body h2 a{
@@ -579,29 +592,134 @@ body {
   height: 500px;
   overflow-y: auto;
 }
-.runners-tab table{
-  width: 100%;
+.table-striped {
+  padding: 0;
 }
-.runners-tab table td {
-  padding: 10px 10px 5px;
+.table-striped .runner {
+  display: flex;
+}
+.table-striped .runner > span{
+  display: inline-block;
+  padding: 10px 10px 2px;
+}
+.table-striped > div:nth-of-type(odd) {
+  background-color: rgba(0,0,0,.05);
 }
 .runners-tab .runner-rank{
   width: 50px;
   text-align: center;
 }
-.runners-tab .runner-name{}
-.runners-tab .runner-name a{
-  display: block;
-  line-height: 10px;
-}
-.runners-tab .runner-name span{
-  font-size: 12px;
-}
 .runners-tab .runner-img{
   width: 50px;
   text-align: center;
 }
+.runners-tab .runner-name{
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.runners-tab .runner-name p{
+  margin: 0;
+  cursor: pointer;
+  line-height: 10px;
+}
+.runners-tab .runner-name p:hover{
+  color: #f6a800;
+}
+.runners-tab .runner-name span{
+  font-size: 12px;
+}
+.runners-tab .runner-details .carousel-item{
+  height: 255px;
+  border-bottom: 4px solid #f6a800;
+}
+.runners-tab .runner-details .carousel-indicators{
+  display: none;
+}
+.runners-tab .runner-details .carousel-caption {
+  position: absolute;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  z-index: 10;
+  padding-top: 0;
+  padding-bottom: 0;
+  color: #888;
+}
+.runners-tab .runner-details .carousel-caption h3 {
+  font-size: 18px;
+  padding: 4px;
+  margin: 0;
+  background: #f6a800;
+  color: #fff;
+}
+.runners-tab .runner-details .carousel-caption ul {
+  list-style: none;
+  padding: 0px;
+  text-align: left;
+}
+.runners-tab .runner-details .carousel-caption ul li{
+  padding: 5px 20px;
+  background: #FFF;
+  font-size: 14px;
+  border-bottom: 1px solid #e2e2e2;
+  color: #000;
+}
+.runners-tab .runner-details .carousel-caption ul span.runner-detail-title{
+  display: inline-block;
+  width: 60%;
+}
+.runners-tab .runner-details .carousel-caption ul span.runner-detail-value{
+  display: inline-block;
+  width: 40%;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.runners-tab .runner-details .carousel-caption ul span.runner-detail-value{}
+.runners-tab .runner-details .carousel-control-prev-icon,
+.runners-tab .runner-details .carousel-control-next-icon {
+  height: 30px;
+  width: 30px;
+  outline: black;
+  background-size: 100%, 100%;
+  background-image: none;
+}
 
+.runners-tab .runner-details .carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 25px;
+  color: #fff;
+  font-weight: bold;
+  line-height: 23px;
+}
+
+.runners-tab .runner-details .carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 25px;
+  color: #fff;
+  font-weight: bold;
+  line-height: 23px;
+}
+
+.runners-tab .runner-details .carousel-control-prev,
+.runners-tab .runner-details .carousel-control-next {
+  position: absolute;
+  top: 0;
+  bottom: auto;
+  display: -ms-flexbox;
+  display: inherit;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 15%;
+  color: #fff;
+  text-align: center;
+  opacity: .5;
+}
 .card {
   display: inherit;
   border: none;
@@ -679,7 +797,7 @@ body {
 
 }
 .btn-info {
-  background-color: #fff;
+  background-color: #218750;
   margin-bottom: 10px;
   border-color: #218750;
 }
@@ -688,8 +806,8 @@ body {
   color: #fff;
 }
 .btn-primary {
-  background: #f62741;
-  border-color: #f62741;
+  background: #f6a800;
+  border-color: #f6a800;
   color: #fff;
   text-transform: uppercase;
 }
@@ -1076,8 +1194,68 @@ body {
   font-weight: bold;
 }
 
-.how-to-bet {}
-.how-to-bet .card{
+#calendar-result .banner.inner-banner .container {
+  min-height: 300px;
+  padding-bottom: 0px;
+}
+
+#calendar-result .banner {
+  position: relative;
+  background-size: cover;
+  background-image: url('https://www.rp-assets.com/images/news/2018/01/31/36976-large.jpeg');
+  background-repeat: no-repeat;
+}
+
+#calendar-result .text-holder {
+  border-radius: 6px;
+  padding: 20px 40px;
+}
+
+#calendar-result .text-holder .h1, h1 {
+  font-size: 1.8rem;
+}
+
+#calendar-result .banner .btn-holder {
+  margin-top: 10px;
+  font-size: 27px;
+  margin-bottom: 15px;
+}
+#calendar-result .data-holder table td:first-child {
+  border-right: none;
+}
+
+#calendar-result .data-holder table td:nth-child(4) {
+  border-right: none;
+}
+
+#calendar-result .data-holder table td:last-child {
+  border: none;
+}
+
+#calendar-result tr:hover td:not(:last-child) {
+  background: #f6a800;
+  color: #fff;
+  cursor: pointer;
+}
+#calendar-result .data-holder table {
+  color: #1f2030;
+  width: 100%;
+}
+#calendar-result .data-holder table td a{
+  margin: 5px 0 3px;
+
+}
+#calendar-result .data-holder table td {
+  border: solid #e0e1e2;
+  border-width: 0 1px 2px 0;
+  padding: 4px 7px;
+}
+#calendar-result .data-holder .cost, .data-holder .text {
+  display: block;
+}
+
+#how-to-bet {}
+#how-to-bet .card{
   text-align: left;
   padding: 0;
   min-width: 0;
@@ -1087,28 +1265,28 @@ body {
   border-radius: 0;
   background: #fbfbfb;
 }
-.how-to-bet .card-body{}
-.how-to-bet .card-body h4{
+#how-to-bet .card-body{}
+#how-to-bet .card-body h4{
   font-size: 17px;
   font-weight: bold;
   padding: 20px 0px 0;
 }
-.how-to-bet .card-body p{
+#how-to-bet .card-body p{
   padding: 8px 20px;
   font-size: 14px;
   line-height: 16px;
 }
-.how-to-bet .card-body a{
+#how-to-bet .card-body a{
   color: #218750;
   font-weight: bold;
   line-height: 17px;
   padding: 20px;
   font-size: 13px;
 }
-.how-to-bet .card-body ul{
+#how-to-bet .card-body ul{
   list-style: none;
 }
-.how-to-bet .card-body ul li{
+#how-to-bet .card-body ul li{
   margin-top: 20px;
 }
 
