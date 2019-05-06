@@ -43,11 +43,10 @@ export default class HowToBetPage extends Component {
                             <div className="container">
                                 <div className="text-holder">
                                     <h1>
-                                        HOW TO BET
+                                        <Trans i18nKey="How to bet">How to bet</Trans>
                                     </h1>
 
-                                    <div style={{marginTop: '30px'}}><a className="btn btn-md" href="#">Parier sur
-                                        Vivaro</a></div>
+                                    <div style={{marginTop: '30px'}}><a target="_blank" className="btn btn-md" href="https://www.vivarobet.am"><Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans></a></div>
                                 </div>
                             </div>
                         </div>
@@ -64,36 +63,19 @@ export default class HowToBetPage extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <div>
-                                                    <h4>Qu’est-ce que le Quinté+ ?</h4>
-                                                    <p>Au Quinté+ il faut trouver les cinq premiers chevaux de la
-                                                        course. C’est le pari qui rencontre le plus gros succès car il
-                                                        offre les plus gros gains. Il met enjeu une tirelire
-                                                        hebdomadaire, à partager entre tous les parieurs ayants trouvés
-                                                        les cinq premiers chevaux dans l'ordre exacte. Elle est
-                                                        proposée, en principe, le dimanche, jour des plus prestigieuses
-                                                        réunions. Le Quinté+ a lieu une fois par jour sur la plus belle
-                                                        course de la journée. On y retrouve les meilleurs chevaux et un
-                                                        suspens incroyable.</p>
+                                                    <h4><Trans i18nKey="What is Quinte + ?">What is Quinté + ?</Trans></h4>
+                                                    <p><Trans i18nKey="At Quinte + you have to find the first five horses of the race. This is the bet that meets the biggest success because it offers the biggest gains. It puts at stake a weekly piggy bank, to share among all the bettors having found the first five horses in the exact order. It is proposed, in principle, Sunday, day of the most prestigious meetings. The Quinte + takes place once a day on the most beautiful race of the day. We find the best horses and incredible suspense.">At Quinté + you have to find the first five horses of the race. This is the bet that meets the biggest success because it offers the biggest gains. It puts at stake a weekly piggy bank, to share among all the bettors having found the first five horses in the exact order. It is proposed, in principle, Sunday, day of the most prestigious meetings. The Quinté + takes place once a day on the most beautiful race of the day. We find the best horses and incredible suspense.</Trans></p>
                                                 </div>
                                                 <div>
-                                                    <h4>Que signifient les cotes ?</h4>
-                                                    <p>Elles représentent les chances de victoire du cheval et sont
-                                                        calculées en fonction de la masse totale des enjeux. Les cotes
-                                                        permettent de connaître les chevaux les plus joués. Un cheval
-                                                        favori aura une cote faible (ex : 1.5). En misant sur lui, vos
-                                                        chances de gagner sont importantes mais vous risquez de gagner
-                                                        peu. Inversement, un cheval peu joué aura une grosse cote (ex :
-                                                        35). C’est un outsider et, en misant sur lui, vous avez moins de
-                                                        chances de gagner mais il vous rapportera gros en cas de
-                                                        victoire.</p>
+                                                    <h4><Trans i18nKey="What do the odds mean ?">What do the odds mean ?</Trans></h4>
+                                                    <p><Trans i18nKey="They represent the chances of victory of the horse and are calculated according to the total mass of the stakes. The odds allow to know the most played horses. A favorite horse will have a low rating (ex: 1.5). By betting on him, your chances of winning are important but you risk winning little. Conversely, a little played horse will have a big odds (ex: 35). It is an outsider and, by betting on him, you have less chances to win but he will pay you big in case of victory.">They represent the chances of victory of the horse and are calculated according to the total mass of the stakes. The odds allow to know the most played horses. A favorite horse will have a low rating (ex: 1.5). By betting on him, your chances of winning are important but you risk winning little. Conversely, a little played horse will have a big odds (ex: 35). It is an outsider and, by betting on him, you have less chances to win but he will pay you big in case of victory.</Trans></p>
                                                 </div>
                                                 <div>
-                                                    <h4>Où puis-je voir le direct ?</h4>
-                                                    <p>En allant sur la page de la course vous pouvez cliquez sur voir
-                                                        le live dans l'en tête de la course en haut de la page</p>
+                                                    <h4><Trans i18nKey="Where can I see the live ?">Where can I see the live ?</Trans></h4>
+                                                    <p><Trans i18nKey="By going to the race page you can click on see the live in the top of the race at the top of the page">By going to the race page you can click on see the live in the top of the race at the top of the page</Trans></p>
                                                 </div>
                                                 <div>
-                                                    <h4>COMMENT JOUER ?</h4>
+                                                    <h4><Trans i18nKey="How to bet ?">How to bet ?</Trans></h4>
                                                     <div className="youtube-embed-wrapper"
                                                          style={{position:'relative',paddingBottom:'56.25%',paddingTop:'30px',height:0,overflow:'hidden'}}>
                                                         <iframe allowFullScreen="" frameBorder="0" height="360"
@@ -103,40 +85,19 @@ export default class HowToBetPage extends Component {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <h4>3 FAÇONS DE CHOISIR SES CHEVAUX</h4>
+                                                    <h4><Trans i18nKey="3 WAYS TO CHOOSE HIS HORSES">3 WAYS TO CHOOSE HIS HORSES</Trans></h4>
                                                     <ul>
                                                         <li>
-                                                            <h5>1. La chance</h5>
-                                                            <p>Certains parieurs jouent leurs numéros au hasard, parfois
-                                                                selon le nom ou la couleur du cheval. Les plus malins
-                                                                font confiance au système spOt. Avec cette technique
-                                                                intelligente, nul besoin de s’y connaître dans le
-                                                                domaine des courses. Les chevaux sont sélectionnés
-                                                                automatiquement en fonction des paris effectués par les
-                                                                autres joueurs. Il est possible de laisser spOt choisir
-                                                                tous les chevaux du pari ou de ne lui en demander qu’une
-                                                                partie en guise de complément dans un pari préparé
-                                                                soi-même.</p>
+                                                            <h5><Trans i18nKey="1. The chance">1. The chance</Trans></h5>
+                                                            <p><Trans i18nKey="Some bettors play their numbers at random, sometimes according to the name or color of the horse. The smartest trust the spOt system. With this intelligent technique, you do not need to know anything about racing. The horses are automatically selected according to the bets made by the other players. It is possible to let all the horses of the bet choose to be chosen, or to ask only a part of it as a complement in a bet prepared by oneself.">Some bettors play their numbers at random, sometimes according to the name or color of the horse. The smartest trust the spOt system. With this intelligent technique, you do not need to know anything about racing. The horses are automatically selected according to the bets made by the other players. It is possible to let all the horses of the bet choose to be chosen, or to ask only a part of it as a complement in a bet prepared by oneself.</Trans></p>
                                                         </li>
                                                         <li>
-                                                            <h5>2. La méthode classique</h5>
-                                                            <p>Le joueur choisit de parier sur des chevaux favoris. Il
-                                                                peut intégrer à ses paris quelques outsiders pour
-                                                                augmenter potentiellement ses gains. La base de cette
-                                                                méthode est la cote. Il ne reste plus qu’à définir si on
-                                                                souhaite prendre des risques ou jouer la prudence.</p>
+                                                            <h5><Trans i18nKey="2. The classical method">2. The classical method</Trans></h5>
+                                                            <p><Trans i18nKey="The player chooses to bet on favorite horses. He can integrate some outsiders into his bets to potentially increase his winnings. The basis of this method is the rating. It only remains to define whether one wishes to take risks or to exercise caution.">The player chooses to bet on favorite horses. He can integrate some outsiders into his bets to potentially increase his winnings. The basis of this method is the rating. It only remains to define whether one wishes to take risks or to exercise caution.</Trans></p>
                                                         </li>
                                                         <li>
-                                                            <h5>3. La méthode des pros</h5>
-                                                            <p>Certains joueurs sont des spécialistes qui connaissent
-                                                                très bien le monde des courses. Ils s’intéressent aux
-                                                                chevaux, aux jockeys et aux entraîneurs. Ils effectuent
-                                                                leurs paris en fonction d’une multitude de critères. Ils
-                                                                passent du temps sur les hippodromes et étudient la
-                                                                course pour établir leurs pronostics. Un turfiste, en
-                                                                fin stratège, pondère risque et gain. Ces enjeux de
-                                                                spécialistes apportent une contribution importante aux
-                                                                sélections spOt et font varier les cotes.</p>
+                                                            <h5><Trans i18nKey="3. The pros method">3. The pros method</Trans></h5>
+                                                            <p><Trans i18nKey="Some players are specialists who know the racing world very well. They are interested in horses, jockeys and coaches. They make their bets according to a multitude of criteria. They spend time on racetracks and study the race to make their predictions. A turfist, in the final strategist, weighting risk and gain. These specialist issues make an important contribution to the spOt selections and vary the ratings.">Some players are specialists who know the racing world very well. They are interested in horses, jockeys and coaches. They make their bets according to a multitude of criteria. They spend time on racetracks and study the race to make their predictions. A turfist, in the final strategist, weighting risk and gain. These specialist issues make an important contribution to the spOt selections and vary the ratings.</Trans></p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -146,32 +107,29 @@ export default class HowToBetPage extends Component {
                                     <div className="col-md-4">
 
                                         <div className="title m-b-0">
-                                            <h3>BESOIN D'AIDE ?</h3>
+                                            <h3><Trans i18nKey="NEED HELP ?">NEED HELP ?</Trans></h3>
                                         </div>
                                         <div className="card">
 
                                             <div className="card-body">
-                                                <p>Si vous n'avez pas trouvé de réponses dans la FAQ ou dans nos guides
-                                                    de jeux vous pouvez utiliser notre formulaire de contact. Notre
-                                                    service clients est à votre disposition pour répondre à vos
-                                                    questions.</p>
-                                                <a href="#">NOUS CONTACTER</a>
+                                                <p><Trans i18nKey="If you have not found answers in the FAQ or in our game guides you can use our contact form. Our customer service is at your disposal to answer your questions.">If you have not found answers in the FAQ or in our game guides you can use our contact form. Our customer service is at your disposal to answer your questions.</Trans></p>
+                                                <a href="#"><Trans i18nKey="CONTACT US">CONTACT US</Trans></a>
                                             </div>
                                         </div>
 
                                         <div className="title m-b-0">
-                                            <h3>LIENS UTILES</h3>
+                                            <h3><Trans i18nKey="USEFUL LINKS">USEFUL LINKS</Trans></h3>
                                         </div>
                                         <div className="card">
 
                                             <div className="card-body">
-                                                <a href="#">FAQ </a>
-                                                <a href="#">RÈGLEMENTS </a>
+                                                <a href="https://www.vivarobet.am">Vivaro</a>
+                                                <a href="https://www.pmu.fr">PMU</a>
                                             </div>
                                         </div>
 
                                         <div className="title m-b-0">
-                                            <h3>DOCUMENTS UTILES</h3>
+                                            <h3><Trans i18nKey="USEFUL DOCUMENTS">USEFUL DOCUMENTS</Trans></h3>
                                         </div>
                                         <div className="card">
 

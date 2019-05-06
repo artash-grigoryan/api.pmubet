@@ -49,8 +49,8 @@ class Race extends Model
     {
         return $this->hasMany('App\Runner', "raceId")
             ->whereNotNull('rank')
-            ->orderBy('rank')
-            ->limit(8);
+            ->orderBy('rank');
+            //->limit(8);
     }
 
     public function bets()

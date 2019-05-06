@@ -67,16 +67,7 @@ export default class HomePage extends Component {
 
             raceActions.getNext().then((response) => {
 
-                let day = 'today';
-                if(response.race.yesterday) {
-                    day = 'yesterday';
-                }
-                if(response.race.today) {
-                    day = 'today';
-                }
-                if(response.race.tomorrow) {
-                    day = 'tomorrow';
-                }
+                let day = response.race.yesterday ? 'yesterday' : (response.race.today ? 'today' : (response.race.today ? 'tomorrow' : 'today'));
 
                 this.setState({
                     day : day,
@@ -106,16 +97,7 @@ export default class HomePage extends Component {
 
         raceActions.get(reunionID, raceNumber).then((response) => {
 
-            let day = 'today';
-            if(response.race.yesterday) {
-                day = 'yesterday';
-            }
-            if(response.race.today) {
-                day = 'today';
-            }
-            if(response.race.tomorrow) {
-                day = 'tomorrow';
-            }
+            let day = response.race.yesterday ? 'yesterday' : (response.race.today ? 'today' : (response.race.today ? 'tomorrow' : 'today'));
 
             this.setState({
                 day : day,
@@ -136,18 +118,7 @@ export default class HomePage extends Component {
 
     setDay(day) {
 
-        switch (day) {
-
-            case 'yesterday' :
-                this.setReunion(this.state.reunions.yesterday[0].id);
-                break;
-            case 'today' :
-                this.setReunion(this.state.reunions.today[0].id);
-                break;
-            case 'tomorrow' :
-                this.setReunion(this.state.reunions.tomorrow[0].id);
-                break;
-        }
+        this.setReunion(this.state.reunions[day][0].id);
     }
 
 	render() {
@@ -155,19 +126,7 @@ export default class HomePage extends Component {
         let listReunions = null;
 	    if(this.state.reunions && this.state.day) {
 
-	        let reunions = [];
-	        switch (this.state.day) {
-
-                case 'yesterday' :
-                    reunions = this.state.reunions.yesterday;
-                    break;
-                case 'today' :
-                    reunions = this.state.reunions.today;
-                    break;
-                case 'tomorrow' :
-                    reunions = this.state.reunions.tomorrow;
-                    break;
-            }
+            let reunions = this.state.reunions[this.state.day];
 	        listReunions = reunions.map((reunion) =>
                 <li key={reunion.id} className={this.reunion && this.reunion.id === reunion.id ? 'active' : ''}>
                     <Link to={"/" + reunion.id + "/R"+reunion.externNumber} onClick={() => this.setReunion(reunion.id)}>

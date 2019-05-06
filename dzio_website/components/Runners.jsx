@@ -48,7 +48,7 @@ export default class Runners extends React.Component {
                         this.state.runnerSelected && this.state.runnerSelected.number === runner.number
                         ?
                             <div className="runner-details">
-                                <Carousel interval={null}>
+                                <Carousel interval={null} fade={true}>
                                     <Carousel.Item>
                                         <Carousel.Caption>
                                             <h3><Trans i18nKey="Runner details">Runner details</Trans></h3>

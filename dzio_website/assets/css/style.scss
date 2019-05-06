@@ -456,6 +456,12 @@ body {
   color: #333;
   text-align: justify;
 }
+.race-comment > p {
+  text-align: justify;
+  padding: 20px;
+  background: #fff;
+  border-bottom: 2px solid #f6a800;
+}
 .prediction-top {}
 .prediction-top .prediction-header {
 
@@ -547,13 +553,16 @@ body {
   padding: 10px 0;
 }
 .prediction-top .prediction-body .prediction-info{
-  float: right;
+  /*float: right;*/
 }
 .prediction-top .prediction-body .prediction-info .reporter{}
-.predictions-container {}
+.predictions-container {
+  background: #fff;
+  margin-bottom: 20px;
+}
 .predictions-container .predictions {
   border-bottom: 1px solid #228650;
-  display: inline-block;
+  display: table;
   width: 100%;
 }
 .predictions-container .predictions .reporter {
@@ -819,6 +828,12 @@ body {
   color: #fff;
   border-color: #218750 !important;
   background-color: #218750 !important;
+}
+.btn.active {
+  background: #f6a800 !important;
+  border-color: #f6a800 !important;
+  color: #fff;
+  text-transform: uppercase;
 }
 .data-holder .btn-holder {
   margin-bottom: 45px;

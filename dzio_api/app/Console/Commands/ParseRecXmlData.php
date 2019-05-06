@@ -591,9 +591,11 @@ parseNonRunnerXML =>
                             ])->first();
 
                             try {
-                                $runnerObj->update(
-                                    $runnerArr
-                                );
+                                if(!empty($runnerObj)) {
+                                    $runnerObj->update(
+                                        $runnerArr
+                                    );
+                                }
                             } catch (\Exception $e) {
                                 print_r('
 parseLiveOddSSGXML => 
