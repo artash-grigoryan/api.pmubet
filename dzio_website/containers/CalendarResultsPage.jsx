@@ -144,7 +144,7 @@ export default class CalendarResultsPage extends Component {
                                                             </td>
                                                             <td className="btn-cell">
                                                                 {
-                                                                    Date.parse(race.date) > Date.now()
+                                                                    Date.parse(race.date) < Date.now()
                                                                         ?
                                                                         <a className="btn btn-access" href={"/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number}>
                                                                             <Trans i18nKey="Results">Results</Trans>
@@ -182,7 +182,7 @@ export default class CalendarResultsPage extends Component {
                                                             </td>
                                                             <td className="btn-cell">
                                                                 {
-                                                                    Date.parse(race.date) > Date.now()
+                                                                    Date.parse(race.date) < Date.now()
                                                                         ?
                                                                         <a className="btn btn-access" href={"/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number}>
                                                                             <Trans i18nKey="Results">Results</Trans>
