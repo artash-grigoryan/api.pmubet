@@ -143,9 +143,17 @@ export default class CalendarResultsPage extends Component {
                                                                 }
                                                             </td>
                                                             <td className="btn-cell">
-                                                                <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
-                                                                    <Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans>
-                                                                </a>
+                                                                {
+                                                                    Date.parse(race.date) > Date.now()
+                                                                        ?
+                                                                        <a className="btn btn-access" href={"/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number}>
+                                                                            <Trans i18nKey="Results">Results</Trans>
+                                                                        </a>
+                                                                        :
+                                                                        <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
+                                                                            <Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans>
+                                                                        </a>
+                                                                }
                                                             </td>
                                                         </tr>
                                                     )
