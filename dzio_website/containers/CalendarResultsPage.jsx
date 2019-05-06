@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import MainMenu from "../components/MainMenu.jsx";
 import Footer from "../components/shared/footer/footer";
 import _ from "lodash";
+import { withRouter } from 'react-router-dom'
 import { faCalendarAlt } from '@fortawesome/fontawesome-free-solid'
 import { useTranslation, Trans } from "react-i18next";
 import { raceActions } from '../actions/race';
@@ -33,6 +34,10 @@ export default class CalendarResultsPage extends Component {
                 races : response.races
             });
         });
+    }
+
+    redirect(target) {
+        this.props.history.push(target);
     }
 
     setDay(day) {
@@ -118,16 +123,16 @@ export default class CalendarResultsPage extends Component {
                                                     _.filter(this.state.races[this.state.day], function(race){ return Date.parse(race.date) > Date.now(); }).map((race, indexRace) =>
                                                         <tr key={indexRace}>
 
-                                                            <td className="name-cell">
+                                                            <td className="name-cell" onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 R{race.reunion.number}C{race.number} - {race.labelLong}
 
                                                             </td>
 
-                                                            <td style={{textAlign:'center'}}>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 {race.time}
                                                             </td>
-                                                            <td style={{textAlign:'center'}}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></td>
-                                                            <td style={{textAlign:'center'}}>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></td>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 {
                                                                     race.results.slice(0, 8).map((runner, indexRunner) =>
                                                                         <span key={indexRunner}>
@@ -138,17 +143,9 @@ export default class CalendarResultsPage extends Component {
                                                                 }
                                                             </td>
                                                             <td className="btn-cell">
-                                                                {
-                                                                    race.results.length > 0
-                                                                        ?
-                                                                        <a className="btn btn-access" href={"/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number}>
-                                                                            <Trans i18nKey="Results">Results</Trans>
-                                                                        </a>
-                                                                        :
-                                                                        <a className="btn btn-access" href={"/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number}>
-                                                                            <Trans i18nKey="Live">Live</Trans>
-                                                                        </a>
-                                                                }
+                                                                <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
+                                                                    <Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans>
+                                                                </a>
                                                             </td>
                                                         </tr>
                                                     )
@@ -156,16 +153,16 @@ export default class CalendarResultsPage extends Component {
                                                     this.state.races[this.state.day].map((race, indexRace) =>
                                                         <tr key={indexRace}>
 
-                                                            <td className="name-cell">
+                                                            <td className="name-cell" onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 R{race.reunion.number}C{race.number} - {race.labelLong}
 
                                                             </td>
 
-                                                            <td style={{textAlign:'center'}}>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 {race.time}
                                                             </td>
-                                                            <td style={{textAlign:'center'}}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></td>
-                                                            <td style={{textAlign:'center'}}>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></td>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 {
                                                                     race.results.slice(0, 8).map((runner, indexRunner) =>
                                                                         <span key={indexRunner}>
@@ -177,14 +174,14 @@ export default class CalendarResultsPage extends Component {
                                                             </td>
                                                             <td className="btn-cell">
                                                                 {
-                                                                    race.results.length > 0
-                                                                    ?
+                                                                    Date.parse(race.date) > Date.now()
+                                                                        ?
                                                                         <a className="btn btn-access" href={"/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number}>
                                                                             <Trans i18nKey="Results">Results</Trans>
                                                                         </a>
-                                                                    :
-                                                                        <a className="btn btn-access" href={"/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number}>
-                                                                            <Trans i18nKey="Live">Live</Trans>
+                                                                        :
+                                                                        <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
+                                                                            <Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans>
                                                                         </a>
                                                                 }
                                                             </td>
