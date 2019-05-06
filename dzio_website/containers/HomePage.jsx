@@ -67,23 +67,15 @@ export default class HomePage extends Component {
 
             raceActions.getNext().then((response) => {
 
+                let day = response.race.yesterday ? 'yesterday' : (response.race.today ? 'today' : (response.race.today ? 'tomorrow' : 'today'));
+
                 this.setState({
+                    day : day,
                     reunion : response.race.reunion,
                     race : response.race,
                     predictionTop : response.race.reporters_top,
                     predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others))
                 });
-                let day = 'today';
-                if(response.race.yesterday) {
-                    day = 'yesterday';
-                }
-                if(response.race.today) {
-                    day = 'today';
-                }
-                if(response.race.tomorrow) {
-                    day = 'tomorrow';
-                }
-                this.setState({day : day});
             });
         }
     }
@@ -99,18 +91,21 @@ export default class HomePage extends Component {
             predictions : null
         });
         this.setRace(reunionID, 1);
-        this.setState({reunionSelectorOpened:false});
     }
 
     setRace(reunionID, raceNumber) {
 
         raceActions.get(reunionID, raceNumber).then((response) => {
 
+            let day = response.race.yesterday ? 'yesterday' : (response.race.today ? 'today' : (response.race.today ? 'tomorrow' : 'today'));
+
             this.setState({
+                day : day,
                 reunion : response.race.reunion,
                 race : response.race,
                 predictionTop : response.race.reporters_top,
-                predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others))
+                predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others)),
+                reunionSelectorOpened : false
             });
             this.props.history.push("/"+reunionID+"/R"+response.race.reunion.externNumber+"/C"+raceNumber);
         });
@@ -123,9 +118,7 @@ export default class HomePage extends Component {
 
     setDay(day) {
 
-        this.setState({day : day});
-        this.setState({race : null});
-        this.setState({reunion : null});
+        this.setReunion(this.state.reunions[day][0].id);
     }
 
 	render() {
@@ -133,19 +126,7 @@ export default class HomePage extends Component {
         let listReunions = null;
 	    if(this.state.reunions && this.state.day) {
 
-	        let reunions = [];
-	        switch (this.state.day) {
-
-                case 'yesterday' :
-                    reunions = this.state.reunions.yesterday;
-                    break;
-                case 'today' :
-                    reunions = this.state.reunions.today;
-                    break;
-                case 'tomorrow' :
-                    reunions = this.state.reunions.tomorrow;
-                    break;
-            }
+            let reunions = this.state.reunions[this.state.day];
 	        listReunions = reunions.map((reunion) =>
                 <li key={reunion.id} className={this.reunion && this.reunion.id === reunion.id ? 'active' : ''}>
                     <Link to={"/" + reunion.id + "/R"+reunion.externNumber} onClick={() => this.setReunion(reunion.id)}>

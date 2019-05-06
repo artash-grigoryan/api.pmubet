@@ -35,10 +35,10 @@ class ReunionController extends Controller
      */
     public function getAll()
     {
-        $yesterday = date('Y-m-d', strtotime('-1 DAY'));
+        $yesterday = date('Y-m-d', strtotime('-1 DAY +2 HOUR'));
         $today = date('Y-m-d');
-        $tomorrow = date('Y-m-d', strtotime('+1 DAY'));
-        $afterTomorrow = date('Y-m-d', strtotime('+2 DAY'));
+        $tomorrow = date('Y-m-d', strtotime('+1 DAY +2 HOUR'));
+        $afterTomorrow = date('Y-m-d', strtotime('+2 DAY +2 HOUR'));
 
         $reunions = [];
         $reunions['yesterday']  = Reunion::where([['date', '>=', $yesterday], ['date', '<', $today]])

@@ -162,9 +162,6 @@ class MainMenu extends React.Component {
                         <a className="nav-link" href="/"><Trans i18nKey="Programs">Programs</Trans></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/predictions"><Trans i18nKey="Predictions">Predictions</Trans></a>
-                    </li>
-                    <li className="nav-item">
                         <a className="nav-link" href="/calendar-results"><Trans i18nKey="Calendar & Results">Calendar & Results</Trans></a>
                     </li>
                     <li className="nav-item">
@@ -179,11 +176,6 @@ class MainMenu extends React.Component {
                         <a className="btn-skew nav-link" href="#">
                             Lives
                             <FontAwesomeIcon style={{marginLeft: '5px'}} icon="play-circle" />
-                        </a>
-                    </li>
-                    <li className="nav-item active">
-                        <a className="nav-link" href="#">
-                            <FontAwesomeIcon icon="search" />
                         </a>
                     </li>
                     <li className="nav-item">

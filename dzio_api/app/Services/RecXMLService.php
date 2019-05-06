@@ -14,6 +14,7 @@ use Sabre\Xml\Service;
 
 class RecXMLService implements DataServiceInterface {
 
+    //const RECTXML_FOLDER_PATH = "/var/www/recxml_root";
     const RECTXML_FOLDER_PATH = "./recxml_root";
 
     //UNUSED
@@ -54,7 +55,7 @@ class RecXMLService implements DataServiceInterface {
         $this->xmlParser = $xmlParser;
 
         $this->dayFolder = (new \DateTime())->format("Ymd");
-        //$this->dayFolder = '20190422';
+        $this->dayFolder = '20190505';
     }
 
     /**

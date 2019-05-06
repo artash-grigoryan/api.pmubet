@@ -40,7 +40,7 @@ export default class Banner extends React.Component {
                         />
                     </div>
 
-                    <div style={{marginTop: "30px"}}><a className="btn btn-md" href="#"><Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans></a></div>
+                    <div style={{marginTop: "30px"}}><a target="_blank" className="btn btn-md" href="https://www.vivarobet.am"><Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans></a></div>
                 </div>
             </div>
         </div>

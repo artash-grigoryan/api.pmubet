@@ -15,9 +15,41 @@ class RaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAll()
     {
+        $yesterday = date('Y-m-d', strtotime('-1 DAY +2 HOUR'));
+        $today = date('Y-m-d', strtotime('+2 HOUR'));
+        $tomorrow = date('Y-m-d', strtotime('+1 DAY +2 HOUR'));
+        $afterTomorrow = date('Y-m-d', strtotime('+2 DAY +2 HOUR'));
 
+        $races = [];
+        $races['yesterday'] = Race::where([['date', '>=', $yesterday], ['date', '<', $today]])
+            ->orderBy('date', 'ASC')
+            ->with("runners")
+            ->with("results")
+            ->get();
+        $races['today'] = Race::where([['date', '>=', $today], ['date', '<', $tomorrow]])
+            ->orderBy('date', 'ASC')
+            ->with("runners")
+            ->with("results")
+            ->get();
+        $races['tomorrow'] = Race::where([['date', '>=', $tomorrow], ['date', '<', $afterTomorrow]])
+            ->orderBy('date', 'ASC')
+            ->with("runners")
+            ->with("results")
+            ->get();
+
+        foreach ($races as $day=>$dayRaces) {
+
+            foreach ($dayRaces as $key=>$race) {
+
+                $races[$day][$key]->reunion = Reunion::where('id', $race->reunionId)->first();
+                $races[$day][$key]->day = date('Y-m-d', strtotime($race->date));
+                $races[$day][$key]->time = date('H:i', strtotime($race->date));
+            }
+        }
+
+        return response()->json(array('races'=>$races));
     }
 
     public function getNext()
@@ -37,9 +69,9 @@ class RaceController extends Controller
         $race->reunion = Reunion::where('id', $race->reunionId)->first();
         $race->day = date('Y-m-d', strtotime($race->date));
         $race->time = date('H:i', strtotime($race->date));
-        $race->yesterday = $race->day == date('Y-m-d', strtotime('- 1DAY'));
+        $race->yesterday = $race->day == date('Y-m-d', strtotime('- 1DAY +2 HOUR'));
         $race->today = $race->day == date('Y-m-d');
-        $race->tomorrow = $race->day == date('Y-m-d', strtotime('+ 1DAY'));
+        $race->tomorrow = $race->day == date('Y-m-d', strtotime('+ 1DAY +2 HOUR'));
         $race->betResults = [];
         return response()->json(array('race'=>$race));
     }
@@ -58,9 +90,9 @@ class RaceController extends Controller
         $race->reunion = Reunion::where('id', $race->reunionId)->first();
         $race->day = date('Y-m-d', strtotime($race->date));
         $race->time = date('H:i', strtotime($race->date));
-        $race->yesterday = $race->day == date('Y-m-d', strtotime('- 1DAY'));
+        $race->yesterday = $race->day == date('Y-m-d', strtotime('- 1DAY +2 HOUR'));
         $race->today = $race->day == date('Y-m-d');
-        $race->tomorrow = $race->day == date('Y-m-d', strtotime('+ 1DAY'));
+        $race->tomorrow = $race->day == date('Y-m-d', strtotime('+ 1DAY +2 HOUR'));
         $betResultsGroups = BetResult::where('raceId', $race->id)->distinct()->pluck('code');
         $betResults = [];
         foreach($betResultsGroups as $key=>$code) {
@@ -122,9 +154,9 @@ class RaceController extends Controller
             $race->reunion = Reunion::where('id', $race->reunionId)->first();
             $race->day = date('Y-m-d', strtotime($race->date));
             $race->time = date('H:i', strtotime($race->date));
-            $race->yesterday = $race->day == date('Y-m-d', strtotime('- 1DAY'));
+            $race->yesterday = $race->day == date('Y-m-d', strtotime('- 1DAY +2 HOUR'));
             $race->today = $race->day == date('Y-m-d');
-            $race->tomorrow = $race->day == date('Y-m-d', strtotime('+ 1DAY'));
+            $race->tomorrow = $race->day == date('Y-m-d', strtotime('+ 1DAY +2 HOUR'));
             return response()->json(array(
                 'race'=>$race
             ));
