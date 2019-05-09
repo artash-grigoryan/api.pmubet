@@ -46,6 +46,8 @@ class RecXMLService implements DataServiceInterface {
     const LIVE_ODDS_SG_FOLDER = "51_LIVE_ODDS_SG";
     const PRIZE_LIST_FOLDER = "8_PRIZE_LIST"; //Nombres de victoires par partants
 
+    const CASAQUES_FOLDER = "casaques"; //Casaques
+
 
     public $xmlParser;
     public $dayFolder;
@@ -55,7 +57,7 @@ class RecXMLService implements DataServiceInterface {
         $this->xmlParser = $xmlParser;
 
         $this->dayFolder = (new \DateTime())->format("Ymd");
-        $this->dayFolder = '20190505';
+        $this->dayFolder = '20190506';
     }
 
     /**
@@ -206,6 +208,24 @@ class RecXMLService implements DataServiceInterface {
         $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::PRIZE_LIST_FOLDER;
 
         return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function scanCasaquesFolder()
+    {
+        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . self::CASAQUES_FOLDER;
+
+        return $this->scanFolder($folderPath);
+    }
+
+    /**
+     * @return array
+     */
+    public function getCasaquesFolder()
+    {
+        return self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . self::CASAQUES_FOLDER;
     }
 
 

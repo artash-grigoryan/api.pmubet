@@ -9,6 +9,7 @@ use App\Race;
 use App\Reporter;
 use App\Runner;
 use App\Reunion;
+use ZipArchive;
 use App\Services\Interfaces\DataServiceInterface;
 use Illuminate\Console\Command;
 use Mockery\Exception;
@@ -46,6 +47,8 @@ class ParseRecXmlData extends Command
      */
     public function handle(DataServiceInterface $dataService) {
 
+        $this->unzipCasaques($dataService);
+exit('done!');
         $this->parseDayReunionsXML($dataService);
         $this->parseReunionsXML($dataService);
         $this->parseRacesXML($dataService);
@@ -1200,6 +1203,23 @@ parsePressReunionXML =>
                         }
                     }
                     //@TODO DELETE THE FILE
+                }
+            }
+        }
+    }
+
+    private function unzipCasaques($dataService) {
+
+        $filesInfo = $dataService->scanCasaquesFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+
+                $zip = new ZipArchive;
+                if ($zip->open($dataService->getCasaquesFolder().'/'.$fileName) === TRUE) {
+                    $zip->extractTo($dataService->getCasaquesFolder());
+                    $zip->close();
+                } else {
+                    echo 'unzip error';
                 }
             }
         }
