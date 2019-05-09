@@ -13,9 +13,12 @@ class CreateBetTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bet_translations', function (Blueprint $table) {
+        Schema::create('bets_translations', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('lib')->nullable();
+            $table->string('libLong')->nullable();
+            $table->integer('betId')->unsigned();
+            $table->char("lang", 3)->nullable();
         });
     }
 
@@ -26,6 +29,6 @@ class CreateBetTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bet_translations');
+        Schema::dropIfExists('bets_translations');
     }
 }
