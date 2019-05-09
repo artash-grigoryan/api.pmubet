@@ -18,15 +18,7 @@ class CreateReporterTranslationsTable extends Migration
             $table->integer("reporterId")->unsigned();
             $table->string('societe');
             $table->string('reporter');
-
             $table->char("lang", 3)->nullable();
-
-            $table->foreign('reporterId')
-                ->references('id')
-                ->on('reporters')
-                ->onDelete('cascade');
-
-
         });
     }
 

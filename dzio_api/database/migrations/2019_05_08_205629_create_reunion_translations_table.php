@@ -15,7 +15,7 @@ class CreateReunionTranslationsTable extends Migration
     {
         Schema::create('reunions_translations', function (Blueprint $table) {
             $table->increments('id')->unsigned();;
-            $table->increments('reunionId')->unsigned();;
+            $table->integer("reunionId")->unsigned();
             $table->string('statusLabel' )->nullable();
             $table->string('label')->nullable();
             $table->char('speciality', 50)->nullable();
@@ -29,9 +29,7 @@ class CreateReunionTranslationsTable extends Migration
             $table->char("progvalid", 1)->nullable();
             $table->text("hippodromeName")->nullable();
             $table->tinyInteger('racesNumber')->nullable();
-
             $table->char("lang", 3)->nullable();
-//            $table->timestamps();
         });
     }
 
