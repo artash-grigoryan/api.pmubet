@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <?php echo $reunions->render(); ?>
                 </div>
             </div>
         </div>

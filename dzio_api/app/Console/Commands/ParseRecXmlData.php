@@ -9,10 +9,8 @@ use App\Race;
 use App\Reporter;
 use App\Runner;
 use App\Reunion;
-
 use App\Services\Interfaces\DataServiceInterface;
 use Illuminate\Console\Command;
-use Mockery\Exception;
 
 class ParseRecXmlData extends Command
 {
