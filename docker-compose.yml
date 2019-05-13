@@ -2,8 +2,7 @@ version: '2'
 
 services:
     api:
-        image: agrigoryan/laravel:17b39b8a41ae86d63d248f61856242c681eaab96
-        #build: "./docker/apache"
+        build: "./docker/apachelocal"
         volumes:
           - ".:/var/www"
         working_dir: "/var/www"
@@ -34,14 +33,14 @@ services:
           #- "./opt:/opt"
         tty: true
 
-    react:
-        build: "./docker/nodejs"
-        #command : "bash -c '/usr/local/bin/recXML_start'"
-        ports:
-          - 80:80
-        volumes:
-          - "./dzio_app:/var/www"
-        tty: true
+#    react:
+#        build: "./docker/nodejs"
+#        #command : "bash -c '/usr/local/bin/recXML_start'"
+#        ports:
+#          - 80:80
+#        volumes:
+#          - "./dzio_app:/var/www"
+#        tty: true
 
     pma:
         image: phpmyadmin/phpmyadmin
