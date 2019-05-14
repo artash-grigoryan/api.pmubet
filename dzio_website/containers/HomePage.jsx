@@ -118,6 +118,8 @@ export default class HomePage extends Component {
 
     setDay(day) {
 
+        console.log(day);
+        console.log(this.state.reunions);
         this.setReunion(this.state.reunions[day][0].id);
     }
 

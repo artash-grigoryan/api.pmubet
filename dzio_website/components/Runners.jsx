@@ -25,6 +25,12 @@ export default class Runners extends React.Component {
         this.setState({runnerSelected : null});
     }
 
+    getCasaqueImgPath(race, runner) {
+
+        let date = new Date(this.props.race.date);
+        return '/img/casaques/'+date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + (date.getDate() + 1)).slice(-2)+'-R'+race.reunion.number+'C'+race.number+'P'+runner.number+'.png';
+    }
+
     render() {
 
         let listRunners = [];
@@ -34,7 +40,7 @@ export default class Runners extends React.Component {
                     <div className="runner">
                         <span className="runner-rank">{runner.number}</span>
                         <span className="runner-img">
-                            <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
+                            <img src={this.getCasaqueImgPath(this.props.race, runner)}/>
                         </span>
                         <span className="runner-name">
                             <p onClick={() => this.setState({runnerSelected : runner})}>{runner.name}</p>

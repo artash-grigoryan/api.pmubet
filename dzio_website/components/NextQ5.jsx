@@ -9,7 +9,7 @@ import {Trans} from "react-i18next";
 export default class NextQ5 extends React.Component {
 
     render() {
-console.log(this.props.nextQ5);
+
         return <div className="adv-1">
             <a className="widget widget__quinte" href={"/" + this.props.nextQ5.reunion.id + "/R"+this.props.nextQ5.reunion.number+"/C" + this.props.nextQ5.number}>
                 <div className="row">

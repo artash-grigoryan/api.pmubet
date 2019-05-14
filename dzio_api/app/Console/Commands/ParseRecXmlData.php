@@ -46,7 +46,8 @@ class ParseRecXmlData extends Command
     public function handle(DataServiceInterface $dataService) {
 
         $this->unzipCasaques($dataService);
-exit('done!');
+        $this->unzipHippodromes($dataService);
+
         $this->parseDayReunionsXML($dataService);
         $this->parseReunionsXML($dataService);
         $this->parseRacesXML($dataService);
@@ -1071,22 +1072,24 @@ parsePressReunionXML =>
                                     var_dump($e->getMessage());
                                 }
 
-                                foreach ($journal['value']['selections'] as $pronostic) {
+                                if(!empty($journal['value']['selections'])) {
+                                    foreach ($journal['value']['selections'] as $pronostic) {
 
-                                    $predictionArr = [
-                                        "number" => $pronostic['value']['num_partant'],
-                                        "runner" => iconv('UTF-8', 'ISO-8859-1', $pronostic['value']['nom_cheval']),
-                                    ];
+                                        $predictionArr = [
+                                            "number" => $pronostic['value']['num_partant'],
+                                            "runner" => iconv('UTF-8', 'ISO-8859-1', $pronostic['value']['nom_cheval']),
+                                        ];
 
-                                    try {
-                                        Prediction::updateOrInsert([
-                                            "rank" => $pronostic['value']['rg_partant'],
-                                            "reporterId" => $ReporterObj->id
-                                        ],
-                                            $predictionArr
-                                        );
-                                    } catch (\Exception $e) {
-                                        var_dump($e->getMessage());
+                                        try {
+                                            Prediction::updateOrInsert([
+                                                "rank" => $pronostic['value']['rg_partant'],
+                                                "reporterId" => $ReporterObj->id
+                                            ],
+                                                $predictionArr
+                                            );
+                                        } catch (\Exception $e) {
+                                            var_dump($e->getMessage());
+                                        }
                                     }
                                 }
 
@@ -1214,8 +1217,27 @@ parsePressReunionXML =>
 
                 $zip = new \ZipArchive();
                 if ($zip->open($dataService->getCasaquesFolder().'/'.$fileName) === TRUE) {
-                    $zip->extractTo($dataService->getCasaquesFolder());
+                    $zip->extractTo(__DIR__.'/../../../public/img/casaques/');
                     $zip->close();
+                    //TODO unlink($dataService->getCasaquesFolder().'/'.$fileName);
+                } else {
+                    echo 'unzip error';
+                }
+            }
+        }
+    }
+
+    private function unzipHippodromes($dataService) {
+
+        $filesInfo = $dataService->scanHippodromesFolder();
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+
+                $zip = new \ZipArchive();
+                if ($zip->open($dataService->getHippodromesFolder().'/'.$fileName) === TRUE) {
+                    $zip->extractTo(__DIR__.'/../../../public/img/hippodromes/');
+                    $zip->close();
+                    //TODO unlink($dataService->getHippodromesFolder().'/'.$fileName);
                 } else {
                     echo 'unzip error';
                 }
