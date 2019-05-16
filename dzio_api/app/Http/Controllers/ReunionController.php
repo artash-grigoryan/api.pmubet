@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Reunion;
+use App\ReunionTranslation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class ReunionController extends Controller
 {
@@ -92,9 +95,16 @@ class ReunionController extends Controller
      * @param  \App\Reunion  $reunion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Reunion $reunion)
+    public function edit($id)
     {
-        //
+        $reunion = ReunionTranslation::where('reunionId', $id)->where('lang', 'hy')->first();
+
+        if ($reunion == null) {
+            $reunion = Reunion::find($id);
+        }
+        $reunion->id = $id;
+
+        return view('reunion.edit', ["reunion" => $reunion]);
     }
 
     /**
@@ -104,9 +114,28 @@ class ReunionController extends Controller
      * @param  \App\Reunion  $reunion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reunion $reunion)
+    public function update(Request $request, $id)
     {
-        //
+
+        $label = $request->input('label');
+        $statusLabel = $request->input('statusLabel');
+        $hippodromeName = $request->input('hippodromeName');
+        $speciality = $request->input('speciality');
+        if ($label == '') {
+            return Redirect::back()->withErrors(['msg', 'The Message']);
+        }
+        $reunionTranslation = ReunionTranslation::firstOrNew(['reunionId' => $id, 'lang' => 'hy']);
+        $reunionTranslation->label = $label;
+        $reunionTranslation->statusLabel = $statusLabel;
+        $reunionTranslation->hippodromeName = $hippodromeName;
+        $reunionTranslation->speciality = $speciality;
+        $reunionTranslation->lang = 'hy';
+
+        $reunionTranslation->save();
+
+        Session::flash('msg', "Successfully saved");
+
+        return Redirect::back();
     }
 
     /**

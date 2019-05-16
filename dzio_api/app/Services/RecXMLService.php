@@ -15,7 +15,7 @@ use Sabre\Xml\Service;
 class RecXMLService implements DataServiceInterface {
 
     //const RECTXML_FOLDER_PATH = "/var/www/recxml_root";
-    const RECTXML_FOLDER_PATH = "./recxml_root";
+    const RECTXML_FOLDER_PATH = "./../recxml_root";
 
     //UNUSED
     const MONTH_REUNIONS_FOLDER = "1_MONTH_MEETINGS"; // Toutes les réunions du mois

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Dzio admin') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -29,25 +29,25 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Dzio admin') }}
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    @if (session('status'))
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ route('login') }}">Reunions</a></li>
-                        <li><a href="{{ route('login') }}">Races</a></li>
-                        <li><a href="{{ route('login') }}">Runners</a></li>
-                        <li><a href="{{ route('login') }}">Reporters</a></li>
+                        <li><a href="{{ url('admin/reunions') }}">Reunions</a></li>
+                        <li><a href="{{ url('admin/races') }}">Races</a></li>
+                        <li><a href="{{ url('admin/runners') }}">Runners</a></li>
+                        <li><a href="{{ url('admin/reporters') }}">Reporters</a></li>
                     </ul>
-
+                    @endif
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
-
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
@@ -55,7 +55,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ route('register') }}">Register new user</a></li>
+                                    <li><a href="{{ route('register') }}">Registration</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
