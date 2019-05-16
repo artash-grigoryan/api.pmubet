@@ -107,8 +107,8 @@ class Race extends Model
         return $this->hasMany('App\RaceTranslation', "raceId")->exists();
     }
 
-    public function translation($lang)
+    public function translation()
     {
-        return $this->hasMany('App\RaceTranslation', "raceId")->where('lang', $lang);
+        return $this->hasOne('App\RaceTranslation', "raceId")->where('lang', 'hy');
     }
 }

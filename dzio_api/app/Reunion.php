@@ -50,9 +50,9 @@ class Reunion extends Model
         return $this->hasMany('App\ReunionTranslation', "reunionId")->exists();
     }
 
-    public function translation($lang)
+    public function translation()
     {
-        return $this->hasMany('App\ReunionTranslation', "reunionId")->where('lang', $lang);
+        return $this->hasMany('App\ReunionTranslation', "reunionId")->where('lang', 'hy');
     }
 
 

@@ -16,6 +16,13 @@ import BetResults from "./BetResults";
 
 export default class Race extends React.Component {
 
+    constructor(args) {
+        super(args);
+        debugger;
+        console.log(this.props.race.translation.description);
+        this.props.race.description = this.props.race.translation.description || this.props.race.description;
+    }
+
     render() {
 
         return <div>

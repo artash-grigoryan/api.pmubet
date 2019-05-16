@@ -89,6 +89,7 @@ class RaceController extends Controller
             ->with('reportersGeny')
             ->with('reportersBest')
             ->with('reportersOthers')
+            ->with('translation')
             ->first();
         $race->reunion = Reunion::where('id', $race->reunionId)->first();
         $race->day = date('Y-m-d', strtotime($race->date));
