@@ -28,7 +28,7 @@ export default class Runners extends React.Component {
     getCasaqueImgPath(race, runner) {
 
         let date = new Date(this.props.race.date);
-        return '/img/casaques/'+date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + (date.getDate() + 1)).slice(-2)+'-R'+race.reunion.number+'C'+race.number+'P'+runner.number+'.png';
+        return '/img/casaques/'+date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2)+'-R'+race.reunion.number+'C'+race.number+'P'+runner.number+'.png';
     }
 
     render() {
