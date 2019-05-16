@@ -998,76 +998,78 @@ class ParseRecXmlData extends Command
                         }
                         $reunionObj = new Reunion($reunionArr);
 
-                        foreach ($reunion['value']["courses"] as $race) {
+                        if(!empty($reunion['value']["courses"])) {
+                            foreach ($reunion['value']["courses"] as $race) {
 
-                            $raceArr = [
-                                'id' => $race['value']["id_nav_course"],
-                                'number' => $race['value']["num_course_pmu"],
-                                "reunionId" => $reunionObj->id
-                            ];
+                                $raceArr = [
+                                    'id' => $race['value']["id_nav_course"],
+                                    'number' => $race['value']["num_course_pmu"],
+                                    "reunionId" => $reunionObj->id
+                                ];
 
-                            try {
-                                //Race::insert(
-                                //    $raceArr
-                                //);
-                            } catch (\Exception $e) {
-                            }
-                            $raceObj = new Race($raceArr);
+                                try {
+                                    //Race::insert(
+                                    //    $raceArr
+                                    //);
+                                } catch (\Exception $e) {
+                                }
+                                $raceObj = new Race($raceArr);
 
-                            if (!empty($race['value']["journals"])) {
-                                foreach ($race['value']["journals"] as $journal) {
+                                if (!empty($race['value']["journals"])) {
+                                    foreach ($race['value']["journals"] as $journal) {
 
-                                    $journalArr = [
-                                        "societe" => iconv('UTF-8', 'ISO-8859-1', $journal['value']['societe']),
-                                        "reporter" => iconv('UTF-8', 'ISO-8859-1', $journal['value']['journalistes']['journaliste']['nom_journaliste']),
-                                        "raceId" => $raceObj->id,
-                                    ];
+                                        $journalArr = [
+                                            "societe" => iconv('UTF-8', 'ISO-8859-1', $journal['value']['societe']),
+                                            "reporter" => iconv('UTF-8', 'ISO-8859-1', $journal['value']['journalistes']['journaliste']['nom_journaliste']),
+                                            "raceId" => $raceObj->id,
+                                        ];
 
-                                    try {
-                                        $ReporterObj = Reporter::where([
-                                            ["societe", '=', iconv('UTF-8', 'ISO-8859-1', $journal['value']['societe'])],
-                                            ["reporter", '=', iconv('UTF-8', 'ISO-8859-1', $journal['value']['journalistes']['journaliste']['nom_journaliste'])],
-                                            ["raceId", '=', $raceObj->id],
-                                        ])->first();
+                                        try {
+                                            $ReporterObj = Reporter::where([
+                                                ["societe", '=', iconv('UTF-8', 'ISO-8859-1', $journal['value']['societe'])],
+                                                ["reporter", '=', iconv('UTF-8', 'ISO-8859-1', $journal['value']['journalistes']['journaliste']['nom_journaliste'])],
+                                                ["raceId", '=', $raceObj->id],
+                                            ])->first();
 
-                                        if (empty($ReporterObj->id)) {
+                                            if (empty($ReporterObj->id)) {
 
-                                            $ReporterObj = new Reporter($journalArr);
-                                            $ReporterObj->save();
+                                                $ReporterObj = new Reporter($journalArr);
+                                                $ReporterObj->save();
+                                            }
+
+                                        } catch (\Exception $e) {
+                                            var_dump($e->getMessage());
                                         }
 
-                                    } catch (\Exception $e) {
-                                        var_dump($e->getMessage());
-                                    }
+                                        if (!empty($journal['value']['journalistes']['journaliste']["pronostics"])) {
+                                            foreach ($journal['value']['journalistes']['journaliste']["pronostics"] as $pronostic) {
 
-                                    if (!empty($journal['value']['journalistes']['journaliste']["pronostics"])) {
-                                        foreach ($journal['value']['journalistes']['journaliste']["pronostics"] as $pronostic) {
+                                                $predictionArr = [
+                                                    "number" => $pronostic['value']['num_partant'],
+                                                    "runner" => iconv('UTF-8', 'ISO-8859-1', $pronostic['value']['nom_cheval']),
+                                                ];
 
-                                            $predictionArr = [
-                                                "number" => $pronostic['value']['num_partant'],
-                                                "runner" => iconv('UTF-8', 'ISO-8859-1', $pronostic['value']['nom_cheval']),
-                                            ];
-
-                                            try {
-                                                Prediction::updateOrInsert([
-                                                    "rank" => $pronostic['value']['rang'],
-                                                    "reporterId" => $ReporterObj->id
-                                                ],
-                                                    $predictionArr
-                                                );
-                                            } catch (\Exception $e) {
-                                                print_r('
-    parsePressReunionXML => 
-    ');
-                                                print_r(array_merge($predictionArr, [
-                                                    "rank" => $pronostic['value']['rang'],
-                                                    "reporterId" => $ReporterObj->id
-                                                ]));
-                                                print_r($e->getMessage());
+                                                try {
+                                                    Prediction::updateOrInsert([
+                                                        "rank" => $pronostic['value']['rang'],
+                                                        "reporterId" => $ReporterObj->id
+                                                    ],
+                                                        $predictionArr
+                                                    );
+                                                } catch (\Exception $e) {
+                                                    print_r('
+        parsePressReunionXML => 
+        ');
+                                                    print_r(array_merge($predictionArr, [
+                                                        "rank" => $pronostic['value']['rang'],
+                                                        "reporterId" => $ReporterObj->id
+                                                    ]));
+                                                    print_r($e->getMessage());
+                                                }
                                             }
                                         }
-                                    }
 
+                                    }
                                 }
                             }
                         }
