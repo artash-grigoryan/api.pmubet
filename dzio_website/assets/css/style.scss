@@ -127,6 +127,12 @@ body {
 .info-section {
   background-color: #f0f0f0;
 }
+.info-section .hippodrome-img {
+  width: 100%;
+  height: 130px;
+  background-size: 150% 150%;
+  background-position: 50% 50%;
+}
 .bg-section {
   background-image: url(https://www.equidia.fr/assets/img/table-bg.jpg);
   position: relative;

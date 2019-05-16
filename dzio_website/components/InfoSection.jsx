@@ -8,6 +8,12 @@ import {Trans} from "react-i18next";
 
 export default class InfoSection extends React.Component {
 
+    getHippodromeImgPath(race) {
+
+        let date = new Date(this.props.race.date);
+        return '/img/hippodromes/'+date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2)+'_'+race.reunion.code+'-R'+race.reunion.number+'C'+race.number+'.png';
+    }
+
     render() {
 
         let listBets = [];
@@ -119,10 +125,6 @@ export default class InfoSection extends React.Component {
 
                 <div className="block-race-condition">
 
-                    <div className="picto-meteo">
-                        <img src="https://www.equidia.fr/assets/img/meteo/P4_grand.png"/>
-                    </div>
-
                     <div className="row m-b-10">
                         <div className="col-md-3">
                             <div className="info-line-1">
@@ -150,14 +152,7 @@ export default class InfoSection extends React.Component {
                             </div>
                         </div>
                         <div className="col-md-3">
-                            <div className="info-line-1">
-                            </div>
-                            <div className="info-line-2">
-                                <div className="text-right">
-                                    <b>{this.props.weather.degree} {this.props.weather.state} / {this.props.weather.wind.speed}<br/>
-                                        {this.props.weather.wind.direction}</b>
-                                </div>
-                            </div>
+                            <div className="hippodrome-img" style={{backgroundImage:'url('+this.getHippodromeImgPath(this.props.race)+')'}}></div>
                         </div>
                     </div>
                 </div>
