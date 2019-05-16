@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Race;
 use App\BetResult;
+use App\RaceTranslation;
 use App\Reunion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class RaceController extends Controller
 {
@@ -205,12 +208,20 @@ class RaceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Race  $reunion
+     * @param  \App\Race  $raceId
      * @return \Illuminate\Http\Response
      */
-    public function edit(Race $reunion)
+    public function edit($raceId)
     {
         //
+        $reunion = RaceTranslation::where('raceId', $raceId)->where('lang', 'hy')->first();
+
+        if ($reunion == null) {
+            $reunion = Race::find($raceId);
+        }
+        $reunion->id = $raceId;
+
+        return view('race.edit', ["race" => $reunion]);
     }
 
     /**
@@ -220,9 +231,35 @@ class RaceController extends Controller
      * @param  \App\Race  $reunion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Race $reunion)
+    public function update(Request $request, $raceId)
     {
-        //
+        $label = $request->input('label');
+        $description = $request->input('description', '');
+        $gender = $request->input('gender', '');
+        $labelLong = $request->input('labelLong');
+        $type = $request->input('type');
+        $discipline = $request->input('discipline');
+        $comment = $request->input('comment');
+
+        if ($label == '') {
+            return Redirect::back()->withErrors(['msg', 'The Message']);
+        }
+
+        $raceTranslation = RaceTranslation::firstOrNew(['raceId' => $raceId, 'lang' => 'hy']);
+        $raceTranslation->label = $label;
+        $raceTranslation->description = $description;
+        $raceTranslation->gender = $gender;
+        $raceTranslation->labelLong = $labelLong;
+        $raceTranslation->type = $type;
+        $raceTranslation->discipline = $discipline;
+        $raceTranslation->comment = $comment;
+        $raceTranslation->lang = 'hy';
+
+        $raceTranslation->save();
+
+        Session::flash('msg', "Successfully saved");
+
+        return Redirect::back();
     }
 
     /**

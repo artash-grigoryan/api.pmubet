@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
     <div id="app">
@@ -34,15 +35,13 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    @if (session('status'))
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('admin/reunions') }}">Reunions</a></li>
-                        <li><a href="{{ url('admin/races') }}">Races</a></li>
+                        <li><a href="{{ url('admin/racesList') }}">Races</a></li>
                         <li><a href="{{ url('admin/runners') }}">Runners</a></li>
                         <li><a href="{{ url('admin/reporters') }}">Reporters</a></li>
                     </ul>
-                    @endif
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->

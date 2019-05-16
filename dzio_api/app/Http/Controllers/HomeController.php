@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Race;
 use App\Reunion;
 use Illuminate\Http\Request;
 
@@ -24,8 +25,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $reunions = Reunion::paginate(15);
+        $reunions = Reunion::orderBy('date', 'DESC')->paginate(15);
 
         return view('home', ["reunions" => $reunions]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function racesList()
+    {
+        $races = Race::orderBy('date', 'DESC')->paginate(15);
+//var_dump($races);exit;
+        return view('races', ["races" => $races]);
     }
 }

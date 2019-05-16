@@ -5,17 +5,14 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit reunion</div>
+                <div class="panel-heading">Edit reunion translation</div>
 
                 <div class="panel-body">
                     @if (session('msg'))
-                        <div class="alert alert-success">
-                            {{ session('msg') }}
-                        </div>
+                    <div class="alert alert-success">
+                        {{ session('msg') }}
+                    </div>
                     @endif
-
-                </div>
-                <div class="panel-body">
                     <form action="{{ url('/admin/reunion/'.$reunion->id) }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -34,7 +31,8 @@
                             <label for="speciality">Speciality</label>
                             <input type="text" class="form-control" id="speciality" name="speciality" value="{{ $reunion->speciality}}">
                         </div>
-                        <div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default">Cancel</button>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </form>

@@ -101,4 +101,14 @@ class Race extends Model
             ->where('societe', '!=', 'AIP')
             ->where('societe', '!=', 'geny.com');
     }
+
+    public function hasTranslation()
+    {
+        return $this->hasMany('App\RaceTranslation', "raceId")->exists();
+    }
+
+    public function translation($lang)
+    {
+        return $this->hasMany('App\RaceTranslation', "raceId")->where('lang', $lang);
+    }
 }

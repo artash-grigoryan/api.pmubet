@@ -92,7 +92,7 @@ class ReunionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Reunion  $reunion
+     * @param  \App\Reunion  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -111,7 +111,7 @@ class ReunionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Reunion  $reunion
+     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)

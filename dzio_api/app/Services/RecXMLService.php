@@ -58,7 +58,7 @@ class RecXMLService implements DataServiceInterface {
         $this->xmlParser = $xmlParser;
 
         $this->dayFolder = (new \DateTime())->format("Ymd");
-        $this->dayFolder = '20190514';
+        $this->dayFolder = '20190516';
     }
 
     /**
@@ -222,7 +222,7 @@ class RecXMLService implements DataServiceInterface {
     }
 
     /**
-     * @return array
+     * @return String
      */
     public function getCasaquesFolder()
     {
@@ -240,7 +240,7 @@ class RecXMLService implements DataServiceInterface {
     }
 
     /**
-     * @return array
+     * @return String
      */
     public function getHippodromesFolder()
     {

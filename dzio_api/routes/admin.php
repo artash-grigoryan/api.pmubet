@@ -14,6 +14,10 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/racesList', 'HomeController@racesList')->name('racesList');
     Route::get('/reunion/{id}', 'ReunionController@edit')->name('editReunion');
     Route::post('/reunion/{id}', 'ReunionController@update')->name('updateReunion');
+
+    Route::get('/race/{id}', 'RaceController@edit')->name('editRace');
+    Route::post('/race/{id}', 'RaceController@update')->name('updateRace');
 });

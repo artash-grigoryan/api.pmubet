@@ -45,5 +45,15 @@ class Reunion extends Model
         return $this->hasMany('App\Race', "reunionId")->with("bets")->with("runners")->with("betResults")->with('reporters');
     }
 
+    public function hasTranslation()
+    {
+        return $this->hasMany('App\ReunionTranslation', "reunionId")->exists();
+    }
+
+    public function translation($lang)
+    {
+        return $this->hasMany('App\ReunionTranslation', "reunionId")->where('lang', $lang);
+    }
+
 
 }
