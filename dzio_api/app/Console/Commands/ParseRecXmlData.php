@@ -46,9 +46,9 @@ class ParseRecXmlData extends Command
     public function handle(DataServiceInterface $dataService)
     {
 
+        $this->unzipHippodromes($dataService);exit;
         $this->unzipCasaques($dataService);
-        $this->unzipHippodromes($dataService);
-exit;
+
         $this->parseDayReunionsXML($dataService);
         $this->parseReunionsXML($dataService);
         $this->parseRacesXML($dataService);
@@ -1324,7 +1324,7 @@ exit;
 
                 $zip = new \ZipArchive();
                 if ($zip->open($dataService->getCasaquesFolder() . '/' . $fileName) === TRUE) {
-                    $zip->extractTo(__DIR__ . '/../../../../public/img/casaques/');
+                    $zip->extractTo(__DIR__ . '/../../../public/img/casaques/');
                     $zip->close();
                     //TODO unlink($dataService->getCasaquesFolder().'/'.$fileName);
                 } else {
@@ -1343,7 +1343,7 @@ exit;
 
                 $zip = new \ZipArchive();
                 if ($zip->open($dataService->getHippodromesFolder() . '/' . $fileName) === TRUE) {
-                    $zip->extractTo(__DIR__ . '/../../../../public/img/hippodromes/');
+                    $zip->extractTo(__DIR__ . '/../../../public/img/hippodromes/');
                     $zip->close();
                     //TODO unlink($dataService->getHippodromesFolder().'/'.$fileName);
                 } else {

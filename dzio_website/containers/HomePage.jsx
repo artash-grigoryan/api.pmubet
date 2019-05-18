@@ -30,16 +30,7 @@ export default class HomePage extends Component {
             reunionSelectorOpened: false,
             predictionTop: [],
             runnerSelected: [],
-            predictions: [],
-            weather: {
-                wind : {
-                    speed : '35km/h',
-                    direction : 'Sud-Ouest',
-                },
-                degree : '12°',
-                state : 'Peu nuageux'
-
-            }
+            predictions: []
         };
     }
 
@@ -67,7 +58,7 @@ export default class HomePage extends Component {
 
             raceActions.getNext().then((response) => {
 
-                let day = response.race.yesterday ? 'yesterday' : (response.race.today ? 'today' : (response.race.today ? 'tomorrow' : 'today'));
+                let day = response.race.yesterday ? 'yesterday' : (response.race.today ? 'today' : (response.race.tomorrow ? 'tomorrow' : ''));
 
                 this.setState({
                     day : day,
@@ -83,7 +74,7 @@ export default class HomePage extends Component {
     setReunion(reunionID) {
 
         let reunion = _.find(this.state.reunions[this.state.day], function(reunion){ return reunion.id === reunionID; });
-
+console.log(this.state.reunions[this.state.day]);
         this.setState({
             reunion : reunion,
             race : null,
@@ -97,7 +88,7 @@ export default class HomePage extends Component {
 
         raceActions.get(reunionID, raceNumber).then((response) => {
 
-            let day = response.race.yesterday ? 'yesterday' : (response.race.today ? 'today' : (response.race.today ? 'tomorrow' : 'today'));
+            let day = response.race.yesterday ? 'yesterday' : (response.race.today ? 'today' : (response.race.tomorrow ? 'tomorrow' : ''));
 
             this.setState({
                 day : day,
@@ -118,8 +109,7 @@ export default class HomePage extends Component {
 
     setDay(day) {
 
-        console.log(day);
-        console.log(this.state.reunions);
+        this.setState({day});
         this.setReunion(this.state.reunions[day][0].id);
     }
 

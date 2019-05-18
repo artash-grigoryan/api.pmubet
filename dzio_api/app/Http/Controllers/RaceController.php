@@ -30,16 +30,19 @@ class RaceController extends Controller
             ->orderBy('date', 'ASC')
             ->with("runners")
             ->with("results")
+            ->with('translation')
             ->get();
         $races['today'] = Race::where([['date', '>=', $today], ['date', '<', $tomorrow]])
             ->orderBy('date', 'ASC')
             ->with("runners")
             ->with("results")
+            ->with('translation')
             ->get();
         $races['tomorrow'] = Race::where([['date', '>=', $tomorrow], ['date', '<', $afterTomorrow]])
             ->orderBy('date', 'ASC')
             ->with("runners")
             ->with("results")
+            ->with('translation')
             ->get();
 
         foreach ($races as $day=>$dayRaces) {
@@ -68,6 +71,7 @@ class RaceController extends Controller
             ->with('reportersGeny')
             ->with('reportersBest')
             ->with('reportersOthers')
+            ->with('translation')
             ->first();
         $race->reunion = Reunion::where('id', $race->reunionId)->first();
         $race->day = date('Y-m-d', strtotime($race->date));
@@ -151,6 +155,7 @@ class RaceController extends Controller
             ->whereHas('bets', function($query){
                   $query->whereLib('QN');
               })
+            ->with('translation')
             ->orderBy('date', 'ASC')
             ->first();
         if($race) {
