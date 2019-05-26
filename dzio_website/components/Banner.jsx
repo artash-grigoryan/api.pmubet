@@ -9,6 +9,11 @@ import Countdown from "react-countdown-now";
 
 export default class Banner extends React.Component {
 
+    constructor(args) {
+        super(args);
+        this.props.race.labelLong = (this.props.race.translation ? this.props.race.translation.labelLong : null) || this.props.race.labelLong;
+    }
+
     renderer = ({ hours, minutes, seconds, completed }) => {
         if (completed) {
             // Render a completed state

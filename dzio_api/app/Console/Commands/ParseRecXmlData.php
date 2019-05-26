@@ -46,7 +46,7 @@ class ParseRecXmlData extends Command
     public function handle(DataServiceInterface $dataService)
     {
 
-        $this->unzipHippodromes($dataService);exit;
+        $this->unzipHippodromes($dataService);
         $this->unzipCasaques($dataService);
 
         $this->parseDayReunionsXML($dataService);

@@ -8,10 +8,15 @@ import {Trans} from "react-i18next";
 
 export default class NextQ5 extends React.Component {
 
+    constructor(args) {
+        super(args);
+        this.props.nextQ5.labelLong = (this.props.nextQ5.translation ? this.props.nextQ5.translation.labelLong : null) || this.props.nextQ5.labelLong;
+    }
+
     render() {
 
         return <div className="adv-1">
-            <a className="widget widget__quinte" href={"/" + this.props.nextQ5.reunion.id + "/R"+this.props.nextQ5.reunion.number+"/C" + this.props.nextQ5.number}>
+            <a className="widget widget__quinte" href={"/" + this.props.nextQ5.datePath + "/R"+this.props.nextQ5.reunion.number+"/C" + this.props.nextQ5.number}>
                 <div className="row">
                     <div className="col-md-12">
                         <div className="widget__top">

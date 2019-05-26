@@ -4,15 +4,16 @@ import cookie from 'js-cookie';
 
 export const raceActions = {
     get,
-    getAll,
+    getFirstByDate,
+    getFirstByReunion,
     getNext,
     getNextQ5
 };
 
-function getAll() {
+function get(date, reunionNumber, raceNumber) {
 
     return new Promise((resolve, reject) => {
-        raceService.getAll()
+        raceService.get(date, reunionNumber, raceNumber)
             .then((response) => {
 
                 if(response.data) {
@@ -28,10 +29,29 @@ function getAll() {
     });
 }
 
-function get(reunionID, raceNumber) {
+function getFirstByDate(date) {
 
     return new Promise((resolve, reject) => {
-        raceService.get(reunionID, raceNumber)
+        raceService.getFirstByDate(date)
+            .then((response) => {
+
+                if(response.data) {
+                    resolve(response.data);
+                }
+                else {
+                    reject();
+                }
+            })
+            .catch((error) => {
+
+            });
+    });
+}
+
+function getFirstByReunion(date, reunionNumber) {
+
+    return new Promise((resolve, reject) => {
+        raceService.getFirstByReunion(date, reunionNumber)
             .then((response) => {
 
                 if(response.data) {

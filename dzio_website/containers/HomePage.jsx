@@ -19,12 +19,23 @@ export default class HomePage extends Component {
     constructor(props) {
 
         super(props);
+
+        let date = new Date();
+        let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
+        date.setDate(date.getDate()-1);
+        let yesterday = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
+        date.setDate(date.getDate()+2);
+        let tomorrow = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
+
         this.state = {
 
+            yesterday: yesterday,
+            today: today,
+            tomorrow: tomorrow,
             reunions: false,
             nextRace: false,
             nextQ5: false,
-            day: 'today',
+            date: false,
             reunion: false,
             race: false,
             reunionSelectorOpened: false,
@@ -36,69 +47,106 @@ export default class HomePage extends Component {
 
     async componentWillMount() {
 
-        reunionActions.getAll().then((response) => {
-
-            this.setState({reunions : response.reunions})
-        });
+        this.setReunions();
 
         raceActions.getNextQ5().then((response) => {
 
             this.setState({nextQ5 : response.race})
         });
 
-        if(typeof this.props.match.params.reunionId !== 'undefined' && typeof this.props.match.params.raceNumber !== 'undefined') {
+        if(typeof this.props.match.params.raceNumber !== 'undefined') {
 
-            this.setRace(this.props.match.params.reunionId, this.props.match.params.raceNumber);
+            this.setRace(this.props.match.params.date, this.props.match.params.reunionNumber, this.props.match.params.raceNumber);
         }
-        else if(typeof this.props.match.params.reunionId !== 'undefined') {
+        else if(typeof this.props.match.params.reunionNumber !== 'undefined') {
 
-            this.setReunion(this.props.match.params.reunionId);
+            this.setFirstRaceByReunion(this.props.match.params.date, this.props.match.params.reunionNumber);
+        }
+        else if(typeof this.props.match.params.date !== 'undefined') {
+
+            this.setReunions(this.props.match.params.date);
+            this.setFirstRaceByDate(this.props.match.params.date)
         }
         else {
 
-            raceActions.getNext().then((response) => {
-
-                let day = response.race.yesterday ? 'yesterday' : (response.race.today ? 'today' : (response.race.tomorrow ? 'tomorrow' : ''));
-
-                this.setState({
-                    day : day,
-                    reunion : response.race.reunion,
-                    race : response.race,
-                    predictionTop : response.race.reporters_top,
-                    predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others))
-                });
-            });
+            this.setNextRace()
         }
     }
 
-    setReunion(reunionID) {
+    setReunions(date) {
 
-        let reunion = _.find(this.state.reunions[this.state.day], function(reunion){ return reunion.id === reunionID; });
-console.log(this.state.reunions[this.state.day]);
-        this.setState({
-            reunion : reunion,
-            race : null,
-            predictionTop : null,
-            predictions : null
+        reunionActions.getAll().then((response) => {
+            let reunions = _.groupBy(response.reunions, 'datePath');
+            this.setState({reunions : reunions});
         });
-        this.setRace(reunionID, 1);
+        if(typeof date === 'undefined') {
+
+        }
+        else {
+
+
+        }
     }
 
-    setRace(reunionID, raceNumber) {
+    setNextRace() {
 
-        raceActions.get(reunionID, raceNumber).then((response) => {
-
-            let day = response.race.yesterday ? 'yesterday' : (response.race.today ? 'today' : (response.race.tomorrow ? 'tomorrow' : ''));
+        raceActions.getNext().then((response) => {
 
             this.setState({
-                day : day,
+                date : response.race.datePath,
+                reunion : response.race.reunion,
+                race : response.race,
+                predictionTop : response.race.reporters_top,
+                predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others))
+            });
+        });
+    }
+
+    setFirstRaceByDate(date) {
+
+        raceActions.getFirstByDate(date).then((response) => {
+
+            this.setState({
+                date : response.race.datePath,
                 reunion : response.race.reunion,
                 race : response.race,
                 predictionTop : response.race.reporters_top,
                 predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others)),
                 reunionSelectorOpened : false
             });
-            this.props.history.push("/"+reunionID+"/R"+response.race.reunion.externNumber+"/C"+raceNumber);
+            this.props.history.push("/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
+        });
+    }
+
+    setFirstRaceByReunion(date, reunionNumber) {
+
+        raceActions.getFirstByReunion(date, reunionNumber).then((response) => {
+
+            this.setState({
+                date : response.race.datePath,
+                reunion : response.race.reunion,
+                race : response.race,
+                predictionTop : response.race.reporters_top,
+                predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others)),
+                reunionSelectorOpened : false
+            });
+            this.props.history.push("/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
+        });
+    }
+
+    setRace(date, reunionNumber, raceNumber) {
+
+        raceActions.get(date, reunionNumber, raceNumber).then((response) => {
+
+            this.setState({
+                date : response.race.datePath,
+                reunion : response.race.reunion,
+                race : response.race,
+                predictionTop : response.race.reporters_top,
+                predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others)),
+                reunionSelectorOpened : false
+            });
+            this.props.history.push("/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
         });
     }
 
@@ -107,34 +155,35 @@ console.log(this.state.reunions[this.state.day]);
         this.setState({reunionSelectorOpened:!this.state.reunionSelectorOpened});
     }
 
-    setDay(day) {
+    setDate(date) {
 
-        this.setState({day});
-        this.setReunion(this.state.reunions[day][0].id);
+        this.setState({date});
+        this.setFirstRaceByDate(date);
     }
 
 	render() {
 
         let listReunions = null;
-	    if(this.state.reunions && this.state.day) {
+	    if(this.state.reunions && this.state.date) {
 
-            let reunions = this.state.reunions[this.state.day];
+            let reunions = this.state.reunions[this.state.date];
 	        listReunions = reunions.map((reunion) =>
                 <li key={reunion.id} className={this.reunion && this.reunion.id === reunion.id ? 'active' : ''}>
-                    <Link to={"/" + reunion.id + "/R"+reunion.externNumber} onClick={() => this.setReunion(reunion.id)}>
-                        <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{reunion.externNumber}</b> - {reunion.hippodromeName}
+                    <Link to={"/" + reunion.datePath + "/R" + reunion.number} onClick={() => this.setFirstRaceByReunion(reunion.datePath, reunion.number)}>
+                        <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{reunion.number}</b> - {(reunion.translation ? reunion.translation.hippodromeName : null) || reunion.hippodromeName}
                     </Link>
                 </li>
             );
         }
 
         let listRaces = [];
-	    if(this.state.reunion && this.state.race) {
+	    if(this.state.date && this.state.reunion && this.state.race) {
 
             for (let raceNumber = 1; raceNumber <= this.state.reunion.racesNumber; ++raceNumber) {
+
                 listRaces.push(
                     <li key={raceNumber}>
-                        <Link className={this.state.race.number && this.state.race.number===raceNumber?'active':''} to={"/" + this.state.reunion.id + "/R"+this.state.reunion.externNumber+"/C" + raceNumber} onClick={() => this.setRace(this.state.reunion.id, raceNumber)}>C{raceNumber}</Link>
+                        <Link className={this.state.race.number && this.state.race.number===raceNumber?'active':''} to={"/" + this.state.date + "/R"+this.state.reunion.number+"/C" + raceNumber} onClick={() => this.setRace(this.state.date, this.state.reunion.number, raceNumber)}>C{raceNumber}</Link>
                     </li>
                 );
             }
@@ -153,13 +202,13 @@ console.log(this.state.reunions[this.state.day]);
                                 <ul>
 
                                     <li>
-                                        <a className={this.state.day === 'yesterday' ? 'active' : ''} href="#" onClick={() => this.setDay('yesterday')}><Trans i18nKey="Yesterday">Yesterday</Trans></a>
+                                        <Link className={this.state.date === this.state.yesterday?'active':''} to={"/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday)}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
                                     </li>
                                     <li>
-                                        <a className={this.state.day === 'today' ? 'active' : ''} href="#" onClick={() => this.setDay('today')}><Trans i18nKey="Today">Today</Trans></a>
+                                        <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.today} onClick={() => this.setDate(this.state.today)}><Trans i18nKey="Today">Today</Trans></Link>
                                     </li>
                                     <li>
-                                        <a className={this.state.day === 'tomorrow' ? 'active' : ''} href="#" onClick={() => this.setDay('tomorrow')}><Trans i18nKey="Tomorrow">Tomorrow</Trans></a>
+                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow)}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
                                     </li>
                                 </ul>
                                 <ul className="calendar-selector">
@@ -179,7 +228,7 @@ console.log(this.state.reunions[this.state.day]);
                                             ?
                                                 <div className="meeting-selector">
                                                     <a className="meeting-selected" href="#" onClick={() => this.toggleReunionSelector()}>
-                                                        <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{this.state.reunion.externNumber}</b> - {this.state.reunion.hippodromeName}
+                                                        <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{this.state.reunion.number}</b> - {(this.state.reunion.translation ? this.state.reunion.translation.hippodromeName : null) || this.state.reunion.hippodromeName}
                                                     </a>
                                                     <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
                                                         {listReunions}
@@ -197,7 +246,7 @@ console.log(this.state.reunions[this.state.day]);
                                         }
                                         <div className="race-selector">
                                             {
-                                                this.state.reunions && this.state.day && this.state.reunion
+                                                this.state.date && this.state.reunion
                                                 ?
                                                     <ul>
                                                         {listRaces}

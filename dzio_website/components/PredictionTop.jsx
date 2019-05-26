@@ -17,15 +17,21 @@ export default class PredictionTop extends React.Component {
         let runnerRank = _.find(props.predictionTop.predictions, function(runner){ return parseInt(runner.rank) === parseInt(1); });
         let runnerSelected = _.find(props.race.runners, function(runner){ return parseInt(runner.number) === parseInt(runnerRank.number); });
 
-        this.state = {
+        runnerSelected.name = (runnerSelected.translation ? runnerSelected.translation.name : null) || runnerSelected.name;
+        runnerSelected.comment = (runnerSelected.translation ? runnerSelected.translation.comment : null) || runnerSelected.comment;
 
-            runnerSelected : runnerSelected
-        }
+        this.state = {runnerSelected : runnerSelected}
+
     }
 
     componentWillReceiveProps(props) {
+
         let runnerRank = _.find(props.predictionTop.predictions, function(runner){ return parseInt(runner.rank) === parseInt(1); });
         let runnerSelected = _.find(props.race.runners, function(runner){ return parseInt(runner.number) === parseInt(runnerRank.number); });
+
+        runnerSelected.name = (runnerSelected.translation ? runnerSelected.translation.name : null) || runnerSelected.name;
+        runnerSelected.comment = (runnerSelected.translation ? runnerSelected.translation.comment : null) || runnerSelected.comment;
+
         this.setState({runnerSelected : runnerSelected});
     }
 
@@ -33,6 +39,10 @@ export default class PredictionTop extends React.Component {
 
         let runnerRank = _.find(this.props.predictionTop.predictions, function(runner){ return parseInt(runner.number) === parseInt(number); });
         let runnerSelected = _.find(this.props.race.runners, function(runner){ return parseInt(runner.number) === parseInt(runnerRank.number); });
+
+        runnerSelected.name = (runnerSelected.translation ? runnerSelected.translation.name : null) || runnerSelected.name;
+        runnerSelected.comment = (runnerSelected.translation ? runnerSelected.translation.comment : null) || runnerSelected.comment;
+        
         this.setState({runnerSelected : runnerSelected});
     }
 

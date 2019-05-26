@@ -52,7 +52,7 @@ class Reunion extends Model
 
     public function translation()
     {
-        return $this->hasMany('App\ReunionTranslation', "reunionId")->where('lang', 'hy');
+        return $this->hasOne('App\ReunionTranslation', "reunionId")->where('lang', 'hy');
     }
 
 
