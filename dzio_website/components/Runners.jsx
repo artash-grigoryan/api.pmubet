@@ -25,6 +25,12 @@ export default class Runners extends React.Component {
         this.setState({runnerSelected : null});
     }
 
+    getCasaqueImgPath(race, runner) {
+
+        let date = new Date(this.props.race.date);
+        return '/img/casaques/'+date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2)+'-R'+race.reunion.number+'C'+race.number+'P'+runner.number+'.png';
+    }
+
     render() {
 
         let listRunners = [];
@@ -34,11 +40,11 @@ export default class Runners extends React.Component {
                     <div className="runner">
                         <span className="runner-rank">{runner.number}</span>
                         <span className="runner-img">
-                            <img src="https://api.equidia.fr/api/public/media/casaque_extra_small/20181227-r1c2p1-png-2?updated_at=2018-12-26T18:16:18+01:00"/>
+                            <img src={this.getCasaqueImgPath(this.props.race, runner)}/>
                         </span>
                         <span className="runner-name">
-                            <p onClick={() => this.setState({runnerSelected : runner})}>{runner.name}</p>
-                            <span>{runner.jokey}</span>
+                            <p onClick={() => this.setState({runnerSelected : runner})}>{(runner.translation ? runner.translation.name : null) || runner.name}</p>
+                            <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey}</span>
                         </span>
                         <span className="runner-cote">
                             <span>{runner.signs} {runner.reportEvol}</span>
@@ -55,19 +61,19 @@ export default class Runners extends React.Component {
                                             <ul>
                                                 <li>
                                                     <span className="runner-detail-title"><Trans i18nKey="Trainer">Coach</Trans></span>
-                                                    <span className="runner-detail-value">{runner.coach}</span>
+                                                    <span className="runner-detail-value">{(runner.translation ? runner.translation.coach : null) || runner.coach}</span>
                                                 </li>
                                                 <li>
                                                     <span className="runner-detail-title"><Trans i18nKey="Birthday">Owner</Trans></span>
-                                                    <span className="runner-detail-value">{runner.owner}</span>
+                                                    <span className="runner-detail-value">{(runner.translation ? runner.translation.owner : null) || runner.owner}</span>
                                                 </li>
                                                 <li>
                                                     <span className="runner-detail-title"><Trans i18nKey="Birthday">Farmer</Trans></span>
-                                                    <span className="runner-detail-value">{runner.farmer}</span>
+                                                    <span className="runner-detail-value">{(runner.translation ? runner.translation.farmer : null) || runner.farmer}</span>
                                                 </li>
                                                 <li>
                                                     <span className="runner-detail-title"><Trans i18nKey="Breed">Breed</Trans></span>
-                                                    <span className="runner-detail-value">{runner.breed}</span>
+                                                    <span className="runner-detail-value">{(runner.translation ? runner.translation.breed : null) || runner.breed}</span>
                                                 </li>
                                                 <li>
                                                     <span className="runner-detail-title"><Trans i18nKey="Gender">Gender</Trans></span>
@@ -86,11 +92,11 @@ export default class Runners extends React.Component {
                                             <ul>
                                                 <li>
                                                     <span className="runner-detail-title"><Trans i18nKey="Name of the mother">Name of the mother</Trans></span>
-                                                    <span className="runner-detail-value">{runner.mother}</span>
+                                                    <span className="runner-detail-value">{(runner.translation ? runner.translation.mother : null) || runner.mother}</span>
                                                 </li>
                                                 <li>
                                                     <span className="runner-detail-title"><Trans i18nKey="Name of the father">Name of the father</Trans></span>
-                                                    <span className="runner-detail-value">{runner.father}</span>
+                                                    <span className="runner-detail-value">{(runner.translation ? runner.translation.father : null) || runner.father}</span>
                                                 </li>
                                             </ul>
                                         </Carousel.Caption>

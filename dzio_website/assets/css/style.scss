@@ -127,6 +127,12 @@ body {
 .info-section {
   background-color: #f0f0f0;
 }
+.info-section .hippodrome-img {
+  width: 100%;
+  height: 130px;
+  background-size: 150% 150%;
+  background-position: 50% 50%;
+}
 .bg-section {
   background-image: url(https://www.equidia.fr/assets/img/table-bg.jpg);
   position: relative;
@@ -301,14 +307,16 @@ body {
 }
 #main .bar-selector .meeting-selector a.meeting-selected {
   display: inline-block;
-  padding: 13px 30px 3px;
+  padding: 13px 0px 3px 30px;
   color: #000;
   vertical-align: super;
+  margin-right: 30px;
   text-transform: uppercase;
   white-space: nowrap;
   text-decoration: none;
   overflow: hidden;
-  width: 400px;
+  text-overflow: ellipsis;
+  width: 370px;
 }
 #main .bar-selector .meeting-selector .meeting-selected a img{
   margin-right: 10px;
@@ -489,6 +497,9 @@ body {
   padding: 0 15px;
   position: relative;
 }
+.prediction-top .prediction-header ul li a {
+  cursor: pointer;
+}
 .prediction-top .prediction-header ul.minimize li{
   font-size: 24px;
   padding: 0 6px;
@@ -621,6 +632,9 @@ body {
 .runners-tab .runner-img{
   width: 50px;
   text-align: center;
+}
+.runners-tab .runner-img img{
+  width: 100%;
 }
 .runners-tab .runner-name{
   width: 250px;
@@ -1187,6 +1201,9 @@ body {
 .results-section .results-selection-tab tr{}
 .results-section .results-selection-tab tr td.result-selector{
   text-align: center;
+}
+.results-section .results-selection-tab tr td.result-selector > a{
+  display: block;
   padding: 20px;
 }
 .results-section .results-selection-tab tr td.result-selector.active{

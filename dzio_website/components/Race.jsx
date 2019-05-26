@@ -16,6 +16,12 @@ import BetResults from "./BetResults";
 
 export default class Race extends React.Component {
 
+    constructor(args) {
+        super(args);
+        this.props.race.comment = (this.props.race.translation ? this.props.race.translation.comment : null) || this.props.race.comment;
+        this.props.race.description = (this.props.race.translation ? this.props.race.translation.description : null) || this.props.race.description;
+    }
+
     render() {
 
         return <div>
@@ -38,7 +44,7 @@ export default class Race extends React.Component {
 
                         <div className="col-lg-5 col-md-12">
                         {
-                            !this.props.race.betResults.length
+                            !this.props.race.betResults.length && this.props.predictionTop
                                 ?
 
                                     <PredictionTop {...this.props}/>
@@ -59,7 +65,7 @@ export default class Race extends React.Component {
                         </div>
 
                         {
-                            !this.props.race.betResults.length
+                            !this.props.race.betResults.length && this.props.predictions
                                 ?
                                 <div className="col-lg-12">
                                     <Predictions {...this.props}/>

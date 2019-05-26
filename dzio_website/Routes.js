@@ -13,8 +13,9 @@ const Routes = () => (
     <Router>
         <Switch>
             <Route exact path='/' component={HomePage}/>
-            <Route exact path='/:reunionId/R:reunionNumber' component={HomePage}/>
-            <Route exact path='/:reunionId/R:reunionNumber/C:raceNumber' component={HomePage}/>
+            <Route exact path='/:date' component={HomePage}/>
+            <Route exact path='/:date/R:reunionNumber' component={HomePage}/>
+            <Route exact path='/:date/R:reunionNumber/C:raceNumber' component={HomePage}/>
             <Route exact path='/predictions' component={PredictionsPage}/>
             <Route exact path='/calendar-results' component={CalendarResultsPage}/>
             <Route exact path='/how-to-bet' component={HowToBetPage}/>
