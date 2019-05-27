@@ -75,16 +75,19 @@ export default class HomePage extends Component {
 
     setReunions(date) {
 
-        reunionActions.getAll().then((response) => {
-            let reunions = _.groupBy(response.reunions, 'datePath');
-            this.setState({reunions : reunions});
-        });
         if(typeof date === 'undefined') {
 
+            reunionActions.getAll().then((response) => {
+                let reunions = _.groupBy(response.reunions, 'datePath');
+                this.setState({reunions : reunions});
+            });
         }
         else {
 
-
+            reunionActions.get(date).then((response) => {
+                let reunionsThisDate = _.groupBy(response.reunions, 'datePath');
+                this.setState({reunions : _.merge(this.state.reunions, reunionsThisDate)});
+            });
         }
     }
 
