@@ -13,17 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 Route::middleware(['cors'])->group(function () {
-    Route::options('reunion/all', "ReunionController@getAll");
-    Route::get('reunion/all', "ReunionController@getAll");
-    Route::get('reunion/{date}', "ReunionController@getByDate");
-    Route::get('race/get/{date}/first', "RaceController@getFirstByDate");
-    Route::get('race/get/{date}/{reunionNumber}/first', "RaceController@getFirstByReunion");
-    Route::get('race/get/{date}/{reunionNumber}/{raceNumber}', "RaceController@get");
-    Route::options('race/next', "RaceController@getNext");
-    Route::get('race/next', "RaceController@getNext");
-    Route::options('race/nextQ5', "RaceController@getNextQ5");
-    Route::get('race/nextQ5', "RaceController@getNextQ5");
-    Route::get('race/2next', "RaceController@get2Next");
+    Route::get('reunion/get/all',   "ReunionController@getAll");
+    Route::get('reunion/get/{date}',"ReunionController@getByDate");
+    Route::get('race/get/all',      "RaceController@getAll");
+    Route::get('race/get/next',     "RaceController@getNext");
+    Route::get('race/get/nextQ5',   "RaceController@getNextQ5");
+    Route::get('race/get/2next',    "RaceController@get2Next");
+    Route::get('race/get/{date}',   "RaceController@getAllByDate");
+    Route::get('race/get/{date}/first',                         "RaceController@getFirstByDate");
+    Route::get('race/get/{date}/{reunionNumber}/first',         "RaceController@getFirstByReunion");
+    Route::get('race/get/{date}/{reunionNumber}/{raceNumber}',  "RaceController@get");
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

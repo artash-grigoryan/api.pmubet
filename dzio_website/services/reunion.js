@@ -8,10 +8,10 @@ export const reunionService = {
 
 function getAll() {
 
-    return axios.get('/api/reunion/all');
+    return axios.get('/api/reunion/get/all');
 }
 
 function get(date) {
 
-    return axios.get('/api/reunion/'+date);
+    return axios.get('/api/reunion/get/'+date);
 }

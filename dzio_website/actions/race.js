@@ -4,6 +4,8 @@ import cookie from 'js-cookie';
 
 export const raceActions = {
     get,
+    getAll,
+    getAllByDate,
     getFirstByDate,
     getFirstByReunion,
     getNext,
@@ -14,6 +16,44 @@ function get(date, reunionNumber, raceNumber) {
 
     return new Promise((resolve, reject) => {
         raceService.get(date, reunionNumber, raceNumber)
+            .then((response) => {
+
+                if(response.data) {
+                    resolve(response.data);
+                }
+                else {
+                    reject();
+                }
+            })
+            .catch((error) => {
+
+            });
+    });
+}
+
+function getAll() {
+
+    return new Promise((resolve, reject) => {
+        raceService.getAll()
+            .then((response) => {
+
+                if(response.data) {
+                    resolve(response.data);
+                }
+                else {
+                    reject();
+                }
+            })
+            .catch((error) => {
+
+            });
+    });
+}
+
+function getAllByDate(date) {
+
+    return new Promise((resolve, reject) => {
+        raceService.getAllByDate(date)
             .then((response) => {
 
                 if(response.data) {

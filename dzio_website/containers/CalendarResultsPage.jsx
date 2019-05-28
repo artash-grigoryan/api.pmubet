@@ -19,8 +19,19 @@ export default class CalendarResultsPage extends Component {
     constructor(props) {
 
         super(props);
+
+        let date = new Date();
+        let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
+        date.setDate(date.getDate()-1);
+        let yesterday = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
+        date.setDate(date.getDate()+2);
+        let tomorrow = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
+
         this.state = {
-            day : 'today',
+            yesterday: yesterday,
+            today: today,
+            tomorrow: tomorrow,
+            date : today,
             filter : 'all',
             races : null
         };
@@ -31,7 +42,7 @@ export default class CalendarResultsPage extends Component {
         raceActions.getAll().then((response) => {
 
             this.setState({
-                races : response.races
+                races : _.groupBy(response.races, 'datePath')
             });
         });
     }
@@ -40,10 +51,10 @@ export default class CalendarResultsPage extends Component {
         this.props.history.push(target);
     }
 
-    setDay(day) {
+    setDate(date) {
 
         this.setState({
-            day : day,
+            date : date,
             filter : 'all'
         });
     }
@@ -71,13 +82,13 @@ export default class CalendarResultsPage extends Component {
                                 <ul>
 
                                     <li>
-                                        <a className={this.state.day === 'yesterday' ? 'active' : ''} href="#" onClick={() => this.setDay('yesterday')}><Trans i18nKey="Yesterday">Yesterday</Trans></a>
+                                        <Link className={this.state.date === this.state.yesterday?'active':''} to={"/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday)}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
                                     </li>
                                     <li>
-                                        <a className={this.state.day === 'today' ? 'active' : ''} href="#" onClick={() => this.setDay('today')}><Trans i18nKey="Today">Today</Trans></a>
+                                        <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.today} onClick={() => this.setDate(this.state.today)}><Trans i18nKey="Today">Today</Trans></Link>
                                     </li>
                                     <li>
-                                        <a className={this.state.day === 'tomorrow' ? 'active' : ''} href="#" onClick={() => this.setDay('tomorrow')}><Trans i18nKey="Tomorrow">Tomorrow</Trans></a>
+                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow)}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
                                     </li>
                                 </ul>
                                 <ul className="calendar-selector">
@@ -158,7 +169,7 @@ export default class CalendarResultsPage extends Component {
                                                         </tr>
                                                     )
                                                 :
-                                                    this.state.races[this.state.day].map((race, indexRace) =>
+                                                    this.state.races[this.state.date].map((race, indexRace) =>
                                                         <tr key={indexRace}>
 
                                                             <td className="name-cell" onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>

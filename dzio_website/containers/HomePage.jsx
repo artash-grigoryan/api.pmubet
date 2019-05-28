@@ -56,10 +56,12 @@ export default class HomePage extends Component {
 
         if(typeof this.props.match.params.raceNumber !== 'undefined') {
 
+            this.setReunions(this.props.match.params.date);
             this.setRace(this.props.match.params.date, this.props.match.params.reunionNumber, this.props.match.params.raceNumber);
         }
         else if(typeof this.props.match.params.reunionNumber !== 'undefined') {
 
+            this.setReunions(this.props.match.params.date);
             this.setFirstRaceByReunion(this.props.match.params.date, this.props.match.params.reunionNumber);
         }
         else if(typeof this.props.match.params.date !== 'undefined') {
