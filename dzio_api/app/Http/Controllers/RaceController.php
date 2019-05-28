@@ -13,6 +13,52 @@ use Illuminate\Support\Facades\Session;
 
 class RaceController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAll()
+    {
+        $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+            ->where([['date', '>=', date('Y-m-d', strtotime('-1 DAY +2 HOUR'))], ['date', '<=', date('Y-m-d', strtotime('+2 DAY +2 HOUR'))]])
+            ->orderBy('date', 'ASC')
+            ->with("runners")
+            ->with("results")
+            ->with('translation')
+            ->get();
+
+        foreach ($races as $key=>$race) {
+
+            $races[$key]->reunion = Reunion::where('id', $race->reunionId)
+                ->with('translation')
+                ->first();
+        }
+
+        return response()->json(array('races'=>$races));
+    }
+
+    public function getAllByDate($date)
+    {
+        $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+            ->where([['date', '>=', date('Y-m-d', strtotime($date.' +2 HOUR'))], ['date', '<', date('Y-m-d', strtotime($date.' +1 DAY +2 HOUR'))]])
+            ->orderBy('date', 'ASC')
+            ->with("runners")
+            ->with("results")
+            ->with('translation')
+            ->get();
+
+        foreach ($races as $key=>$race) {
+
+            $races[$key]->reunion = Reunion::where('id', $race->reunionId)
+                ->with('translation')
+                ->first();
+        }
+
+        return response()->json(array('races'=>$races));
+    }
+
     public function getNext()
     {
         $now = date('Y-m-d H:m:s', strtotime('+2 HOUR'));

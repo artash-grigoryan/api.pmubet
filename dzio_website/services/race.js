@@ -3,6 +3,8 @@ import axios  from './../helpers/axios';
 
 export const raceService = {
     get,
+    getAll,
+    getAllByDate,
     getFirstByDate,
     getFirstByReunion,
     getNext,
@@ -12,6 +14,16 @@ export const raceService = {
 function get(date, reunionNumber, raceNumber) {
 
     return axios.get('/api/race/get/'+date+'/'+reunionNumber+'/'+raceNumber);
+}
+
+function getAll() {
+
+    return axios.get('/api/race/get/all');
+}
+
+function getAllByDate(date) {
+
+    return axios.get('/api/race/get/'+date);
 }
 
 function getFirstByDate(date) {
@@ -26,10 +38,10 @@ function getFirstByReunion(date, reunionNumber) {
 
 function getNext() {
 
-    return axios.get('/api/race/next');
+    return axios.get('/api/race/get/next');
 }
 
 function getNextQ5() {
 
-    return axios.get('/api/race/nextQ5');
+    return axios.get('/api/race/get/nextQ5');
 }
