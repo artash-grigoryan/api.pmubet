@@ -7,10 +7,10 @@ export const reunionActions = {
     getAll,
 };
 
-function getAll() {
+function getAll(lang) {
 
     return new Promise((resolve, reject) => {
-        reunionService.getAll()
+        reunionService.getAll(lang)
             .then((response) => {
 
                 if(response.data) {
@@ -26,10 +26,10 @@ function getAll() {
     });
 }
 
-function get(date) {
+function get(lang, date) {
 
     return new Promise((resolve, reject) => {
-        reunionService.get(date)
+        reunionService.get(lang, date)
             .then((response) => {
 
                 if(response.data) {

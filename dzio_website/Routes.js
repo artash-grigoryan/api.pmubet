@@ -13,14 +13,15 @@ const Routes = () => (
     <Router>
         <Switch>
             <Route exact path='/' component={HomePage}/>
-            <Route exact path='/predictions' component={PredictionsPage}/>
-            <Route exact path='/calendar-results' component={CalendarResultsPage}/>
-            <Route exact path='/calendar-results/:date' component={CalendarResultsPage}/>
-            <Route exact path='/how-to-bet' component={HowToBetPage}/>
-            <Route exact path='/news' component={NewsPage}/>
-            <Route exact path='/:date' component={HomePage}/>
-            <Route exact path='/:date/R:reunionNumber' component={HomePage}/>
-            <Route exact path='/:date/R:reunionNumber/C:raceNumber' component={HomePage}/>
+            <Route exact path='/:lang' component={HomePage}/>
+            <Route exact path='/:lang/predictions' component={PredictionsPage}/>
+            <Route exact path='/:lang/calendar-results' component={CalendarResultsPage}/>
+            <Route exact path='/:lang/calendar-results/:date' component={CalendarResultsPage}/>
+            <Route exact path='/:lang/how-to-bet' component={HowToBetPage}/>
+            <Route exact path='/:lang/news' component={NewsPage}/>
+            <Route exact path='/:lang/:date' component={HomePage}/>
+            <Route exact path='/:lang/:date/R:reunionNumber' component={HomePage}/>
+            <Route exact path='/:lang/:date/R:reunionNumber/C:raceNumber' component={HomePage}/>
             {/*<PrivateRoute path='/trip' component={TripLayout}/>*/}
             <Route path='*' exact={true} component={NotFoundPage}/>
         </Switch>

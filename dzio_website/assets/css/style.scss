@@ -362,6 +362,20 @@ body {
   color: #000;
   font-size: 25px;
 }
+#main .bar-selector .react-calendar {
+  z-index: 10;
+  position: absolute;
+  border: none;
+  font-family: inherit;
+}
+#main .bar-selector .react-calendar__tile--active {
+  background: #218750;
+  color: white;
+}
+#main .react-calendar__navigation__prev2-button,
+#main .react-calendar__navigation__next2-button {
+  display: none;
+}
 #main .bar-selector .meeting-selector ul li a {
   display: inline-block;
   padding: 13px 30px 3px;
@@ -617,6 +631,7 @@ body {
 }
 .table-striped .runner {
   display: flex;
+  position: relative;
 }
 .table-striped .runner > span{
   display: inline-block;
@@ -640,6 +655,17 @@ body {
   width: 250px;
   white-space: nowrap;
   overflow: hidden;
+}
+.runners-tab .runner-name .do-not-run{
+  background-color: red;
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 20px;
+  color: #fff;
+  position: absolute;
+  padding: 3px 7px;
+  right: 10px;
+  top: 15px;
 }
 .runners-tab .runner-name p{
   margin: 0;

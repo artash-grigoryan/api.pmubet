@@ -19,7 +19,7 @@ export default class PredictionsPage extends Component {
 
         super(props);
         this.state = {
-
+            lang: this.props.match.params.lang,
         };
     }
 
@@ -31,7 +31,7 @@ export default class PredictionsPage extends Component {
 
 		return <div>
             <header>
-                <MainMenu/>
+                <MainMenu {...this.state}/>
             </header>
 
             <div className="container-fluid">

@@ -12,6 +12,7 @@ import Countdown from 'react-countdown-now';
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import Race from "../components/Race";
+import Calendar from "react-calendar";
 const { t, i18n } = useTranslation();
 
 export default class CalendarResultsPage extends Component {
@@ -21,30 +22,46 @@ export default class CalendarResultsPage extends Component {
         super(props);
 
         let date = new Date();
+        date.setTime(date.getTime() + (2*60*60*1000)); // ADDING 2 HOURS FOR ARMENIA
         let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
         date.setDate(date.getDate()-1);
         let yesterday = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
         date.setDate(date.getDate()+2);
         let tomorrow = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
 
+        let dateCalendar = new Date();
+        let minDateCalendar = new Date().setMonth(new Date().getMonth()-2);
+        let maxDateCalendar = new Date().setDate(new Date().getDate()+1);
+
         this.state = {
+            lang: this.props.match.params.lang,
             yesterday: yesterday,
             today: today,
             tomorrow: tomorrow,
             date : today,
             filter : 'all',
+            calendarSelectorOpened: false,
+            dateCalendar : dateCalendar,
+            minDateCalendar : minDateCalendar,
+            maxDateCalendar : maxDateCalendar,
             races : null
         };
     }
 
     async componentWillMount() {
 
-        raceActions.getAll().then((response) => {
+        if(typeof this.props.match.params.date !== 'undefined') {
 
-            this.setState({
-                races : _.groupBy(response.races, 'datePath')
+            this.setDate(this.props.match.params.date);
+        }
+        else {
+            raceActions.getAll(this.state.lang).then((response) => {
+
+                this.setState({
+                    races : _.groupBy(response.races, 'datePath')
+                });
             });
-        });
+        }
     }
 
     redirect(target) {
@@ -53,10 +70,38 @@ export default class CalendarResultsPage extends Component {
 
     setDate(date) {
 
-        this.setState({
-            date : date,
-            filter : 'all'
-        });
+        if(!this.state.races || !this.state.races[date]) {
+
+            raceActions.getAllByDate(this.state.lang, date).then((response) => {
+
+                if(this.state.races) {
+                    this.state.races[date] = response.races;
+                }
+                else {
+                    this.state.races = _.groupBy(response.races, 'datePath');
+                }
+                if(this.state.races[date] && this.state.races[date].length) {
+
+                    this.setState({
+                        races : this.state.races,
+                        date : date,
+                        dateCalendar : this.state.races[date][0].day,
+                        filter : 'all',
+                        calendarSelectorOpened: false,
+                    });
+                }
+            });
+        }
+        else {
+
+            this.setState({
+                date : date,
+                filter : 'all',
+                dateCalendar : this.state.races[date][0].day,
+                calendarSelectorOpened: false,
+            });
+        }
+        this.props.history.push("/"+this.state.lang+"/calendar-results/"+date);
     }
 
     setFilter(filter) {
@@ -66,11 +111,16 @@ export default class CalendarResultsPage extends Component {
         });
     }
 
+    toggleCalendarSelector() {
+
+        this.setState({calendarSelectorOpened:!this.state.calendarSelectorOpened});
+    }
+
 	render() {
 
 		return <div id="calendar-result">
             <header>
-                <MainMenu/>
+                <MainMenu {...this.state}/>
             </header>
 
             <div className="container-fluid">
@@ -82,20 +132,33 @@ export default class CalendarResultsPage extends Component {
                                 <ul>
 
                                     <li>
-                                        <Link className={this.state.date === this.state.yesterday?'active':''} to={"/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday)}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
+                                        <Link className={this.state.date === this.state.yesterday?'active':''} to={"/"+ this.state.lang + "/calendar-results/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday)}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
                                     </li>
                                     <li>
-                                        <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.today} onClick={() => this.setDate(this.state.today)}><Trans i18nKey="Today">Today</Trans></Link>
+                                        <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.lang + "/calendar-results/" + this.state.today} onClick={() => this.setDate(this.state.today)}><Trans i18nKey="Today">Today</Trans></Link>
                                     </li>
                                     <li>
-                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow)}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
+                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.lang + "/calendar-results/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow)}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
                                     </li>
                                 </ul>
                                 <ul className="calendar-selector">
                                     <li>
-                                        <a href="#">
+                                        <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleCalendarSelector()}>
                                             <FontAwesomeIcon icon="calendar-alt" />
                                         </a>
+                                        {
+                                            this.state.calendarSelectorOpened
+                                                ?
+                                                <Calendar
+                                                    locale={this.state.lang}
+                                                    onClickDay={(date) => this.setDate(date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2))}
+                                                    value={new Date(this.state.dateCalendar)}
+                                                    minDate={new Date(this.state.minDateCalendar)}
+                                                    maxDate={new Date(this.state.maxDateCalendar)}
+                                                />
+                                                :
+                                                null
+                                        }
                                     </li>
                                 </ul>
                             </div>
@@ -109,8 +172,8 @@ export default class CalendarResultsPage extends Component {
                                     <h1>
                                         <Trans i18nKey="Calendar & Results">Calendar & Results</Trans>
                                     </h1>
+                                    <p style={{marginTop: '20px',fontSize: '27px'}}>{this.state.date === this.state.today ? <Trans i18nKey="Today">Today</Trans> : (this.state.date === this.state.tomorrow ? <Trans i18nKey="Tomorrow">Tomorrow</Trans> : (this.state.date === this.state.yesterday ? <Trans i18nKey="Yesterday">Yesterday</Trans> : this.state.dateCalendar))}</p>
 
-                                    <div style={{marginTop: '30px'}}><a target="_blank" className="btn btn-md" href="https://www.vivarobet.am"><Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans></a></div>
                                 </div>
                             </div>
                         </div>
@@ -131,19 +194,19 @@ export default class CalendarResultsPage extends Component {
                                             ?
                                                 this.state.filter === 'next'
                                                 ?
-                                                    _.filter(this.state.races[this.state.day], function(race){ return Date.parse(race.date) > Date.now(); }).map((race, indexRace) =>
+                                                    _.filter(this.state.races[this.state.date], function(race){ return Date.parse(race.date) > Date.now(); }).map((race, indexRace) =>
                                                         <tr key={indexRace}>
 
-                                                            <td className="name-cell" onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            <td className="name-cell" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 R{race.reunion.number}C{race.number} - {race.labelLong}
 
                                                             </td>
 
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 {race.time}
                                                             </td>
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></td>
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></td>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 {
                                                                     race.results.slice(0, 8).map((runner, indexRunner) =>
                                                                         <span key={indexRunner}>
@@ -157,7 +220,7 @@ export default class CalendarResultsPage extends Component {
                                                                 {
                                                                     Date.parse(race.date) < Date.now()
                                                                         ?
-                                                                        <a className="btn btn-access" href={"/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number}>
+                                                                        <a className="btn btn-access" href={"/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number}>
                                                                             <Trans i18nKey="Results">Results</Trans>
                                                                         </a>
                                                                         :
@@ -172,16 +235,16 @@ export default class CalendarResultsPage extends Component {
                                                     this.state.races[this.state.date].map((race, indexRace) =>
                                                         <tr key={indexRace}>
 
-                                                            <td className="name-cell" onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            <td className="name-cell" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 R{race.reunion.number}C{race.number} - {race.labelLong}
 
                                                             </td>
 
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 {race.time}
                                                             </td>
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></td>
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></td>
+                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 {
                                                                     race.results.slice(0, 8).map((runner, indexRunner) =>
                                                                         <span key={indexRunner}>
@@ -195,7 +258,7 @@ export default class CalendarResultsPage extends Component {
                                                                 {
                                                                     Date.parse(race.date) < Date.now()
                                                                         ?
-                                                                        <a className="btn btn-access" href={"/" + race.reunion.id + "/R"+race.reunion.number+"/C" + race.number}>
+                                                                        <a className="btn btn-access" href={"/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number}>
                                                                             <Trans i18nKey="Results">Results</Trans>
                                                                         </a>
                                                                         :

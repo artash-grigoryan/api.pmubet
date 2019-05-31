@@ -43,7 +43,7 @@ export default class Runners extends React.Component {
                             <img src={this.getCasaqueImgPath(this.props.race, runner)}/>
                         </span>
                         <span className="runner-name">
-                            <p onClick={() => this.setState({runnerSelected : runner})}>{(runner.translation ? runner.translation.name : null) || runner.name}</p>
+                            <p onClick={() => this.setState({runnerSelected : runner})}>{(runner.translation ? runner.translation.name : null) || runner.name} {runner.doNotRun ? <span className="do-not-run"><Trans i18nKey="Do not run">Do not run</Trans></span> : null}</p>
                             <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey}</span>
                         </span>
                         <span className="runner-cote">
@@ -60,15 +60,15 @@ export default class Runners extends React.Component {
                                             <h3><Trans i18nKey="Runner details">Runner details</Trans></h3>
                                             <ul>
                                                 <li>
-                                                    <span className="runner-detail-title"><Trans i18nKey="Trainer">Coach</Trans></span>
+                                                    <span className="runner-detail-title"><Trans i18nKey="Coach">Coach</Trans></span>
                                                     <span className="runner-detail-value">{(runner.translation ? runner.translation.coach : null) || runner.coach}</span>
                                                 </li>
                                                 <li>
-                                                    <span className="runner-detail-title"><Trans i18nKey="Birthday">Owner</Trans></span>
+                                                    <span className="runner-detail-title"><Trans i18nKey="Owner">Owner</Trans></span>
                                                     <span className="runner-detail-value">{(runner.translation ? runner.translation.owner : null) || runner.owner}</span>
                                                 </li>
                                                 <li>
-                                                    <span className="runner-detail-title"><Trans i18nKey="Birthday">Farmer</Trans></span>
+                                                    <span className="runner-detail-title"><Trans i18nKey="Farmer">Farmer</Trans></span>
                                                     <span className="runner-detail-value">{(runner.translation ? runner.translation.farmer : null) || runner.farmer}</span>
                                                 </li>
                                                 <li>
