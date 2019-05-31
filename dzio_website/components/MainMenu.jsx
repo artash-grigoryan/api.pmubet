@@ -159,16 +159,16 @@ class MainMenu extends React.Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <a className="nav-link" href="/"><Trans i18nKey="Programs">Programs</Trans></a>
+                        <a className="nav-link" href={"/"+this.props.lang}><Trans i18nKey="Programs">Programs</Trans></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/calendar-results"><Trans i18nKey="Calendar & Results">Calendar & Results</Trans></a>
+                        <a className="nav-link" href={"/"+this.props.lang+"/calendar-results"}><Trans i18nKey="Calendar & Results">Calendar & Results</Trans></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/how-to-bet"><Trans i18nKey="How to bet">How to bet</Trans></a>
+                        <a className="nav-link" href={"/"+this.props.lang+"/how-to-bet"}><Trans i18nKey="How to bet">How to bet</Trans></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/news"><Trans i18nKey="News">News</Trans></a>
+                        <a className="nav-link" href={"/"+this.props.lang+"/news"}><Trans i18nKey="News">News</Trans></a>
                     </li>
                 </ul>
                 <ul className="navbar-nav">

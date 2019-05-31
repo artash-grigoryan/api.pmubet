@@ -12,10 +12,10 @@ export const raceActions = {
     getNextQ5
 };
 
-function get(date, reunionNumber, raceNumber) {
+function get(lang, date, reunionNumber, raceNumber) {
 
     return new Promise((resolve, reject) => {
-        raceService.get(date, reunionNumber, raceNumber)
+        raceService.get(lang, date, reunionNumber, raceNumber)
             .then((response) => {
 
                 if(response.data) {
@@ -31,10 +31,10 @@ function get(date, reunionNumber, raceNumber) {
     });
 }
 
-function getAll() {
+function getAll(lang) {
 
     return new Promise((resolve, reject) => {
-        raceService.getAll()
+        raceService.getAll(lang)
             .then((response) => {
 
                 if(response.data) {
@@ -50,10 +50,10 @@ function getAll() {
     });
 }
 
-function getAllByDate(date) {
+function getAllByDate(lang, date) {
 
     return new Promise((resolve, reject) => {
-        raceService.getAllByDate(date)
+        raceService.getAllByDate(lang, date)
             .then((response) => {
 
                 if(response.data) {
@@ -69,10 +69,10 @@ function getAllByDate(date) {
     });
 }
 
-function getFirstByDate(date) {
+function getFirstByDate(lang, date) {
 
     return new Promise((resolve, reject) => {
-        raceService.getFirstByDate(date)
+        raceService.getFirstByDate(lang, date)
             .then((response) => {
 
                 if(response.data) {
@@ -88,10 +88,10 @@ function getFirstByDate(date) {
     });
 }
 
-function getFirstByReunion(date, reunionNumber) {
+function getFirstByReunion(lang, date, reunionNumber) {
 
     return new Promise((resolve, reject) => {
-        raceService.getFirstByReunion(date, reunionNumber)
+        raceService.getFirstByReunion(lang, date, reunionNumber)
             .then((response) => {
 
                 if(response.data) {
@@ -107,10 +107,10 @@ function getFirstByReunion(date, reunionNumber) {
     });
 }
 
-function getNext() {
+function getNext(lang) {
 
     return new Promise((resolve, reject) => {
-        raceService.getNext()
+        raceService.getNext(lang)
             .then((response) => {
 
                 if(response.data) {
@@ -126,10 +126,10 @@ function getNext() {
     });
 }
 
-function getNextQ5() {
+function getNextQ5(lang) {
 
     return new Promise((resolve, reject) => {
-        raceService.getNextQ5()
+        raceService.getNextQ5(lang)
             .then((response) => {
 
                 if(response.data) {

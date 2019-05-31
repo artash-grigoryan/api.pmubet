@@ -32,7 +32,7 @@ export default class Banner extends React.Component {
                 <div className="text-holder">
                     <h1>
                         <time>
-                            {this.props.race.today ? <Trans i18nKey="Today">Today</Trans> : (this.props.race.tomorrow ? <Trans i18nKey="Tomorrow">Tomorrow</Trans> : this.props.race.day)} {this.props.race.time}
+                            {this.props.race.datePath === this.props.today ? <Trans i18nKey="Today">Today</Trans> : (this.props.race.datePath === this.props.tomorrow ? <Trans i18nKey="Tomorrow">Tomorrow</Trans> : (this.props.race.datePath === this.props.yesterday ? <Trans i18nKey="Yesterday">Yesterday</Trans> : this.props.race.day))} {this.props.race.time}
                         </time>
                         <b>R{this.props.reunion.externNumber}C{this.props.race.number} </b>
                         {this.props.race.labelLong}

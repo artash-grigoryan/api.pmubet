@@ -19,7 +19,7 @@ class ParseRecXmlData extends Command
      *
      * @var string
      */
-    protected $signature = 'recXML:parseData';
+    protected $signature = 'recXML:parseData {date=today}';
 
     /**
      * The console command description.
@@ -33,47 +33,55 @@ class ParseRecXmlData extends Command
      *
      * @return void
      */
+    
+    protected $dataService;
+    protected $date;
+    
     public function __construct()
     {
         parent::__construct();
+        $this->date = (new \DateTime())->format("Ymd");
     }
 
     /**
-     * Execute the console command.
-     *
      * @param DataServiceInterface $dataService
+     * @throws \Exception
      */
     public function handle(DataServiceInterface $dataService)
     {
+        $this->dataService = $dataService;
+        $argDate = $this->argument('date');
 
-        $this->unzipHippodromes($dataService);
-        $this->unzipCasaques($dataService);
+        $this->dataService->setDayFolder(($argDate != 'today') ? $argDate : $this->date);
 
-        $this->parseDayReunionsXML($dataService);
-        $this->parseReunionsXML($dataService);
-        $this->parseRacesXML($dataService);
-        $this->parseRunnersXML($dataService);
-        $this->parseResultsXML($dataService);
-        $this->parseBetsXML($dataService);
-        $this->parseBetResultsXML($dataService);
+        $this->unzipHippodromes();
+        $this->unzipCasaques();
 
-        $this->parsePressReunionXML($dataService);
-        $this->parsePressQ5XML($dataService);
-        $this->parseForcesPresenceXML($dataService);
-        $this->parsePronoQ5XML($dataService);
+        $this->parseDayReunionsXML();
+        $this->parseReunionsXML();
+        $this->parseRacesXML();
+        $this->parseRunnersXML();
+        $this->parseResultsXML();
+        $this->parseBetsXML();
+        $this->parseBetResultsXML();
 
-        $this->parseNonRunnerXML($dataService);
-        $this->parseLiveOddSSGXML($dataService);
-        $this->parsePrizeListXML($dataService);
+        $this->parsePressReunionXML();
+        $this->parsePressQ5XML();
+        $this->parseForcesPresenceXML();
+        $this->parsePronoQ5XML();
+
+        $this->parseNonRunnerXML();
+        $this->parseLiveOddSSGXML();
+        $this->parsePrizeListXML();
     }
 
-    private function parseDayReunionsXML($dataService)
+    private function parseDayReunionsXML()
     {
 
-        $filesInfo = $dataService->scanDayReunionsFolder();
+        $filesInfo = $this->dataService->scanDayReunionsFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -125,13 +133,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parseReunionsXML($dataService)
+    private function parseReunionsXML()
     {
 
-        $filesInfo = $dataService->scanReunionsFolder();
+        $filesInfo = $this->dataService->scanReunionsFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -183,13 +191,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parseRacesXML($dataService)
+    private function parseRacesXML()
     {
 
-        $filesInfo = $dataService->scanRacesFolder();
+        $filesInfo = $this->dataService->scanRacesFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -272,13 +280,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parseRunnersXML($dataService)
+    private function parseRunnersXML()
     {
 
-        $filesInfo = $dataService->scanRunnersFolder();
+        $filesInfo = $this->dataService->scanRunnersFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -383,13 +391,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parseResultsXML($dataService)
+    private function parseResultsXML()
     {
 
-        $filesInfo = $dataService->scanResultsFolder();
+        $filesInfo = $this->dataService->scanResultsFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -478,14 +486,14 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parseNonRunnerXML($dataService)
+    private function parseNonRunnerXML()
     {
 
 
-        $filesInfo = $dataService->scanNonRunnerFolder();
+        $filesInfo = $this->dataService->scanNonRunnerFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -565,13 +573,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parseLiveOddSSGXML($dataService)
+    private function parseLiveOddSSGXML()
     {
 
-        $filesInfo = $dataService->scanLiveOddSSGFolder();
+        $filesInfo = $this->dataService->scanLiveOddSSGFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -661,13 +669,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parsePrizeListXML($dataService)
+    private function parsePrizeListXML()
     {
 
-        $filesInfo = $dataService->scanPrizeListFolder();
+        $filesInfo = $this->dataService->scanPrizeListFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -753,13 +761,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parseBetsXML($dataService)
+    private function parseBetsXML()
     {
 
-        $filesInfo = $dataService->scanBetsFolder();
+        $filesInfo = $this->dataService->scanBetsFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -845,13 +853,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parseBetResultsXML($dataService)
+    private function parseBetResultsXML()
     {
 
-        $filesInfo = $dataService->scanBetResultsFolder();
+        $filesInfo = $this->dataService->scanBetResultsFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -961,13 +969,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parsePressReunionXML($dataService)
+    private function parsePressReunionXML()
     {
 
-        $filesInfo = $dataService->scanPressReunionFolder();
+        $filesInfo = $this->dataService->scanPressReunionFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -1080,13 +1088,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parsePressQ5XML($dataService)
+    private function parsePressQ5XML()
     {
 
-        $filesInfo = $dataService->scanPressQ5Folder();
+        $filesInfo = $this->dataService->scanPressQ5Folder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -1193,13 +1201,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parseForcesPresenceXML($dataService)
+    private function parseForcesPresenceXML()
     {
 
-        $filesInfo = $dataService->scanForcesPresenceFolder();
+        $filesInfo = $this->dataService->scanForcesPresenceFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -1265,13 +1273,13 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function parsePronoQ5XML($dataService)
+    private function parsePronoQ5XML()
     {
 
-        $filesInfo = $dataService->scanPronoQ5Folder();
+        $filesInfo = $this->dataService->scanPronoQ5Folder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-                $parsedXml = $dataService->parseXMLFileByPath(
+                $parsedXml = $this->dataService->parseXMLFileByPath(
                     $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
                     [
                         "jours",
@@ -1315,18 +1323,18 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function unzipCasaques($dataService)
+    private function unzipCasaques()
     {
 
-        $filesInfo = $dataService->scanCasaquesFolder();
+        $filesInfo = $this->dataService->scanCasaquesFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
 
                 $zip = new \ZipArchive();
-                if ($zip->open($dataService->getCasaquesFolder() . '/' . $fileName) === TRUE) {
+                if ($zip->open($this->dataService->getCasaquesFolder() . '/' . $fileName) === TRUE) {
                     $zip->extractTo(__DIR__ . '/../../../public/img/casaques/');
                     $zip->close();
-                    //TODO unlink($dataService->getCasaquesFolder().'/'.$fileName);
+                    //TODO unlink($this->dataService->getCasaquesFolder().'/'.$fileName);
                 } else {
                     echo 'unzip error';
                 }
@@ -1334,18 +1342,17 @@ class ParseRecXmlData extends Command
         }
     }
 
-    private function unzipHippodromes($dataService)
+    private function unzipHippodromes()
     {
-
-        $filesInfo = $dataService->scanHippodromesFolder();
+        $filesInfo = $this->dataService->scanHippodromesFolder();
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
 
                 $zip = new \ZipArchive();
-                if ($zip->open($dataService->getHippodromesFolder() . '/' . $fileName) === TRUE) {
+                if ($zip->open($this->dataService->getHippodromesFolder() . '/' . $fileName) === TRUE) {
                     $zip->extractTo(__DIR__ . '/../../../public/img/hippodromes/');
                     $zip->close();
-                    //TODO unlink($dataService->getHippodromesFolder().'/'.$fileName);
+                    //TODO unlink($this->dataService->getHippodromesFolder().'/'.$fileName);
                 } else {
                     echo 'unzip error';
                 }

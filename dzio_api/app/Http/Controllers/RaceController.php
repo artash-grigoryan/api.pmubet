@@ -19,9 +19,9 @@ class RaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getAll()
+    public function getAll($locale)
     {
-        $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->where([['date', '>=', date('Y-m-d', strtotime('-1 DAY +2 HOUR'))], ['date', '<=', date('Y-m-d', strtotime('+2 DAY +2 HOUR'))]])
             ->orderBy('date', 'ASC')
             ->with("runners")
@@ -29,6 +29,13 @@ class RaceController extends Controller
             ->with('translation')
             ->get();
 
+        if(empty($races)) {
+            return response()->json(array(
+                'races'=>[],
+                'error'=>'No data'
+            ));
+        }
+
         foreach ($races as $key=>$race) {
 
             $races[$key]->reunion = Reunion::where('id', $race->reunionId)
@@ -39,9 +46,9 @@ class RaceController extends Controller
         return response()->json(array('races'=>$races));
     }
 
-    public function getAllByDate($date)
+    public function getAllByDate($locale, $date)
     {
-        $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->where([['date', '>=', date('Y-m-d', strtotime($date.' +2 HOUR'))], ['date', '<', date('Y-m-d', strtotime($date.' +1 DAY +2 HOUR'))]])
             ->orderBy('date', 'ASC')
             ->with("runners")
@@ -49,6 +56,13 @@ class RaceController extends Controller
             ->with('translation')
             ->get();
 
+        if(empty($races)) {
+            return response()->json(array(
+                'races'=>[],
+                'error'=>'No data'
+            ));
+        }
+
         foreach ($races as $key=>$race) {
 
             $races[$key]->reunion = Reunion::where('id', $race->reunionId)
@@ -59,11 +73,11 @@ class RaceController extends Controller
         return response()->json(array('races'=>$races));
     }
 
-    public function getNext()
+    public function getNext($locale)
     {
         $now = date('Y-m-d H:m:s', strtotime('+2 HOUR'));
 
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->where([['date', '>=', $now]])
             ->orderBy('date', 'ASC')
             ->with("bets")
@@ -76,6 +90,13 @@ class RaceController extends Controller
             ->with('translation')
             ->first();
 
+        if(empty($race)) {
+            return response()->json(array(
+                'race'=>'',
+                'error'=>'No data'
+            ));
+        }
+
         $race->reunion = Reunion::where('id', $race->reunionId)
             ->with('translation')
             ->first();
@@ -84,9 +105,9 @@ class RaceController extends Controller
         return response()->json(array('race'=>$race));
     }
 
-    public function get($date, $reunionNumber, $raceNumber)
+    public function get($locale, $date, $reunionNumber, $raceNumber)
     {
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->join('reunions', 'reunions.id', '=', 'races.reunionId')
             ->where([
                 [DB::raw('DATE(reunions.date)'), '=', date('Y-m-d', strtotime($date))],
@@ -103,6 +124,13 @@ class RaceController extends Controller
             ->with('translation')
             ->first();
 
+        if(empty($race)) {
+            return response()->json(array(
+                'race'=>'',
+                'error'=>'No data'
+            ));
+        }
+
         $race->reunion = Reunion::where('id', $race->reunionId)
             ->with('translation')
             ->first();
@@ -153,9 +181,9 @@ class RaceController extends Controller
         return response()->json(array('race'=>$race));
     }
 
-    public function getFirstByDate($date)
+    public function getFirstByDate($locale, $date)
     {
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->join('reunions', 'reunions.id', '=', 'races.reunionId')
             ->where([
                 [DB::raw('DATE(reunions.date)'), '=', date('Y-m-d', strtotime($date))]
@@ -171,6 +199,13 @@ class RaceController extends Controller
             ->orderBy('races.number', 'ASC')
             ->first();
 
+        if(empty($race)) {
+            return response()->json(array(
+                'race'=>'',
+                'error'=>'No data'
+            ));
+        }
+
         $race->reunion = Reunion::where('id', $race->reunionId)
             ->with('translation')
             ->first();
@@ -221,9 +256,9 @@ class RaceController extends Controller
         return response()->json(array('race'=>$race));
     }
 
-    public function getFirstByReunion($date, $reunionNumber)
+    public function getFirstByReunion($locale, $date, $reunionNumber)
     {
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->join('reunions', 'reunions.id', '=', 'races.reunionId')
             ->where([
                 [DB::raw('DATE(reunions.date)'), '=', date('Y-m-d', strtotime($date))],
@@ -240,6 +275,13 @@ class RaceController extends Controller
             ->orderBy('races.number', 'ASC')
             ->first();
 
+        if(empty($race)) {
+            return response()->json(array(
+                'race'=>'',
+                'error'=>'No data'
+            ));
+        }
+
         $race->reunion = Reunion::where('id', $race->reunionId)
             ->with('translation')
             ->first();
@@ -290,11 +332,11 @@ class RaceController extends Controller
         return response()->json(array('race'=>$race));
     }
 
-    public function getNextQ5()
+    public function getNextQ5($locale)
     {
         $now = date('Y-m-d H:m:s', strtotime('+2 HOUR'));
 
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->where([['date', '>=', $now]])
             ->whereHas('bets', function($query){
                   $query->whereLib('QN');
@@ -302,21 +344,21 @@ class RaceController extends Controller
             ->with('translation')
             ->orderBy('date', 'ASC')
             ->first();
-        if($race) {
 
-            $race->reunion = Reunion::where('id', $race->reunionId)
-                ->with('translation')
-                ->first();
-
+        if(empty($race)) {
             return response()->json(array(
-                'race'=>$race
+                'race'=>'',
+                'error'=>'No data'
             ));
         }
-        return response()->json(array(
-            'race'=>[],
-            'error'=>'No data'
-        ));
 
+        $race->reunion = Reunion::where('id', $race->reunionId)
+            ->with('translation')
+            ->first();
+
+        return response()->json(array(
+            'race'=>$race
+        ));
     }
 
     /**

@@ -11,37 +11,37 @@ export const raceService = {
     getNextQ5,
 };
 
-function get(date, reunionNumber, raceNumber) {
+function get(lang, date, reunionNumber, raceNumber) {
 
-    return axios.get('/api/race/get/'+date+'/'+reunionNumber+'/'+raceNumber);
+    return axios.get('/api/'+lang+'/race/get/'+date+'/'+reunionNumber+'/'+raceNumber);
 }
 
-function getAll() {
+function getAll(lang) {
 
-    return axios.get('/api/race/get/all');
+    return axios.get('/api/'+lang+'/race/get/all');
 }
 
-function getAllByDate(date) {
+function getAllByDate(lang, date) {
 
-    return axios.get('/api/race/get/'+date);
+    return axios.get('/api/'+lang+'/race/get/'+date);
 }
 
-function getFirstByDate(date) {
+function getFirstByDate(lang, date) {
 
-    return axios.get('/api/race/get/'+date+'/first');
+    return axios.get('/api/'+lang+'/race/get/'+date+'/first');
 }
 
-function getFirstByReunion(date, reunionNumber) {
+function getFirstByReunion(lang, date, reunionNumber) {
 
-    return axios.get('/api/race/get/'+date+'/'+reunionNumber+'/first');
+    return axios.get('/api/'+lang+'/race/get/'+date+'/'+reunionNumber+'/first');
 }
 
-function getNext() {
+function getNext(lang) {
 
-    return axios.get('/api/race/get/next');
+    return axios.get('/api/'+lang+'/race/get/next');
 }
 
-function getNextQ5() {
+function getNextQ5(lang) {
 
-    return axios.get('/api/race/get/nextQ5');
+    return axios.get('/api/'+lang+'/race/get/nextQ5');
 }

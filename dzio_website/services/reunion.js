@@ -6,12 +6,12 @@ export const reunionService = {
     get,
 };
 
-function getAll() {
+function getAll(lang) {
 
-    return axios.get('/api/reunion/get/all');
+    return axios.get('/api/'+lang+'/reunion/get/all');
 }
 
-function get(date) {
+function get(lang, date) {
 
-    return axios.get('/api/reunion/get/'+date);
+    return axios.get('/api/'+lang+'/reunion/get/'+date);
 }

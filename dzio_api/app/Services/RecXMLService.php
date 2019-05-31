@@ -72,6 +72,22 @@ class RecXMLService implements DataServiceInterface {
     }
 
     /**
+     * @return string
+     */
+    public function getDayFolder(): string
+    {
+        return $this->dayFolder;
+    }
+
+    /**
+     * @param string $dayFolder
+     */
+    public function setDayFolder(string $dayFolder)
+    {
+        $this->dayFolder = $dayFolder;
+    }
+
+    /**
      * @return array
      */
     public function scanMonthReunionsFolder()

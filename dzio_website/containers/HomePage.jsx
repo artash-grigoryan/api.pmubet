@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import { Link } from 'react-router-dom'
 import MainMenu from "../components/MainMenu.jsx";
+import Calendar from 'react-calendar';
 import Footer from "../components/shared/footer/footer";
 import _ from "lodash";
 
-import { useTranslation, Trans } from "react-i18next";
 import { raceActions } from '../actions/race';
 import { reunionActions } from '../actions/reunion';
 
@@ -12,7 +12,10 @@ import "./../assets/css/main.scss";
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import Race from "../components/Race";
+
+import { useTranslation, Trans } from "react-i18next";
 const { t, i18n } = useTranslation();
+const i18next = require('i18next');
 
 export default class HomePage extends Component {
 
@@ -21,14 +24,23 @@ export default class HomePage extends Component {
         super(props);
 
         let date = new Date();
+        date.setTime(date.getTime() + (2*60*60*1000)); // ADDING 2 HOURS FOR ARMENIA
         let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
         date.setDate(date.getDate()-1);
         let yesterday = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
         date.setDate(date.getDate()+2);
         let tomorrow = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
 
+        let lang = (typeof this.props.match.params.lang !== 'undefined' ? this.props.match.params.lang : 'am');
+        i18next.changeLanguage(lang);
+
+        let dateCalendar = new Date();
+        let minDateCalendar = new Date().setMonth(new Date().getMonth()-2);
+        let maxDateCalendar = new Date().setDate(new Date().getDate()+1);
+
         this.state = {
 
+            lang: lang,
             yesterday: yesterday,
             today: today,
             tomorrow: tomorrow,
@@ -39,17 +51,27 @@ export default class HomePage extends Component {
             reunion: false,
             race: false,
             reunionSelectorOpened: false,
+            calendarSelectorOpened: false,
+            dateCalendar : dateCalendar,
+            minDateCalendar : minDateCalendar,
+            maxDateCalendar : maxDateCalendar,
             predictionTop: [],
             runnerSelected: [],
             predictions: []
         };
     }
 
+    changeLanguage(lang) {
+
+        this.setState({lang});
+        i18next.changeLanguage(lang);
+    }
+
     async componentWillMount() {
 
         this.setReunions();
 
-        raceActions.getNextQ5().then((response) => {
+        raceActions.getNextQ5(this.state.lang).then((response) => {
 
             this.setState({nextQ5 : response.race})
         });
@@ -79,26 +101,36 @@ export default class HomePage extends Component {
 
         if(typeof date === 'undefined') {
 
-            reunionActions.getAll().then((response) => {
+            reunionActions.getAll(this.state.lang).then((response) => {
                 let reunions = _.groupBy(response.reunions, 'datePath');
                 this.setState({reunions : reunions});
             });
         }
         else {
 
-            reunionActions.get(date).then((response) => {
-                let reunionsThisDate = _.groupBy(response.reunions, 'datePath');
-                this.setState({reunions : _.merge(this.state.reunions, reunionsThisDate)});
-            });
+            if(!this.state.reunions[date]) {
+
+                reunionActions.get(this.state.lang, date).then((response) => {
+
+                    if(this.state.reunions) {
+                        this.state.reunions[date] = response.reunions;
+                    }
+                    else {
+                        this.state.reunions = _.groupBy(response.reunions, 'datePath');
+                    }
+                    this.setState({reunions : this.state.reunions});
+                });
+            }
         }
     }
 
     setNextRace() {
 
-        raceActions.getNext().then((response) => {
+        raceActions.getNext(this.state.lang).then((response) => {
 
             this.setState({
                 date : response.race.datePath,
+                dateCalendar : response.race.date,
                 reunion : response.race.reunion,
                 race : response.race,
                 predictionTop : response.race.reporters_top,
@@ -109,49 +141,58 @@ export default class HomePage extends Component {
 
     setFirstRaceByDate(date) {
 
-        raceActions.getFirstByDate(date).then((response) => {
+        raceActions.getFirstByDate(this.state.lang, date).then((response) => {
 
-            this.setState({
-                date : response.race.datePath,
-                reunion : response.race.reunion,
-                race : response.race,
-                predictionTop : response.race.reporters_top,
-                predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others)),
-                reunionSelectorOpened : false
-            });
-            this.props.history.push("/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
+            if(response.race) {
+
+                this.setState({
+                    date : response.race.datePath,
+                    dateCalendar : response.race.date,
+                    reunion : response.race.reunion,
+                    race : response.race,
+                    predictionTop : response.race.reporters_top,
+                    predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others)),
+                    reunionSelectorOpened : false,
+                    calendarSelectorOpened : false
+                });
+                this.props.history.push("/"+this.state.lang+"/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
+            }
         });
     }
 
     setFirstRaceByReunion(date, reunionNumber) {
 
-        raceActions.getFirstByReunion(date, reunionNumber).then((response) => {
+        raceActions.getFirstByReunion(this.state.lang, date, reunionNumber).then((response) => {
 
             this.setState({
                 date : response.race.datePath,
+                dateCalendar : response.race.date,
                 reunion : response.race.reunion,
                 race : response.race,
                 predictionTop : response.race.reporters_top,
                 predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others)),
-                reunionSelectorOpened : false
+                reunionSelectorOpened : false,
+                calendarSelectorOpened : false
             });
-            this.props.history.push("/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
+            this.props.history.push("/"+this.state.lang+"/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
         });
     }
 
     setRace(date, reunionNumber, raceNumber) {
 
-        raceActions.get(date, reunionNumber, raceNumber).then((response) => {
+        raceActions.get(this.state.lang, date, reunionNumber, raceNumber).then((response) => {
 
             this.setState({
                 date : response.race.datePath,
+                dateCalendar : response.race.date,
                 reunion : response.race.reunion,
                 race : response.race,
                 predictionTop : response.race.reporters_top,
                 predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others)),
-                reunionSelectorOpened : false
+                reunionSelectorOpened : false,
+                calendarSelectorOpened : false,
             });
-            this.props.history.push("/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
+            this.props.history.push("/"+this.state.lang+"/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
         });
     }
 
@@ -160,8 +201,14 @@ export default class HomePage extends Component {
         this.setState({reunionSelectorOpened:!this.state.reunionSelectorOpened});
     }
 
+    toggleCalendarSelector() {
+
+        this.setState({calendarSelectorOpened:!this.state.calendarSelectorOpened});
+    }
+
     setDate(date) {
 
+        this.setReunions(date);
         this.setState({date});
         this.setFirstRaceByDate(date);
     }
@@ -172,13 +219,19 @@ export default class HomePage extends Component {
 	    if(this.state.reunions && this.state.date) {
 
             let reunions = this.state.reunions[this.state.date];
-	        listReunions = reunions.map((reunion) =>
-                <li key={reunion.id} className={this.reunion && this.reunion.id === reunion.id ? 'active' : ''}>
-                    <Link to={"/" + reunion.datePath + "/R" + reunion.number} onClick={() => this.setFirstRaceByReunion(reunion.datePath, reunion.number)}>
-                        <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{reunion.number}</b> - {(reunion.translation ? reunion.translation.hippodromeName : null) || reunion.hippodromeName}
-                    </Link>
-                </li>
-            );
+
+            if(reunions) {
+                listReunions = reunions.map((reunion) =>
+                    <li key={reunion.id} className={this.reunion && this.reunion.id === reunion.id ? 'active' : ''}>
+                        <Link to={"/" + reunion.datePath + "/R" + reunion.number} onClick={() => this.setFirstRaceByReunion(reunion.datePath, reunion.number)}>
+                            <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{reunion.number}</b> - {(reunion.translation ? reunion.translation.hippodromeName : null) || reunion.hippodromeName}
+                        </Link>
+                    </li>
+                );
+            }
+            else {
+                listReunions = null;
+            }
         }
 
         let listRaces = [];
@@ -188,7 +241,7 @@ export default class HomePage extends Component {
 
                 listRaces.push(
                     <li key={raceNumber}>
-                        <Link className={this.state.race.number && this.state.race.number===raceNumber?'active':''} to={"/" + this.state.date + "/R"+this.state.reunion.number+"/C" + raceNumber} onClick={() => this.setRace(this.state.date, this.state.reunion.number, raceNumber)}>C{raceNumber}</Link>
+                        <Link className={this.state.race.number && this.state.race.number===raceNumber?'active':''} to={"/" + this.state.lang + "/" + this.state.date + "/R"+this.state.reunion.number+"/C" + raceNumber} onClick={() => this.setRace(this.state.date, this.state.reunion.number, raceNumber)}>C{raceNumber}</Link>
                     </li>
                 );
             }
@@ -196,7 +249,7 @@ export default class HomePage extends Component {
 
 		return <div>
             <header>
-                <MainMenu/>
+                <MainMenu {...this.state}/>
             </header>
 
             <div className="container-fluid">
@@ -207,20 +260,33 @@ export default class HomePage extends Component {
                                 <ul>
 
                                     <li>
-                                        <Link className={this.state.date === this.state.yesterday?'active':''} to={"/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday)}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
+                                        <Link className={this.state.date === this.state.yesterday?'active':''} to={"/" + this.state.lang + "/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday)}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
                                     </li>
                                     <li>
-                                        <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.today} onClick={() => this.setDate(this.state.today)}><Trans i18nKey="Today">Today</Trans></Link>
+                                        <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.lang + "/" + this.state.today} onClick={() => this.setDate(this.state.today)}><Trans i18nKey="Today">Today</Trans></Link>
                                     </li>
                                     <li>
-                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow)}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
+                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.lang + "/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow)}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
                                     </li>
                                 </ul>
                                 <ul className="calendar-selector">
                                     <li>
-                                        <a href="#">
+                                        <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleCalendarSelector()}>
                                             <FontAwesomeIcon icon="calendar-alt" />
                                         </a>
+                                        {
+                                            this.state.calendarSelectorOpened
+                                            ?
+                                                <Calendar
+                                                    locale={this.state.lang}
+                                                    onClickDay={(date) => this.setDate(date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2))}
+                                                    value={new Date(this.state.dateCalendar)}
+                                                    minDate={new Date(this.state.minDateCalendar)}
+                                                    maxDate={new Date(this.state.maxDateCalendar)}
+                                                />
+                                            :
+                                                null
+                                        }
                                     </li>
                                 </ul>
                             </div>
