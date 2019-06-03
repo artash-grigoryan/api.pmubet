@@ -111,4 +111,9 @@ class Race extends Model
     {
         return $this->hasOne('App\RaceTranslation', "raceId")->where('lang', 'hy');
     }
+
+    public function translations()
+    {
+        return $this->hasOne('App\RaceTranslation', "raceId")->select('lang');
+    }
 }

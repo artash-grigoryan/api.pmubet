@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class RunnerTranslation extends Model
 {
     //
-    protected $table = 'runners_translations';
+    protected $table = 'runner_translations';
 
     public $timestamps = false;
 

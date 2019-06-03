@@ -27,6 +27,7 @@
                             <td class="table-text"><div>{{ $race->label }}</div></td>
                             <td class="table-text"><div>{{ $race->description }}</div></td>
                             <td class="table-text"><div>{{ $race->date }}</div></td>
+                            <td class="table-text"><div>{{ $race->translations }}</div></td>
                             <td>
                                 <a href="{{ url('admin/race/'.$race->id) }}" class="btn btn-primary">
                                     <i class="fa fa-btn fa-edit"></i>
@@ -34,7 +35,7 @@
                             </td>
                             <!-- Task Delete Button -->
                             <td>
-                                <form action="{{ url('/admin/reunion/'.$race->id) }}" method="POST">
+                                <form action="{{ url('/admin/race/'.$race->id) }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 

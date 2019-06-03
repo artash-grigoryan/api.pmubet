@@ -16,6 +16,14 @@
                     <form action="{{ url('/admin/reunion/'.$reunion->id) }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
+                            <label for="lang">Locale</label>
+                            <select name="lang" id="lang">
+                                <option value="fr">Français</option>
+                                <option value="hy">Հայերեն</option>
+                                <option value="ru">Russian</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="label">Label</label>
                             <input type="text" class="form-control" id="label" name="label" value="{{ $reunion->label or old('label')}}">
                         </div>

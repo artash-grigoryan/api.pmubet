@@ -48,4 +48,24 @@ class Runner extends Model
         'tendencySign',
         'doNotRun',
     ];
+
+    public function hasTranslation()
+    {
+        return $this->hasMany('App\RunnerTranslation', "runnerId")->exists();
+    }
+
+    public function race()
+    {
+        return $this->belongsTo('App\Race', "raceId");
+    }
+
+    public function translation()
+    {
+        return $this->hasOne('App\RunnerTranslation', "runnerId")->where('lang', 'hy');
+    }
+
+    public function translations()
+    {
+        return $this->hasOne('App\RunnerTranslation', "runnerId")->select('lang');
+    }
 }

@@ -16,29 +16,29 @@
                     <table class="table table-striped task-table">
                         <thead>
                         <th>id</th>
-                        <th>label</th>
-                        <th>hippodrome name</th>
-                        <th>speciality</th>
+                        <th>name</th>
+                        <th>breed</th>
+                        <th>color</th>
                         <th>date</th>
-                        <th>locale</th>
                         </thead>
                         <tbody>
-                        @foreach ($reunions as $reunion)
-                        <tr @if ($reunion->hasTranslation()) style="background-color: #1c7430; color: #FFF" @endif>
-                            <td class="table-text"><div>{{ $reunion->id }}</div></td>
-                            <td class="table-text"><div>{{ $reunion->label }}</div></td>
-                            <td class="table-text"><div>{{ $reunion->hippodromeName }}</div></td>
-                            <td class="table-text"><div>{{ $reunion->speciality }}</div></td>
-                            <td class="table-text"><div>{{ $reunion->date }}</div></td>
-                            <td class="table-text"><div>{{ $reunion->translations }}</div></td>
+                        @foreach ($runners as $runner)
+
+                        <tr @if ($runner->hasTranslation()) style="background-color: #1c7430; color: #FFF" @endif>
+                            <td class="table-text"><div>{{ $runner->id }}</div></td>
+                            <td class="table-text"><div>{{ $runner->name }}</div></td>
+                            <td class="table-text"><div>{{ $runner->breed }}</div></td>
+                            <td class="table-text"><div>{{ $runner->color }}</div></td>
+                            <td class="table-text"><div>{{ $runner->race->date }}</div></td>
+                            <td class="table-text"><div>{{ $runner->translations }}</div></td>
                             <td>
-                                <a href="{{ url('admin/reunion/'.$reunion->id) }}" class="btn btn-primary">
+                                <a href="{{ url('admin/runner/'.$runner->id) }}" class="btn btn-primary">
                                     <i class="fa fa-btn fa-edit"></i>
                                 </a>
                             </td>
                             <!-- Task Delete Button -->
                             <td>
-                                <form action="{{ url('/admin/reunion/'.$reunion->id) }}" method="POST">
+                                <form action="{{ url('/admin/runner/'.$runner->id) }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
@@ -51,7 +51,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <?php echo $reunions->render(); ?>
+                    <?php echo $runners->render(); ?>
                 </div>
             </div>
         </div>

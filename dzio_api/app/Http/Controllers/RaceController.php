@@ -428,6 +428,7 @@ class RaceController extends Controller
         $type = $request->input('type');
         $discipline = $request->input('discipline');
         $comment = $request->input('comment');
+        $lang = $request->input('lang');
 
         if ($label == '') {
             return Redirect::back()->withErrors(['msg', 'The Message']);
@@ -441,7 +442,7 @@ class RaceController extends Controller
         $raceTranslation->type = $type;
         $raceTranslation->discipline = $discipline;
         $raceTranslation->comment = $comment;
-        $raceTranslation->lang = 'hy';
+        $raceTranslation->lang = $lang;
 
         $raceTranslation->save();
 

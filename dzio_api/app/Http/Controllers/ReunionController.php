@@ -128,6 +128,7 @@ class ReunionController extends Controller
         $statusLabel = $request->input('statusLabel');
         $hippodromeName = $request->input('hippodromeName');
         $speciality = $request->input('speciality');
+        $lang = $request->input('lang');
         if ($label == '') {
             return Redirect::back()->withErrors(['msg', 'The Message']);
         }
@@ -136,7 +137,7 @@ class ReunionController extends Controller
         $reunionTranslation->statusLabel = $statusLabel;
         $reunionTranslation->hippodromeName = $hippodromeName;
         $reunionTranslation->speciality = $speciality;
-        $reunionTranslation->lang = 'hy';
+        $reunionTranslation->lang = $lang;
 
         $reunionTranslation->save();
 

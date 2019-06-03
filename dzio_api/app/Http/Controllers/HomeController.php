@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Race;
 use App\Reunion;
+use App\Runner;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -38,7 +39,23 @@ class HomeController extends Controller
     public function racesList()
     {
         $races = Race::orderBy('date', 'DESC')->paginate(15);
-//var_dump($races);exit;
+
         return view('races', ["races" => $races]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function runnersList()
+    {
+        $runners = Runner::select('runners.*')
+            ->with('race')
+            ->join('races', 'runners.raceId', '=', 'races.id')
+            ->orderBy('races.date', 'DESC')
+            ->paginate(15);
+
+        return view('runners', ["runners" => $runners]);
     }
 }

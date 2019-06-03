@@ -17,6 +17,14 @@
                     <form action="{{ url('/admin/race/'.$race->id) }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
+                            <label for="lang">Locale</label>
+                            <select name="lang" id="lang">
+                                <option value="fr">Français</option>
+                                <option value="hy">Հայերեն</option>
+                                <option value="ru">Russian</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="label">Label</label>
                             <input type="text" class="form-control" id="label" name="label" value="{{ $race->label or old('label')}}">
                         </div>
