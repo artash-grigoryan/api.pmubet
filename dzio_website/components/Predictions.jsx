@@ -12,12 +12,15 @@ export default class Predictions extends React.Component {
 
         let listPredictions = [];
         if(this.props.race) {
-            listPredictions = this.props.predictions.map((reporter) =>
+            listPredictions = this.props.predictions.map((reporter, key) =>
 
                 <div key={reporter.id} className="predictions">
+                    <p className="reporter-key">
+                        {key+1}.
+                    </p>
                     <p className="reporter">
                         <b>{reporter.reporter}</b> <br/>
-                        <a href={reporter.societe === 'AIP' ? 'http://www.turf-fr.com/' : (reporter.societe === 'geny.com' ? 'http://www.geny.com/' : 'javascript:;')}>{reporter.societe === 'AIP' ? 'www.turf-fr.com' : (reporter.societe === 'geny.com' ? 'www.geny.com' : reporter.societe)}</a>
+                        <a target="_blank" href={reporter.societe === 'AIP' ? 'http://www.turf-fr.com/' : (reporter.societe === 'geny.com' ? 'http://www.geny.com/' : 'javascript:;')}>{reporter.societe === 'AIP' ? 'www.turf-fr.com' : (reporter.societe === 'geny.com' ? 'www.geny.com' : reporter.societe)}</a>
                     </p>
                     <ul>
                         {

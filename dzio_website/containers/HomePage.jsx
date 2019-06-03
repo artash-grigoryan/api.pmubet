@@ -23,8 +23,9 @@ export default class HomePage extends Component {
 
         super(props);
 
+        let timezoneOffset = new Date().getTimezoneOffset() + 120;
+
         let date = new Date();
-        date.setTime(date.getTime() + (2*60*60*1000)); // ADDING 2 HOURS FOR ARMENIA
         let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
         date.setDate(date.getDate()-1);
         let yesterday = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
@@ -40,6 +41,7 @@ export default class HomePage extends Component {
 
         this.state = {
 
+            timezoneOffset: timezoneOffset,
             lang: lang,
             yesterday: yesterday,
             today: today,
@@ -134,7 +136,7 @@ export default class HomePage extends Component {
                 reunion : response.race.reunion,
                 race : response.race,
                 predictionTop : response.race.reporters_top,
-                predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others))
+                predictions : _.compact(_.concat(response.race.reporters_geny, response.race.reporters_best, response.race.reporters_others))
             });
         });
     }
@@ -151,7 +153,7 @@ export default class HomePage extends Component {
                     reunion : response.race.reunion,
                     race : response.race,
                     predictionTop : response.race.reporters_top,
-                    predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others)),
+                    predictions : _.compact(_.concat(response.race.reporters_geny, response.race.reporters_best, response.race.reporters_others)),
                     reunionSelectorOpened : false,
                     calendarSelectorOpened : false
                 });
@@ -170,7 +172,7 @@ export default class HomePage extends Component {
                 reunion : response.race.reunion,
                 race : response.race,
                 predictionTop : response.race.reporters_top,
-                predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others)),
+                predictions : _.compact(_.concat(response.race.reporters_geny, response.race.reporters_best, response.race.reporters_others)),
                 reunionSelectorOpened : false,
                 calendarSelectorOpened : false
             });
@@ -188,7 +190,7 @@ export default class HomePage extends Component {
                 reunion : response.race.reunion,
                 race : response.race,
                 predictionTop : response.race.reporters_top,
-                predictions : _.compact(_.concat(response.race.reportersGeny, response.race.reporters_best, response.race.reporters_others)),
+                predictions : _.compact(_.concat(response.race.reporters_geny, response.race.reporters_best, response.race.reporters_others)),
                 reunionSelectorOpened : false,
                 calendarSelectorOpened : false,
             });
@@ -298,7 +300,7 @@ export default class HomePage extends Component {
                                             this.state.reunion
                                             ?
                                                 <div className="meeting-selector">
-                                                    <a className="meeting-selected" href="#" onClick={() => this.toggleReunionSelector()}>
+                                                    <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleReunionSelector()}>
                                                         <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{this.state.reunion.number}</b> - {(this.state.reunion.translation ? this.state.reunion.translation.hippodromeName : null) || this.state.reunion.hippodromeName}
                                                     </a>
                                                     <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
@@ -307,7 +309,7 @@ export default class HomePage extends Component {
                                                 </div>
                                             :
                                                 <div className="meeting-selector">
-                                                    <a className="meeting-selected" href="#" onClick={() => this.toggleReunionSelector()}>
+                                                    <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleReunionSelector()}>
                                                         <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <Trans i18nKey="Select a Reunion">Select a Reunion</Trans>
                                                     </a>
                                                     <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">

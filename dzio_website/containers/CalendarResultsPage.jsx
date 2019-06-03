@@ -13,6 +13,7 @@ import Countdown from 'react-countdown-now';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import Race from "../components/Race";
 import Calendar from "react-calendar";
+import Banner from "../components/Banner";
 const { t, i18n } = useTranslation();
 
 export default class CalendarResultsPage extends Component {
@@ -22,7 +23,7 @@ export default class CalendarResultsPage extends Component {
         super(props);
 
         let date = new Date();
-        date.setTime(date.getTime() + (2*60*60*1000)); // ADDING 2 HOURS FOR ARMENIA
+        //date.setTime(date.getTime() + (2*60*60*1000)); // ADDING 2 HOURS FOR ARMENIA
         let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
         date.setDate(date.getDate()-1);
         let yesterday = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
@@ -44,11 +45,22 @@ export default class CalendarResultsPage extends Component {
             dateCalendar : dateCalendar,
             minDateCalendar : minDateCalendar,
             maxDateCalendar : maxDateCalendar,
-            races : null
+            races : null,
+            race: null
         };
     }
 
     async componentWillMount() {
+
+        raceActions.getNext(this.state.lang).then((response) => {
+
+            this.setState({
+                date : response.race.datePath,
+                dateCalendar : response.race.date,
+                reunion : response.race.reunion,
+                race : response.race,
+            });
+        });
 
         if(typeof this.props.match.params.date !== 'undefined') {
 
@@ -165,29 +177,29 @@ export default class CalendarResultsPage extends Component {
 
                         </div>
 
-                        <div className="banner inner-banner">
-
-                            <div className="container">
-                                <div className="text-holder">
-                                    <h1>
-                                        <Trans i18nKey="Calendar & Results">Calendar & Results</Trans>
-                                    </h1>
-                                    <p style={{marginTop: '20px',fontSize: '27px'}}>{this.state.date === this.state.today ? <Trans i18nKey="Today">Today</Trans> : (this.state.date === this.state.tomorrow ? <Trans i18nKey="Tomorrow">Tomorrow</Trans> : (this.state.date === this.state.yesterday ? <Trans i18nKey="Yesterday">Yesterday</Trans> : this.state.dateCalendar))}</p>
-
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            this.state.race
+                                ?
+                                <Banner {...this.state}/>
+                                :
+                                null
+                        }
 
                         <div className="container">
                             <div className="data-holder">
 
-                                <div className="btn-holder d-none d-md-block"
-                                     style={{textAlign: 'center',margin: '40px 0px'}}>
-                                    <button style={{margin: '0 10px'}} onClick={()=>this.setFilter('all')} className={this.state.filter === 'all'?'btn btn-info active':'btn btn-info'} type="button"><Trans i18nKey="All races">All races</Trans></button>
-                                    <button style={{margin: '0 10px'}} onClick={()=>this.setFilter('next')} className={this.state.filter === 'next'?'btn btn-info active':'btn btn-info'} type="button"><Trans i18nKey="Next">Next</Trans></button>
+                                <div className="btn-holder d-none d-md-block">
+                                    <Link className={this.state.date === this.state.yesterday?'btn btn-info active':'btn btn-info'} to={"/"+ this.state.lang + "/calendar-results/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday)}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
+                                    <Link className={this.state.date === this.state.today?'btn btn-info active':'btn btn-info'} to={"/" + this.state.lang + "/calendar-results/" + this.state.today} onClick={() => this.setDate(this.state.today)}><Trans i18nKey="Today">Today</Trans></Link>
+                                    <Link className={this.state.date === this.state.tomorrow?'btn btn-info active':'btn btn-info'} to={"/" + this.state.lang + "/calendar-results/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow)}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
+
+                                    <div className="filters">
+                                        <button onClick={()=>this.setFilter('all')} className={this.state.filter === 'all'?'btn btn-info active':'btn btn-info'} type="button"><Trans i18nKey="All races">All races</Trans></button>
+                                        <button onClick={()=>this.setFilter('next')} className={this.state.filter === 'next'?'btn btn-info active':'btn btn-info'} type="button"><Trans i18nKey="Next">Next</Trans></button>
+                                    </div>
                                 </div>
 
-                                <table style={{margin: '40px 0 0 0'}}>
+                                <table>
                                     <tbody>
                                         {
                                             this.state.races

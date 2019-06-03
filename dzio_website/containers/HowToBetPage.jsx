@@ -11,6 +11,7 @@ import Countdown from 'react-countdown-now';
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import Race from "../components/Race";
+import Banner from "../components/Banner";
 const { t, i18n } = useTranslation();
 
 export default class HowToBetPage extends Component {
@@ -20,11 +21,26 @@ export default class HowToBetPage extends Component {
         super(props);
         this.state = {
             lang: this.props.match.params.lang,
+            race: null
         };
     }
 
     async componentWillMount() {
 
+        this.setNextRace()
+    }
+
+    setNextRace() {
+
+        raceActions.getNext(this.state.lang).then((response) => {
+
+            this.setState({
+                date : response.race.datePath,
+                dateCalendar : response.race.date,
+                reunion : response.race.reunion,
+                race : response.race,
+            });
+        });
     }
 
 	render() {
@@ -38,22 +54,16 @@ export default class HowToBetPage extends Component {
                 <div id="wrapper">
                     <div id="main">
 
-                        <div className="banner inner-banner">
-
-                            <div className="container">
-                                <div className="text-holder">
-                                    <h1>
-                                        <Trans i18nKey="How to bet">How to bet</Trans>
-                                    </h1>
-
-                                    <div style={{marginTop: '30px'}}><a target="_blank" className="btn btn-md" href="https://www.vivarobet.am"><Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans></a></div>
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            this.state.race
+                                ?
+                                <Banner {...this.state}/>
+                                :
+                                null
+                        }
 
                         <div className="container">
                             <section>
-
                                 <div className="row">
                                     <div className="col-md-8">
 

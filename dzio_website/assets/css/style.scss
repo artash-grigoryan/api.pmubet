@@ -240,6 +240,9 @@ body {
   border: none;
   bottom: 0;
 }
+.navbar-nav li.nav-item a.nav-link .text-minify{
+  display: none;
+}
 
 .container-fluid {
   overflow: hidden;
@@ -297,7 +300,7 @@ body {
   position: relative;
 }
 #main .bar-selector .day-selector ul,
-#main .bar-selector .meeting-selector ul ,
+#main .bar-selector .meeting-selector ul,
 #main .bar-selector .race-selector ul,
 #main .bar-selector ul.calendar-selector{
   padding: 0;
@@ -316,13 +319,12 @@ body {
   text-decoration: none;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 370px;
+  width: 340px;
 }
 #main .bar-selector .meeting-selector .meeting-selected a img{
   margin-right: 10px;
 }
 #main .bar-selector .day-selector  ul li,
-#main .bar-selector .meeting-selector ul li,
 #main .bar-selector .race-selector ul li,
 #main .bar-selector ul.calendar-selector li{
   display: inline;
@@ -590,6 +592,12 @@ body {
   display: table;
   width: 100%;
 }
+.predictions-container .predictions .reporter-key{
+  float: left;
+  padding: 14px 10px 8px 20px;
+  margin: 0;
+  font-size: 20px;
+}
 .predictions-container .predictions .reporter {
   float: left;
   line-height: 20px;
@@ -632,6 +640,7 @@ body {
 .table-striped .runner {
   display: flex;
   position: relative;
+  cursor: pointer;
 }
 .table-striped .runner > span{
   display: inline-block;
@@ -657,15 +666,14 @@ body {
   overflow: hidden;
 }
 .runners-tab .runner-name .do-not-run{
-  background-color: red;
+  color: red;
   font-weight: bold;
   font-size: 14px;
-  margin-left: 20px;
-  color: #fff;
   position: absolute;
+  margin-left: 20px;
   padding: 3px 7px;
-  right: 10px;
-  top: 15px;
+  right: 5px;
+  top: 26px;
 }
 .runners-tab .runner-name p{
   margin: 0;
@@ -1264,6 +1272,11 @@ body {
   background-repeat: no-repeat;
 }
 
+#calendar-result .btn-holder {
+  text-align: center;
+  padding: 40px 0px;
+  margin: 0px;
+}
 #calendar-result .text-holder {
   border-radius: 6px;
   padding: 20px 40px;
@@ -1277,6 +1290,23 @@ body {
   margin-top: 10px;
   font-size: 27px;
   margin-bottom: 15px;
+}
+#calendar-result .data-holder .btn-holder {
+  position: relative;
+}
+#calendar-result .filters {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#calendar-result .filters .btn{
+  margin: 0;
+  padding: 10px;
+  min-width: auto;
+  border-radius: 0;
+  width: 100px;
+  background: #DDD;
+  border: none;
 }
 #calendar-result .data-holder table td:first-child {
   border-right: none;
@@ -1419,138 +1449,216 @@ footer {
 
 @media (max-width: 1400px) {
 
-.results-section .results-selection-tab tr td.result-selector img{}
-.results-section .results-selection-tab tr td.result-selector {
-  text-align: center;
-  padding: 10px;
-}
+  .results-section .results-selection-tab tr td.result-selector img{}
+  .results-section .results-selection-tab tr td.result-selector {
+    text-align: center;
+    padding: 10px;
+  }
 
-#main .bar-selector {
-  font-size: 14px;
-  height: 46px;
-}
-#main .bar-selector .day-selector ul li a {
-  padding: 13px 15px;
-}
-#main .bar-selector .meeting-selector ul li a {
-  width: 300px;
-  font-size: 14px;
-  padding: 10px;
-}
-#main .bar-selector .meeting-selector ul li a img {
-  margin-right: 10px;
-  width: 40px;
-}
-#main .bar-selector .race-selector ul li a {
-  padding: 13px;
-}
+  #main .bar-selector {
+    font-size: 14px;
+    height: 46px;
+  }
+  #main .bar-selector .day-selector ul li a {
+    padding: 13px 15px;
+  }
+  #main .bar-selector .day-selector ul.calendar-selector li a {
+    padding: 2px;
+  }
+  #main .bar-selector .meeting-selector ul li a {
+    width: 300px;
+    font-size: 14px;
+    padding: 10px;
+  }
+  #main .bar-selector .meeting-selector ul li a img {
+    margin-right: 10px;
+    width: 40px;
+  }
+  #main .bar-selector .meeting-selector a.meeting-selected {
+    padding: 8px 0px 3px 10px;
+    width: 270px;
+  }
+  #main .bar-selector .meeting-selector ul.meeting-selector-list {
+    left: 0;
+    top: 46px;
+    width: 400px;
+  }
+  #main .bar-selector .meeting-selector ul li a {
+    font-size: 14px;
+    padding: 10px 0px 10px 22px;
+  }
+  #main .bar-selector .race-selector ul li a {
+    padding: 13px;
+  }
 
-.previsions .previsions-header ul li {
-  font-size: 24px;
-  padding: 0 10px;
-  position: relative;
-}
+  .previsions .previsions-header ul li {
+    font-size: 24px;
+    padding: 0 10px;
+    position: relative;
+  }
 }
 @media (max-width: 1100px){
 
-.results-section .results-selection-tab tr td.result-selector img{
-  width: 70px;
-}
-.results-section .results-selection-tab tr td.result-selector {
-  text-align: center;
-  padding: 10px;
-}
+  .results-section .results-selection-tab tr td.result-selector img{
+    width: 70px;
+  }
+  .results-section .results-selection-tab tr td.result-selector {
+    text-align: center;
+    padding: 10px;
+  }
 
-.previsions .previsions-header ul li a {
-  color: #1d1e56;
-  background: #f5f5f5;
-  width: 50px;
-  height: 50px;
-}
-#main .bar-selector {
-  font-size: 14px;
-  height: 46px;
-}
-#main .bar-selector .day-selector ul li a {
-  padding: 13px 5px;
-}
-#main .bar-selector ul.calendar-selector li a i {
-  color: #000;
-  font-size: 20px;
-}
-#main .bar-selector .meeting-selector ul li a {
-  width: 300px;
-  font-size: 14px;
-  padding: 11px;
-}
-#main .bar-selector .meeting-selector ul li a img {
-  margin-right: 10px;
-  width: 40px;
-}
-#main .bar-selector .race-selector ul li a {
-  padding: 13px 10px;
-}
+  .previsions .previsions-header ul li a {
+    color: #1d1e56;
+    background: #f5f5f5;
+    width: 50px;
+    height: 50px;
+  }
+  #main .bar-selector {
+    font-size: 14px;
+    height: 46px;
+  }
+  #main .bar-selector .day-selector ul li a {
+    padding: 13px 5px;
+  }
+  #main .bar-selector ul.calendar-selector li a i {
+    color: #000;
+    font-size: 20px;
+  }
 }
 @media (max-width: 1200px) and (min-width: 992px){
 
-.navbar-nav li.nav-item {
-  margin: 0 5px;
-}
+  .navbar-nav li.nav-item {
+    margin: 0 7px;
+  }
 
-#main .bar-selector .day-selector ul li a {}
-#main .bar-selector .meeting-selector ul li a {}
-#main .bar-selector .race-selector ul li a {}
+  #main .bar-selector .day-selector ul li a {}
+  #main .bar-selector .meeting-selector ul li a {}
+  #main .bar-selector .race-selector ul li a {}
 }
 
 @media (max-width: 991px) {
 
-.results-section .results-selection-tab tr td.result-selector img{
-  width: 50px;
-}
-.navbar.navbar-light {
-  background-color: #fff;
-  padding-bottom: 10px;
-}
-.navbar-nav li.nav-item a.nav-link.btn-skew i {
-  display: none;
-}
-.navbar-nav li.nav-item a.nav-link.btn-skew {
-  color: #000;
-  background: none;
-}
-.navbar-nav li.nav-item a.nav-link.btn-skew:before, .navbar-nav li.nav-item a.nav-link.btn-skew:after {
-  content: none;
-}
-#wrapper {
-  margin: 58px 0 0 0;
-}
+  .results-section .results-selection-tab tr td.result-selector img{
+    width: 50px;
+  }
+  .navbar.navbar-light {
+    background-color: #fff;
+    padding-bottom: 10px;
+  }
+  .navbar-nav {
+    margin-top: 10px;
+  }
+  .navbar-nav li.nav-item a.nav-link {
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #000;
+    padding: 10px;
+    white-space: nowrap;
+  }
+  .navbar-nav li.nav-item a.nav-link.btn-skew i {
+    display: none;
+  }
+  .navbar-nav li.nav-item a.nav-link.btn-skew {
+    color: #000;
+    background: none;
+    margin: 0;
+  }
+  .navbar-nav li.nav-item a.nav-link:hover,
+  .navbar-nav li.nav-item a.nav-link.btn-skew:hover {
+    color: #fff;
+    background-color: #218850;
+  }
+  .navbar-nav li.nav-item a.nav-link svg{
+    display: none;
+  }
+  .navbar-nav li.nav-item a.nav-link .text-minify{
+    display: inline;
+  }
+  .navbar-nav li.nav-item a.nav-link.btn-skew:before, .navbar-nav li.nav-item a.nav-link.btn-skew:after {
+    content: none;
+  }
+  .navbar-nav.secondary {
+    margin: 0;
+  }
+  .navbar-nav.secondary li.nav-item {
+    margin: 0 15px !important;
+  }
+  #wrapper {
+    margin: 58px 0 0 0;
+  }
 
-#main .bar-selector {
-  font-size: 14px;
-  height: 144px;
-}
-#main .bar-selector .day-selector,#main .bar-selector .meeting-selector ul, #main .bar-selector .race-selector ul, #main .bar-selector ul.calendar-selector,
-#main .bar-selector .day-selector, #main .bar-selector .meeting-selector, #main .bar-selector .race-selector {
-  float: none;
-}
-#main .bar-selector .day-selector ul li a {
-  padding: 13px 16px;
-}
-#main .bar-selector ul.calendar-selector li a i {
-  color: #000;
-  font-size: 20px;
-}
+  #main .bar-selector {
+    font-size: 14px;
+    height: 144px;
+  }
+  #calendar-result #main .bar-selector {
+    font-size: 14px;
+    height: 47px;
+  }
+  #calendar-result .btn-holder {
+    text-align: center;
+    padding: 40px 0px 20px;
+    margin: 0px;
+  }
+  #calendar-result .filters {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin-top: 20px;
+  }
+  #main .bar-selector .day-selector, #main .bar-selector .meeting-selector, #main .bar-selector .race-selector {
+    float: none;
+  }
+  #main .bar-selector .race-selector ul
+  #main .bar-selector .race-selector {
+    float: none;
+  }
+  #main .bar-selector .day-selector {
+    display: inline-block;
+  }
+  #main .bar-selector .day-selector ul li a {
+    padding: 13px 16px;
+  }
+  #main .bar-selector .day-selector ul.calendar-selector li a {
+    padding: 2px;
+  }
+  #main .bar-selector ul.calendar-selector li a i {
+    color: #000;
+    font-size: 20px;
+  }
 
-#main .bar-selector .meeting-selector ul li a {
-  width: 300px;
-  font-size: 14px;
-  padding: 11px;
+  #main .bar-selector .meeting-selector {
+    height: 47px;
+  }
+  #main .bar-selector .meeting-selector a.meeting-selected {
+    padding: 0px 0px 3px 10px;
+    width: 100%;
+  }
+  #main .bar-selector .meeting-selector ul li a {
+    width: 300px;
+    font-size: 14px;
+    padding: 11px;
+  }
+  #main .bar-selector .meeting-selector ul li a img {
+    margin-right: 10px;
+    width: 40px;
+  }
+  #main .bar-selector .meeting-selector ul.meeting-selector-list {
+    left: 0;
+    top: 42px;
+    width: 100%;
+  }
+  #main .bar-selector .race-selector ul {
+    float: none;
+  }
+  #main .bar-selector .race-selector ul li a {
+    padding: 13px 10px;
+  }
 }
-#main .bar-selector .meeting-selector ul li a img {
-  margin-right: 10px;
-  width: 40px;
-}
-#main .bar-selector .race-selector ul li a {
-  padding: 13px 10px;
-}
+@media (max-width: 700px) {
+
+  .data-holder .btn-holder .btn {
+    min-width: 120px;
+    text-transform: none;
+  }
 }

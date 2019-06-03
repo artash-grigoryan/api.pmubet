@@ -40,7 +40,7 @@ class ReunionController extends Controller
     public function getAll($locale) {
 
         $reunions  = Reunion::select(DB::raw('reunions.*, DATE_FORMAT(reunions.date,\'%Y%m%d\') as datePath, DATE_FORMAT(reunions.date,\'%Y-%m-%d\') as day, DATE_FORMAT(reunions.date,\'%H:%i\') as  time'))
-            ->where([['date', '>=', date('Y-m-d', strtotime('-1 DAY +2 HOUR'))], ['date', '<=', date('Y-m-d', strtotime('+2 DAY +2 HOUR'))]])
+            ->where([['date', '>=', date('Y-m-d', strtotime('-1 DAY'))], ['date', '<=', date('Y-m-d', strtotime('+2 DAY'))]])
             ->whereHas('races')
             ->with('translation')
             ->get();
@@ -58,7 +58,7 @@ class ReunionController extends Controller
     public function getByDate($locale, $date) {
 
         $reunions  = Reunion::select(DB::raw('reunions.*, DATE_FORMAT(reunions.date,\'%Y%m%d\') as datePath, DATE_FORMAT(reunions.date,\'%Y-%m-%d\') as day, DATE_FORMAT(reunions.date,\'%H:%i\') as  time'))
-            ->where([['date', '>=', date('Y-m-d', strtotime($date.' +2 HOUR'))], ['date', '<', date('Y-m-d', strtotime($date.' +1 DAY +2 HOUR'))]])
+            ->where([['date', '>=', date('Y-m-d', strtotime($date))], ['date', '<', date('Y-m-d', strtotime($date.' +1 DAY'))]])
             ->whereHas('races')
             ->with('translation')
             ->get();

@@ -22,7 +22,9 @@ class RaceController extends Controller
     public function getAll($locale)
     {
         $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
-            ->where([['date', '>=', date('Y-m-d', strtotime('-1 DAY +2 HOUR'))], ['date', '<=', date('Y-m-d', strtotime('+2 DAY +2 HOUR'))]])
+            ->where([['date', '>=', date('Y-m-d', strtotime('-1 DAY'))], ['date', '<=', date('Y-m-d', strtotime('+2 DAY'))]])
+            ->whereRaw('date >= ADDDATE(ADDDATE(NOW(), INTERVAL -1 DAY), 2 HOUR)')
+            ->whereRaw('date >= ADDDATE(ADDDATE(NOW(), INTERVAL 2 DAY), 2 HOUR)')
             ->orderBy('date', 'ASC')
             ->with("runners")
             ->with("results")
@@ -49,7 +51,7 @@ class RaceController extends Controller
     public function getAllByDate($locale, $date)
     {
         $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
-            ->where([['date', '>=', date('Y-m-d', strtotime($date.' +2 HOUR'))], ['date', '<', date('Y-m-d', strtotime($date.' +1 DAY +2 HOUR'))]])
+            ->where([['date', '>=', date('Y-m-d', strtotime($date.' + 2 HOUR'))], ['date', '<', date('Y-m-d', strtotime($date.' +1 DAY + 2 HOUR'))]])
             ->orderBy('date', 'ASC')
             ->with("runners")
             ->with("results")
@@ -75,10 +77,8 @@ class RaceController extends Controller
 
     public function getNext($locale)
     {
-        $now = date('Y-m-d H:m:s', strtotime('+2 HOUR'));
-
         $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
-            ->where([['date', '>=', $now]])
+            ->whereRaw('date >= ADDDATE(NOW(), INTERVAL 2 HOUR)')
             ->orderBy('date', 'ASC')
             ->with("bets")
             ->with("runners")
@@ -334,10 +334,8 @@ class RaceController extends Controller
 
     public function getNextQ5($locale)
     {
-        $now = date('Y-m-d H:m:s', strtotime('+2 HOUR'));
-
         $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
-            ->where([['date', '>=', $now]])
+            ->whereRaw('date >= ADDDATE(NOW(), INTERVAL 2 HOUR)')
             ->whereHas('bets', function($query){
                   $query->whereLib('QN');
               })

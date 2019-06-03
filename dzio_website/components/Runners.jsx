@@ -31,19 +31,29 @@ export default class Runners extends React.Component {
         return '/img/casaques/'+date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2)+'-R'+race.reunion.number+'C'+race.number+'P'+runner.number+'.png';
     }
 
+    selectRunner(runner) {
+
+        if(runner === this.state.runnerSelected) {
+            this.setState({runnerSelected : null});
+        }
+        else {
+            this.setState({runnerSelected : runner})
+        }
+    }
+
     render() {
 
         let listRunners = [];
         if(this.props.race) {
             listRunners = this.props.race.runners.map((runner) =>
                 <div key={runner.number} >
-                    <div className="runner">
+                    <div className="runner" onClick={() => this.selectRunner(runner)}>
                         <span className="runner-rank">{runner.number}</span>
                         <span className="runner-img">
                             <img src={this.getCasaqueImgPath(this.props.race, runner)}/>
                         </span>
                         <span className="runner-name">
-                            <p onClick={() => this.setState({runnerSelected : runner})}>{(runner.translation ? runner.translation.name : null) || runner.name} {runner.doNotRun ? <span className="do-not-run"><Trans i18nKey="Do not run">Do not run</Trans></span> : null}</p>
+                            <p>{(runner.translation ? runner.translation.name : null) || runner.name} {runner.doNotRun ? <span className="do-not-run"><Trans i18nKey="Do not run">Do not run</Trans></span> : null}</p>
                             <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey}</span>
                         </span>
                         <span className="runner-cote">

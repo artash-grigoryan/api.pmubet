@@ -84,9 +84,9 @@ class Race extends Model
     public function reportersGeny()
     {
         return $this->reporters()
-            ->where('societe', 'geny.com')
-            ->skip(1)
-            ->take(100);
+            ->where('societe', 'geny.com');
+            //->skip(1)
+            //->take(100);
     }
 
     public function reportersBest()

@@ -16,7 +16,7 @@ export default {
     "Bet now":"Ставка сейчас",
     "Select a Reunion":"Select a Reunion",
     "Bet on Vivaro":"Bet on Vivaro",
-    "Top Predictions":"Top Predictions",
+    "Next Predictions":"Next Predictions",
     "Programs":"Programs",
     "Calendar & Results":"Calendar & Results",
     "How to bet":"How to bet",

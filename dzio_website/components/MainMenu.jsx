@@ -17,6 +17,7 @@ class MainMenu extends React.Component {
             messages: [],
             requests: [],
             fixedTop: "",
+            navBarOpen: false,
             showSignInPage: false,
             showSignUpPage: false,
             showSignUpDialog: false,
@@ -130,6 +131,11 @@ class MainMenu extends React.Component {
 
     }
 
+    handleClick() {
+
+        this.setState({'navBarOpen':!this.state.navBarOpen});
+    }
+
     toggleMessagePopup() {
         this.setState(prevState => ({
             showNotifications: false,
@@ -152,11 +158,11 @@ class MainMenu extends React.Component {
 
         return <nav className="navbar fixed-top navbar-expand-lg navbar-light">
             <ReactLogo type={'jpg'} />
-            <button className="navbar-toggler" type="button">
+            <button className="navbar-toggler" type="button" onClick={() => this.handleClick()}>
                 <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div className="collapse navbar-collapse" id="navbarSupportedContent"  style={{display:this.state.navBarOpen?'block':'none'}}>
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <a className="nav-link" href={"/"+this.props.lang}><Trans i18nKey="Programs">Programs</Trans></a>
@@ -171,15 +177,16 @@ class MainMenu extends React.Component {
                         <a className="nav-link" href={"/"+this.props.lang+"/news"}><Trans i18nKey="News">News</Trans></a>
                     </li>
                 </ul>
-                <ul className="navbar-nav">
+                <ul className="navbar-nav secondary">
                     <li className="nav-item m-0">
                         <a className="btn-skew nav-link" href="#">
-                            Lives
+                            <Trans i18nKey="Lives">Lives</Trans>
                             <FontAwesomeIcon style={{marginLeft: '5px'}} icon="play-circle" />
                         </a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">
+                            <span className="text-minify"><Trans i18nKey="Account">Account</Trans></span>
                             <FontAwesomeIcon icon="user" />
                         </a>
                     </li>
