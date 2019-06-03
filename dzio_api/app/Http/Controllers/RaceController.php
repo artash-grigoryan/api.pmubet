@@ -430,7 +430,7 @@ class RaceController extends Controller
         $comment = $request->input('comment');
         $lang = $request->input('lang');
 
-        if ($label == '') {
+        if ($label == '' || $lang == '') {
             return Redirect::back()->withErrors(['msg', 'The Message']);
         }
 

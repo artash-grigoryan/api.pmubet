@@ -96,7 +96,7 @@ class RunnerController extends Controller
         $farmer = $request->input('farmer');
         $lang = $request->input('lang');
 
-        if ($name == '') {
+        if ($name == '' || $lang == '') {
             return Redirect::back()->withErrors(['msg', 'The Message']);
         }
         $runnerTranslation = RunnerTranslation::firstOrNew(['reunionId' => $id, 'lang' => 'hy']);

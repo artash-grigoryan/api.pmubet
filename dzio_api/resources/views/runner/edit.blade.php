@@ -19,6 +19,7 @@
                         <div class="form-group">
                             <label for="lang">Locale</label>
                             <select name="lang" id="lang">
+                                <option value="">Language</option>
                                 <option value="fr">Français</option>
                                 <option value="hy">Հայերեն</option>
                                 <option value="ru">Russian</option>

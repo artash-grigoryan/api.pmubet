@@ -129,7 +129,7 @@ class ReunionController extends Controller
         $hippodromeName = $request->input('hippodromeName');
         $speciality = $request->input('speciality');
         $lang = $request->input('lang');
-        if ($label == '') {
+        if ($label == '' || $lang == '') {
             return Redirect::back()->withErrors(['msg', 'The Message']);
         }
         $reunionTranslation = ReunionTranslation::firstOrNew(['reunionId' => $id, 'lang' => 'hy']);
