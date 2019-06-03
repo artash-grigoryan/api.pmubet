@@ -8,6 +8,11 @@
                 <div class="panel-heading">Edit race translation</div>
 
                 <div class="panel-body">
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                        {{$errors->first()}}
+                    </div>
+                    @endif
                     @if (session('msg'))
                     <div class="alert alert-success">
                         {{ session('msg') }}

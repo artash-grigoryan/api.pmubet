@@ -431,7 +431,7 @@ class RaceController extends Controller
         $lang = $request->input('lang');
 
         if ($label == '' || $lang == '') {
-            return Redirect::back()->withErrors(['msg', 'The Message']);
+            return Redirect::back()->withErrors(['Fill required fields']);
         }
 
         $raceTranslation = RaceTranslation::firstOrNew(['raceId' => $raceId, 'lang' => 'hy']);
