@@ -132,7 +132,7 @@ class ReunionController extends Controller
         if ($label == '' || $lang == '') {
             return Redirect::back()->withErrors(['Fill required fields']);
         }
-        $reunionTranslation = ReunionTranslation::firstOrNew(['reunionId' => $id, 'lang' => 'hy']);
+        $reunionTranslation = ReunionTranslation::firstOrNew(['reunionId' => $id, 'lang' => $lang]);
         $reunionTranslation->label = $label;
         $reunionTranslation->statusLabel = $statusLabel;
         $reunionTranslation->hippodromeName = $hippodromeName;

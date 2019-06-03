@@ -99,7 +99,7 @@ class RunnerController extends Controller
         if ($name == '' || $lang == '') {
             return Redirect::back()->withErrors(['Fill required fields']);
         }
-        $runnerTranslation = RunnerTranslation::firstOrNew(['reunionId' => $id, 'lang' => 'hy']);
+        $runnerTranslation = RunnerTranslation::firstOrNew(['runnerId' => $id, 'lang' => $lang]);
         $runnerTranslation->name = $name;
         $runnerTranslation->breed = $breed;
         $runnerTranslation->color = $color;

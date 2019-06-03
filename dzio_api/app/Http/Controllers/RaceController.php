@@ -434,7 +434,7 @@ class RaceController extends Controller
             return Redirect::back()->withErrors(['Fill required fields']);
         }
 
-        $raceTranslation = RaceTranslation::firstOrNew(['raceId' => $raceId, 'lang' => 'hy']);
+        $raceTranslation = RaceTranslation::firstOrNew(['raceId' => $raceId, 'lang' => $lang]);
         $raceTranslation->label = $label;
         $raceTranslation->description = $description;
         $raceTranslation->gender = $gender;
