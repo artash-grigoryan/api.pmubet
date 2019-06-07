@@ -399,24 +399,24 @@ class RaceController extends Controller
      * @param  \App\Race  $raceId
      * @return \Illuminate\Http\Response
      */
-    public function edit($raceId)
+    public function edit($raceId, $lang = 'hy')
     {
-        //
-        $reunion = RaceTranslation::where('raceId', $raceId)->where('lang', 'hy')->first();
+        $race = RaceTranslation::where('raceId', $raceId)->where('lang', $lang)->first();
 
-        if ($reunion == null) {
-            $reunion = Race::find($raceId);
+        if ($race == null) {
+            $race = Race::find($raceId);
         }
-        $reunion->id = $raceId;
+        $race->id = $raceId;
+        $race->lang = $lang;
 
-        return view('race.edit', ["race" => $reunion]);
+        return view('race.edit', ["race" => $race]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Race  $reunion
+     * @param  \App\Race  $race
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $raceId)
@@ -454,10 +454,10 @@ class RaceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Race  $reunion
+     * @param  \App\Race  $race
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Race $reunion)
+    public function destroy(Race $race)
     {
         //
     }

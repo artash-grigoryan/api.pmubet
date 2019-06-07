@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit reunion translation</div>
+                <div class="panel-heading">Edit reporter translation</div>
 
                 <div class="panel-body">
                     @if($errors->any())
@@ -18,7 +18,10 @@
                         {{ session('msg') }}
                     </div>
                     @endif
-                    <form action="{{ url('/admin/reunion/'.$reunion->id) }}" method="post">
+
+
+
+                    <form action="{{ url('/admin/reporter/'.$reporter->id) }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="lang">Locale</label>
@@ -30,21 +33,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="label">Label</label>
-                            <input type="text" class="form-control" id="label" name="label" value="{{ $reunion->label or old('label')}}">
+                            <label for="societe">Societe</label>
+                            <input type="text" class="form-control" id="societe" name="societe" value="{{ $reporter->societe or old('societe')}}">
                         </div>
                         <div class="form-group">
-                            <label for="statusLabel">Label</label>
-                            <input type="text" class="form-control" id="statusLabel" name="statusLabel" value="{{ $reunion->statusLabel or old('statusLabel')}}">
+                            <label for="reporter">reporter</label>
+                            <textarea name="reporter" class="form-control"  id="reporter" cols="30" rows="5">{{ $reporter->reporter or old('reporter')}}</textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="hippodromeName">Hippodrome Name</label>
-                            <input type="text" class="form-control" id="hippodromeName" name="hippodromeName" value="{{ $reunion->hippodromeName or old('hippodromeName')}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="speciality">Speciality</label>
-                            <input type="text" class="form-control" id="speciality" name="speciality" value="{{ $reunion->speciality}}">
-                        </div>
+
                         <div class="form-group">
                             <button type="button" class="btn btn-default">Cancel</button>
                             <button type="submit" class="btn btn-primary">Save</button>

@@ -100,16 +100,18 @@ class ReunionController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Reunion  $id
+     * @param  String  $lang
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $lang = 'hy')
     {
-        $reunion = ReunionTranslation::where('reunionId', $id)->where('lang', 'hy')->first();
+        $reunion = ReunionTranslation::where('reunionId', $id)->where('lang', $lang)->first();
 
         if ($reunion == null) {
             $reunion = Reunion::find($id);
         }
         $reunion->id = $id;
+        $reunion->lang = $lang;
 
         return view('reunion.edit', ["reunion" => $reunion]);
     }

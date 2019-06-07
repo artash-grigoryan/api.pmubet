@@ -59,18 +59,16 @@ class RunnerController extends Controller
      * @param  \App\Runner  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $lang = 'hy')
     {
-
-        //
-        $runner = RunnerTranslation::where('runnerId', $id)->where('lang', 'hy')->first();
+        $runner = RunnerTranslation::where('runnerId', $id)->where('lang', $lang)->first();
 
         if ($runner == null) {
             $runner = Runner::find($id);
-
         }
 
         $runner->id = $id;
+        $runner->lang = $lang;
 
         return view('runner.edit', ["runner" => $runner]);
     }
