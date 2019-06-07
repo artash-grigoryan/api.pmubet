@@ -66,6 +66,6 @@ class Runner extends Model
 
     public function translations()
     {
-        return $this->hasOne('App\RunnerTranslation', "runnerId")->select('lang');
+        return $this->hasMany('App\RunnerTranslation', "runnerId")->select('lang');
     }
 }

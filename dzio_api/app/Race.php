@@ -114,6 +114,6 @@ class Race extends Model
 
     public function translations()
     {
-        return $this->hasOne('App\RaceTranslation', "raceId")->select('lang');
+        return $this->hasMany('App\RaceTranslation', "raceId")->select('lang');
     }
 }

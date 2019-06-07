@@ -41,6 +41,6 @@ class Reporter extends Model
 
     public function translations()
     {
-        return $this->hasOne('App\ReporterTranslation', "reporterId")->select('lang');
+        return $this->hasMany('App\ReporterTranslation', "reporterId")->select('lang');
     }
 }
