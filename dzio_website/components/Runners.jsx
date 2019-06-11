@@ -57,7 +57,7 @@ export default class Runners extends React.Component {
                             <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey}</span>
                         </span>
                         <span className="runner-cote">
-                            <span>{runner.signs} {runner.reportEvol}</span>
+                            <span>{!runner.doNotRun ? runner.signs : null} {!runner.doNotRun ? runner.reportEvol : null}</span>
                         </span>
                     </div>
                     {

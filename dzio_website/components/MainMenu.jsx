@@ -8,6 +8,7 @@ import ReactLogo from "./../elements/ReactLogo";
 import {userActions} from "./../actions/user";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import {Trans} from "react-i18next";
+import LanguageSelector from "./LanguageSelector";
 
 
 class MainMenu extends React.Component {
@@ -179,16 +180,19 @@ class MainMenu extends React.Component {
                 </ul>
                 <ul className="navbar-nav secondary">
                     <li className="nav-item m-0">
-                        <a className="btn-skew nav-link" href="#">
+                        <a className="btn-skew nav-link" href="javascript:;">
                             <Trans i18nKey="Lives">Lives</Trans>
                             <FontAwesomeIcon style={{marginLeft: '5px'}} icon="play-circle" />
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">
+                        <a className="nav-link" href="javascript:;">
                             <span className="text-minify"><Trans i18nKey="Account">Account</Trans></span>
                             <FontAwesomeIcon icon="user" />
                         </a>
+                    </li>
+                    <li className="nav-item m-0">
+                        <LanguageSelector {...this.props}/>
                     </li>
                 </ul>
             </div>

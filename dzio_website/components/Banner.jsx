@@ -12,6 +12,8 @@ export default class Banner extends React.Component {
     constructor(args) {
         super(args);
         this.props.race.labelLong = (this.props.race.translation ? this.props.race.translation.labelLong : null) || this.props.race.labelLong;
+        this.props.race.date = new Date(this.props.race.date);
+        this.props.race.date.setMinutes( this.props.race.date.getMinutes() + this.props.timezoneOffset );
     }
 
     renderer = ({ hours, minutes, seconds, completed }) => {

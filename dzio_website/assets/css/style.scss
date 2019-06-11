@@ -52,6 +52,28 @@ body {
   left: 30px;
 
 }
+
+.language-selector {
+  padding: 5px 20px 5px 0px;
+}
+.language-selector > a{}
+.language-selector > a > img{
+  width: 30px;
+}
+.language-selector > a > svg{
+  color : #000;
+}
+.language-selector .language-options{
+  list-style: none;
+  padding: 0;
+  position: absolute;
+  top: 35px;
+}
+.language-selector .language-options li{}
+.language-selector .language-options li > a {}
+.language-selector .language-options li > a > img{
+  width: 30px;
+}
 .banner {
   position: relative;
   background-size: cover;
