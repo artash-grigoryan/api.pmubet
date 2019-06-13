@@ -43,6 +43,6 @@ class CreateBetResultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bet_results');
+//        Schema::dropIfExists('bet_results');
     }
 }

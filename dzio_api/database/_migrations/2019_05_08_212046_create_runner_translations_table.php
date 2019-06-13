@@ -49,6 +49,6 @@ class CreateRunnerTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('runner_translations');
+//        Schema::dropIfExists('runner_translations');
     }
 }

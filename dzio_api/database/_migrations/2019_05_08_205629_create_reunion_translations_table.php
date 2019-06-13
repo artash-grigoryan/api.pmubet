@@ -40,6 +40,6 @@ class CreateReunionTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reunions_translations');
+//        Schema::dropIfExists('reunions_translations');
     }
 }

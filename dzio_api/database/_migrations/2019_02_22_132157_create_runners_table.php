@@ -62,6 +62,6 @@ class CreateRunnersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('runners');
+//        Schema::dropIfExists('runners');
     }
 }

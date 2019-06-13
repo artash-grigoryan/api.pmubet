@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReportersTable extends Migration
+class CreateBetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateReportersTable extends Migration
      */
     public function up()
     {
-        Schema::create('reporters', function (Blueprint $table) {
+        Schema::create('bets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('societe');
-            $table->string('reporter');
-            $table->string('nb_pts')->nullable();
-            $table->string('reporter_rank')->nullable();
-            $table->integer("raceId")->unsigned();
+            $table->integer('code');
+            $table->string('lib')->nullable();
+            $table->string('libLong')->nullable();
+            $table->integer('raceId')->unsigned();
+
+            $table->unique(array('code', 'raceId'));
 
             $table->foreign('raceId')
                 ->references('id')
@@ -35,6 +36,6 @@ class CreateReportersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reporters');
+//        Schema::dropIfExists('bets');
     }
 }

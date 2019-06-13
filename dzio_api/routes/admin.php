@@ -13,6 +13,7 @@
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/predictions', 'HomeController@predictions')->name('predictions');
     Route::get('/reunions', 'HomeController@index')->name('reunions');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/racesList', 'HomeController@racesList')->name('racesList');
@@ -30,4 +31,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/reporter/{id}/{lang?}', 'ReporterController@edit')->name('editReport');
     Route::post('/reporter/{id}', 'ReporterController@update')->name('updateReport');
+
+    Route::get('/race/{raceId}/prediction/add', 'PredictionController@addForm')->name('addPrediction');
+    Route::post('/race/{raceId}/prediction/add', 'PredictionController@add')->name('addPrediction');
+
+    Route::get('/prediction/{id}/{lang?}', 'PredictionController@edit')->name('editPrediction');
+    Route::post('/prediction/{id}', 'PredictionController@update')->name('updatePrediction');
+
+    Route::get('/home-banner/', 'HomeController@bannerEdit')->name('editBanner');
+    Route::post('/home-banner/', 'HomeController@bannerUpdate')->name('updateBanner');
 });

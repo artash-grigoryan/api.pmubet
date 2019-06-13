@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReporterTranslationsTable extends Migration
+class CreatePredictionTranslationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateReporterTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reporters_translations', function (Blueprint $table) {
+        Schema::create('prediction_translations', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer("reporterId")->unsigned();
-            $table->string('societe');
-            $table->string('reporter');
+            $table->string('runner');
+            $table->integer('predictionId')->unsigned();
             $table->char("lang", 3)->nullable();
         });
     }
@@ -29,6 +28,6 @@ class CreateReporterTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reporters_translations');
+        Schema::dropIfExists('prediction_translations');
     }
 }

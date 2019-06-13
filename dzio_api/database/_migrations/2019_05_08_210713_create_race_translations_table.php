@@ -34,6 +34,6 @@ class CreateRaceTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('races_translations');
+//        Schema::dropIfExists('races_translations');
     }
 }

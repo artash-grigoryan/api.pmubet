@@ -32,6 +32,9 @@
                                 <a href="{{ url('admin/race/'.$race->id) }}" class="btn btn-primary">
                                     <i class="fa fa-btn fa-edit"></i>
                                 </a>
+                                <a href="{{ url('admin/race/'.$race->id.'/prediction/add') }}" class="btn btn-primary">
+                                    predictions
+                                </a>
                             </td>
                             <!-- Task Delete Button -->
                             <td>

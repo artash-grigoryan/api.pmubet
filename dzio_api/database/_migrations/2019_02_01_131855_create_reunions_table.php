@@ -14,7 +14,7 @@ class CreateReunionsTable extends Migration
     public function up()
     {
         Schema::create('reunions', function (Blueprint $table) {
-            $table->increments('id')->unsigned();;
+            $table->increments('id')->unsigned();
             $table->string('statusLabel' )->nullable();
             $table->string('label')->nullable();
             $table->char('speciality', 50)->nullable();
@@ -38,6 +38,6 @@ class CreateReunionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reunions');
+//        Schema::dropIfExists('reunions');
     }
 }
