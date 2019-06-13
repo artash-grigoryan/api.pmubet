@@ -39,6 +39,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        <li><a href="{{ route('editBanner') }}">Home Banner</a></li>
                         <li><a href="{{ url('admin/predictions') }}">Predictions</a></li>
                         <li><a href="{{ url('admin/reunions') }}">Reunions</a></li>
                         <li><a href="{{ url('admin/racesList') }}">Races</a></li>
