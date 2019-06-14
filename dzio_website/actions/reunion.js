@@ -1,6 +1,5 @@
 import { reunionService } from './../services/reunion';
-import {constants} from './../reducers/constants';
-import cookie from 'js-cookie';
+
 
 export const reunionActions = {
     get,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Banner;
 use App\Race;
 use App\BetResult;
 use App\RaceTranslation;
@@ -13,6 +14,25 @@ use Illuminate\Support\Facades\Session;
 
 class RaceController extends Controller
 {
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @param $locale
+     * @return \Illuminate\Http\Response
+     */
+    public function lastBanner($locale)
+    {
+        $banner = Banner::where('lang', '=', $locale)->orderBy('id', 'desc')->first();
+        if (!empty($banner)) {
+
+            return json_encode($banner);
+        } else {
+
+            return json_encode([]);
+        }
+    }
 
     /**
      * Display a listing of the resource.

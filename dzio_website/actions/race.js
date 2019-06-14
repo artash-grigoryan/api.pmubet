@@ -1,6 +1,4 @@
-import { raceService } from './../services/race';
-import {constants} from './../reducers/constants';
-import cookie from 'js-cookie';
+import {raceService} from './../services/race';
 
 export const raceActions = {
     get,
@@ -18,10 +16,9 @@ function get(lang, date, reunionNumber, raceNumber) {
         raceService.get(lang, date, reunionNumber, raceNumber)
             .then((response) => {
 
-                if(response.data) {
+                if (response.data) {
                     resolve(response.data);
-                }
-                else {
+                } else {
                     reject();
                 }
             })
@@ -37,10 +34,9 @@ function getAll(lang) {
         raceService.getAll(lang)
             .then((response) => {
 
-                if(response.data) {
+                if (response.data) {
                     resolve(response.data);
-                }
-                else {
+                } else {
                     reject();
                 }
             })
@@ -56,10 +52,9 @@ function getAllByDate(lang, date) {
         raceService.getAllByDate(lang, date)
             .then((response) => {
 
-                if(response.data) {
+                if (response.data) {
                     resolve(response.data);
-                }
-                else {
+                } else {
                     reject();
                 }
             })
@@ -75,10 +70,9 @@ function getFirstByDate(lang, date) {
         raceService.getFirstByDate(lang, date)
             .then((response) => {
 
-                if(response.data) {
+                if (response.data) {
                     resolve(response.data);
-                }
-                else {
+                } else {
                     reject();
                 }
             })
@@ -94,10 +88,9 @@ function getFirstByReunion(lang, date, reunionNumber) {
         raceService.getFirstByReunion(lang, date, reunionNumber)
             .then((response) => {
 
-                if(response.data) {
+                if (response.data) {
                     resolve(response.data);
-                }
-                else {
+                } else {
                     reject();
                 }
             })
@@ -113,10 +106,9 @@ function getNext(lang) {
         raceService.getNext(lang)
             .then((response) => {
 
-                if(response.data) {
+                if (response.data) {
                     resolve(response.data);
-                }
-                else {
+                } else {
                     reject();
                 }
             })
@@ -132,10 +124,9 @@ function getNextQ5(lang) {
         raceService.getNextQ5(lang)
             .then((response) => {
 
-                if(response.data) {
+                if (response.data) {
                     resolve(response.data);
-                }
-                else {
+                } else {
                     reject();
                 }
             })

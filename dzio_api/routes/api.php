@@ -23,6 +23,8 @@ Route::middleware(['cors'])->group(function () {
     Route::get('{locale}/race/get/{date}/first',                         "RaceController@getFirstByDate");
     Route::get('{locale}/race/get/{date}/{reunionNumber}/first',         "RaceController@getFirstByReunion");
     Route::get('{locale}/race/get/{date}/{reunionNumber}/{raceNumber}',  "RaceController@get");
+
+    Route::get('{locale}/banner/last',  "RaceController@lastBanner");
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
