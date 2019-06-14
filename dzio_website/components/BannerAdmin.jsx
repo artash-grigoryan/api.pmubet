@@ -17,7 +17,7 @@ export default class Banner extends React.Component {
 
     async componentWillMount() {
 
-        bannerActions.getLast(this.props.lang).then((response) => {
+        bannerActions.getLast(this.props.lang || 'hy').then((response) => {
             this.setState(response);
         });
     }
