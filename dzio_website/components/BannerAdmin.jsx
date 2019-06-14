@@ -22,7 +22,7 @@ export default class Banner extends React.Component {
         });
     }
 
-    renderer = ({hours, minutes, seconds, completed}) => {
+    renderer = ({ total, days, hours, minutes, seconds, milliseconds, completed }) => {
         if (completed) {
             // Render a completed state
             return null;
@@ -30,6 +30,7 @@ export default class Banner extends React.Component {
 
             return <span>
                 <Trans i18nKey="Departure in">Departure in</Trans>&nbsp;
+                {days > 0 ? days : null} {days > 1 ?  <Trans i18nKey="days">days</Trans> :  <Trans i18nKey="day">day</Trans>}&nbsp;
                 {hours > 0 ? hours : null} {hours > 1 ?  <Trans i18nKey="hours">hours</Trans> :  <Trans i18nKey="hour">hour</Trans>}&nbsp;
                 {minutes > 0 ? minutes : null} {minutes > 1 ? <Trans i18nKey="minutes">minutes</Trans> : <Trans i18nKey="minute">minute</Trans>}
             </span>;
