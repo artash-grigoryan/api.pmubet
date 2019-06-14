@@ -40,7 +40,7 @@ export default class Banner extends React.Component {
 
         return <div>
             { this.state.image &&
-            <div className="banner inner-banner" style={{backgroundImage: "url('/images/" + this.state.image + "')"}}>
+            <div className="banner inner-banner" style={{backgroundImage: "url('/img/banner/" + this.state.image + "')"}}>
                 <div className="container">
                     <div className="text-holder">
                         <h1>
