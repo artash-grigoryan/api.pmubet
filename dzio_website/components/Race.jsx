@@ -1,10 +1,9 @@
-import _ from "lodash";
+
 import React from "react";
 import '@fortawesome/fontawesome';
 
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-import {Trans} from "react-i18next";
 import Banner from "./Banner";
+import BannerAdmin from "./BannerAdmin";
 import InfoSection from "./InfoSection";
 import Runners from "./Runners";
 import Predictions from "./Predictions";
@@ -26,6 +25,7 @@ export default class Race extends React.Component {
 
         return <div>
             <Banner {...this.props}/>
+            <BannerAdmin/>
 
             <InfoSection {...this.props}/>
 

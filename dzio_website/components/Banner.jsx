@@ -1,8 +1,6 @@
-import _ from "lodash";
 import React from "react";
 import '@fortawesome/fontawesome';
 
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import {Trans} from "react-i18next";
 import Countdown from "react-countdown-now";
 
@@ -13,7 +11,8 @@ export default class Banner extends React.Component {
         super(args);
         this.props.race.labelLong = (this.props.race.translation ? this.props.race.translation.labelLong : null) || this.props.race.labelLong;
         this.props.race.date = new Date(this.props.race.date);
-        this.props.race.date.setMinutes( this.props.race.date.getMinutes() + this.props.timezoneOffset );
+        this.props.race.date.setMinutes(this.props.race.date.getMinutes() + this.props.timezoneOffset);
+
     }
 
     renderer = ({ hours, minutes, seconds, completed }) => {
@@ -22,7 +21,12 @@ export default class Banner extends React.Component {
             return null;
         } else {
             // Render a countdown
-            return <span><Trans i18nKey="Departure in">Departure in</Trans> {hours>0?hours:null} {hours>1? <Trans i18nKey="hours">hours</Trans>:(hours===1?<Trans i18nKey="hour">hour</Trans>:null)} {minutes>0?minutes:null} {minutes>0 ? (minutes>1?<Trans i18nKey="minutes">minutes</Trans>:<Trans i18nKey="minute">minute</Trans>):null}</span>;
+            return <span>
+                <Trans i18nKey="Departure in">Departure in</Trans> {hours > 0 ? hours : null} {hours > 1 ?
+                <Trans i18nKey="hours">hours</Trans> : (hours === 1 ?
+                <Trans i18nKey="hour">hour</Trans> : null)} {minutes > 0 ? minutes : null} {minutes > 0 ? (minutes > 1 ?
+                <Trans i18nKey="minutes">minutes</Trans> : <Trans i18nKey="minute">minute</Trans>) : null}
+            </span>;
         }
     };
 
@@ -34,7 +38,13 @@ export default class Banner extends React.Component {
                 <div className="text-holder">
                     <h1>
                         <time>
-                            {this.props.race.datePath === this.props.today ? <Trans i18nKey="Today">Today</Trans> : (this.props.race.datePath === this.props.tomorrow ? <Trans i18nKey="Tomorrow">Tomorrow</Trans> : (this.props.race.datePath === this.props.yesterday ? <Trans i18nKey="Yesterday">Yesterday</Trans> : this.props.race.day))} {this.props.race.time}
+                            {this.props.race.datePath === this.props.today ? <Trans
+                                i18nKey="Today">Today</Trans> : (this.props.race.datePath === this.props.tomorrow ?
+                                <Trans
+                                    i18nKey="Tomorrow">Tomorrow</Trans> : (this.props.race.datePath === this.props.yesterday ?
+                                    <Trans i18nKey="Yesterday">
+                                        Yesterday
+                                    </Trans> : this.props.race.day))} {this.props.race.time}
                         </time>
                         <b>R{this.props.reunion.externNumber}C{this.props.race.number} </b>
                         {this.props.race.labelLong}
@@ -47,7 +57,14 @@ export default class Banner extends React.Component {
                         />
                     </div>
 
-                    <div style={{marginTop: "30px"}}><a target="_blank" className="btn btn-md" href="https://www.vivarobet.am"><Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans></a></div>
+                    <div style={{marginTop: "30px"}}>
+                        <a target="_blank" className="btn btn-md"
+                           href="https://www.vivarobet.am">
+                            <Trans i18nKey="Bet on Vivaro">
+                                Bet on Vivaro
+                            </Trans>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,13 +1,13 @@
 import axios from 'axios'
-import { store } from './../helpers/store';
+
 
 function getAxios() {
-    let state = store.getState();
-    let user = JSON.parse(localStorage.getItem('user'));
-    let token = state.authentication.publicKey;
-    if (user && user.token) {
-        token = user.token;
-    }
+    // let state = store.getState();
+    // let user = JSON.parse(localStorage.getItem('user'));
+    // let token = state.authentication.publicKey;
+    // if (user && user.token) {
+    //     token = user.token;
+    // }
 
     return axios.create({
         baseURL: API_URL,

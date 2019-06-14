@@ -14,6 +14,8 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import Race from "../components/Race";
 
 import { useTranslation, Trans } from "react-i18next";
+import BannerAdmin from "../components/BannerAdmin";
+import Banner from "../components/Banner";
 const { t, i18n } = useTranslation();
 const i18next = require('i18next');
 
@@ -32,7 +34,7 @@ export default class HomePage extends Component {
         date.setDate(date.getDate()+2);
         let tomorrow = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
 
-        let lang = (typeof this.props.match.params.lang !== 'undefined' ? this.props.match.params.lang : 'am');
+        let lang = (typeof this.props.match.params.lang !== 'undefined' ? this.props.match.params.lang : 'hy');
         i18next.changeLanguage(lang);
 
         let dateCalendar = new Date();
@@ -340,14 +342,7 @@ export default class HomePage extends Component {
                             ?
                                 <Race {...this.state}/>
                             :
-                                <div className="banner inner-banner">
-
-                                    <div className="container">
-                                        <div className="text-holder">
-
-                                        </div>
-                                    </div>
-                                </div>
+                                <BannerAdmin {...this.state}/>
                         }
 
                     </div>

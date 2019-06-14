@@ -1,4 +1,3 @@
-// import axios  from 'axios';
 import axios  from './../helpers/axios';
 
 export const raceService = {
