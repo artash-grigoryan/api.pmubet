@@ -41,7 +41,7 @@ export default class Banner extends React.Component {
 
         return <div>
             { this.state.image &&
-            <div style={{backgroundImage: "url('/img/banner/" + this.state.image + "')"}}>
+            <div className="inner-banner" style={{backgroundImage: "url('/img/banner/" + this.state.image + "')"}}>
                 <div className="container">
                     <div className="text-holder">
                         <h1>
@@ -52,15 +52,6 @@ export default class Banner extends React.Component {
                                 date={this.state.date}
                                 renderer={this.renderer}
                             />
-
-                        <div style={{marginTop: "30px"}}>
-                            <a target="_blank" className="btn btn-md"
-                               href="https://www.vivarobet.am">
-                                <Trans i18nKey="Bet on Vivaro">
-                                    Bet on Vivaro
-                                </Trans>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
