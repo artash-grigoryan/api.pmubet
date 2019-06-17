@@ -100,21 +100,24 @@ class HomeController extends Controller
     public function bannerUpdate(Request $request)
     {
 
+        $image = $request->input('image', '');
         $text = $request->input('text', '');
         $date = $request->input('date', '');
         $lang = $request->input('lang');
         if ($date == '' || $lang == '') {
             return Redirect::back()->withErrors(['Fill required fields']);
         }
+        $imageName = '';
+        if ($image != '') {
 
-        request()->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:250048',
-        ]);
+            request()->validate([
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:250048',
+            ]);
 
-        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+            $imageName = time().'.'.request()->image->getClientOriginalExtension();
 
-        request()->image->move(public_path('img/banner'), $imageName);
-
+            request()->image->move(public_path('img/banner'), $imageName);
+        }
         $banner = new Banner([
             'image' => $imageName,
             'date' => $date,

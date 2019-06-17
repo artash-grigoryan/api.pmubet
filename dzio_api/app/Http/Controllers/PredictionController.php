@@ -90,12 +90,11 @@ class PredictionController extends Controller
     {
         $number = $request->input('number');
         $runner = $request->input('runner', '');
-        $rank = $request->input('rank', '');
+//        $rank = $request->input('rank', '');
 
-        if ($number == '' || $runner == '' || $rank == '') {
+        if ($number == '') {
             return Redirect::back()->withErrors(['Fill required fields']);
         }
-
         $reporter = new Reporter([
             'societe' => 'PMU',
             'reporter' => 'dzio',
@@ -103,14 +102,27 @@ class PredictionController extends Controller
         ]);
         $reporter->save();
 
-        $prediction = new Prediction([
-            'number' => $number,
-            'runner' => $runner,
-            'rank' => $rank,
-            'reporterId' => $reporter->id,
-        ]);
+        $numbers = [];
+        $runners = [];
+        if (strpos(',', $runner)) {
+            $runners = explode(',', $runner);
+        }
+        if (strpos(',', $number)) {
+            $numbers = explode(',', $number);
+        }
 
-        $prediction->save();
+        foreach ($numbers as $number=>$key) {
+
+            $prediction = new Prediction([
+                'number' => $number,
+                'runner' => isset($runners[$key]) ? $runners[$key] : $runner,
+                'rank' => $key,
+                'reporterId' => $reporter->id,
+            ]);
+
+            $prediction->save();
+        }
+
 
         Session::flash('msg', "Successfully saved");
 
