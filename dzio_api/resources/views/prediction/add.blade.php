@@ -30,10 +30,6 @@
                             <label for="runner">runner</label>
                             <input type="text" class="form-control" id="runner" name="runner" value="{{ old('runner')}}">
                         </div>
-                        <div class="form-group">
-                            <label for="rank">rank</label>
-                            <input type="text" class="form-control" id="rank" name="rank" value="{{ old('rank')}}">
-                        </div>
 
                         <div class="form-group">
                             <button type="button" class="btn btn-default">Cancel</button>
