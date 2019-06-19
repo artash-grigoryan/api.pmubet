@@ -24,7 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reunion/{id}', 'ReunionController@update')->name('updateReunion');
 
     Route::get('/race/{raceId}/prediction/add', 'PredictionController@addForm')->name('addPrediction');
-    Route::post('/race/{raceId}/prediction/add', 'PredictionController@add')->name('addPrediction');
+    Route::post('/race/{raceId}/prediction/add', 'PredictionController@add')->name('addPredictionForRace');
 
     Route::get('/race/{id}/{lang?}', 'RaceController@edit')->name('editRace');
     Route::post('/race/{id}', 'RaceController@update')->name('updateRace');
