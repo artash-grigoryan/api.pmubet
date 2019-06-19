@@ -90,7 +90,6 @@ class PredictionController extends Controller
     {
         $number = $request->input('number');
         $runner = $request->input('runner', '');
-//        $rank = $request->input('rank', '');
 
         if ($number == '') {
             return Redirect::back()->withErrors(['Fill required fields']);
@@ -104,10 +103,10 @@ class PredictionController extends Controller
 
         $numbers = [];
         $runners = [];
-        if (strpos(',', $runner)) {
+        if (strpos(',', $runner) !== false) {
             $runners = explode(',', $runner);
         }
-        if (strpos(',', $number)) {
+        if (strpos(',', $number) !== false) {
             $numbers = explode(',', $number);
         }
 
