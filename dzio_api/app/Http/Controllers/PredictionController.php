@@ -103,10 +103,10 @@ class PredictionController extends Controller
 
         $numbers = [];
         $runners = [];
-        if (strpos(',', $runner) !== false) {
+        if (preg_match('/,/', $runner)) {
             $runners = explode(',', $runner);
         }
-        if (strpos(',', $number) !== false) {
+        if (preg_match('/,/', $number)) {
             $numbers = explode(',', $number);
         }
 
