@@ -43,8 +43,8 @@ export default class Banner extends React.Component {
             { this.state.image &&
             <div className="inner-banner" style={{backgroundImage: "url('/img/banner/" + this.state.image + "')"}}>
                 <div className="container">
-                    <div className="text-holder">
-                        <h1>
+                    <div className="text-holder" style={{paddingTop: '20px'}}>
+                        <h1 style={this.state.image ? {color: '#FFFFF'} : {}}>
                             {this.state.text}
                         </h1>
 
