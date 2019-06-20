@@ -110,18 +110,17 @@ class PredictionController extends Controller
             $numbers = explode(',', $number);
         }
 
-        foreach ($numbers as $number=>$key) {
+        foreach ($numbers as $key=>$number) {
 
             $prediction = new Prediction([
                 'number' => $number,
                 'runner' => isset($runners[$key]) ? $runners[$key] : $runner,
                 'rank' => $key,
-                'reporterId' => $reporter->id,
+                'reporterId' => $reporter->id
             ]);
 
             $prediction->save();
         }
-
 
         Session::flash('msg', "Successfully saved");
 

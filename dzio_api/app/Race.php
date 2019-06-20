@@ -74,8 +74,9 @@ class Race extends Model
     public function reportersTop()
     {
         return $this->hasOne('App\Reporter', 'raceId')
-            ->where('societe', 'geny.com')
-            ->orWhere('societe', 'AIP')
+            ->where('societe', 'PMU')
+//            ->where('societe', 'geny.com')
+//            ->orWhere('societe', 'AIP')
             ->orderBy('nb_pts', 'DESC')
             ->orderBy('id', 'DESC')
             ->with('predictions');

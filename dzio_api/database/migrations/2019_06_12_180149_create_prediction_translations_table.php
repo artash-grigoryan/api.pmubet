@@ -15,7 +15,7 @@ class CreatePredictionTranslationsTable extends Migration
     {
         Schema::create('prediction_translations', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('runner');
+            $table->string('runner')->nullable();
             $table->integer('predictionId')->unsigned();
             $table->char("lang", 3)->nullable();
         });

@@ -16,7 +16,7 @@ class CreatePredictionsTable extends Migration
         Schema::create('predictions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('number');
-            $table->string('runner');
+            $table->string('runner')->nullable();
             $table->tinyInteger('rank');
             $table->integer("reporterId")->unsigned();
 
