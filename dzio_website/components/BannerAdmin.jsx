@@ -40,11 +40,11 @@ export default class Banner extends React.Component {
     render() {
 
         return <div>
-            { this.state.image &&
+            { this.state.text &&
             <div className="inner-banner" style={{backgroundImage: "url('/img/banner/" + this.state.image + "')"}}>
                 <div className="container">
                     <div className="text-holder" style={{paddingTop: '20px'}}>
-                        <h1 style={this.state.image ? {color: '#FFFFF'} : {}}>
+                        <h1 style={!this.state.image ? {color: '#212529'} : {}}>
                             {this.state.text}
                         </h1>
 
