@@ -24,6 +24,7 @@
                             <label for="lang">Locale</label>
                             <select name="lang" id="lang">
                                 <option value="">Language</option>
+                                <option value="en" @if ($reunion->lang == 'en') selected @endif>English</option>
                                 <option value="fr" @if ($reunion->lang == 'fr') selected @endif>Français</option>
                                 <option value="hy" @if ($reunion->lang == 'hy') selected @endif>Հայերեն</option>
                                 <option value="ru" @if ($reunion->lang == 'ru') selected @endif>Russian</option>

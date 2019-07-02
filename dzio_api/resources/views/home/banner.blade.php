@@ -19,6 +19,7 @@
             <label for="lang">Locale</label>
             <select name="lang" id="lang" class="form-control">
                 <option value="">Language</option>
+                <option value="en" @if (!empty($baner) && $baner->lang == 'en') selected @endif>English</option>
                 <option value="fr" @if (!empty($baner) && $baner->lang == 'fr') selected @endif>Français</option>
                 <option value="hy" @if (!empty($baner) && $baner->lang == 'hy') selected @endif>Հայերեն</option>
                 <option value="ru" @if (!empty($baner) && $baner->lang == 'ru') selected @endif>Russian</option>

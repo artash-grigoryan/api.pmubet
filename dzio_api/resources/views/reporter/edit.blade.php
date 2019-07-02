@@ -27,6 +27,7 @@
                             <label for="lang">Locale</label>
                             <select name="lang" id="lang">
                                 <option value="">Language</option>
+                                <option value="en" @if ($reporter->lang == 'en') selected @endif>English</option>
                                 <option value="fr" @if ($reporter->lang == 'fr') selected @endif>Français</option>
                                 <option value="hy" @if ($reporter->lang == 'hy') selected @endif>Հայերեն</option>
                                 <option value="ru" @if ($reporter->lang == 'ru') selected @endif>Russian</option>
