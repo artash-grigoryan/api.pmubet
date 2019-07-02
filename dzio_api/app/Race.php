@@ -45,6 +45,11 @@ class Race extends Model
         return $this->hasMany('App\Runner', "raceId");
     }
 
+    public function reunion()
+    {
+        return $this->belongsTo('App\Reunion', "reunionId");
+    }
+
     public function results()
     {
         return $this->hasMany('App\Runner', "raceId")
