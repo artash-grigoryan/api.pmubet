@@ -16,6 +16,7 @@
                     <table class="table table-striped task-table">
                         <thead>
                         <th>id</th>
+                        <th>reunion name</th>
                         <th>code</th>
                         <th>description</th>
                         <th>date</th>
@@ -25,6 +26,7 @@
 
                         <tr @if ($race->hasTranslation()) style="background-color: #1c7430; color: #FFF" @endif>
                             <td class="table-text"><div>{{ $race->id }}</div></td>
+                            <td class="table-text"><div>{{ $race->reunion->label }}</div></td>
                             <td class="table-text"><div>R{{ $race->reunion->number }}C{{ $race->number}}</div></td>
                             <td class="table-text"><div>{{ $race->label }}</div></td>
                             <td class="table-text"><div>{{ $race->description }}</div></td>

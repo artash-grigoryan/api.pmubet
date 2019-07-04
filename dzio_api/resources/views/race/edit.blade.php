@@ -60,6 +60,7 @@
                             <textarea name="comment" class="form-control"  id="comment" cols="30" rows="5">{{ $race->comment or old('comment')}}</textarea>
                         </div>
                         <div class="form-group">
+                            <a href="{{ URL::previous() }}">Go Back</a>
                             <button type="button" class="btn btn-default">Cancel</button>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
