@@ -7,16 +7,9 @@ export default class LanguageSelector extends React.Component {
     constructor(props) {
         super(props);
 
-        let url = "";
-        if(props.race !== 'undefined' && props.race) {
-
-            url = "/"+this.props.race.datePath+"/R"+this.props.reunion.number+"/C"+this.props.race.number
-        }
         this.state = {
-
             unselectedLanguages : _.without(['hy', 'ru', 'en'], props.lang),
-            selectorOpened : false,
-            url : url
+            selectorOpened : false
         };
     }
 
@@ -36,10 +29,15 @@ export default class LanguageSelector extends React.Component {
     }
 
     render() {
+        let url = "";
 
+        if(this.props.race !== 'undefined' && this.props.race) {
+
+            url = "/"+this.props.race.datePath+"/R"+this.props.reunion.number+"/C"+this.props.race.number
+        }
         let unselectedLanguagesList = this.state.unselectedLanguages.map((lang) =>
             <li key={lang}>
-                <a href={"/"+lang+this.state.url} >
+                <a href={"/"+lang+url} >
                     <img src={"/img/flags/"+lang+".png"}/>
                 </a>
             </li>

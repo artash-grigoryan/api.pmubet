@@ -15,6 +15,8 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
+        app()->setLocale($request->segment(2));
+
         return $next($request)
             ->header('Access-Control-Allow-Headers', '*')
             ->header('Access-Control-Allow-Origin', '*')
