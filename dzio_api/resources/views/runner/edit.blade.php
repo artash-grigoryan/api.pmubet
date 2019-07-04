@@ -23,7 +23,7 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="lang">Locale</label>
-                            <select name="lang" id="lang">
+                            <select name="lang" id="lang" onchange="window.location = '{{ url('/admin/runner/'.$runner->id) }}/' + $(this).val()">
                                 <option value="">Language</option>
                                 <option value="en" @if ($runner->lang == 'en') selected @endif>English</option>
                                 <option value="fr" @if ($runner->lang == 'fr') selected @endif>Français</option>
