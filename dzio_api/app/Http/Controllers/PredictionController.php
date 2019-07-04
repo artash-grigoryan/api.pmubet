@@ -71,7 +71,10 @@ class PredictionController extends Controller
         $prediction->id = $id;
         $prediction->lang = $lang;
 
-        return view('prediction.edit', ["prediction" => $prediction]);
+        return view('prediction.edit', [
+            "prediction" => $prediction,
+            "previousPage" => route('racesList').'/?page=' . Session::get('currentPage', 1)
+        ]);
     }
 
     /**

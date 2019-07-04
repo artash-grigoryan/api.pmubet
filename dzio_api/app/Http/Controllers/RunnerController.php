@@ -70,7 +70,10 @@ class RunnerController extends Controller
         $runner->id = $id;
         $runner->lang = $lang;
 
-        return view('runner.edit', ["runner" => $runner]);
+        return view('runner.edit', [
+            "runner" => $runner,
+            "previousPage" => route('racesList').'/?page=' . Session::get('currentPage', 1)
+        ]);
     }
 
     /**

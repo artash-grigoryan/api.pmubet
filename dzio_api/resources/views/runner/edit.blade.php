@@ -72,6 +72,7 @@
                             <textarea name="farmer" class="form-control"  id="farmer" cols="30" rows="5">{{ $runner->farmer or old('farmer')}}</textarea>
                         </div>
                         <div class="form-group">
+                            <a href="{{ $previousPage }}">Go Back</a>
                             <button type="button" class="btn btn-default">Cancel</button>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>

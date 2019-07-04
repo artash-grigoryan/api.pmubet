@@ -9,8 +9,10 @@ use App\RaceTranslation;
 use App\Reunion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 
 class RaceController extends Controller
 {
@@ -429,7 +431,10 @@ class RaceController extends Controller
         $race->id = $raceId;
         $race->lang = $lang;
 
-        return view('race.edit', ["race" => $race]);
+        return view('race.edit', [
+            "race" => $race,
+            "previousPage" => route('racesList').'/?page=' . Session::get('currentPage', 1)
+        ]);
     }
 
     /**

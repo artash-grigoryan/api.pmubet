@@ -9,6 +9,7 @@ use App\Reporter;
 use App\Reunion;
 use App\Runner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -43,6 +44,9 @@ class HomeController extends Controller
      */
     public function racesList()
     {
+        $page = Input::get('page', 1);
+        Session::put('currentPage', $page);
+
         $races = Race::orderBy('date', 'DESC')->paginate(15);
 
         return view('race.list', ["races" => $races]);
@@ -55,6 +59,9 @@ class HomeController extends Controller
      */
     public function runnersList()
     {
+        $page = Input::get('page', 1);
+        Session::put('currentPage', $page);
+
         $runners = Runner::select('runners.*')
             ->with('race')
             ->join('races', 'runners.raceId', '=', 'races.id')
@@ -71,6 +78,9 @@ class HomeController extends Controller
      */
     public function predictions()
     {
+        $page = Input::get('page', 1);
+        Session::put('currentPage', $page);
+
         $predictions = Prediction::select('predictions.*')
             ->with('reporter')
             ->join('reporters', 'predictions.reporterId', '=', 'reporters.id')
@@ -139,6 +149,9 @@ class HomeController extends Controller
      */
     public function reportersList()
     {
+        $page = Input::get('page', 1);
+        Session::put('currentPage', $page);
+
         $runners = Reporter::select('reporters.*')
             ->with('race')
             ->join('races', 'reporters.raceId', '=', 'races.id')

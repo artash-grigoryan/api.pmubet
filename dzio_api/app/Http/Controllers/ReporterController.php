@@ -69,7 +69,10 @@ class ReporterController extends Controller
         $reporter->id = $id;
         $reporter->lang = $lang;
 
-        return view('reporter.edit', ["reporter" => $reporter]);
+        return view('reporter.edit', [
+            "reporter" => $reporter,
+            "previousPage" => route('racesList').'/?page=' . Session::get('currentPage', 1)
+        ]);
     }
 
     /**

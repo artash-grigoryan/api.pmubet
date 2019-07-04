@@ -113,7 +113,10 @@ class ReunionController extends Controller
         $reunion->id = $id;
         $reunion->lang = $lang;
 
-        return view('reunion.edit', ["reunion" => $reunion]);
+        return view('reunion.edit', [
+            "reunion" => $reunion,
+            "previousPage" => route('racesList').'/?page=' . Session::get('currentPage', 1)
+        ]);
     }
 
     /**

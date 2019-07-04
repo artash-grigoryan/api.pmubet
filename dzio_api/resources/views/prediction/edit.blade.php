@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group">
-                            <a href="{{ URL::previous() }}">Go Back</a>
+                            <a href="{{ $previousPage }}">Go Back</a>
                             <button type="button" class="btn btn-default">Cancel</button>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
