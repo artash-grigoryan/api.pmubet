@@ -41,15 +41,15 @@ export default class Banner extends React.Component {
 
         return <div>
             { this.state.text &&
-            <div className="inner-banner" style={{backgroundImage: "url('/img/banner/" + this.state.image + "')"}}>
+            <div className="inner-banner additional " style={{backgroundImage: "url('/img/banner/" + this.state.image + "')"}}>
                 <div className="container">
                     <div className="text-holder" style={{paddingTop: '20px'}}>
-                        <h1 style={!this.state.image ? {color: '#212529'} : {}}>
+                        <h1>
                             {this.state.text}
                         </h1>
 
                             <Countdown
-                                date={this.state.date}
+                                date={'2019-09-10'}
                                 renderer={this.renderer}
                             />
                     </div>

@@ -90,7 +90,21 @@ body {
   bottom: 0;
   opacity: .3;
   background-color: #303030;
-/*background-image: linear-gradient(-45deg, transparent 25%, transparent 25%, transparent 75%, currentColor 75%, currentColor), linear-gradient(-45deg, currentColor 25%, transparent 25%, transparent 75%, transparent 75%, transparent);*/
+//background-image: linear-gradient(-45deg, transparent 25%, transparent 25%, transparent 75%, currentColor 75%, currentColor), linear-gradient(-45deg, currentColor 25%, transparent 25%, transparent 75%, transparent 75%, transparent);
+}
+
+.inner-banner {
+  .text-holder {
+    transform: skew(-10deg, 0);
+  }
+  &.additional {
+    height: 60px;
+    .text-holder {
+      padding: 15px;
+      position: absolute;
+      background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(51, 51, 51), rgb(221, 24, 24)) repeat scroll 0% 0%;
+    }
+  }
 }
 
 .banner.inner-banner .container {
