@@ -12,7 +12,7 @@ RUN apt-get install -y \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN apt-get install -y --force-yes make git locales gcc g++
+RUN apt-get install -y --allow-change-held-packages make git locales gcc g++
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 RUN locale-gen
 ENV LC_ALL en_US.UTF-8
@@ -25,7 +25,8 @@ RUN a2enmod rewrite
 
 #Nodejs install
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
+RUN apt-get install -y nodejs
+
 RUN npm install -g webpack
 RUN npm install sass
 
