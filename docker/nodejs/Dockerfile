@@ -24,8 +24,9 @@ RUN a2ensite default
 RUN a2enmod rewrite
 
 #Nodejs install
-RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-RUN apt-get install -y nodejs
+#RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+RUN sudo apt-get install -y nodejs
 
 RUN npm install -g webpack
 RUN npm install sass
