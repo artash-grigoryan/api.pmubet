@@ -20,6 +20,8 @@ export default class CalendarResultsPage extends Component {
 
         super(props);
 
+        let timezoneOffset = (new Date().getTimezoneOffset()*-1 - 120) / 60;
+
         let date = new Date();
         //date.setTime(date.getTime() + (2*60*60*1000)); // ADDING 2 HOURS FOR ARMENIA
         let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
@@ -33,6 +35,7 @@ export default class CalendarResultsPage extends Component {
         let maxDateCalendar = new Date().setDate(new Date().getDate()+1);
 
         this.state = {
+            timezoneOffset: timezoneOffset,
             lang: this.props.match.params.lang,
             yesterday: yesterday,
             today: today,
@@ -182,15 +185,8 @@ export default class CalendarResultsPage extends Component {
                                 :
                                 null
                         }
-                        {
-                            this.state.race
-                                ?
-                                <BannerAdmin {...this.state}/>
-                                :
-                                null
-                        }
 
-                        <div className="container">
+                        <div className="container" style={{marginTop:20}}>
                             <div className="data-holder">
 
                                 <div className="btn-holder d-none d-md-block">

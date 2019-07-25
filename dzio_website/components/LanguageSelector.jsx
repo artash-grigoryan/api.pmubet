@@ -18,7 +18,7 @@ export default class LanguageSelector extends React.Component {
         let url = "";
         if(props.race !== 'undefined' && props.race) {
 
-            url = "/"+this.props.race.datePath+"/R"+this.props.reunion.number+"/C"+this.props.race.number
+            url = "/"+props.race.datePath+"/R"+props.reunion.number+"/C"+props.race.number
         }
         this.setState({url : url});
     }

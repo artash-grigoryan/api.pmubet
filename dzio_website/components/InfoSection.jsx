@@ -125,8 +125,8 @@ export default class InfoSection extends React.Component {
             }
         }
 
-        return <section className="info-section" style={{background: "#fff"}}>
-            <div className="container">
+        return <section className="info-section">
+            <div className="container" style={{paddingTop: 50}}>
 
                 <div className="block-race-condition">
 

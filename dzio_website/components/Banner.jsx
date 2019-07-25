@@ -3,6 +3,7 @@ import '@fortawesome/fontawesome';
 
 import {Trans} from "react-i18next";
 import Countdown from "react-countdown-now";
+import BannerAdmin from "./BannerAdmin";
 
 
 export default class Banner extends React.Component {
@@ -11,8 +12,10 @@ export default class Banner extends React.Component {
         super(args);
         this.props.race.labelLong = (this.props.race.translation ? this.props.race.translation.labelLong : null) || this.props.race.labelLong;
         this.props.race.date = new Date(this.props.race.date);
-        this.props.race.date.setMinutes(this.props.race.date.getMinutes() + this.props.timezoneOffset);
 
+        let hours = parseInt(this.props.race.time.substring(0,2)) + parseInt(this.props.timezoneOffset);
+        let minutes = parseInt(this.props.race.time.substring(3,5));
+        this.props.race.time = hours + ':' + minutes;
     }
 
     renderer = ({ hours, minutes, seconds, completed }) => {
@@ -46,8 +49,10 @@ export default class Banner extends React.Component {
                                         Yesterday
                                     </Trans> : this.props.race.day))} {this.props.race.time}
                         </time>
-                        <b>R{this.props.reunion.externNumber}C{this.props.race.number} </b>
-                        {this.props.race.labelLong}
+                        <span className="label-name">
+                            <b>R{this.props.reunion.externNumber}C{this.props.race.number} </b>
+                            {this.props.race.labelLong}
+                        </span>
                     </h1>
 
                     <div className="btn-holder">
@@ -67,6 +72,7 @@ export default class Banner extends React.Component {
                     </div>
                 </div>
             </div>
+            <BannerAdmin {...this.props}/>
         </div>
     }
 }

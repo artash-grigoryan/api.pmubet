@@ -47,13 +47,20 @@ export default class Runners extends React.Component {
         if(this.props.race) {
             listRunners = this.props.race.runners.map((runner) =>
                 <div key={runner.number} >
-                    <div className="runner" onClick={() => this.selectRunner(runner)}>
+                    <div className="runner" onClick={() => this.selectRunner(runner)} style={{border:runner.doNotRun?'1px solid rgb(222, 43, ':0}}>
                         <span className="runner-rank">{runner.number}</span>
                         <span className="runner-img">
-                            <img src={this.getCasaqueImgPath(this.props.race, runner)}/>
+                            {
+                                !runner.doNotRun
+                                ?
+                                    <img src={this.getCasaqueImgPath(this.props.race, runner)}/>
+                                :
+                                    <FontAwesomeIcon icon="user-slash" style={{color:'#de2b25',fontSize:26}} />
+                            }
+
                         </span>
                         <span className="runner-name">
-                            <p>{(runner.translation ? runner.translation.name : null) || runner.name} {runner.doNotRun ? <span className="do-not-run"><Trans i18nKey="Do not run">Do not run</Trans></span> : null}</p>
+                            <p>{(runner.translation ? runner.translation.name : null) || runner.name}</p>
                             <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey}</span>
                         </span>
                         <span className="runner-cote">

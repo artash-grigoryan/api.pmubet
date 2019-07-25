@@ -77,8 +77,16 @@ body {
 .banner {
   position: relative;
   background-size: cover;
-  background-image: url('https://www.rp-assets.com/images/news/2017/07/27/26377-large.jpeg');
+  background-image: url('http://localhost:9200/img/banner/0.jpg');
   background-repeat: no-repeat;
+  background-position: 0 -110px;
+}
+
+@media (max-width: 1250px) {
+
+  .banner {
+    background-position: 0 0px;
+  }
 }
 
 .banner::before {
@@ -92,16 +100,31 @@ body {
   background-color: #303030;
 //background-image: linear-gradient(-45deg, transparent 25%, transparent 25%, transparent 75%, currentColor 75%, currentColor), linear-gradient(-45deg, currentColor 25%, transparent 25%, transparent 75%, transparent 75%, transparent);
 }
+.banner.inner-banner > .container{
+  text-align: left;
+  align-items: baseline;
+}
+.banner.inner-banner > .container .label-name{
+  transform: skew(-10deg, 0);
+  background-color: #FFF;
+  color: #000;
+  padding: 10px;
+  display: block;
+}
 
 .inner-banner {
-  .text-holder {
-    transform: skew(-10deg, 0);
-  }
   &.additional {
     height: 60px;
+    .container {
+      position: initial;
+      min-height: 0 !important;
+    }
     .text-holder {
-      padding: 15px;
+      padding: 20px 15px !important;
       position: absolute;
+      min-width: 500px;
+      bottom: -30px;
+      transform: skew(-10deg, 0);
       background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(51, 51, 51), rgb(221, 24, 24)) repeat scroll 0% 0%;
     }
   }
@@ -133,7 +156,7 @@ body {
   color: #fff;
 }
 .banner .btn-holder {
-  margin-top: 100px;
+  margin-top: 28px;
   font-size: 27px;
 }
 .banner .btn {
@@ -144,8 +167,8 @@ body {
   display: inline-block;
   padding: 5px 20px;
   text-align: center;
-  border-radius: 30px;
-  margin: 0 10px;
+  border-radius: 0;
+  margin: 0;
   font-size: 18px;
 
 }
@@ -186,8 +209,11 @@ body {
   max-width: 100%;
   position: relative;
   padding: 20px;
+  background-color: #FFF;
   width: 100%;
   color: #333;
+  border-bottom: 2px solid #f6a800;
+  box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.24);
 }
 .picto-meteo {
   position: absolute;
@@ -522,6 +548,7 @@ body {
   padding: 20px;
   background: #fff;
   border-bottom: 2px solid #f6a800;
+  box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.24);
 }
 .prediction-top {}
 .prediction-top .prediction-header {
@@ -1297,6 +1324,7 @@ body {
   font-weight: bold;
 }
 
+/*
 #calendar-result .banner.inner-banner .container {
   min-height: 300px;
   padding-bottom: 0px;
@@ -1308,7 +1336,12 @@ body {
   background-image: url('https://www.rp-assets.com/images/news/2018/01/31/36976-large.jpeg');
   background-repeat: no-repeat;
 }
-
+#calendar-result .banner .btn-holder {
+  margin-top: 10px;
+  font-size: 27px;
+  margin-bottom: 15px;
+}
+*/
 #calendar-result .btn-holder {
   text-align: center;
   padding: 40px 0px;
@@ -1323,11 +1356,6 @@ body {
   font-size: 1.8rem;
 }
 
-#calendar-result .banner .btn-holder {
-  margin-top: 10px;
-  font-size: 27px;
-  margin-bottom: 15px;
-}
 #calendar-result .data-holder .btn-holder {
   position: relative;
 }
@@ -1377,6 +1405,17 @@ body {
 }
 #calendar-result .data-holder .cost, .data-holder .text {
   display: block;
+}
+#calendar-result .banner .btn-holder {
+  text-align: initial;
+  padding: initial;
+  margin: initial;
+  margin-top: 28px;
+  font-size: 27px;
+}
+#calendar-result .banner .text-holder {
+  border-radius: 0;
+  padding: 0;
 }
 
 #how-to-bet {}

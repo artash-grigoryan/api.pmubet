@@ -60,7 +60,7 @@ export default class Results extends React.Component {
                                     <b className="primary-color">{this.state.runnerSelected.number}</b> -
                                     <a href="">{this.state.runnerSelected.name}</a>
                                 </h2>
-                                <p><span>{this.state.runnerSelected.textRank}</span></p>
+                                <p><span></span></p>
                             </div>
                         :
                             null

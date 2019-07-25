@@ -25,7 +25,6 @@ export default class Race extends React.Component {
 
         return <div>
             <Banner {...this.props}/>
-            <BannerAdmin/>
 
             <InfoSection {...this.props}/>
 

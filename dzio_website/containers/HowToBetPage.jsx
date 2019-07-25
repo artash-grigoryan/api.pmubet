@@ -19,7 +19,11 @@ export default class HowToBetPage extends Component {
     constructor(props) {
 
         super(props);
+
+        let timezoneOffset = (new Date().getTimezoneOffset()*-1 - 120) / 60;
+
         this.state = {
+            timezoneOffset: timezoneOffset,
             lang: this.props.match.params.lang,
             race: null
         };

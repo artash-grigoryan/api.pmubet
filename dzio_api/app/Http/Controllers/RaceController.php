@@ -45,8 +45,6 @@ class RaceController extends Controller
     {
         $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->where([['date', '>=', date('Y-m-d', strtotime('-1 DAY'))], ['date', '<=', date('Y-m-d', strtotime('+2 DAY'))]])
-            ->whereRaw('date >= ADDDATE(ADDDATE(NOW(), INTERVAL -1 DAY), 2 HOUR)')
-            ->whereRaw('date >= ADDDATE(ADDDATE(NOW(), INTERVAL 2 DAY), 2 HOUR)')
             ->orderBy('date', 'ASC')
             ->with("runners")
             ->with("results")
