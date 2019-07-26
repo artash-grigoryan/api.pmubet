@@ -47,7 +47,7 @@ export default class Runners extends React.Component {
         if(this.props.race) {
             listRunners = this.props.race.runners.map((runner) =>
                 <div key={runner.number} >
-                    <div className="runner" onClick={() => this.selectRunner(runner)} style={{border:runner.doNotRun?'1px solid rgb(222, 43, ':0}}>
+                    <div className="runner" onClick={() => this.selectRunner(runner)} style={{border:runner.doNotRun?'1px solid rgb(222, 43, 37)':0}}>
                         <span className="runner-rank">{runner.number}</span>
                         <span className="runner-img">
                             {
