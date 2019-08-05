@@ -24,6 +24,19 @@ RUN a2ensite default
 
 COPY --chown=www-data:www-data . /var/www
 
+#//////////////CRON//////////////////////////////////////////////
+RUN apt-get update && apt-get -y install cron
+
+# Copy hello-cron file to the cron.d directory
+COPY docker/apache/cron /etc/cron.d/cron
+
+# Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/cron
+
+# Apply cron job
+RUN crontab /etc/cron.d/cron
+#////////////////////////////////////////////////////////////////
+
 WORKDIR /var/www/
 
 RUN cd dzio_api && composer install
