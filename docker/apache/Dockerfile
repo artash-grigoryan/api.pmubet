@@ -25,16 +25,16 @@ RUN a2ensite default
 COPY --chown=www-data:www-data . /var/www
 
 #//////////////CRON//////////////////////////////////////////////
-RUN apt-get update && apt-get -y install cron
+RUN apt-get -y install cron
 
 # Copy hello-cron file to the cron.d directory
-COPY docker/apache/cron /etc/cron.d/cron
+COPY docker/apache/parse-cron /etc/cron.d/parse-cron
 
 # Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/cron
+RUN chmod 0644 /etc/cron.d/parse-cron
 
 # Apply cron job
-RUN crontab /etc/cron.d/cron
+RUN crontab /etc/cron.d/parse-cron
 #////////////////////////////////////////////////////////////////
 
 WORKDIR /var/www/
