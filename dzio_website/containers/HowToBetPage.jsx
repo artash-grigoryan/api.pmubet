@@ -89,16 +89,6 @@ export default class HowToBetPage extends Component {
                                                     <p><Trans i18nKey="By going to the race page you can click on see the live in the top of the race at the top of the page">By going to the race page you can click on see the live in the top of the race at the top of the page</Trans></p>
                                                 </div>
                                                 <div>
-                                                    <h4><Trans i18nKey="How to bet ?">How to bet ?</Trans></h4>
-                                                    <div className="youtube-embed-wrapper"
-                                                         style={{position:'relative',paddingBottom:'56.25%',paddingTop:'30px',height:0,overflow:'hidden'}}>
-                                                        <iframe allowFullScreen="" frameBorder="0" height="360"
-                                                                src="https://www.youtube.com/embed/QK12FTeU2tk"
-                                                                style={{position: 'absolute',top: 0,left: 0,width: '100%',height: '100%'}}
-                                                                width="640"></iframe>
-                                                    </div>
-                                                </div>
-                                                <div>
                                                     <h4><Trans i18nKey="3 WAYS TO CHOOSE HIS HORSES">3 WAYS TO CHOOSE HIS HORSES</Trans></h4>
                                                     <ul>
                                                         <li>

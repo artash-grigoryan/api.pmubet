@@ -15,7 +15,7 @@ i18n
             en: {
                 translations: en
             },
-            am: {
+            hy: {
                 translations: hy
             },
             ru: {

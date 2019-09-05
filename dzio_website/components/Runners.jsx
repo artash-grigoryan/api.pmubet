@@ -74,6 +74,25 @@ export default class Runners extends React.Component {
                                 <Carousel interval={null} fade={true}>
                                     <Carousel.Item>
                                         <Carousel.Caption>
+                                            <h3><Trans i18nKey="Performances">Performances</Trans></h3>
+                                            <ul>
+                                                <li>
+                                                    <span className="runner-detail-title"><Trans i18nKey="Number of races">Number of races</Trans></span>
+                                                    <span className="runner-detail-value">{runner.nbRaces}</span>
+                                                </li>
+                                                <li>
+                                                    <span className="runner-detail-title"><Trans i18nKey="Number of races won">Number of races won</Trans></span>
+                                                    <span className="runner-detail-value">{runner.nbRacesWon}</span>
+                                                </li>
+                                                <li>
+                                                    <span className="runner-detail-title"><Trans i18nKey="Number of places">Number of places</Trans></span>
+                                                    <span className="runner-detail-value">{runner.nbPlaces}</span>
+                                                </li>
+                                            </ul>
+                                        </Carousel.Caption>
+                                    </Carousel.Item>
+                                    <Carousel.Item>
+                                        <Carousel.Caption>
                                             <h3><Trans i18nKey="Runner details">Runner details</Trans></h3>
                                             <ul>
                                                 <li>
@@ -114,25 +133,6 @@ export default class Runners extends React.Component {
                                                 <li>
                                                     <span className="runner-detail-title"><Trans i18nKey="Name of the father">Name of the father</Trans></span>
                                                     <span className="runner-detail-value">{(runner.translation ? runner.translation.father : null) || runner.father}</span>
-                                                </li>
-                                            </ul>
-                                        </Carousel.Caption>
-                                    </Carousel.Item>
-                                    <Carousel.Item>
-                                        <Carousel.Caption>
-                                            <h3><Trans i18nKey="Performances">Performances</Trans></h3>
-                                            <ul>
-                                                <li>
-                                                    <span className="runner-detail-title"><Trans i18nKey="Number of races">Number of races</Trans></span>
-                                                    <span className="runner-detail-value">{runner.nbRaces}</span>
-                                                </li>
-                                                <li>
-                                                    <span className="runner-detail-title"><Trans i18nKey="Number of races won">Number of races won</Trans></span>
-                                                    <span className="runner-detail-value">{runner.nbRacesWon}</span>
-                                                </li>
-                                                <li>
-                                                    <span className="runner-detail-title"><Trans i18nKey="Number of places">Number of places</Trans></span>
-                                                    <span className="runner-detail-value">{runner.nbPlaces}</span>
                                                 </li>
                                             </ul>
                                         </Carousel.Caption>

@@ -1360,18 +1360,18 @@ body {
   position: relative;
 }
 #calendar-result .filters {
-  position: absolute;
-  right: 0;
-  top: 0;
+  margin-top: 30px;
 }
 #calendar-result .filters .btn{
   margin: 0;
-  padding: 10px;
+  padding: 0px;
   min-width: auto;
   border-radius: 0;
-  width: 100px;
+  width: 120px;
   background: #DDD;
+  line-height: 14px;
   border: none;
+  height: 38px;
 }
 #calendar-result .data-holder table td:first-child {
   border-right: none;
@@ -1389,6 +1389,10 @@ body {
   background: #f6a800;
   color: #fff;
   cursor: pointer;
+}
+#calendar-result .data-holder table .widget__icon--quinte {
+  margin-left: 20px;
+  vertical-align: inherit;
 }
 #calendar-result .data-holder table {
   color: #1f2030;
@@ -1736,5 +1740,25 @@ footer {
   .data-holder .btn-holder .btn {
     min-width: 120px;
     text-transform: none;
+  }
+}
+@media (max-width: 500px) {
+
+  .inner-banner {
+    &.additional {
+      height: 60px;
+      .container {
+        position: initial;
+        min-height: 0 !important;
+      }
+      .text-holder {
+        padding: 20px 15px !important;
+        position: absolute;
+        min-width: 0;
+        bottom: -30px;
+        transform: none;
+        background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(51, 51, 51), rgb(221, 24, 24)) repeat scroll 0% 0%;
+      }
+    }
   }
 }

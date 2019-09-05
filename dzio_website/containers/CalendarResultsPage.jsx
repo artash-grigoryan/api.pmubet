@@ -212,7 +212,7 @@ export default class CalendarResultsPage extends Component {
 
                                                             <td className="name-cell" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 R{race.reunion.number}C{race.number} - {race.labelLong}
-
+                                                                { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i> : ''}
                                                             </td>
 
                                                             <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
@@ -250,7 +250,7 @@ export default class CalendarResultsPage extends Component {
 
                                                             <td className="name-cell" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                                 R{race.reunion.number}C{race.number} - {race.labelLong}
-
+                                                                { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i> : ''}
                                                             </td>
 
                                                             <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>

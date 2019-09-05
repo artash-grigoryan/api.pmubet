@@ -20,7 +20,7 @@ export default class Predictions extends React.Component {
                     </p>
                     <ul>
                         {
-                            reporter.predictions.map((prediction) =>
+                            reporter.predictions.slice(0, 5).map((prediction) =>
                                 <li key={prediction.id}><span>{prediction.number}</span></li>
                             )
                         }

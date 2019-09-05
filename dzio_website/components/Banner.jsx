@@ -4,18 +4,21 @@ import '@fortawesome/fontawesome';
 import {Trans} from "react-i18next";
 import Countdown from "react-countdown-now";
 import BannerAdmin from "./BannerAdmin";
+import _ from "lodash";
 
 
 export default class Banner extends React.Component {
 
-    constructor(args) {
-        super(args);
-        this.props.race.labelLong = (this.props.race.translation ? this.props.race.translation.labelLong : null) || this.props.race.labelLong;
-        this.props.race.date = new Date(this.props.race.date);
+    componentWillReceiveProps(props) {
 
-        let hours = parseInt(this.props.race.time.substring(0,2)) + parseInt(this.props.timezoneOffset);
-        let minutes = parseInt(this.props.race.time.substring(3,5));
-        this.props.race.time = hours + ':' + minutes;
+        this.props.race.labelLong = (this.props.race.translation ? this.props.race.translation.labelLong : null) || this.props.race.labelLong;
+
+        let timezoneHours = parseInt(this.props.race.time.substring(0,2)) + parseInt(this.props.timezoneOffset);
+        while (timezoneHours.toString().length < 2) {timezoneHours = "0" + timezoneHours;}
+        let timezoneMinutes = parseInt(this.props.race.time.substring(3,5));
+        while (timezoneMinutes.toString().length < 2) {timezoneMinutes = "0" + timezoneMinutes;}
+        this.props.race.timezoneTime = timezoneHours + ':' + timezoneMinutes;
+        this.props.race.date = new Date(this.props.race.date);
     }
 
     renderer = ({ hours, minutes, seconds, completed }) => {
@@ -47,7 +50,7 @@ export default class Banner extends React.Component {
                                     i18nKey="Tomorrow">Tomorrow</Trans> : (this.props.race.datePath === this.props.yesterday ?
                                     <Trans i18nKey="Yesterday">
                                         Yesterday
-                                    </Trans> : this.props.race.day))} {this.props.race.time}
+                                    </Trans> : this.props.race.day))} {this.props.race.timezoneTime}
                         </time>
                         <span className="label-name">
                             <b>R{this.props.reunion.externNumber}C{this.props.race.number} </b>
