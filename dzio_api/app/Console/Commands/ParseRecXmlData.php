@@ -818,12 +818,18 @@ class ParseRecXmlData extends Command
                                 $raceObj = new Race($raceArr);
 
                                 if (!empty($race['value']["paris_course"])) {
+
+                                    $hasQN = false;
                                     foreach ($race['value']["paris_course"] as $bet) {
 
                                         $betArr = [
                                             'lib' => iconv('UTF-8', 'ISO-8859-1', $bet['value']["libcourt_pari_course"]),
                                             'libLong' => iconv('UTF-8', 'ISO-8859-1', $bet['value']["liblong_pari_course"])
                                         ];
+
+                                        if($betArr['lib'] == 'QN') {
+                                            $hasQN = $raceArr['number'];
+                                        }
 
                                         try {
                                             Bet::updateOrInsert([
@@ -840,6 +846,26 @@ class ParseRecXmlData extends Command
                                                 'code' => $bet['value']["code_pari"],
                                                 "raceId" => $raceObj->id
                                             ]));
+                                            print_r($e->getMessage());
+                                        }
+                                    }
+                                    if($hasQN) {
+
+                                        $reunionObj = Reunion::where(['id' => $reunionArr["id"]])->first();
+
+                                        try {
+                                            if (!empty($reunionObj)) {
+
+                                                $reunionObj->update(
+                                                    ['qn' => $hasQN]
+                                                );
+                                            }
+
+                                        } catch (\Exception $e) {
+                                            print_r('
+            parseBetsXML => 
+            ');
+                                            print_r($reunionObj);
                                             print_r($e->getMessage());
                                         }
                                     }

@@ -470,6 +470,13 @@ body {
   color: #000;
   text-transform: uppercase;
   text-decoration: none;
+  position: relative;
+}
+#main .bar-selector .race-selector ul li a .widget__icon--quinte{
+  position: absolute;
+  width: 50px;
+  bottom: -9px;
+  right: -9px;
 }
 
 .title h1, .title h2, .title h3, .title h4, .title strong {

@@ -33,6 +33,7 @@ class Reunion extends Model
         "progvalid",
         "hippodromeName",
         "racesNumber",
+        "qn",
     ];
 
     public function racesLite()

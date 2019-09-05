@@ -28,6 +28,7 @@ class CreateReunionsTable extends Migration
             $table->char("progvalid", 1)->nullable();
             $table->text("hippodromeName")->nullable();
             $table->tinyInteger('racesNumber')->nullable();
+            $table->tinyInteger('qn')->nullable();
         });
     }
 

@@ -245,7 +245,10 @@ export default class HomePage extends Component {
 
                 listRaces.push(
                     <li key={raceNumber}>
-                        <Link className={this.state.race.number && this.state.race.number===raceNumber?'active':''} to={"/" + this.state.lang + "/" + this.state.date + "/R"+this.state.reunion.number+"/C" + raceNumber} onClick={() => this.setRace(this.state.date, this.state.reunion.number, raceNumber)}>C{raceNumber}</Link>
+                        <Link className={this.state.race.number && this.state.race.number===raceNumber?'active':''} to={"/" + this.state.lang + "/" + this.state.date + "/R"+this.state.reunion.number+"/C" + raceNumber} onClick={() => this.setRace(this.state.date, this.state.reunion.number, raceNumber)}>
+                            C{raceNumber}
+                            {raceNumber === this.state.reunion.qn ? <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i> : ''}
+                        </Link>
                     </li>
                 );
             }
