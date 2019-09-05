@@ -12,13 +12,15 @@ export default class PredictionTop extends React.Component {
 
     componentWillReceiveProps(props) {
 
-        let runnerRank = _.find(props.predictionTop.predictions, function(runner){ return parseInt(runner.rank) === parseInt(1); });
-        let runnerSelected = _.find(props.race.runners, function(runner){ return parseInt(runner.number) === parseInt(runnerRank.number); });
+        if(props.predictionTop) {
+            let runnerRank = _.find(props.predictionTop.predictions, function(runner){ return parseInt(runner.rank) === parseInt(1); });
+            let runnerSelected = _.find(props.race.runners, function(runner){ return parseInt(runner.number) === parseInt(runnerRank.number); });
 
-        runnerSelected.name = (runnerSelected.translation ? runnerSelected.translation.name : null) || runnerSelected.name;
-        runnerSelected.comment = (runnerSelected.translation ? runnerSelected.translation.comment : null) || runnerSelected.comment;
+            runnerSelected.name = (runnerSelected.translation ? runnerSelected.translation.name : null) || runnerSelected.name;
+            runnerSelected.comment = (runnerSelected.translation ? runnerSelected.translation.comment : null) || runnerSelected.comment;
 
-        this.setState({runnerSelected : runnerSelected});
+            this.setState({runnerSelected : runnerSelected});
+        }
     }
 
     setRunnerSelected(number) {
@@ -28,7 +30,7 @@ export default class PredictionTop extends React.Component {
 
         runnerSelected.name = (runnerSelected.translation ? runnerSelected.translation.name : null) || runnerSelected.name;
         runnerSelected.comment = (runnerSelected.translation ? runnerSelected.translation.comment : null) || runnerSelected.comment;
-        
+
         this.setState({runnerSelected : runnerSelected});
     }
 
@@ -40,13 +42,19 @@ export default class PredictionTop extends React.Component {
             </div>
             <div className="prediction">
                 <div className="prediction-header">
-                    <ul className={this.props.predictionTop.predictions.length > 6 ? 'minimize' : ''}>
-                        {
-                            this.props.predictionTop.predictions.map((runner) =>
-                                <li key={parseInt(runner.number)} className={parseInt(runner.number)===parseInt(this.state.runnerSelected.number)?'active' : '' }><a onClick={() => this.setRunnerSelected(runner.number)}>{runner.number}</a></li>
-                            )
-                        }
-                    </ul>
+                    {
+                        this.props.predictionTop
+                        ?
+                            <ul className={this.props.predictionTop.predictions.length > 6 ? 'minimize' : ''}>
+                                {
+                                    this.props.predictionTop.predictions.map((runner) =>
+                                        <li key={parseInt(runner.number)} className={parseInt(runner.number)===parseInt(this.state.runnerSelected.number)?'active' : '' }><a onClick={() => this.setRunnerSelected(runner.number)}>{runner.number}</a></li>
+                                    )
+                                }
+                            </ul>
+                        :
+                            null
+                    }
                 </div>
                 <div className="prediction-body tab-content">
 

@@ -15,10 +15,20 @@ import BetResults from "./BetResults";
 
 export default class Race extends React.Component {
 
+    constructor(props) {
+
+        super(props);
+        this.state = {
+            props : null
+        }
+    }
     componentWillReceiveProps(args) {
 
         this.props.race.comment = (this.props.race.translation ? this.props.race.translation.comment : null) || this.props.race.comment;
         this.props.race.description = (this.props.race.translation ? this.props.race.translation.description : null) || this.props.race.description;
+
+        let raceDate = new Date(this.props.race.date);
+        this.setState({isOver : raceDate < new Date()});
     }
 
     render() {
@@ -43,7 +53,7 @@ export default class Race extends React.Component {
 
                         <div className="col-lg-5 col-md-12">
                         {
-                            !this.props.race.betResults.length && this.props.predictionTop
+                            !this.state.isOver
                                 ?
 
                                     <PredictionTop {...this.props}/>
@@ -64,7 +74,7 @@ export default class Race extends React.Component {
                         </div>
 
                         {
-                            !this.props.race.betResults.length && this.props.predictions
+                            !this.state.isOver
                                 ?
                                 <div className="col-lg-12">
                                     <Predictions {...this.props}/>
