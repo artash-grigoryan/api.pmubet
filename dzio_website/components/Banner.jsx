@@ -18,20 +18,20 @@ export default class Banner extends React.Component {
         let timezoneMinutes = parseInt(this.props.race.time.substring(3,5));
         while (timezoneMinutes.toString().length < 2) {timezoneMinutes = "0" + timezoneMinutes;}
         this.props.race.timezoneTime = timezoneHours + ':' + timezoneMinutes;
-        this.props.race.date = new Date(this.props.race.date);
+        this.props.race.date = new Date(this.props.race.day+' '+this.props.race.timezoneTime);
     }
 
-    renderer = ({ hours, minutes, seconds, completed }) => {
+    renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
             // Render a completed state
             return null;
         } else {
             // Render a countdown
             return <span>
-                <Trans i18nKey="Departure in">Departure in</Trans> {hours > 0 ? hours : null} {hours > 1 ?
-                <Trans i18nKey="hours">hours</Trans> : (hours === 1 ?
-                <Trans i18nKey="hour">hour</Trans> : null)} {minutes > 0 ? minutes : null} {minutes > 0 ? (minutes > 1 ?
-                <Trans i18nKey="minutes">minutes</Trans> : <Trans i18nKey="minute">minute</Trans>) : null}
+                <Trans i18nKey="Departure in">Departure in</Trans>&nbsp;
+                {days > 0 ? days : null} {days > 1 ?  <Trans i18nKey="days">days</Trans> :  <Trans i18nKey="day">day</Trans>}&nbsp;
+                {hours > 0 ? hours : null} {hours > 1 ?  <Trans i18nKey="hours">hours</Trans> :  <Trans i18nKey="hour">hour</Trans>}&nbsp;
+                {minutes > 0 ? minutes : null} {minutes > 1 ? <Trans i18nKey="minutes">minutes</Trans> : <Trans i18nKey="minute">minute</Trans>}
             </span>;
         }
     };
