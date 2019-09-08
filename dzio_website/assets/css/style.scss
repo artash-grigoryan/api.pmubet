@@ -1223,6 +1223,9 @@ body {
   text-decoration: none;
 }
 
+.nextQ5 {
+  margin-top: 61px;
+}
 .widget__quinte {
   background-image: url(https://jeux.loro.ch/static/images/react/images/promos/quinte_promo_mobile.min.jpg);
   background-size: cover;
@@ -1330,6 +1333,11 @@ body {
 .results-section .results tbody tr td{
   font-weight: bold;
 }
+.results-section .results thead .bet-logo{
+  background: #00652e;
+  text-align: left;
+  padding-left: 30px;
+}
 
 /*
 #calendar-result .banner.inner-banner .container {
@@ -1397,7 +1405,7 @@ body {
   color: #fff;
   cursor: pointer;
 }
-#calendar-result .data-holder table .widget__icon--quinte {
+#calendar-result .widget__icon--quinte {
   margin-left: 20px;
   vertical-align: inherit;
 }
@@ -1427,6 +1435,75 @@ body {
 #calendar-result .banner .text-holder {
   border-radius: 0;
   padding: 0;
+}
+#calendar-result .calendar-row {
+  border-bottom: 1px solid #bdbcbc;
+  display: inline-block;
+  width: 100%;
+  float: left;
+}
+#calendar-result .calendar-name {
+  float: left;
+  height: 54px;
+  padding: 10px;
+  width: 50%;
+  border-right: 1px solid #bdbcbc;
+  display: inline-block;
+  vertical-align: middle;
+}
+#calendar-result .calendar-time {
+  float: left;
+  height: 54px;
+  padding: 10px;
+  width: 15%;
+  border-right: 1px solid #bdbcbc;
+  display: inline-block;
+  vertical-align: middle;
+}
+#calendar-result .calendar-runners {
+  float: left;
+  height: 54px;
+  padding: 10px;
+  width: 20%;
+  display: inline-block;
+  vertical-align: middle;
+}
+#calendar-result .calendar-btn {
+  float: left;
+  height: 54px;
+  width: 15%;
+  display: inline-block;
+  vertical-align: middle;
+}
+#calendar-result .btn-access {
+  border: 1px solid;
+  width: 100%;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+#calendar-result .calendar-results .calendar-results-numbers{
+  display: inline-block;
+  float: left;
+  width: 50%;
+  text-align: right !important;
+  background-color: #228650;
+}
+#calendar-result .calendar-results .calendar-results-numbers span{
+  color: #228650;
+  width: 25px;
+  display: inline-block;
+  height: 25px;
+  text-align: center;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 16px;
+  margin: 5px;
+}
+#calendar-result .calendar-results .calendar-results-time{
+  width: 15%;
+  float: left;
+  border-right: 1px solid #bdbcbc;
+  height: 34px;
 }
 
 #how-to-bet {}
@@ -1625,6 +1702,19 @@ footer {
 
 @media (max-width: 991px) {
 
+  .language-selector {
+    padding: 5px 20px 5px 0px;
+    position: fixed;
+    top: 9px;
+    right: 60px;
+  }
+  .nextQ5 {
+    margin-top: 0;
+  }
+  .prediction-top .prediction-body {
+    height: auto;
+    min-height: 200px;
+  }
   .results-section .results-selection-tab tr td.result-selector img{
     width: 50px;
   }
@@ -1748,8 +1838,43 @@ footer {
     min-width: 120px;
     text-transform: none;
   }
+
+  #calendar-result .calendar-results .calendar-results-numbers span {
+    width: 21px;
+    height: 21px;
+    font-size: 14px;
+    margin: 3px 2px;
+  }
+  #calendar-result .calendar-results .calendar-results-time {
+    width: 15%;
+    float: left;
+    border-right: 1px solid #bdbcbc;
+    height: 27px;
+  }
+  #calendar-result .calendar-name {
+    font-size: 14px;
+    max-height: 54px;
+    overflow: hidden;
+  }
+  #calendar-result .calendar-time {
+    padding: 10px 5px;
+    font-size: 14px;
+  }
+  #calendar-result .calendar-runners {
+    padding: 10px 5px;
+    font-size: 14px;
+  }
+  #calendar-result .btn-access {
+    font-size: 12px;
+    padding: 3px;
+  }
 }
 @media (max-width: 500px) {
+
+  .title h3 {
+    font-weight: bold;
+    font-size: 20px;
+  }
 
   .inner-banner {
     &.additional {
@@ -1768,4 +1893,95 @@ footer {
       }
     }
   }
+
+  #main .bar-selector .race-selector ul li a .widget__icon--quinte {
+    position: absolute;
+    width: 32px;
+    bottom: -15px;
+    right: -8px;
+  }
+
+  .double-title .add-value {
+    margin-left: 6px;
+    font-size: 21px;
+  }
+  .double-title .add-value img {
+    margin-right: 0px;
+    width: 40px;
+    vertical-align: text-top;
+  }
+
+  .prediction-top .prediction-header ul li a {
+    width: 40px;
+    height: 40px;
+  }
+  .prediction-top .prediction-header ul.minimize li a {
+    width: 30px;
+    height: 30px;
+  }
+  .prediction-top .prediction-header ul li {
+    font-size: 24px;
+    padding: 0 6px;
+  }
+  .prediction-top .prediction-header ul.minimize li {
+    font-size: 20px;
+    padding: 0 4px;
+  }
+  .prediction-top .prediction-header {
+    padding: 15px 15px;
+  }
+  .prediction-top .prediction-header ul li.active:before,
+  .prediction-top .prediction-header  ul.minimize li.active:before {
+    bottom: -31px;
+  }
+  .prediction-top .prediction-body {
+    height: auto;
+  }
+  .prediction-top .prediction-body h2{
+    font-size: 24px;
+  }
+
+  .results-section h3 {
+    border: 1px solid #fff;
+  }
+  .results-section .results tr td {
+    padding: 10px;
+    color: #FFF;
+    text-align: center;
+    font-size: 11px;
+    border: 1px solid;
+  }
+
+  .results-section .results .bet-logo a img {
+    width: 75px;
+  }
+
+  .data-holder .btn-holder .btn {
+    min-width: 80px;
+    text-transform: none;
+    font-size: 12px;
+    width: 89px;
+  }
+  #calendar-result .data-holder table td {
+    font-size: 13px;
+  }
+
+  .widget__icon {
+    width: 60px;
+    height: 26px;
+  }
+
+  #calendar-result .calendar-results .calendar-results-time {
+    width: 15%;
+    float: left;
+    border-right: 1px solid #bdbcbc;
+    height: 24px;
+  }
+  #calendar-result .calendar-results .calendar-results-numbers span {
+    width: 15px;
+    height: 15px;
+    font-size: 11px;
+    margin: 3px 2px;
+  }
+
 }

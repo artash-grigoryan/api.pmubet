@@ -40,11 +40,11 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="{{ route('editBanner') }}">Home Banner</a></li>
-                        <li><a href="{{ url('admin/predictions') }}">Predictions</a></li>
+                        <!--<li><a href="{{ url('admin/predictions') }}">Predictions</a></li>-->
                         <li><a href="{{ url('admin/reunions') }}">Reunions</a></li>
-                        <li><a href="{{ url('admin/racesList') }}">Races</a></li>
-                        <li><a href="{{ url('admin/runnersList') }}">Runners</a></li>
-                        <li><a href="{{ url('admin/reportersList') }}">Reporters</a></li>
+                        <!--<li><a href="{{ url('admin/racesList') }}">Races</a></li>-->
+                        <!--<li><a href="{{ url('admin/runnersList') }}">Runners</a></li>-->
+                        <!--<li><a href="{{ url('admin/reportersList') }}">Reporters</a></li>-->
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">

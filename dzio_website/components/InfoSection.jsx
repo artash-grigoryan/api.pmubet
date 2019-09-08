@@ -8,8 +8,8 @@ import {Trans} from "react-i18next";
 
 export default class InfoSection extends React.Component {
 
-    constructor(args) {
-        super(args);
+    componentWillReceiveProps(args) {
+
         this.props.race.discipline = (this.props.race.translation ? this.props.race.translation.discipline : null) || this.props.race.discipline;
     }
 

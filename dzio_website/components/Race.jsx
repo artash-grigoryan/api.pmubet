@@ -18,8 +18,13 @@ export default class Race extends React.Component {
     constructor(props) {
 
         super(props);
+
+        this.props.race.comment = (this.props.race.translation ? this.props.race.translation.comment : null) || this.props.race.comment;
+        this.props.race.description = (this.props.race.translation ? this.props.race.translation.description : null) || this.props.race.description;
+
+        let raceDate = new Date(this.props.race.date);
         this.state = {
-            props : null
+            isOver : raceDate < new Date()
         }
     }
     componentWillReceiveProps(args) {
@@ -62,7 +67,7 @@ export default class Race extends React.Component {
                         }
                         </div>
 
-                        <div className="col-lg-3 col-md-12" style={{marginTop: "61px"}}>
+                        <div className="col-lg-3 col-md-12 nextQ5">
                             {
                                 this.props.nextQ5
                                     ?

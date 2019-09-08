@@ -200,93 +200,105 @@ export default class CalendarResultsPage extends Component {
                                     </div>
                                 </div>
 
-                                <table>
-                                    <tbody>
-                                        {
-                                            this.state.races
-                                            ?
-                                                this.state.filter === 'next'
-                                                ?
-                                                    _.filter(this.state.races[this.state.date], function(race){ return Date.parse(race.date) > Date.now(); }).map((race, indexRace) =>
-                                                        <tr key={indexRace}>
+                                {
+                                    this.state.races
+                                    ?
+                                        this.state.filter === 'next'
+                                        ?
+                                            _.filter(this.state.races[this.state.date], function(race){ return Date.parse(race.date) > Date.now(); }).map((race, indexRace) =>
+                                                <div className="calendar-row">
+                                                    <div key={indexRace}>
 
-                                                            <td className="name-cell" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                                R{race.reunion.number}C{race.number} - {race.labelLong}
-                                                                { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i> : ''}
-                                                            </td>
+                                                        <div className="calendar-name" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            R{race.reunion.number}C{race.number} - {race.labelLong}
+                                                            { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i> : ''}
+                                                        </div>
 
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                                {race.time}
-                                                            </td>
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></td>
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                                {
-                                                                    race.results.slice(0, 8).map((runner, indexRunner) =>
-                                                                        <span key={indexRunner}>
-                                                                            {indexRunner !== 0 ? ' - ' : ''}
-                                                                            {runner.number}
-                                                                        </span>
-                                                                    )
-                                                                }
-                                                            </td>
-                                                            <td className="btn-cell">
-                                                                {
-                                                                    Date.parse(race.date) < Date.now()
-                                                                        ?
-                                                                        <a className="btn btn-access" href={"/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number}>
-                                                                            <Trans i18nKey="Results">Results</Trans>
-                                                                        </a>
-                                                                        :
-                                                                        <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
-                                                                            <Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans>
-                                                                        </a>
-                                                                }
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                :
-                                                    this.state.races[this.state.date].map((race, indexRace) =>
-                                                        <tr key={indexRace}>
+                                                        <div className="calendar-time" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            {race.time}
+                                                        </div>
+                                                        <div className="calendar-runners" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></div>
+                                                        <div className="calendar-btn">
+                                                            {
+                                                                Date.parse(race.date) < Date.now()
+                                                                    ?
+                                                                    <a className="btn btn-access" href={"/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number}>
+                                                                        <Trans i18nKey="Results">Results</Trans>
+                                                                    </a>
+                                                                    :
+                                                                    <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
+                                                                        <Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans>
+                                                                    </a>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    {
+                                                        race.results.length
+                                                            ?
+                                                            <div className="calendar-results" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                                <div className="calendar-results-numbers">
+                                                                    {
+                                                                        race.results.slice(0, 8).map((runner, indexRunner) =>
+                                                                            <span key={indexRunner}>{runner.number}</span>
+                                                                        )
+                                                                    }
+                                                                </div>
+                                                                <div className="calendar-results-time"></div>
+                                                            </div>
+                                                            :
+                                                            null
+                                                    }
+                                                </div>
+                                            )
+                                        :
+                                            this.state.races[this.state.date].map((race, indexRace) =>
+                                                <div className="calendar-row">
+                                                    <div key={indexRace}>
 
-                                                            <td className="name-cell" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                                R{race.reunion.number}C{race.number} - {race.labelLong}
-                                                                { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i> : ''}
-                                                            </td>
+                                                        <div className="calendar-name" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            R{race.reunion.number}C{race.number} - {race.labelLong}
+                                                            { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i> : ''}
+                                                        </div>
 
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                                {race.time}
-                                                            </td>
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></td>
-                                                            <td style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                                {
-                                                                    race.results.slice(0, 8).map((runner, indexRunner) =>
-                                                                        <span key={indexRunner}>
-                                                                            {indexRunner !== 0 ? ' - ' : ''}
-                                                                            {runner.number}
-                                                                        </span>
-                                                                    )
-                                                                }
-                                                            </td>
-                                                            <td className="btn-cell">
-                                                                {
-                                                                    Date.parse(race.date) < Date.now()
-                                                                        ?
-                                                                        <a className="btn btn-access" href={"/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number}>
-                                                                            <Trans i18nKey="Results">Results</Trans>
-                                                                        </a>
-                                                                        :
-                                                                        <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
-                                                                            <Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans>
-                                                                        </a>
-                                                                }
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                            :
-                                                null
-                                        }
-                                    </tbody>
-                                </table>
+                                                        <div className="calendar-time" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            {race.time}
+                                                        </div>
+                                                        <div className="calendar-runners" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></div>
+                                                        <div className="calendar-btn">
+                                                            {
+                                                                Date.parse(race.date) < Date.now()
+                                                                    ?
+                                                                    <a className="btn btn-access" href={"/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number}>
+                                                                        <Trans i18nKey="Results">Results</Trans>
+                                                                    </a>
+                                                                    :
+                                                                    <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
+                                                                        <Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans>
+                                                                    </a>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    {
+                                                        race.results.length
+                                                        ?
+                                                            <div className="calendar-results" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                                <div className="calendar-results-numbers">
+                                                                    {
+                                                                        race.results.slice(0, 8).map((runner, indexRunner) =>
+                                                                            <span key={indexRunner}>{runner.number}</span>
+                                                                        )
+                                                                    }
+                                                                </div>
+                                                                <div className="calendar-results-time"></div>
+                                                            </div>
+                                                        :
+                                                            null
+                                                    }
+                                                </div>
+                                            )
+                                    :
+                                        null
+                                }
                             </div>
                         </div>
                     </div>

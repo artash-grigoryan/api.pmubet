@@ -32,9 +32,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $reunions = Reunion::orderBy('date', 'DESC')->paginate(15);
+        $year = Input::get('year', date('Y'));
+        $month = Input::get('month', date('m'));
+        $day = Input::get('day', date('d'));
+        $date = Date('Y-m-d', strtotime($year.'-'.str_pad($month, 2, '0', STR_PAD_LEFT).'-'.str_pad($day, 2, '0', STR_PAD_LEFT)));
+        //dd($date);
+        $reunions = Reunion::orderBy('reunions.number', 'ASC')
+            ->select('reunions.*')
+            ->join('races', 'races.reunionId', '=', 'reunions.id')
+            ->where('reunions.date', 'LIKE', $date.'%')
+            ->distinct()
+            ->paginate(15);
 
-        return view('home', ["reunions" => $reunions]);
+        return view('home', ["reunions" => $reunions, "year" => $year, "month" => $month, "day" => $day]);
     }
 
     /**
@@ -45,11 +55,17 @@ class HomeController extends Controller
     public function racesList()
     {
         $page = Input::get('page', 1);
+        $reunionId = Input::get('reunionId', 0);
+
         Session::put('currentPage', $page);
 
-        $races = Race::orderBy('date', 'DESC')->paginate(15);
+        $reunion = Reunion::where('id', '=', $reunionId)->first();
 
-        return view('race.list', ["races" => $races]);
+        $races = Race::orderBy('number', 'ASC')
+            ->where('reunionId', '=', $reunionId)
+            ->paginate(15);
+
+        return view('race.list', ["reunion" => $reunion, "races" => $races]);
     }
 
     /**
@@ -60,11 +76,13 @@ class HomeController extends Controller
     public function runnersList()
     {
         $page = Input::get('page', 1);
+        $raceId = Input::get('raceId', 0);
         Session::put('currentPage', $page);
 
         $runners = Runner::select('runners.*')
             ->with('race')
             ->join('races', 'runners.raceId', '=', 'races.id')
+            ->where('races.id', '=', $raceId)
             ->orderBy('races.date', 'DESC')
             ->paginate(15);
 

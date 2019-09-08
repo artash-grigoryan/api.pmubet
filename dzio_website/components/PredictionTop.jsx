@@ -10,6 +10,21 @@ import {raceActions} from "../actions/race";
 
 export default class PredictionTop extends React.Component {
 
+    constructor(props) {
+
+        super(props);
+
+        if(props.predictionTop) {
+            let runnerRank = _.find(props.predictionTop.predictions, function(runner){ return parseInt(runner.rank) === parseInt(1); });
+            let runnerSelected = _.find(props.race.runners, function(runner){ return parseInt(runner.number) === parseInt(runnerRank.number); });
+
+            runnerSelected.name = (runnerSelected.translation ? runnerSelected.translation.name : null) || runnerSelected.name;
+            runnerSelected.comment = (runnerSelected.translation ? runnerSelected.translation.comment : null) || runnerSelected.comment;
+
+            this.state = {runnerSelected : runnerSelected}
+        }
+    }
+
     componentWillReceiveProps(props) {
 
         if(props.predictionTop) {

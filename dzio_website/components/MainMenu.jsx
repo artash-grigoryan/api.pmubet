@@ -192,10 +192,11 @@ class MainMenu extends React.Component {
                         </a>
                     </li>
                     <li className="nav-item m-0">
-                        <LanguageSelector {...this.props}/>
+
                     </li>
                 </ul>
             </div>
+            <LanguageSelector {...this.props}/>
         </nav>
     }
 }

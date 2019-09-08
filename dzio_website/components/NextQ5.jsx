@@ -5,8 +5,8 @@ import {Trans} from "react-i18next";
 
 export default class NextQ5 extends React.Component {
 
-    constructor(args) {
-        super(args);
+    componentWillReceiveProps(args) {
+
         this.props.nextQ5.labelLong = (this.props.nextQ5.translation ? this.props.nextQ5.translation.labelLong : null) || this.props.nextQ5.labelLong;
         // this.props.nextQ5.labelLong = this.props.nextQ5.translation.labelLong || this.props.nextQ5.labelLong;
     }
