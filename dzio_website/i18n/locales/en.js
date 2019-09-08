@@ -13,6 +13,7 @@ export default {
     hours:"hours",
     minute:"minute",
     minutes:"minutes",
+    "Bet":"Bet",
     "Bet now":"Bet now",
     "Select a Reunion":"Select a Reunion",
     "Bet on Vivaro":"Bet on Vivaro",

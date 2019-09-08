@@ -13,6 +13,7 @@ export default {
     "hours":"часов",
     "minute":"минут",
     "minutes":"минут",
+    "Bet":"Bet",
     "Bet now":"Ставка сейчас",
     "Select a Reunion":"Выбрать забег",
     "Bet on Vivaro":"Сделать ставку в Vivaro",

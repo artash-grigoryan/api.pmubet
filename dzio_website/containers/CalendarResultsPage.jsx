@@ -227,7 +227,7 @@ export default class CalendarResultsPage extends Component {
                                                                     </a>
                                                                     :
                                                                     <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
-                                                                        <Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans>
+                                                                        <Trans i18nKey="Bet now">Bet now</Trans>
                                                                     </a>
                                                             }
                                                         </div>
@@ -273,7 +273,7 @@ export default class CalendarResultsPage extends Component {
                                                                     </a>
                                                                     :
                                                                     <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
-                                                                        <Trans i18nKey="Bet on Vivaro">Bet on Vivaro</Trans>
+                                                                        <Trans i18nKey="Bet now">Bet now</Trans>
                                                                     </a>
                                                             }
                                                         </div>
