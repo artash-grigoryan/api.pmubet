@@ -95,6 +95,7 @@ class RunnerController extends Controller
         $coach = $request->input('coach');
         $jokey = $request->input('jokey');
         $farmer = $request->input('farmer');
+        $comment = $request->input('comment');
         $lang = $request->input('lang');
 
         if ($name == '' || $lang == '') {
@@ -111,6 +112,7 @@ class RunnerController extends Controller
         $runnerTranslation->coach = $coach;
         $runnerTranslation->jokey = $jokey;
         $runnerTranslation->farmer = $farmer;
+        $runnerTranslation->comment = $comment;
 
         $runnerTranslation->lang = $lang;
 

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Runner extends Model
 {
@@ -61,7 +62,9 @@ class Runner extends Model
 
     public function translation()
     {
-        return $this->hasOne('App\RunnerTranslation', "runnerId")->where('lang', 'hy');
+        $locale = App::getLocale();
+
+        return $this->hasOne('App\RunnerTranslation', "runnerId")->where('lang', $locale);
     }
 
     public function translations()

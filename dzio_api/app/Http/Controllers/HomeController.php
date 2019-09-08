@@ -77,16 +77,19 @@ class HomeController extends Controller
     {
         $page = Input::get('page', 1);
         $raceId = Input::get('raceId', 0);
+
         Session::put('currentPage', $page);
+
+        $race = Race::where('id', '=', $raceId)->first();
 
         $runners = Runner::select('runners.*')
             ->with('race')
             ->join('races', 'runners.raceId', '=', 'races.id')
             ->where('races.id', '=', $raceId)
-            ->orderBy('races.date', 'DESC')
-            ->paginate(15);
+            ->orderBy('races.number', 'ASC')
+            ->paginate(20);
 
-        return view('runners', ["runners" => $runners]);
+        return view('runners', ["race" => $race, "runners" => $runners]);
     }
 
     /**

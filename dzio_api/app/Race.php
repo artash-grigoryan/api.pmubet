@@ -43,7 +43,7 @@ class Race extends Model
 
     public function runners()
     {
-        return $this->hasMany('App\Runner', "raceId");
+        return $this->hasMany('App\Runner', "raceId")->with('translation');
     }
 
     public function reunion()

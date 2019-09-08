@@ -36,10 +36,10 @@
                             <td class="table-text"><div>{{ $race->date }}</div></td>
                             <td class="table-text"><div>{{ $race->translations }}</div></td>
                             <td>
-                                <a style="margin: 3px 0;" href="{{ url('admin/race/'.$race->id) }}" class="btn btn-primary">
+                                <a target="_blank" style="margin: 3px 0;" href="{{ url('admin/race/'.$race->id) }}" class="btn btn-primary">
                                     <i class="fa fa-btn fa-edit"></i>
                                 </a>
-                                <a style="margin: 3px 0;" href="{{ url('admin/race/'.$race->id.'/prediction/add') }}" class="btn btn-primary">
+                                <a target="_blank" style="margin: 3px 0;" href="{{ url('admin/race/'.$race->id.'/prediction/add') }}" class="btn btn-primary">
                                     predictions
                                 </a>
                                 <a style="margin: 3px 0;" target="_blank" href="{{ url('admin/runnersList/?raceId='.$race->id) }}" class="btn btn-primary">

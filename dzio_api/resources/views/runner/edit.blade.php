@@ -32,6 +32,10 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="comment">comment</label>
+                            <textarea name="comment" class="form-control"  id="comment" cols="30" rows="5">{{ $runner->comment or old('comment')}}</textarea>
+                        </div>
+                        <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ $runner->name or old('name')}}">
                         </div>

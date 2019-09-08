@@ -7,6 +7,7 @@ use App\Race;
 use App\BetResult;
 use App\RaceTranslation;
 use App\Reunion;
+use App\Runner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -446,25 +447,25 @@ class RaceController extends Controller
      */
     public function update(Request $request, $raceId)
     {
-        $label = $request->input('label');
+        //$label = $request->input('label');
         $description = $request->input('description', '');
-        $gender = $request->input('gender', '');
+        //$gender = $request->input('gender', '');
         $labelLong = $request->input('labelLong');
-        $type = $request->input('type');
+        //$type = $request->input('type');
         $discipline = $request->input('discipline');
         $comment = $request->input('comment');
         $lang = $request->input('lang');
 
-        if ($label == '' || $lang == '') {
+        if (/*$label == '' || */$lang == '') {
             return Redirect::back()->withErrors(['Fill required fields']);
         }
 
         $raceTranslation = RaceTranslation::firstOrNew(['raceId' => $raceId, 'lang' => $lang]);
-        $raceTranslation->label = $label;
+        //$raceTranslation->label = $label;
         $raceTranslation->description = $description;
-        $raceTranslation->gender = $gender;
+        //$raceTranslation->gender = $gender;
         $raceTranslation->labelLong = $labelLong;
-        $raceTranslation->type = $type;
+        //$raceTranslation->type = $type;
         $raceTranslation->discipline = $discipline;
         $raceTranslation->comment = $comment;
         $raceTranslation->lang = $lang;

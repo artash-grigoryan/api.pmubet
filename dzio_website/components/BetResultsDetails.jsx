@@ -69,6 +69,13 @@ export default class BetResultsDetails extends React.Component {
                         <td className="bet-logo" colSpan="5">
                             <a href="javascript:;">
                                 <img src={this.getBetLogo(betSeleted)} alt=""/>
+                                {
+                                    betSeleted === 'Simple'
+                                    ?
+                                        <span className="bet-calibrate"><Trans i18nKey="FOR 1 EURO">FOR 1 EURO</Trans></span>
+                                    :
+                                        null
+                                }
                             </a>
                         </td>
                     </tr>
