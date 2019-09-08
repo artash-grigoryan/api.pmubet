@@ -14,6 +14,7 @@ const Routes = () => (
         <Switch>
             <Route exact path='/' component={HomePage}/>
             <Route exact path='/:lang' component={HomePage}/>
+            <Route exact path='/news/:lang' component={HomePage}/>
             <Route exact path='/:lang/predictions' component={PredictionsPage}/>
             <Route exact path='/:lang/calendar-results' component={CalendarResultsPage}/>
             <Route exact path='/:lang/calendar-results/:date' component={CalendarResultsPage}/>
