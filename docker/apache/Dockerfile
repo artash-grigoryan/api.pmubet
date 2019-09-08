@@ -35,6 +35,8 @@ RUN chmod 0644 /etc/cron.d/parse-cron
 
 # Apply cron job
 RUN crontab /etc/cron.d/parse-cron
+
+RUN cron
 #////////////////////////////////////////////////////////////////
 
 WORKDIR /var/www/
