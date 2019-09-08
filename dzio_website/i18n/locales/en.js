@@ -23,6 +23,12 @@ export default {
     "News":"News",
     "Best Predictions":"Best Predictions",
 
+    "Lives" : "Lives",
+    "Account" : "Account",
+    "days" : "days",
+    "Type" : "Type",
+    "FOR 1 EURO" : "FOR 1 EURO",
+
     "Results":"Results",
     "Reports":"Reports",
     "Report":"Report",
