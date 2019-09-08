@@ -1,10 +1,5 @@
 import React, {Component} from "react";
-
 import "./../assets/css/main.scss";
-
-import { useTranslation, Trans } from "react-i18next";
-const { t, i18n } = useTranslation();
-const i18next = require('i18next');
 
 export default class HomePage extends Component {
 
