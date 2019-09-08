@@ -10,7 +10,7 @@ export default class Predictions extends React.Component {
         if(this.props.race) {
             listPredictions = this.props.predictions.map((reporter, key) =>
 
-                <div key={reporter.id} className="predictions">
+                <div key={key} className="predictions">
                     <p className="reporter-key">
                         {key+1}.
                     </p>

@@ -206,8 +206,8 @@ export default class CalendarResultsPage extends Component {
                                         this.state.filter === 'next'
                                         ?
                                             _.filter(this.state.races[this.state.date], function(race){ return Date.parse(race.date) > Date.now(); }).map((race, indexRace) =>
-                                                <div className="calendar-row">
-                                                    <div key={indexRace}>
+                                                <div key={race.id} className="calendar-row">
+                                                    <div>
 
                                                         <div className="calendar-name" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                             R{race.reunion.number}C{race.number} - {race.labelLong}
@@ -239,7 +239,7 @@ export default class CalendarResultsPage extends Component {
                                                                 <div className="calendar-results-numbers">
                                                                     {
                                                                         race.results.slice(0, 8).map((runner, indexRunner) =>
-                                                                            <span key={indexRunner}>{runner.number}</span>
+                                                                            <span key={runner.id}>{runner.number}</span>
                                                                         )
                                                                     }
                                                                 </div>
@@ -252,8 +252,8 @@ export default class CalendarResultsPage extends Component {
                                             )
                                         :
                                             this.state.races[this.state.date].map((race, indexRace) =>
-                                                <div className="calendar-row">
-                                                    <div key={indexRace}>
+                                                <div key={race.id} className="calendar-row">
+                                                    <div>
 
                                                         <div className="calendar-name" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                             R{race.reunion.number}C{race.number} - {race.labelLong}
