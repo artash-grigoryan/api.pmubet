@@ -30,9 +30,9 @@ export default class Banner extends React.Component {
 
             return <span>
                 <Trans i18nKey="Departure in">Departure in</Trans>&nbsp;
-                {days > 0 ? days : null} {days > 1 ?  <Trans i18nKey="days">days</Trans> :  <Trans i18nKey="day">day</Trans>}&nbsp;
-                {hours > 0 ? hours : null} {hours > 1 ?  <Trans i18nKey="hours">hours</Trans> :  <Trans i18nKey="hour">hour</Trans>}&nbsp;
-                {minutes > 0 ? minutes : null} {minutes > 1 ? <Trans i18nKey="minutes">minutes</Trans> : <Trans i18nKey="minute">minute</Trans>}
+                {days > 0 ? days : null} {days > 1 ?  <Trans i18nKey="days">days</Trans> : (days > 0) ? <Trans i18nKey="day">day</Trans> : null}&nbsp;
+                {hours > 0 ? hours : null} {hours > 1 ?  <Trans i18nKey="hours">hours</Trans> :  (hours > 0) ? <Trans i18nKey="hour">hour</Trans> : null}&nbsp;
+                {minutes > 0 ? minutes : null} {minutes > 1 ? <Trans i18nKey="minutes">minutes</Trans> : (minutes > 0) ? <Trans i18nKey="minute">minute</Trans> : null}
             </span>;
         }
     };
