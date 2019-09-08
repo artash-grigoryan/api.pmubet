@@ -80,7 +80,7 @@ export default class BetResultsDetails extends React.Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="arrivee" rowSpan="2"><Trans i18nKey="Arrival">Arrival</Trans></td>
+                        <td className="arrivee" rowSpan="2">N</td>
                         <td colSpan="2"><Trans i18nKey="Winner">Winner</Trans></td>
                         <td colSpan="2"><Trans i18nKey="Placed">Placed</Trans></td>
                     </tr>
@@ -121,7 +121,7 @@ export default class BetResultsDetails extends React.Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="arrivee" rowSpan="2"><Trans i18nKey="Arrival">Arrival</Trans></td>
+                        <td className="arrivee" rowSpan="2">N</td>
                         <td className="forceLeftBorder"><Trans i18nKey="Report">Report</Trans></td>
                         <td><Trans i18nKey="Nb winning bets">Nb winning bets</Trans></td>
                     </tr>
@@ -157,7 +157,7 @@ export default class BetResultsDetails extends React.Component {
                         </td>
                     </tr>
                     <tr>
-                        <td className="arrivee" rowSpan="2"><Trans i18nKey="Arrival">Arrival</Trans></td>
+                        <td className="arrivee" rowSpan="2">N</td>
                         <td className="type" rowSpan="2"><Trans i18nKey="Type">Type</Trans></td>
                         <td className="forceLeftBorder"><Trans i18nKey="Report">Report</Trans></td>
                         <td><Trans i18nKey="Nb winning bets">Nb winning bets</Trans></td>
