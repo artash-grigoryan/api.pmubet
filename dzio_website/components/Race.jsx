@@ -99,7 +99,7 @@ export default class Race extends React.Component {
             </section>
 
             {
-                this.props.race.betResults.length
+                this.state.isOver
                     ?
                     <BetResults {...this.props}/>
                     :
