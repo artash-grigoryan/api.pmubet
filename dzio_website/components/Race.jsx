@@ -39,6 +39,13 @@ export default class Race extends React.Component {
         this.props.race.comment = (this.props.race.translation ? this.props.race.translation.comment : null) || this.props.race.comment;
         this.props.race.description = (this.props.race.translation ? this.props.race.translation.description : null) || this.props.race.description;
 
+        let timezoneHours = parseInt(this.props.race.time.substring(0,2)) + parseInt(this.props.timezoneOffset);
+        while (timezoneHours.toString().length < 2) {timezoneHours = "0" + timezoneHours;}
+        let timezoneMinutes = parseInt(this.props.race.time.substring(3,5));
+        while (timezoneMinutes.toString().length < 2) {timezoneMinutes = "0" + timezoneMinutes;}
+        this.props.race.timezoneTime = timezoneHours + ':' + timezoneMinutes;
+        this.props.race.date = new Date(this.props.race.day+' '+this.props.race.timezoneTime);
+
         let raceDate = new Date(this.props.race.date);
         this.setState({isOver : raceDate < new Date()});
     }
