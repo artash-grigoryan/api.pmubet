@@ -2004,3 +2004,13 @@ footer {
   }
 
 }
+
+@media (max-width: 402px) {
+
+  #main .bar-selector .day-selector ul li a {
+    padding: 13px 10px;
+  }
+  #main .bar-selector ul.calendar-selector li a {
+    width: 40px;
+  }
+}
