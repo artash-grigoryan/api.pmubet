@@ -12,13 +12,6 @@ export default class Banner extends React.Component {
     componentWillReceiveProps(props) {
 
         this.props.race.labelLong = (this.props.race.translation ? this.props.race.translation.labelLong : null) || this.props.race.labelLong;
-
-        let timezoneHours = parseInt(this.props.race.time.substring(0,2)) + parseInt(this.props.timezoneOffset);
-        while (timezoneHours.toString().length < 2) {timezoneHours = "0" + timezoneHours;}
-        let timezoneMinutes = parseInt(this.props.race.time.substring(3,5));
-        while (timezoneMinutes.toString().length < 2) {timezoneMinutes = "0" + timezoneMinutes;}
-        this.props.race.timezoneTime = timezoneHours + ':' + timezoneMinutes;
-        this.props.race.date = new Date(this.props.race.day+' '+this.props.race.timezoneTime);
     }
 
     renderer = ({ days, hours, minutes, seconds, completed }) => {
@@ -28,10 +21,7 @@ export default class Banner extends React.Component {
         } else {
             // Render a countdown
             return <span>
-                <Trans i18nKey="Departure in">Departure in</Trans>&nbsp;
-                {days > 0 ? days : null} {days > 1 ?  <Trans i18nKey="days">days</Trans> : (days > 0) ? <Trans i18nKey="day">day</Trans> : null}&nbsp;
-                {hours > 0 ? hours : null} {hours > 1 ?  <Trans i18nKey="hours">hours</Trans> :  (hours > 0) ? <Trans i18nKey="hour">hour</Trans> : null}&nbsp;
-                {minutes > 0 ? minutes : null} {minutes > 1 ? <Trans i18nKey="minutes">minutes</Trans> : (minutes > 0) ? <Trans i18nKey="minute">minute</Trans> : null}
+                <Trans i18nKey="Departure in">Departure in</Trans> {days > 0 ? days : null} {days > 1 ?  <Trans i18nKey="days">days</Trans> : (days > 0) ? <Trans i18nKey="day">day</Trans> : null} {hours > 0 ? hours : null} {hours > 1 ?  <Trans i18nKey="hours">hours</Trans> :  (hours > 0) ? <Trans i18nKey="hour">hour</Trans> : null} {minutes > 0 ? minutes : null} {minutes > 1 ? <Trans i18nKey="minutes">minutes</Trans> : (minutes > 0) ? <Trans i18nKey="minute">minute</Trans> : null}
             </span>;
         }
     };
