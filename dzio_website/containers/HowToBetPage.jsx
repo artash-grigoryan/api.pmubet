@@ -3,6 +3,9 @@ import MainMenu from "../components/MainMenu.jsx";
 import Footer from "../components/shared/footer/footer";
 import { raceActions } from '../actions/race';
 import Banner from "../components/Banner";
+import { useTranslation, Trans } from "react-i18next";
+const { t, i18n } = useTranslation();
+const i18next = require('i18next');
 
 export default class HowToBetPage extends Component {
 
