@@ -52,7 +52,7 @@ export default class Race extends React.Component {
 
     render() {
 
-        return <div>
+        return <div id={this.state.isOver ? 'race-over' : ''}>
             <Banner {...this.props}/>
 
             <InfoSection {...this.props}/>

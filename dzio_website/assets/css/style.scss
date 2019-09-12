@@ -1850,6 +1850,20 @@ footer {
   #main .bar-selector .race-selector ul li a {
     padding: 13px 10px;
   }
+
+  #race-over .block-race-condition,
+  #race-over .race-comment,
+  #race-over .prediction-body.tab-content,
+  #race-over .prediction-top .prediction-header ul li.active:before,
+  #race-over .runners-container {
+    display: none;
+  }
+  #main .bar-selector .race-selector ul li a .widget__icon--quinte {
+    position: absolute;
+    width: 41px;
+    bottom: -12px;
+    right: -9px;
+  }
 }
 @media (max-width: 700px) {
 
