@@ -136,6 +136,15 @@ export default class CalendarResultsPage extends Component {
         this.setState({calendarSelectorOpened:!this.state.calendarSelectorOpened});
     }
 
+    getRaceTime(race) {
+
+        let timezoneHours = parseInt(race.time.substring(0,2)) + parseInt(this.state.timezoneOffset);
+        while (timezoneHours.toString().length < 2) {timezoneHours = "0" + timezoneHours;}
+        let timezoneMinutes = parseInt(race.time.substring(3,5));
+        while (timezoneMinutes.toString().length < 2) {timezoneMinutes = "0" + timezoneMinutes;}
+        return timezoneHours + ':' + timezoneMinutes;
+    }
+
 	render() {
 
 		return <div id="calendar-result">
@@ -268,7 +277,7 @@ export default class CalendarResultsPage extends Component {
                                                         </div>
 
                                                         <div className="calendar-time" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                            {race.time}
+                                                            {this.getRaceTime(race)}
                                                         </div>
                                                         <div className="calendar-runners" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></div>
                                                         <div className="calendar-btn">
