@@ -22,7 +22,7 @@ export default {
     "Calendar & Results":"Календарь и результаты",
     "How to bet":"Как сделать ставку?",
     "News":"Новости",
-    "Best Predictions":"Лучшие прогнозы",
+    "Best Predictions from France":"Лучшие прогнозы",
     "Contact us":"Участники",
     "Distance":"Дистанция",
     "Attele":"Скачки в упряжке",

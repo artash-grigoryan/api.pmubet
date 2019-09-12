@@ -31,7 +31,7 @@ export default class Predictions extends React.Component {
         
         return <div className="predictions">
             <div className="title" style={{marginBottom: 0}}>
-                <h3>{this.props.predictions.length} <Trans i18nKey="Best Predictions"> Best Predictions</Trans>
+                <h3>{this.props.predictions.length} <Trans i18nKey="Best Predictions from France"> Best Predictions from France</Trans>
                 </h3>
             </div>
             <div className="predictions-container">

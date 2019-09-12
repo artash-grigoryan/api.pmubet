@@ -22,7 +22,7 @@ export default {
     "Calendar & Results":"Calendar & Results",
     "How to bet":"How to bet",
     "News":"News",
-    "Best Predictions":"Best Predictions",
+    "Best Predictions from France":"Best Predictions from France",
 
     "Lives" : "Lives",
     "Account" : "Account",

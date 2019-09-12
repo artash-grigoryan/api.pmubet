@@ -21,7 +21,7 @@ export default {
     "Calendar & Results":"Օրացույց և արդյունքներ",
     "How to bet":"Ինչպես կատարել խաղադրույք",
     "News":"Նորություններ",
-    "Best Predictions":"Լավագույն կանխատեսումներ",
+    "Best Predictions from France":"Լավագույն կանխատեսումներ",
     "Contact us":"Մասնակիցներ",
     "Distance":"Հեռավորություն",
     "Sport":"Սպորտաձև",
