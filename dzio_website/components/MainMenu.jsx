@@ -174,9 +174,11 @@ class MainMenu extends React.Component {
                     <li className="nav-item">
                         <a className="nav-link" href={"/"+this.props.lang+"/how-to-bet"}><Trans i18nKey="How to bet">How to bet</Trans></a>
                     </li>
+                    /*
                     <li className="nav-item">
                         <a className="nav-link" href={"https://news.dzio.am/"+this.props.lang} target={'_blank'}><Trans i18nKey="News">News</Trans></a>
                     </li>
+                     */
                 </ul>
                 <ul className="navbar-nav secondary">
                     <li className="nav-item m-0">

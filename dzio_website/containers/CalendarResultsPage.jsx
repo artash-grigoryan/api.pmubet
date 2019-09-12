@@ -23,7 +23,6 @@ export default class CalendarResultsPage extends Component {
         let timezoneOffset = (new Date().getTimezoneOffset()*-1 - 120) / 60;
 
         let date = new Date();
-        //date.setTime(date.getTime() + (2*60*60*1000)); // ADDING 2 HOURS FOR ARMENIA
         let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
         date.setDate(date.getDate()-1);
         let yesterday = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
@@ -54,6 +53,14 @@ export default class CalendarResultsPage extends Component {
     async componentWillMount() {
 
         raceActions.getNext(this.state.lang).then((response) => {
+
+            let timezoneHours = parseInt(response.race.time.substring(0,2)) + parseInt(this.state.timezoneOffset);
+            while (timezoneHours.toString().length < 2) {timezoneHours = "0" + timezoneHours;}
+            let timezoneMinutes = parseInt(response.race.time.substring(3,5));
+            while (timezoneMinutes.toString().length < 2) {timezoneMinutes = "0" + timezoneMinutes;}
+
+            response.race.timezoneTime = timezoneHours + ':' + timezoneMinutes;
+            response.race.date = new Date(response.race.day+' '+response.race.timezoneTime);
 
             this.setState({
                 date : response.race.datePath,
