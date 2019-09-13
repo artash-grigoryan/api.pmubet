@@ -137,7 +137,7 @@ export default class InfoSection extends React.Component {
                                 <b>{this.props.race.runners.length} <Trans i18nKey="Runners">Runners</Trans></b>
                             </div>
                             <div className="info-line-2">
-                                Distance :<br/>
+                                <Trans i18nKey="Distance">Distance</Trans> :<br/>
                                 <b>{this.props.race.distance} <Trans i18nKey="meters">meters</Trans></b>
                             </div>
                         </div>
