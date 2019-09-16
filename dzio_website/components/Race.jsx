@@ -61,7 +61,7 @@ export default class Race extends React.Component {
                 <div className="container">
 
                     <div className="race-comment">
-                        <p style={{textAlign:'justify'}}>{this.props.race.comment || this.props.race.description}</p>
+                        <p style={{textAlign:'justify'}}>{this.props.race.description || this.props.race.comment}</p>
                     </div>
 
                     <div className="row">
