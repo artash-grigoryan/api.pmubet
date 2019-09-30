@@ -560,16 +560,14 @@ body {
 }
 .prediction-top {}
 .prediction-top .prediction-header {
-
-  padding: 30px 15px;
   overflow: hidden;
   text-align: center;
   position: relative;
-  /*background: linear-gradient(-70deg, transparent 25%, transparent 25%, transparent 80%, currentColor 75%, currentColor), linear-gradient(-45deg, currentColor 25%, transparent 25%, transparent 75%, transparent 75%, transparent);*/
-  background-color: #BFBFBF;
-
+  background-color: #fff;
+  border-bottom: 2px solid #000;
 }
-.prediction-top .prediction-header ul{
+
+.prediction-top .prediction-header ul {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
@@ -579,12 +577,22 @@ body {
   display: flex;
   list-style: none;
   padding: 0;
+  margin: 0;
 }
-.prediction-top .prediction-header ul li{
-  font-size: 24px;
-  padding: 0 15px;
+
+.prediction-top .prediction-header ul li {
+  font-size: 62px;
   position: relative;
+  width: 170px;
+  font-family: fantasy;
+  transform: skew(-10deg);
+  border-right: 2px solid #000;
 }
+
+.prediction-header ul li:last-child {
+  border-right: 0;
+}
+
 .prediction-top .prediction-header ul li a {
   cursor: pointer;
 }
@@ -615,9 +623,8 @@ body {
 .prediction-top .prediction-header ul li a {
 
   color: #1d1e56;
-  background: #f5f5f5;
-  width: 60px;
-  height: 60px;
+  width: auto;
+  height: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -627,10 +634,7 @@ body {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  border-radius: 19%;
   text-decoration: none;
-  box-shadow: 2px 2px 6px 0px;
-
 }
 
 .prediction-top .prediction-header ul li.active a,
@@ -639,9 +643,10 @@ body {
   color: #fff;
 }
 .prediction-top .prediction-body {
-  padding: 30px;
+  padding: 15px 15px 10px 15px;
   background-color: #FFF;
-  height: 371px;
+  height: auto;
+  text-align: center;
 }
 .prediction-top .prediction-body h2{}
 .prediction-top .prediction-body h2 a{
@@ -973,7 +978,8 @@ body {
 }
 
 .adv-1 {
-  margin: 40px 0 50px 0;
+  margin: -22px 0 0px 0;
+  height: 561px;
 }
 
 .result-table {
@@ -1228,19 +1234,25 @@ body {
   margin-top: 61px;
 }
 .widget__quinte {
-  background-image: url(https://jeux.loro.ch/static/images/react/images/promos/quinte_promo_mobile.min.jpg);
   background-size: cover;
   -ms-flex-order: 0;
   order: 0;
 }
 .widget {
   width: 100%;
-  padding: 20px;
+  padding: 0 20px;
   box-sizing: border-box;
   text-transform: uppercase;
   position: relative;
   display: block;
   overflow: hidden;
+}
+
+.adv-1 img {
+  width: auto;
+  height: 561px;
+  display: block;
+  margin: auto;
 }
 
 .widget__sub-txt, .widget__top {
@@ -1727,12 +1739,36 @@ footer {
     top: 9px;
     right: 60px;
   }
+  .adv-1 {
+    margin: 0;
+    height: auto;
+  }
   .nextQ5 {
-    margin-top: 0;
+    margin-top: 35px;
+  }
+  .widget__quinte {
+    background-size: cover;
+    -ms-flex-order: 0;
+    order: 0;
+  }
+  .widget {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
+  .adv-1 img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
   }
   .prediction-top .prediction-body {
     height: auto;
-    min-height: 200px;
   }
   .results-section .results-selection-tab tr td.result-selector img{
     width: 50px;
@@ -1954,6 +1990,7 @@ footer {
   }
   .prediction-top .prediction-header ul li {
     font-size: 24px;
+    width: auto;
     padding: 0 6px;
   }
   .prediction-top .prediction-header ul.minimize li {

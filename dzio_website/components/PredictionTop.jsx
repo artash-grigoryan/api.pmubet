@@ -53,7 +53,7 @@ export default class PredictionTop extends React.Component {
 
         return <div className="prediction-top">
             <div className="title m-b-0">
-                <h3><Trans i18nKey="Last Predictions">Last Prediction</Trans></h3>
+                <h3><Trans i18nKey="Dzio Predictions">Dzio Predictions</Trans></h3>
             </div>
             <div className="prediction">
                 <div className="prediction-header">
@@ -81,13 +81,12 @@ export default class PredictionTop extends React.Component {
                                     <b className="primary-color">{this.state.runnerSelected.number}</b> -
                                     <a href="">{this.state.runnerSelected.name}</a>
                                 </h2>
-                                <p><span>{this.state.runnerSelected.comment}</span></p>
-                                <div className="prediction-info">
+                                /*<div className="prediction-info">
                                     <p className="reporter">
                                         <b>{this.props.predictionTop.reporter}</b> <br/>
                                         <a href={this.props.predictionTop.societe === 'AIP' ? 'http://www.turf-fr.com/' : (this.props.predictionTop.societe === 'geny.com' ? 'http://www.geny.com/' : 'javascript:;')}>{this.props.predictionTop.societe === 'AIP' ? 'www.turf-fr.com' : (this.props.predictionTop.societe === 'geny.com' ? 'www.geny.com' : this.props.predictionTop.societe)}</a>
                                     </p>
-                                </div>
+                                </div>*/
                             </div>
                         :
                             null

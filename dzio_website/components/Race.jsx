@@ -66,22 +66,22 @@ export default class Race extends React.Component {
 
                     <div className="row">
 
-                        <div className="col-lg-4 col-md-12 runners-container">
+                        <div className="col-lg-12 col-md-12 top-container">
+                            {
+                                !this.state.isOver
+                                    ?
+
+                                    <PredictionTop {...this.props}/>
+                                    :
+                                    <Results {...this.props}/>
+                            }
+                        </div>
+
+                        <div className="col-lg-5 col-md-12 runners-container">
                             <Runners {...this.props}/>
                         </div>
 
-                        <div className="col-lg-5 col-md-12 top-container">
-                        {
-                            !this.state.isOver
-                                ?
-
-                                    <PredictionTop {...this.props}/>
-                                :
-                                    <Results {...this.props}/>
-                        }
-                        </div>
-
-                        <div className="col-lg-3 col-md-12 nextQ5">
+                        <div className="col-lg-7 col-md-12 nextQ5">
                             {
                                 this.props.nextQ5
                                     ?

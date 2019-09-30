@@ -18,6 +18,7 @@ export default {
     "Select a Reunion":"Выбрать забег",
     "Bet on Vivaro":"Сделать ставку в Vivaro",
     "Next Predictions":"Следующие прогнозы",
+    "Dzio Predictions":"Dzio Предсказания",
     "Programs":"Программы",
     "Calendar & Results":"Календарь и результаты",
     "How to bet":"Как сделать ставку?",

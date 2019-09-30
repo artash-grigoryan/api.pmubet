@@ -18,6 +18,7 @@ export default {
     "Select a Reunion":"Select a Reunion",
     "Bet on Vivaro":"Bet on Vivaro",
     "Next Predictions":"Next Predictions",
+    "Dzio Predictions":"Dzio Predictions",
     "Programs":"Programs",
     "Calendar & Results":"Calendar & Results",
     "How to bet":"How to bet",

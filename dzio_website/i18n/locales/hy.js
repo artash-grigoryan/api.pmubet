@@ -17,6 +17,7 @@ export default {
     "Select a Reunion":"Ընտրել մրցավազքը",
     "Bet on Vivaro":"Bet on Vivaro",
     "Next Predictions":"Հետագա կանխատեսումներs",
+    "Dzio Predictions":"Dzio Կանխատեսումներ",
     "Programs":"Ծրագիր",
     "Calendar & Results":"Օրացույց և արդյունքներ",
     "How to bet":"Ինչպես կատարել խաղադրույք",
