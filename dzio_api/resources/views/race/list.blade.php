@@ -47,7 +47,7 @@
                                 </a>
                             </td>
                             <!-- Task Delete Button -->
-                            <!--<td>
+                            <td>
                                 <form action="{{ url('/admin/race/'.$race->id) }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
@@ -56,7 +56,7 @@
                                         <i class="fa fa-btn fa-trash"></i>
                                     </button>
                                 </form>
-                            </td>-->
+                            </td>
                         </tr>
                         @endforeach
                         </tbody>

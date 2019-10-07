@@ -109,7 +109,7 @@ body {
   background-color: #FFF;
   color: #000;
   padding: 10px;
-  display: block;
+  display: inline-block;
 }
 
 .inner-banner {
@@ -139,7 +139,7 @@ body {
   padding-bottom: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  display: block;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
@@ -154,6 +154,9 @@ body {
   width: 100%;
   text-align: center;
   color: #fff;
+}
+.banner .text-holder {
+  padding-top: 130px;
 }
 .banner .btn-holder {
   margin-top: 28px;
@@ -584,7 +587,7 @@ body {
   font-size: 62px;
   position: relative;
   width: 170px;
-  font-family: fantasy;
+  font-weight: bold;
   transform: skew(-10deg);
   border-right: 2px solid #000;
 }
@@ -1233,6 +1236,24 @@ body {
 .nextQ5 {
   margin-top: 61px;
 }
+.nextQ5 .col-md-12{
+  position: relative;
+}
+.nextQ5 .widget-overlay{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40%;
+  background: #000;
+  opacity: 0.5;
+}
+.nextQ5 .widget-container{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 35%;
+  padding: 30px;
+}
 .widget__quinte {
   background-size: cover;
   -ms-flex-order: 0;
@@ -1720,6 +1741,9 @@ footer {
 
 @media (max-width: 991px) {
 
+  .nextQ5 .widget-overlay {
+    width: calc(100% - 30px);
+  }
   .runners-container {
 
   }
@@ -1732,6 +1756,8 @@ footer {
   .prono-container {
     order: -1;
   }
+
+
 
   .language-selector {
     padding: 5px 20px 5px 0px;
@@ -1903,6 +1929,14 @@ footer {
 }
 @media (max-width: 700px) {
 
+  .nextQ5 .widget-container {
+    width: calc(100% - 30px);
+    height: 50%;
+    padding: 0 30px;
+  }
+  .nextQ5 .widget-overlay{
+    height: 60%;
+  }
   .data-holder .btn-holder .btn {
     min-width: 120px;
     text-transform: none;
@@ -1936,6 +1970,14 @@ footer {
   #calendar-result .btn-access {
     font-size: 12px;
     padding: 3px;
+  }
+  .prediction-top .prediction-header ul li a {
+    font-size: 20px;
+    width: 56px;
+    height: 50px;
+  }
+  .prediction-top .prediction-header ul li {
+    width: 58px;
   }
 }
 @media (max-width: 500px) {
@@ -1981,8 +2023,8 @@ footer {
   }
 
   .prediction-top .prediction-header ul li a {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
   }
   .prediction-top .prediction-header ul.minimize li a {
     width: 30px;
@@ -1990,8 +2032,7 @@ footer {
   }
   .prediction-top .prediction-header ul li {
     font-size: 24px;
-    width: auto;
-    padding: 0 6px;
+    width: 32px;
   }
   .prediction-top .prediction-header ul.minimize li {
     font-size: 20px;

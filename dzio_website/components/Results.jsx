@@ -42,7 +42,7 @@ export default class Results extends React.Component {
             </div>
             <div className="prediction">
                 <div className="prediction-header">
-                    <ul className={this.props.race.results.length > 6 ? 'minimize' : ''}>
+                    <ul className={this.props.race.results.length > 6 ? 'minimized' : ''}>
                         {
                             this.props.race.results.slice(0, 8).map((runner) =>
                                 <li key={parseInt(runner.number)} className={parseInt(runner.number)===parseInt(this.state.runnerSelected.number)?'active' : '' }><a onClick={() => this.setRunnerSelected(runner.number)}>{runner.number}</a></li>
@@ -60,7 +60,6 @@ export default class Results extends React.Component {
                                     <b className="primary-color">{this.state.runnerSelected.number}</b> -
                                     <a href="">{this.state.runnerSelected.name}</a>
                                 </h2>
-                                <p><span></span></p>
                             </div>
                         :
                             null

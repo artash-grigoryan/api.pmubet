@@ -60,7 +60,7 @@ export default class PredictionTop extends React.Component {
                     {
                         this.props.predictionTop
                         ?
-                            <ul className={this.props.predictionTop.predictions.length > 6 ? 'minimize' : ''}>
+                            <ul className={this.props.predictionTop.predictions.length > 6 ? 'minimized' : ''}>
                                 {
                                     this.props.predictionTop.predictions.map((runner) =>
                                         <li key={parseInt(runner.number)} className={parseInt(runner.number)===parseInt(this.state.runnerSelected.number)?'active' : '' }><a onClick={() => this.setRunnerSelected(runner.number)}>{runner.number}</a></li>
@@ -79,14 +79,8 @@ export default class PredictionTop extends React.Component {
                             <div>
                                 <h2 className="text-uppercase">
                                     <b className="primary-color">{this.state.runnerSelected.number}</b> -
-                                    <a href="">{this.state.runnerSelected.name}</a>
+                                    <a href="javascript:;">{this.state.runnerSelected.name}</a>
                                 </h2>
-                                /*<div className="prediction-info">
-                                    <p className="reporter">
-                                        <b>{this.props.predictionTop.reporter}</b> <br/>
-                                        <a href={this.props.predictionTop.societe === 'AIP' ? 'http://www.turf-fr.com/' : (this.props.predictionTop.societe === 'geny.com' ? 'http://www.geny.com/' : 'javascript:;')}>{this.props.predictionTop.societe === 'AIP' ? 'www.turf-fr.com' : (this.props.predictionTop.societe === 'geny.com' ? 'www.geny.com' : this.props.predictionTop.societe)}</a>
-                                    </p>
-                                </div>*/
                             </div>
                         :
                             null

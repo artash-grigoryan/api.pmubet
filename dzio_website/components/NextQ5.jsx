@@ -17,17 +17,20 @@ export default class NextQ5 extends React.Component {
             <a className="widget widget__quinte" href={"/" + this.props.lang + "/" + this.props.nextQ5.datePath + "/R"+this.props.nextQ5.reunion.number+"/C" + this.props.nextQ5.number}>
                 <div className="row">
                     <div className="col-md-12">
-                        <img alt="nextQ5" src="http://news.dzio.am/wp-content/uploads/2019/09/PMU9102_AFF_QPAT-DIR-INTER_FRANCE_page-01.jpg"/>
-                        /*<div className="widget__top">
-                            <p className="widget__sub-title" data-reactid="1067">{this.props.nextQ5.today ? <Trans i18nKey="Today">Today</Trans> : (this.props.nextQ5.tomorrow ? <Trans i18nKey="Tomorrow">Tomorrow</Trans> : this.props.nextQ5.day)}</p>
-                            <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i>
+                        <img alt="nextQ5" src="/images/nextQ5.jpg"/>
+                        <div className="widget-overlay"></div>
+                        <div className="widget-container">
+                            <div className="widget__top">
+                                <p className="widget__sub-title" data-reactid="1067">{this.props.nextQ5.today ? <Trans i18nKey="Today">Today</Trans> : (this.props.nextQ5.tomorrow ? <Trans i18nKey="Tomorrow">Tomorrow</Trans> : this.props.nextQ5.day)}</p>
+                                <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i>
+                            </div>
+                            <header className="widget-flex-wrap">
+                                <p className="widget-race__text">{this.props.nextQ5.labelLong} - {this.props.nextQ5.time}</p>
+                            </header>
+                            <div className="widget__link"><Trans i18nKey="Bet now">Bet now</Trans>
+                                <i className="widget__link-icon"></i>
+                            </div>
                         </div>
-                        <header className="widget-flex-wrap">
-                            <p className="widget-race__text">{this.props.nextQ5.labelLong} - {this.props.nextQ5.time}</p>
-                        </header>
-                        <div className="widget__link"><Trans i18nKey="Bet now">Bet now</Trans>
-                            <i className="widget__link-icon"></i>
-                        </div>*/
                     </div>
                 </div>
             </a>
