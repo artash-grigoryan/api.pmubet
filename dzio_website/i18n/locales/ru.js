@@ -69,4 +69,17 @@ export default {
     "Previous":"Предыдущий",
     "runners":"Бегуны",
 
+    "Runner details":"Runner details",
+    "Number of races":"Number of races",
+    "Number of races won":"Number of races won",
+    "Number of places":"Number of places",
+    "Coach":"Coach",
+    "Owner":"Owner",
+    "Farmer":"Farmer",
+    "Breed":"Breed",
+    "Gender":"Gender",
+    "Birthday":"Birthday",
+    "Name of the mother":"Name of the mother",
+    "Name of the father":"Name of the father",
+
 };
