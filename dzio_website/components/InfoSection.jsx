@@ -100,22 +100,22 @@ export default class InfoSection extends React.Component {
             }
             if(twoOnFour) {
                 listBets.push(
-                    <img key="C4" src="/img/bets/C4.png" alt=""/>
+                    <img class="hide-elem" key="C4" src="/img/bets/C4.png" alt=""/>
                 );
             }
             if(multi) {
                 listBets.push(
-                    <img key="MI" src="/img/bets/MI.png" alt=""/>
+                    <img class="hide-elem" key="MI" src="/img/bets/MI.png" alt=""/>
                 );
             }
             if(tierce) {
                 listBets.push(
-                    <img key="T" src="/img/bets/T.png" alt=""/>
+                    <img class="hide-elem" key="T" src="/img/bets/T.png" alt=""/>
                 );
             }
             if(quarte) {
                 listBets.push(
-                    <img key="QP" src="/img/bets/QP.png" alt=""/>
+                    <img class="hide-elem" key="QP" src="/img/bets/QP.png" alt=""/>
                 );
             }
             if(quintePlus) {
