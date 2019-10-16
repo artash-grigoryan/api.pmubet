@@ -97,42 +97,7 @@ export default class BetResultsDetails extends React.Component {
 
             </table>
         }
-        else if(betSeleted === '2 sur 4') {
-
-            let betResult = _.find(this.props.race.betResults, function (betResult) {
-                return betResult.name === betSeleted;
-            });
-
-            let trResults = betResult.results.map(function (result) {
-
-                return <tr key={result.id} className="odd">
-                    <td>{result.combinaisonRapDef}</td>
-                    <td>{result.gagnantMb ? result.gagnantMb + ' €': '-'}</td>
-                    <td>{result.sumMisesGagn ? result.sumMisesGagn: '-'}</td>
-                </tr>
-            });
-            return <table className="results">
-                <thead className="double">
-                    <tr>
-                        <td className="bet-logo" colSpan="3">
-                            <a href="javascript:;">
-                                <img src={this.getBetLogo(betSeleted)} alt=""/>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="arrivee" rowSpan="2">N</td>
-                        <td className="forceLeftBorder"><Trans i18nKey="Report">Report</Trans></td>
-                        <td><Trans i18nKey="Nb winning bets">Nb winning bets</Trans></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {trResults}
-                </tbody>
-
-            </table>
-        }
-        else if(betSeleted === 'Multi' || betSeleted === 'Tiercé' || betSeleted === 'Quarté' || betSeleted === 'Quinté+') {
+        else if(betSeleted === 'Quinté+') {
 
             let betResult = _.find(this.props.race.betResults, function (betResult) {
                 return betResult.name === betSeleted;
