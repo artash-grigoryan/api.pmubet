@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Reporter extends Model
 {
@@ -36,7 +37,8 @@ class Reporter extends Model
 
     public function translation()
     {
-        return $this->hasOne('App\ReporterTranslation', "reporterId")->where('lang', 'hy');
+        $locale = App::getLocale();
+        return $this->hasOne('App\ReporterTranslation', "reporterId")->where('lang', $locale);
     }
 
     public function translations()

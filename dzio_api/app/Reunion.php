@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Reunion extends Model
 {
@@ -53,7 +54,8 @@ class Reunion extends Model
 
     public function translation()
     {
-        return $this->hasOne('App\ReunionTranslation', "reunionId")->where('lang', 'hy');
+        $locale = App::getLocale();
+        return $this->hasOne('App\ReunionTranslation', "reunionId")->where('lang', $locale);
     }
 
     public function translations()

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Prediction extends Model
 {
@@ -25,7 +26,8 @@ class Prediction extends Model
 
     public function translation()
     {
-        return $this->hasOne('App\PredictionTranslation', "predictionId")->where('lang', 'hy');
+        $locale = App::getLocale();
+        return $this->hasOne('App\PredictionTranslation', "predictionId")->where('lang', $locale);
     }
 
     public function translations()

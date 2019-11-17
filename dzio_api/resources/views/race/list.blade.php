@@ -52,7 +52,7 @@
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
-                                    <button type="submit" class="btn btn-danger">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Remove the race ?')">
                                         <i class="fa fa-btn fa-trash"></i>
                                     </button>
                                 </form>

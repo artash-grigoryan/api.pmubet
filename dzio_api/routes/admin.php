@@ -29,6 +29,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/race/{id}/{lang?}', 'RaceController@edit')->name('editRace');
     Route::post('/race/{id}', 'RaceController@update')->name('updateRace');
 
+    Route::delete('/race/{id}', 'RaceController@delete')->name('deleteRace');
+
     Route::get('/runner/{id}/{lang?}', 'RunnerController@edit')->name('editRunner');
     Route::post('/runner/{id}', 'RunnerController@update')->name('updateRunner');
 

@@ -24,6 +24,9 @@ export default class BetResultsDetails extends React.Component {
             case('Trio Ordre'):
                 imgPath = "/img/bets/TR.png";
                 break;
+            case('Trio'):
+                imgPath = "/img/bets/TR.png";
+                break;
             case('2 sur 4'):
                 imgPath = "/img/bets/C4.png";
                 break;
@@ -47,7 +50,7 @@ export default class BetResultsDetails extends React.Component {
     render() {
 
         let betSeleted = this.props.betSelected;
-        if(betSeleted === 'Simple' || betSeleted === 'Couplé' || betSeleted === 'Couplé ordre' || betSeleted === 'Trio Ordre') {
+        if(betSeleted === 'Simple' || betSeleted === 'Couplé' || betSeleted === 'Couplé ordre' || betSeleted === 'Trio Ordre' || betSeleted === 'Trio') {
 
             let betResult = _.find(this.props.race.betResults, function (betResult) {
                 return betResult.name === betSeleted;

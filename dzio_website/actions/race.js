@@ -5,6 +5,7 @@ export const raceActions = {
     getAll,
     getAllByDate,
     getFirstByDate,
+    getNextByDate,
     getFirstByReunion,
     getNext,
     getNextQ5
@@ -68,6 +69,24 @@ function getFirstByDate(lang, date) {
 
     return new Promise((resolve, reject) => {
         raceService.getFirstByDate(lang, date)
+            .then((response) => {
+
+                if (response.data) {
+                    resolve(response.data);
+                } else {
+                    reject();
+                }
+            })
+            .catch((error) => {
+
+            });
+    });
+}
+
+function getNextByDate(lang, date) {
+
+    return new Promise((resolve, reject) => {
+        raceService.getNextByDate(lang, date)
             .then((response) => {
 
                 if (response.data) {

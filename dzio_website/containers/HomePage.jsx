@@ -25,7 +25,7 @@ export default class HomePage extends Component {
 
         super(props);
 
-        let timezoneOffset = (new Date().getTimezoneOffset()*-1 - 120) / 60;
+        let timezoneOffset = (new Date().getTimezoneOffset()*-1 - 120 - 60) / 60;
 
         let date = new Date();
         let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
@@ -164,6 +164,30 @@ export default class HomePage extends Component {
         });
     }
 
+    setNextRaceByDate(date) {
+
+        raceActions.getNextByDate(this.state.lang, date).then((response) => {
+
+            if(response.race) {
+
+                this.setState({
+                    date : response.race.datePath,
+                    dateCalendar : response.race.date,
+                    reunion : response.race.reunion,
+                    race : response.race,
+                    predictionTop : response.race.reporters_top,
+                    predictions : _.compact(_.concat(response.race.reporters_geny, response.race.reporters_best, response.race.reporters_others)),
+                    reunionSelectorOpened : false,
+                    calendarSelectorOpened : false
+                });
+                this.props.history.push("/"+this.state.lang+"/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
+            }
+            else {
+                this.setDate(date, 'first');
+            }
+        });
+    }
+
     setFirstRaceByReunion(date, reunionNumber) {
 
         raceActions.getFirstByReunion(this.state.lang, date, reunionNumber).then((response) => {
@@ -186,17 +210,22 @@ export default class HomePage extends Component {
 
         raceActions.get(this.state.lang, date, reunionNumber, raceNumber).then((response) => {
 
-            this.setState({
-                date : response.race.datePath,
-                dateCalendar : response.race.date,
-                reunion : response.race.reunion,
-                race : response.race,
-                predictionTop : response.race.reporters_top,
-                predictions : _.compact(_.concat(response.race.reporters_geny, response.race.reporters_best, response.race.reporters_others)),
-                reunionSelectorOpened : false,
-                calendarSelectorOpened : false,
-            });
-            this.props.history.push("/"+this.state.lang+"/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
+            if(response.race) {
+                this.setState({
+                    date : response.race.datePath,
+                    dateCalendar : response.race.date,
+                    reunion : response.race.reunion,
+                    race : response.race,
+                    predictionTop : response.race.reporters_top,
+                    predictions : _.compact(_.concat(response.race.reporters_geny, response.race.reporters_best, response.race.reporters_others)),
+                    reunionSelectorOpened : false,
+                    calendarSelectorOpened : false,
+                });
+                this.props.history.push("/"+this.state.lang+"/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
+            }
+            else {
+                this.setDate(date, 'first');
+            }
         });
     }
 
@@ -210,11 +239,20 @@ export default class HomePage extends Component {
         this.setState({calendarSelectorOpened:!this.state.calendarSelectorOpened});
     }
 
-    setDate(date) {
+    setDate(date, rcase) {
 
         this.setReunions(date);
         this.setState({date});
-        this.setFirstRaceByDate(date);
+
+        switch (rcase) {
+
+            case 'next' :
+                this.setNextRaceByDate(date);
+                break;
+            case 'first' :
+                this.setFirstRaceByDate(date);
+                break;
+        }
     }
 
 	render() {
@@ -267,13 +305,13 @@ export default class HomePage extends Component {
                                 <ul>
 
                                     <li>
-                                        <Link className={this.state.date === this.state.yesterday?'active':''} to={"/" + this.state.lang + "/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday)}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
+                                        <Link className={this.state.date === this.state.yesterday?'active':''} to={"/" + this.state.lang + "/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday, 'first')}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
                                     </li>
                                     <li>
-                                        <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.lang + "/" + this.state.today} onClick={() => this.setDate(this.state.today)}><Trans i18nKey="Today">Today</Trans></Link>
+                                        <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.lang + "/" + this.state.today} onClick={() => this.setDate(this.state.today, 'next')}><Trans i18nKey="Today">Today</Trans></Link>
                                     </li>
                                     <li>
-                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.lang + "/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow)}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
+                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.lang + "/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow, 'first')}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
                                     </li>
                                 </ul>
                                 <ul className="calendar-selector">

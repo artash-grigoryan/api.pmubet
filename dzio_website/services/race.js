@@ -5,6 +5,7 @@ export const raceService = {
     getAll,
     getAllByDate,
     getFirstByDate,
+    getNextByDate,
     getFirstByReunion,
     getNext,
     getNextQ5,
@@ -28,6 +29,11 @@ function getAllByDate(lang, date) {
 function getFirstByDate(lang, date) {
 
     return axios.get('/api/'+lang+'/race/get/'+date+'/first');
+}
+
+function getNextByDate(lang, date) {
+
+    return axios.get('/api/'+lang+'/race/get/'+date+'/next');
 }
 
 function getFirstByReunion(lang, date, reunionNumber) {
