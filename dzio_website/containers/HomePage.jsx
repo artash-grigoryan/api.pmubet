@@ -25,7 +25,7 @@ export default class HomePage extends Component {
 
         super(props);
 
-        let timezoneOffset = (new Date().getTimezoneOffset()*-1 - 120 - 60) / 60;
+        let timezoneOffset = (new Date().getTimezoneOffset()*-1 - 120) / 60;
 
         let date = new Date();
         let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
@@ -183,7 +183,7 @@ export default class HomePage extends Component {
                 this.props.history.push("/"+this.state.lang+"/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
             }
             else {
-                this.setDate(date, 'first');
+                this.setNextRaceByDate(this.date);
             }
         });
     }
@@ -211,6 +211,7 @@ export default class HomePage extends Component {
         raceActions.get(this.state.lang, date, reunionNumber, raceNumber).then((response) => {
 
             if(response.race) {
+
                 this.setState({
                     date : response.race.datePath,
                     dateCalendar : response.race.date,
@@ -224,7 +225,7 @@ export default class HomePage extends Component {
                 this.props.history.push("/"+this.state.lang+"/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
             }
             else {
-                this.setDate(date, 'first');
+                this.setDate(this.date, 'next');
             }
         });
     }
