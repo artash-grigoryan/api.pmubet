@@ -73,7 +73,7 @@ class RaceController extends Controller
     public function getAllByDate($locale, $date)
     {
         $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
-            ->where([['date', '>=', date('Y-m-d', strtotime($date.' + 2 HOUR'))], ['date', '<', date('Y-m-d', strtotime($date.' +1 DAY + 2 HOUR'))]])
+            ->where([['date', '>=', date('Y-m-d', strtotime($date.' + 1 HOUR'))], ['date', '<', date('Y-m-d', strtotime($date.' +1 DAY + 2 HOUR'))]])
             ->orderBy('date', 'ASC')
             ->with("bets")
             ->with("runners")
@@ -101,7 +101,7 @@ class RaceController extends Controller
     public function getNext($locale)
     {
         $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
-            ->whereRaw('date >= ADDDATE(NOW(), INTERVAL 2 HOUR)')
+            ->whereRaw('date >= ADDDATE(NOW(), INTERVAL 1 HOUR)')
             ->orderBy('date', 'ASC')
             ->with("bets")
             ->with("runners")
@@ -296,7 +296,7 @@ class RaceController extends Controller
             ->where([
                 [DB::raw('DATE(reunions.date)'), '=', date('Y-m-d', strtotime($date))]
             ])
-            ->whereRaw('races.date >= ADDDATE(NOW(), INTERVAL 2 HOUR)')
+            ->whereRaw('races.date >= ADDDATE(NOW(), INTERVAL 1 HOUR)')
             ->orderBy('races.date', 'ASC')
             ->with("bets")
             ->with("runners")
@@ -454,7 +454,7 @@ class RaceController extends Controller
     public function getNextQ5($locale)
     {
         $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
-            ->whereRaw('date >= ADDDATE(NOW(), INTERVAL 2 HOUR)')
+            ->whereRaw('date >= ADDDATE(NOW(), INTERVAL 1 HOUR)')
             ->whereHas('bets', function($query){
                   $query->whereLib('QN');
               })
