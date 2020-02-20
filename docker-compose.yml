@@ -1,0 +1,53 @@
+version: '2'
+
+services:
+    api:
+        build: "./docker/apachelocal"
+        volumes:
+          - ".:/var/www"
+        working_dir: "/var/www"
+        #command : "bash -c 'source /etc/apache2/envvars; apache2 -DFOREGROUND'"
+        ports:
+          - 9200:80
+          - 443:443
+        links:
+          - db
+          - recxml
+
+    db:
+        image: mysql:5.7.21
+        command: --lower_case_table_names=1
+        restart: always
+        environment:
+          MYSQL_ROOT_PASSWORD: admin
+        ports:
+          - 3306:3306
+
+    recxml:
+        image: agrigoryan/recxml:latest
+        #build: "./docker/recxml"
+        #command : "bash -c '/usr/local/bin/recXML_start'"
+        ports:
+          - 7008:80
+        #volumes:
+          #- "./opt:/opt"
+        tty: true
+
+#    react:
+#        build: "./docker/nodejs"
+#        #command : "bash -c '/usr/local/bin/recXML_start'"
+#        ports:
+#          - 80:80
+#        volumes:
+#          - "./dzio_app:/var/www"
+#        tty: true
+
+    pma:
+        image: phpmyadmin/phpmyadmin
+        environment:
+         - PMA_ARBITRARY=1
+        restart: always
+        ports:
+         - 8080:80
+        volumes:
+         - /sessions

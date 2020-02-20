@@ -1,0 +1,10 @@
+.idea
+.idea/vcs.xml
+
+*.log
+*.csv
+node_modules
+vitrine
+instance
+vendor
+opt

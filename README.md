@@ -1,29 +1,39 @@
-# README #
+**Dzio project is a PMU project for Armenia** developed by *Nicolas Cramail* and *Artashes Grigoryan*
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Once project cloned you should build it, by following instructions below.
 
-### What is this repository for? ###
+*You can see project in live [here](https://dzio.am/).*
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+---
 
-### How do I get set up? ###
+## Requirements
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+Find out required softwares below
 
-### Contribution guidelines ###
+1. **Docker** should be running.
+2. Temporarily Nodejs in your local installed.
 
-* Writing tests
-* Code review
-* Other guidelines
+---
 
-### Who do I talk to? ###
+## Build project
 
-* Repo owner or admin
-* Other community or team contact
+Next, you’ll add a new file to this repository.
+
+1. **docker-compose up -d --build** To build containers:
+    * Apache, Php.
+    * Mysql.
+    * Pma.
+
+2. **source .bashrc** to made composer and npm command linked with container.
+3. **composer install**.
+4. **cp .env.example .env**.
+
+artisan migrate:fresh --seed to migrate database
+
+If you see this error
+*No Application Encryption Key Has Been Specified*
+Try to generate the key with this command **docker exec -it dzio_www_1 /bin/sh -c 'cd dzio_api/;php artisan key:generate'** 
+
+Enjoy in [localhost](http://localhost/)!
+
+---
