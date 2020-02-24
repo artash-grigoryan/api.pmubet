@@ -14,8 +14,8 @@ pipelines:
             - docker
           script: # Modify the commands below to build your repository.
             # Set $DOCKER_HUB_USERNAME and $DOCKER_HUB_PASSWORD as environment variables in repository settings
-            - export IMAGE_NAME=agrigoryan/laravel:$BITBUCKET_COMMIT
-            - export REACT_IMAGE=agrigoryan/dzio:$BITBUCKET_COMMIT
+            - export IMAGE_NAME=agrigoryan/pmp_api:$BITBUCKET_COMMIT
+            - export REACT_IMAGE=agrigoryan/pmp:$BITBUCKET_COMMIT
             - export LATEST_IMAGE_NAME=agrigoryan/laravel:1c36e7bf1a2d83ada94311ecbdf01ec0d9de7e06
             - export LATEST_REACT_IMAGE_NAME=agrigoryan/dzio:latest
             # authenticate with the Docker Hub registry
@@ -24,7 +24,7 @@ pipelines:
             #- docker pull $LATEST_IMAGE_NAME
             - docker build -t $IMAGE_NAME -f ./docker/apache/Dockerfile .
             - docker build -t $REACT_IMAGE -f ./docker/nodejs/Dockerfile .
-            #- docker run --rm -v $(pwd)/:/var/www/ -w /var/www/dzio_api $IMAGE_NAME bash -c "composer install;"
+            #- docker run --rm -v $(pwd)/:/var/www/ -w /var/www/api $IMAGE_NAME bash -c "composer install;"
             # push the new Docker image to the Docker registry
             - docker push $IMAGE_NAME
             - docker push $REACT_IMAGE
