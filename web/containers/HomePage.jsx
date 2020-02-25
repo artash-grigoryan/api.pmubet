@@ -93,7 +93,7 @@ export default class HomePage extends Component {
         else if(typeof this.props.match.params.date !== 'undefined') {
 
             this.setReunions(this.props.match.params.date);
-            this.setFirstRaceByDate(this.props.match.params.date)
+            this.setNextRaceByDate(this.props.match.params.date)
         }
         else {
 
@@ -312,7 +312,7 @@ export default class HomePage extends Component {
                                         <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.lang + "/" + this.state.today} onClick={() => this.setDate(this.state.today, 'next')}><Trans i18nKey="Today">Today</Trans></Link>
                                     </li>
                                     <li>
-                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.lang + "/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow, 'first')}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
+                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.lang + "/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow, 'next')}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
                                     </li>
                                 </ul>
                                 <ul className="calendar-selector">
@@ -325,7 +325,7 @@ export default class HomePage extends Component {
                                             ?
                                                 <Calendar
                                                     locale={this.state.lang}
-                                                    onClickDay={(date) => this.setDate(date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2))}
+                                                    onClickDay={(date) => this.setDate(date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2), 'first')}
                                                     value={new Date(this.state.dateCalendar)}
                                                     minDate={new Date(this.state.minDateCalendar)}
                                                     maxDate={new Date(this.state.maxDateCalendar)}

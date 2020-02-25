@@ -128,6 +128,36 @@ class RaceController extends Controller
         return response()->json(array('race'=>$race));
     }
 
+    public function getNextQ5($locale)
+    {
+        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+            ->whereRaw('date >= ADDDATE(NOW(), INTERVAL 1 HOUR)')
+            ->whereHas('bets', function($query){
+                $query->whereLib('QN');
+            })
+            ->orderBy('date', 'ASC')
+            ->with("bets")
+            ->with("runners")
+            ->with("results")
+            ->with('reportersTop')
+            ->with('reportersGeny')
+            ->with('reportersBest')
+            ->with('reportersOthers')
+            ->with('translation')
+            ->first();
+
+        if(empty($race)) {
+            return $this->getNext($locale);
+        }
+
+        $race->reunion = Reunion::where('id', $race->reunionId)
+            ->with('translation')
+            ->first();
+
+        $race->betResults = [];
+        return response()->json(array('race'=>$race));
+    }
+
     public function get($locale, $date, $reunionNumber, $raceNumber)
     {
         $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
@@ -370,6 +400,85 @@ class RaceController extends Controller
         return response()->json(array('race'=>$race));
     }
 
+    public function getNextQ5ByDate($locale, $date)
+    {
+        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+            ->join('reunions', 'reunions.id', '=', 'races.reunionId')
+            ->whereHas('bets', function($query){
+                $query->whereLib('QN');
+            })
+            ->where('races.date', '>', date('Y-m-d 00:00:00', strtotime($date)))
+            ->where('races.date', '<', date('Y-m-d 23:59:59', strtotime($date)))
+            ->orderBy('races.date', 'ASC')
+            ->with("bets")
+            ->with("runners")
+            ->with("results")
+            ->with('reportersTop')
+            ->with('reportersGeny')
+            ->with('reportersBest')
+            ->with('reportersOthers')
+            ->with('translation')
+            ->first();
+
+        if(empty($race)) {
+            return $this->getFirstByDate($locale, $date);
+        }
+
+        $race->reunion = Reunion::where('id', $race->reunionId)
+            ->with('translation')
+            ->first();
+
+        $betResultsGroups = BetResult::where('raceId', $race->id)->distinct()->pluck('code');
+        $betResults = [];
+        foreach($betResultsGroups as $key=>$code) {
+            switch($code) {
+                case 1:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Simple';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->get();
+                    break;
+                case 2:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Couplé';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->get();
+                    break;
+                case 4:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = '2 sur 4';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->orderBy('typeReserveRapDef', 'ASC')->get();
+                    break;
+                case 7:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Tiercé';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->orderBy('typeReserveRapDef', 'DESC')->get();
+                    break;
+                case 8:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Quarté';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->orderBy('typeReserveRapDef', 'DESC')->get();
+                    break;
+                case 9:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Trio';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->orderBy('typeReserveRapDef', 'DESC')->get();
+                    break;
+                case 10:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Multi';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->orderBy('typeReserveRapDef', 'ASC')->get();
+                    break;
+                case 14:
+                    $betResults[$key]['code'] = $code;
+                    $betResults[$key]['name'] = 'Quinté+';
+                    $betResults[$key]['results'] = BetResult::where('raceId', $race->id)->where('code', $code)->orderBy('typeReserveRapDef', 'DESC')->get();
+                    break;
+            }
+        }
+        sort($betResults);
+        $race->betResults = $betResults;
+        return response()->json(array('race'=>$race));
+    }
+
     public function getFirstByReunion($locale, $date, $reunionNumber)
     {
         $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
@@ -451,7 +560,7 @@ class RaceController extends Controller
         return response()->json(array('race'=>$race));
     }
 
-    public function getNextQ5($locale)
+    public function getNextQ5Minimalist($locale)
     {
         $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->whereRaw('date >= ADDDATE(NOW(), INTERVAL 1 HOUR)')

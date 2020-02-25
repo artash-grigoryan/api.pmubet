@@ -35,7 +35,7 @@ COPY --chown=www-data:www-data . /var/www
 
 WORKDIR /var/www/
 
-RUN cd dzio_api && composer install
+RUN cd api && composer install
 
 #RUN cd dzio_website && npm install && npm run build
 

@@ -12,15 +12,15 @@ const config = {
         './main.js'
     ],
     output: {
-        path: __dirname + "/../dzio_api/public",
+        path: __dirname + "/../api/public",
         filename: 'js/bundle.js',
-        publicPath: "http://127.0.0.1:2992/",
+        publicPath: "http://127.0.0.1:2993/",
     },
     devtool: 'source-map',
     devServer: {
         headers: { "Access-Control-Allow-Origin": "http://127.0.0.1" },
         inline: true,
-        port: 2992
+        port: 2993
     },
     resolve: {
         extensions: ['.js', '.jsx']

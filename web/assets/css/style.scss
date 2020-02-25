@@ -441,6 +441,11 @@ body {
   border: none;
   font-family: inherit;
 }
+@media (max-width: 991px) {
+  #main .bar-selector .react-calendar {
+    right: 0;
+  }
+}
 #main .bar-selector .react-calendar__tile--active {
   background: #218750;
   color: white;
