@@ -8,30 +8,29 @@ services:
         working_dir: "/var/www"
         #command : "bash -c 'source /etc/apache2/envvars; apache2 -DFOREGROUND'"
         ports:
-          - 9200:80
+          - 3008:80
         #  - 443:443
         links:
           - db
-          - recxml
+#          - recxml
 
     db:
         image: mysql:5.7.21
         command: --lower_case_table_names=1
-        restart: always
         environment:
           MYSQL_ROOT_PASSWORD: admin
         ports:
           - 3308:3306
 
-    recxml:
-        image: agrigoryan/recxml:latest
-        #build: "./docker/recxml"
-        #command : "bash -c '/usr/local/bin/recXML_start'"
-        ports:
-          - 7009:80
-        #volumes:
-          #- "./opt:/opt"
-        tty: true
+#    recxml:
+#        image: agrigoryan/recxml:latest
+#        #build: "./docker/recxml"
+#        #command : "bash -c '/usr/local/bin/recXML_start'"
+#        ports:
+#          - 7009:80
+#        #volumes:
+#          #- "./opt:/opt"
+#        tty: true
 
 #    react:
 #        build: "./docker/nodejs"
@@ -46,8 +45,7 @@ services:
         image: phpmyadmin/phpmyadmin
         environment:
          - PMA_ARBITRARY=1
-        restart: always
         ports:
-         - 8082:80
+         - 8008:80
         volumes:
          - /sessions

@@ -1,14 +1,10 @@
-import _ from "lodash";
 import React from "react";
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import '@fortawesome/fontawesome';
 
-import ReactLogo from "./../elements/ReactLogo";
-import {userActions} from "./../actions/user";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import {Trans} from "react-i18next";
 import LanguageSelector from "./LanguageSelector";
+import {Link} from "react-router-dom";
 
 
 class MainMenu extends React.Component {
@@ -154,11 +150,11 @@ class MainMenu extends React.Component {
     }
 
     render() {
-        const {loggedIn, requests, user} = this.props;
-        const {messages, showDropDown, showSignInPage, showSignUpPage, showSignUpDialogPage, fixedTop, showMessageNotifications, showNotifications} = this.state;
 
         return <nav className="navbar fixed-top navbar-expand-lg navbar-light">
-            <ReactLogo type={'jpg'} />
+            <Link className={"navbar-brand"} to="/">
+                <img className={"header-logo"} src={require('./../elements/ReactLogo/logo.jpg')} height="40" width="50" />
+            </Link>
             <button className="navbar-toggler" type="button" onClick={() => this.handleClick()}>
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -199,23 +195,4 @@ class MainMenu extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    const {user, loggedIn, token} = state.authentication;
-
-    let requests = [];
-
-    if (user && user.groups) {
-        _.each(user.groups, (group) => {
-            requests = _.unionWith(requests, group.requests, _.isEqual);
-        });
-    }
-
-    return {
-        requests,
-        token,
-        user,
-        loggedIn
-    };
-}
-
-export default connect(mapStateToProps, userActions)(MainMenu);
+export default MainMenu;

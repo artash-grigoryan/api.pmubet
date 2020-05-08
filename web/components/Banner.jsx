@@ -6,7 +6,6 @@ import Countdown from "react-countdown-now";
 import BannerAdmin from "./BannerAdmin";
 import _ from "lodash";
 
-
 export default class Banner extends React.Component {
 
     componentWillReceiveProps(props) {

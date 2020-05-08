@@ -6,6 +6,7 @@ export default {
     Tomorrow:"Tomorrow",
     Runners:"Runners",
     Participants:"Participants",
+    Distance:"Distance",
     meters:"meters",
     Sport:"Sport",
     Diffusion:"Diffusion",

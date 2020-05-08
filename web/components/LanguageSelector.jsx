@@ -8,7 +8,7 @@ export default class LanguageSelector extends React.Component {
         super(props);
 
         this.state = {
-            unselectedLanguages : _.without(['hy', 'ru', 'en'], props.lang),
+            unselectedLanguages : _.without(['en', 'fr', 'pt', 'mg'], props.lang),
             selectorOpened : false
         };
     }

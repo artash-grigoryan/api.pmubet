@@ -3,8 +3,11 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
 import en from './locales/en';
-import hy from './locales/hy';
-import ru from './locales/ru';
+import fr from './locales/fr';
+import pt from './locales/pt';
+import mg from './locales/mg';
+//import hy from './locales/hy';
+//import ru from './locales/ru';
 
 i18n
     .use(LanguageDetector)
@@ -15,11 +18,14 @@ i18n
             en: {
                 translations: en
             },
-            hy: {
-                translations: hy
+            fr: {
+                translations: fr
             },
-            ru: {
-                translations: ru
+            pt: {
+                translations: pt
+            },
+            mg: {
+                translations: mg
             }
         },
         fallbackLng: "en",

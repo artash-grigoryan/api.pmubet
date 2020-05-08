@@ -1,7 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import PrivateRoute from "./PrivateRoute";
 import HomePage from "./containers/HomePage";
 import News from "./containers/News";
 import PredictionsPage from "./containers/PredictionsPage";

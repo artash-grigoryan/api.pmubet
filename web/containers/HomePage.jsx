@@ -34,7 +34,7 @@ export default class HomePage extends Component {
         date.setDate(date.getDate()+2);
         let tomorrow = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
 
-        let lang = (typeof this.props.match.params.lang !== 'undefined' ? this.props.match.params.lang : 'hy');
+        let lang = (typeof this.props.match.params.lang !== 'undefined' ? this.props.match.params.lang : 'en');
         i18next.changeLanguage(lang);
 
         let dateCalendar = new Date();
@@ -183,7 +183,7 @@ export default class HomePage extends Component {
                 this.props.history.push("/"+this.state.lang+"/"+response.race.datePath+"/R"+response.race.reunion.number+"/C"+response.race.number);
             }
             else {
-                this.setNextRaceByDate(this.date);
+                //this.setNextRaceByDate(this.date);
             }
         });
     }
@@ -293,104 +293,106 @@ export default class HomePage extends Component {
             }
         }
 
-		return <div>
-            <header>
-                <MainMenu {...this.state}/>
-            </header>
+		return (
+		    <div>
+                <header>
+                    <MainMenu {...this.state}/>
+                </header>
 
-            <div className="container-fluid">
-                <div id="wrapper">
-                    <div id="main">
-                        <div className="bar-selector">
-                            <div className="day-selector">
-                                <ul>
+                <div className="container-fluid">
+                    <div id="wrapper">
+                        <div id="main">
+                            <div className="bar-selector">
+                                <div className="day-selector">
+                                    <ul>
 
-                                    <li>
-                                        <Link className={this.state.date === this.state.yesterday?'active':''} to={"/" + this.state.lang + "/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday, 'first')}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
-                                    </li>
-                                    <li>
-                                        <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.lang + "/" + this.state.today} onClick={() => this.setDate(this.state.today, 'next')}><Trans i18nKey="Today">Today</Trans></Link>
-                                    </li>
-                                    <li>
-                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.lang + "/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow, 'next')}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
-                                    </li>
-                                </ul>
-                                <ul className="calendar-selector">
-                                    <li>
-                                        <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleCalendarSelector()}>
-                                            <FontAwesomeIcon icon="calendar-alt" />
-                                        </a>
-                                        {
-                                            this.state.calendarSelectorOpened
-                                            ?
-                                                <Calendar
-                                                    locale={this.state.lang}
-                                                    onClickDay={(date) => this.setDate(date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2), 'first')}
-                                                    value={new Date(this.state.dateCalendar)}
-                                                    minDate={new Date(this.state.minDateCalendar)}
-                                                    maxDate={new Date(this.state.maxDateCalendar)}
-                                                />
-                                            :
-                                                null
-                                        }
-                                    </li>
-                                </ul>
-                            </div>
-                            {
-                                this.state.reunions
-                                ?
-                                    <div>
-                                        {
-                                            this.state.reunion
-                                            ?
-                                                <div className="meeting-selector">
-                                                    <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleReunionSelector()}>
-                                                        <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{this.state.reunion.number}</b> - {(this.state.reunion.translation ? this.state.reunion.translation.hippodromeName : null) || this.state.reunion.hippodromeName}
-                                                    </a>
-                                                    <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
-                                                        {listReunions}
-                                                    </ul>
-                                                </div>
-                                            :
-                                                <div className="meeting-selector">
-                                                    <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleReunionSelector()}>
-                                                        <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <Trans i18nKey="Select a Reunion">Select a Reunion</Trans>
-                                                    </a>
-                                                    <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
-                                                        {listReunions}
-                                                    </ul>
-                                                </div>
-                                        }
-                                        <div className="race-selector">
+                                        <li>
+                                            <Link className={this.state.date === this.state.yesterday?'active':''} to={"/" + this.state.lang + "/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday, 'first')}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
+                                        </li>
+                                        <li>
+                                            <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.lang + "/" + this.state.today} onClick={() => this.setDate(this.state.today, 'next')}><Trans i18nKey="Today">Today</Trans></Link>
+                                        </li>
+                                        <li>
+                                            <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.lang + "/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow, 'next')}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
+                                        </li>
+                                    </ul>
+                                    <ul className="calendar-selector">
+                                        <li>
+                                            <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleCalendarSelector()}>
+                                                <FontAwesomeIcon icon="calendar-alt" />
+                                            </a>
                                             {
-                                                this.state.date && this.state.reunion
+                                                this.state.calendarSelectorOpened
                                                 ?
-                                                    <ul>
-                                                        {listRaces}
-                                                    </ul>
+                                                    <Calendar
+                                                        locale={this.state.lang}
+                                                        onClickDay={(date) => this.setDate(date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2), 'first')}
+                                                        value={new Date(this.state.dateCalendar)}
+                                                        minDate={new Date(this.state.minDateCalendar)}
+                                                        maxDate={new Date(this.state.maxDateCalendar)}
+                                                    />
                                                 :
                                                     null
                                             }
+                                        </li>
+                                    </ul>
+                                </div>
+                                {
+                                    this.state.reunions
+                                    ?
+                                        <div>
+                                            {
+                                                this.state.reunion
+                                                ?
+                                                    <div className="meeting-selector">
+                                                        <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleReunionSelector()}>
+                                                            <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{this.state.reunion.number}</b> - {(this.state.reunion.translation ? this.state.reunion.translation.hippodromeName : null) || this.state.reunion.hippodromeName}
+                                                        </a>
+                                                        <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
+                                                            {listReunions}
+                                                        </ul>
+                                                    </div>
+                                                :
+                                                    <div className="meeting-selector">
+                                                        <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleReunionSelector()}>
+                                                            <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <Trans i18nKey="Select a Reunion">Select a Reunion</Trans>
+                                                        </a>
+                                                        <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
+                                                            {listReunions}
+                                                        </ul>
+                                                    </div>
+                                            }
+                                            <div className="race-selector">
+                                                {
+                                                    this.state.date && this.state.reunion
+                                                    ?
+                                                        <ul>
+                                                            {listRaces}
+                                                        </ul>
+                                                    :
+                                                        null
+                                                }
+                                            </div>
                                         </div>
-                                    </div>
+                                    :
+                                        null
+                                }
+
+                            </div>
+
+                            {
+                                this.state.race && this.state.reunion
+                                ?
+                                    <Race {...this.state}/>
                                 :
-                                    null
+                                    <BannerAdmin {...this.state}/>
                             }
 
                         </div>
-
-                        {
-                            this.state.race && this.state.reunion
-                            ?
-                                <Race {...this.state}/>
-                            :
-                                <BannerAdmin {...this.state}/>
-                        }
-
                     </div>
                 </div>
+                <Footer />
             </div>
-            <Footer />
-		</div>;
+        );
 	}
 }
