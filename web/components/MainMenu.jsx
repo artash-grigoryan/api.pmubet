@@ -159,7 +159,7 @@ class MainMenu extends React.Component {
 
         return <nav className="navbar fixed-top navbar-expand-lg navbar-light">
             <Link className={"navbar-brand"} to="/">
-                <img className={"header-logo"} src={require('./../elements/ReactLogo/logo.jpg')} height="40" width="50" />
+                <img className={"header-logo"} src={require('./../assets/images/logo.svg')} height="40" width="50" />
             </Link>
             <button className="navbar-toggler" type="button" onClick={() => this.handleClick()}>
                 <span className="navbar-toggler-icon"></span>

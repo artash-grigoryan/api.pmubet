@@ -84,4 +84,12 @@ export default {
     "Name of the mother":"Name of the mother",
     "Name of the father":"Name of the father",
 
+    "Select your country":"Select your country",
+    "Angola":"Angola",
+    "Cameroun":"Cameroun",
+    "Centrafrique":"Centrafrique",
+    "Gabon":"Gabon",
+    "Mauritius":"Mauritius",
+    "Nigeria":"Nigeria",
+    "Tchad":"Tchad",
 };

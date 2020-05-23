@@ -6,38 +6,38 @@ const DialogMenu = () => {
     const [dialogStatus, setDialogStatus] = useState('closed')
     const countries = [
         {
-            name: 'Angola',
+            name: <Trans i18nKey="Angola">Angola</Trans>,
             flag: 'angola',
             url: 'https://pmubet.cm/'
         },
         {
-            name: 'Cameroun',
-            flag: 'cameroun',
+            name: <Trans i18nKey="Cameroun">Cameroun</Trans>,
+            flag: 'cameroon',
             url: 'https://pmubet.cm/'
         },
         {
-            name: 'Centrafrique',
-            flag: 'centrafrique',
+            name: <Trans i18nKey="Centrafrique">Centrafrique</Trans>,
+            flag: 'central-african-republic',
             url: 'https://pmubet.cm/'
         },
         {
-            name: 'Gabon',
+            name: <Trans i18nKey="Gabon">Gabon</Trans>,
             flag: 'gabon',
             url: 'https://pmubet.cm/'
         },
         {
-            name: 'Mauritius',
+            name: <Trans i18nKey="Mauritius">Mauritius</Trans>,
             flag: 'mauritius',
             url: 'https://pmubet.cm/'
         },
         {
-            name: 'Nigeria',
+            name: <Trans i18nKey="Nigeria">Nigeria</Trans>,
             flag: 'nigeria',
             url: 'https://pmubet.cm/'
         },
         {
-            name: 'Tchad',
-            flag: 'tchad',
+            name: <Trans i18nKey="Tchad">Tchad</Trans>,
+            flag: 'chad',
             url: 'https://pmubet.cm/'
         },
     ]
