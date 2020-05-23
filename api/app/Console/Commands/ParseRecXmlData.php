@@ -61,6 +61,8 @@ class ParseRecXmlData extends Command
         $this->parseReunionsXML();
         $this->parseRacesXML();
         $this->parseRunnersXML();
+        $this->parseRunnerMusicsXML();
+        $this->parseResultsXML();
         $this->parseResultsXML();
         $this->parseBetsXML();
         $this->parseBetResultsXML();
@@ -73,12 +75,14 @@ class ParseRecXmlData extends Command
         $this->parseNonRunnerXML();
         $this->parseLiveOddSSGXML();
         $this->parsePrizeListXML();
+
+        $this->dataService->deleteFilesFromYesterday();
     }
 
     private function parseDayReunionsXML()
     {
 
-        $filesInfo = $this->dataService->scanDayReunionsFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getDayReunionsFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -128,7 +132,8 @@ class ParseRecXmlData extends Command
                         }
                     }
                 }
-                //@TODO DELETE THE FILE
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getDayReunionsFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -136,7 +141,7 @@ class ParseRecXmlData extends Command
     private function parseReunionsXML()
     {
 
-        $filesInfo = $this->dataService->scanReunionsFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getReunionsFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -186,7 +191,8 @@ class ParseRecXmlData extends Command
                         }
                     }
                 }
-                //@TODO DELETE THE FILE
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getReunionsFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -194,7 +200,7 @@ class ParseRecXmlData extends Command
     private function parseRacesXML()
     {
 
-        $filesInfo = $this->dataService->scanRacesFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getRacesFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -273,9 +279,10 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getRacesFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -283,7 +290,7 @@ class ParseRecXmlData extends Command
     private function parseRunnersXML()
     {
 
-        $filesInfo = $this->dataService->scanRunnersFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getRunnersFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -384,9 +391,84 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getRunnersFolder() . DIRECTORY_SEPARATOR . $fileName);
+            }
+        }
+    }
+
+    private function parseRunnerMusicsXML()
+    {
+
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getRunnerMusicsFolder());
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $this->dataService->parseXMLFileByPath(
+                    $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "partant",
+                    ]
+                );
+
+                if(!empty($parsedXml["jour"]["reunions"])) {
+                    foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                        $reunionArr = [
+                            "id" => $reunion['value']["id_nav_reunion"],
+                            "type" => $reunion['value']["type_reunion"],
+                            "code" => $reunion['value']["code_hippo"],
+                            "date" => date("Y-m-d 00:00:00", strtotime($reunion['value']["date_reunion"])),
+                            "number" => $reunion['value']["num_reunion"],
+                            "externNumber" => $reunion['value']["num_externe_reunion"],
+                        ];
+                        try {
+                            //Reunion::insert(
+                            //    $reunionArr
+                            //);
+                        } catch (\Exception $e) {
+                        }
+                        $reunionObj = new Reunion($reunionArr);
+
+                        if(!empty($reunion['value']["courses"])) {
+                            foreach ($reunion['value']["courses"] as $race) {
+
+                                $raceArr = [
+                                    'id' => $race['value']["id_nav_course"],
+                                    "reunionId" => $reunionObj->id
+                                ];
+
+                                try {
+                                    //Race::insert(
+                                    //    $raceArr
+                                    //);
+                                } catch (\Exception $e) {
+                                }
+                                $raceObj = new Race($raceArr);
+
+                                if(!empty($race['value']["partants"])) {
+                                    foreach ($race['value']["partants"] as $runner) {
+
+                                        $runnerObj = Runner::where(['id' => $runner['value']["id_nav_partant"]])->first();
+                                        try {
+                                            $runnerObj->music = iconv('UTF-8', 'ISO-8859-1', $runner['value']["musique_partant"]);
+                                            $runnerObj->save();
+                                        } catch (\Exception $e) {
+                                            print_r($e->getMessage());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getRunnerMusicsFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -394,7 +476,7 @@ class ParseRecXmlData extends Command
     private function parseResultsXML()
     {
 
-        $filesInfo = $this->dataService->scanResultsFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getResultsFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -479,9 +561,10 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getResultsFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -490,7 +573,7 @@ class ParseRecXmlData extends Command
     {
 
 
-        $filesInfo = $this->dataService->scanNonRunnerFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getNonRunnerFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -566,9 +649,10 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getNonRunnerFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -576,7 +660,7 @@ class ParseRecXmlData extends Command
     private function parseLiveOddSSGXML()
     {
 
-        $filesInfo = $this->dataService->scanLiveOddSSGFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getLiveOddSSGFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -662,9 +746,10 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getLiveOddSSGFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -672,7 +757,7 @@ class ParseRecXmlData extends Command
     private function parsePrizeListXML()
     {
 
-        $filesInfo = $this->dataService->scanPrizeListFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getPrizeListFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -754,9 +839,10 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getPrizeListFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -764,7 +850,7 @@ class ParseRecXmlData extends Command
     private function parseBetsXML()
     {
 
-        $filesInfo = $this->dataService->scanBetsFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getBetsFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -872,9 +958,10 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getBetsFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -882,7 +969,7 @@ class ParseRecXmlData extends Command
     private function parseBetResultsXML()
     {
 
-        $filesInfo = $this->dataService->scanBetResultsFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getBetResultsFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -988,9 +1075,10 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getBetResultsFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -998,7 +1086,7 @@ class ParseRecXmlData extends Command
     private function parsePressReunionXML()
     {
 
-        $filesInfo = $this->dataService->scanPressReunionFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getPressReunionFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -1107,9 +1195,10 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getPressReunionFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -1117,7 +1206,7 @@ class ParseRecXmlData extends Command
     private function parsePressQ5XML()
     {
 
-        $filesInfo = $this->dataService->scanPressQ5Folder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getPressQ5Folder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -1220,9 +1309,10 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getPressQ5Folder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -1230,7 +1320,7 @@ class ParseRecXmlData extends Command
     private function parseForcesPresenceXML()
     {
 
-        $filesInfo = $this->dataService->scanForcesPresenceFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getForcesPresenceFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -1292,9 +1382,10 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getForcesPresenceFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -1302,7 +1393,7 @@ class ParseRecXmlData extends Command
     private function parsePronoQ5XML()
     {
 
-        $filesInfo = $this->dataService->scanPronoQ5Folder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getPronoQ5Folder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $parsedXml = $this->dataService->parseXMLFileByPath(
@@ -1342,9 +1433,10 @@ class ParseRecXmlData extends Command
                                 }
                             }
                         }
-                        //@TODO DELETE THE FILE
                     }
                 }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getPronoQ5Folder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }
@@ -1352,15 +1444,16 @@ class ParseRecXmlData extends Command
     private function unzipCasaques()
     {
 
-        $filesInfo = $this->dataService->scanCasaquesFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getCasaquesFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
 
                 $zip = new \ZipArchive();
-                if ($zip->open($this->dataService->getCasaquesFolder() . '/' . $fileName) === TRUE) {
+                if ($zip->open($filesInfo['path'] . '/' . $fileName) === TRUE) {
                     $zip->extractTo(__DIR__ . '/../../../public/img/casaques/');
                     $zip->close();
-                    //TODO unlink($this->dataService->getCasaquesFolder().'/'.$fileName);
+                    // unlink($this->dataService->getCasaquesFolder().'/'.$fileName);
+                    $this->dataService->mvFileDone($this->dataService->getCasaquesFolder() . DIRECTORY_SEPARATOR . $fileName);
                 } else {
                     echo 'unzip error';
                 }
@@ -1370,15 +1463,15 @@ class ParseRecXmlData extends Command
 
     private function unzipHippodromes()
     {
-        $filesInfo = $this->dataService->scanHippodromesFolder();
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getHippodromesFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-
                 $zip = new \ZipArchive();
-                if ($zip->open($this->dataService->getHippodromesFolder() . '/' . $fileName) === TRUE) {
+                if ($zip->open($filesInfo['path'] . '/' . $fileName) === TRUE) {
                     $zip->extractTo(__DIR__ . '/../../../public/img/hippodromes/');
                     $zip->close();
-                    //TODO unlink($this->dataService->getHippodromesFolder().'/'.$fileName);
+                    // unlink($this->dataService->getHippodromesFolder().'/'.$fileName);
+                    $this->dataService->mvFileDone($this->dataService->getHippodromesFolder() . DIRECTORY_SEPARATOR . $fileName);
                 } else {
                     echo 'unzip error';
                 }

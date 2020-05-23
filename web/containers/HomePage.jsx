@@ -15,9 +15,10 @@ import Race from "../components/Race";
 
 import { useTranslation, Trans } from "react-i18next";
 import BannerAdmin from "../components/BannerAdmin";
-import Banner from "../components/Banner";
+import {getIconBySpeciality} from "../helpers/iconsBySpeciality";
 const { t, i18n } = useTranslation();
 const i18next = require('i18next');
+
 
 export default class HomePage extends Component {
 
@@ -264,13 +265,16 @@ export default class HomePage extends Component {
             let reunions = this.state.reunions[this.state.date];
 
             if(reunions) {
-                listReunions = reunions.map((reunion) =>
-                    <li key={reunion.id} className={this.reunion && this.reunion.id === reunion.id ? 'active' : ''}>
-                        <Link to={"/" + reunion.datePath + "/R" + reunion.number} onClick={() => this.setFirstRaceByReunion(reunion.datePath, reunion.number)}>
-                            <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{reunion.number}</b> - {(reunion.translation ? reunion.translation.hippodromeName : null) || reunion.hippodromeName}
-                        </Link>
-                    </li>
-                );
+                let specialityLogo = null;
+                listReunions = reunions.map((reunion) => {
+                    return (
+                        <li key={reunion.id} className={this.reunion && this.reunion.id === reunion.id ? 'active' : ''}>
+                            <Link to={"/" + reunion.datePath + "/R" + reunion.number} onClick={() => this.setFirstRaceByReunion(reunion.datePath, reunion.number)}>
+                                <img src={getIconBySpeciality(reunion.speciality)}/> <b>R{reunion.number}</b> - {(reunion.translation ? reunion.translation.hippodromeName : null) || reunion.hippodromeName}
+                            </Link>
+                        </li>
+                    );
+                });
             }
             else {
                 listReunions = null;
@@ -346,7 +350,8 @@ export default class HomePage extends Component {
                                                 ?
                                                     <div className="meeting-selector">
                                                         <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleReunionSelector()}>
-                                                            <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <b>R{this.state.reunion.number}</b> - {(this.state.reunion.translation ? this.state.reunion.translation.hippodromeName : null) || this.state.reunion.hippodromeName}
+                                                            <FontAwesomeIcon icon="angle-double-down" className="selector-icon" />
+                                                            <img src={getIconBySpeciality(this.state.reunion.speciality)}/> <b>R{this.state.reunion.number}</b> - {(this.state.reunion.translation ? this.state.reunion.translation.hippodromeName : null) || this.state.reunion.hippodromeName}
                                                         </a>
                                                         <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
                                                             {listReunions}

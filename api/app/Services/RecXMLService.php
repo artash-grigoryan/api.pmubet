@@ -15,7 +15,8 @@ use Sabre\Xml\Service;
 class RecXMLService implements DataServiceInterface {
 
     //const RECTXML_FOLDER_PATH = "/var/www/recxml_root";
-    const RECTXML_FOLDER_PATH = "./../recxml_root";
+    const RECTXML_FOLDER_PATH_TODO = "./../recxml_root";
+    const RECTXML_FOLDER_PATH_DONE = "./../recxml_done";
 
     //UNUSED
     const MONTH_REUNIONS_FOLDER = "1_MONTH_MEETINGS"; // Toutes les réunions du mois
@@ -34,6 +35,7 @@ class RecXMLService implements DataServiceInterface {
     const REUNIONS_FOLDER = "3_MEETING"; //Toutes les courses d'une réunion mais réunion detaillée
     const RACES_FOLDER = "4_RACE"; // Détails de la course
     const RUNNERS_FOLDER = "6_RUNNERS"; // Tous les partants d'une course
+    const RUNNERS_MUSIC_FOLDER = "171"; // Tous les partants d'une course
     const BETS_FOLDER = "16_BETS"; //Tous les paris d'une course
     const RESULT_FOLDER = "21_RESULT"; //description detaillée des arrivés
     const DEFINITIVE_DIVIDENDS_RAP_FOLDER = "20_DEFINITIVE_DIVIDENDS_RAP"; //Détails des gains
@@ -58,17 +60,10 @@ class RecXMLService implements DataServiceInterface {
         $this->xmlParser = $xmlParser;
 
         $this->dayFolder = (new \DateTime())->format("Ymd");
-        $this->dayFolder = '20190526';
-    }
 
-    /**
-     * @return array
-     */
-    public function scanDayReunionsFolder()
-    {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DAY_REUNIONS_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE)) {
+            mkdir(self::RECTXML_FOLDER_PATH_DONE);
+        }
     }
 
     /**
@@ -85,192 +80,210 @@ class RecXMLService implements DataServiceInterface {
     public function setDayFolder(string $dayFolder)
     {
         $this->dayFolder = $dayFolder;
+        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder)) {
+            mkdir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder);
+        }
+        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML")) {
+            mkdir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML");
+        }
+        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY")) {
+            mkdir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY");
+        }
+    }
+
+    public function createIsNotDir($dir) {
+
+        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . $dir)) {
+            mkdir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . $dir);
+        }
+    }
+
+    public function createIsNotDirBinary($dir) {
+
+        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . $dir)) {
+            mkdir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . $dir);
+        }
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanMonthReunionsFolder()
+    public function getDayReunionsFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::MONTH_REUNIONS_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::DAY_REUNIONS_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DAY_REUNIONS_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanReunionsFolder()
+    public function getMonthReunionsFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::REUNIONS_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::MONTH_REUNIONS_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::MONTH_REUNIONS_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanRacesFolder()
+    public function getReunionsFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RACES_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::REUNIONS_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::REUNIONS_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanRunnersFolder()
+    public function getRacesFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RUNNERS_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::RACES_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RACES_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanBetsFolder()
+    public function getRunnersFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::BETS_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::RUNNERS_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RUNNERS_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanBetResultsFolder()
+    public function getRunnerMusicsFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DEFINITIVE_DIVIDENDS_RAP_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::RUNNERS_MUSIC_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RUNNERS_MUSIC_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanResultsFolder()
+    public function getBetsFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RESULT_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::BETS_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::BETS_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanPressReunionFolder()
+    public function getBetResultsFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_PRESS_REUNION_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::DEFINITIVE_DIVIDENDS_RAP_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::DEFINITIVE_DIVIDENDS_RAP_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanPressQ5Folder()
+    public function getResultsFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_SELECTION_PRESS_Q5_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::RESULT_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RESULT_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanForcesPresenceFolder()
+    public function getPressReunionFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_FORCES_PRESENCE_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::GNY_PRESS_REUNION_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_PRESS_REUNION_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanPronoQ5Folder()
+    public function getPressQ5Folder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_PRONO_Q5_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::GNY_SELECTION_PRESS_Q5_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_SELECTION_PRESS_Q5_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanNonRunnerFolder()
+    public function getForcesPresenceFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::NON_RUNNER_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::GNY_FORCES_PRESENCE_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_FORCES_PRESENCE_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanLiveOddSSGFolder()
+    public function getPronoQ5Folder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::LIVE_ODDS_SG_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::GNY_PRONO_Q5_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::GNY_PRONO_Q5_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanPrizeListFolder()
+    public function getNonRunnerFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::PRIZE_LIST_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::NON_RUNNER_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::NON_RUNNER_FOLDER;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function scanCasaquesFolder()
+    public function getLiveOddSSGFolder()
     {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . self::CASAQUES_FOLDER;
-
-        return $this->scanFolder($folderPath);
+        $this->createIsNotDir(self::LIVE_ODDS_SG_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::LIVE_ODDS_SG_FOLDER;
     }
 
     /**
-     * @return String
+     * @return string
+     */
+    public function getPrizeListFolder()
+    {
+        $this->createIsNotDir(self::PRIZE_LIST_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::PRIZE_LIST_FOLDER;
+    }
+
+    /**
+     * @return string
      */
     public function getCasaquesFolder()
     {
-        return self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . self::CASAQUES_FOLDER;
+        $this->createIsNotDirBinary(self::CASAQUES_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . self::CASAQUES_FOLDER;
     }
 
     /**
-     * @return array
-     */
-    public function scanHippodromesFolder()
-    {
-        $folderPath = self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . self::HIPPODROMES_FOLDER;
-
-        return $this->scanFolder($folderPath);
-    }
-
-    /**
-     * @return String
+     * @return string
      */
     public function getHippodromesFolder()
     {
-        return self::RECTXML_FOLDER_PATH . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . self::HIPPODROMES_FOLDER;
+        $this->createIsNotDirBinary(self::HIPPODROMES_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . self::HIPPODROMES_FOLDER;
     }
 
+    public function getTodoFolderPath($path) {
+
+        return self::RECTXML_FOLDER_PATH_TODO . DIRECTORY_SEPARATOR . $path;
+    }
+
+    public function getDoneFolderPath($path) {
+
+        return self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $path;
+    }
 
     /**
      * @param $path
      * @return array
      */
-    private function scanFolder($path)
+    public function scanFolder($path)
     {
-
+        $path = $this->getTodoFolderPath($path);
         return [
             "path" => $path,
             "files" => file_exists($path) ? scandir($path) : []
@@ -293,5 +306,31 @@ class RecXMLService implements DataServiceInterface {
         }
         $this->xmlParser->elementMap = $map;
         return $this->xmlParser->parse(file_get_contents($filePath));
+    }
+
+    public function mvFileDone($filePath) {
+
+        rename($this->getTodoFolderPath($filePath), $this->getDoneFolderPath($filePath));
+    }
+
+    public function deleteFilesFromYesterday() {
+
+        $this->deleteFiles(self::RECTXML_FOLDER_PATH_TODO. DIRECTORY_SEPARATOR .date('Ymd', strtotime($this->dayFolder .' -1DAY')));
+    }
+
+    function deleteFiles($target) {
+        if(is_dir($target)){
+            $files = glob( $target . '*', GLOB_MARK ); //GLOB_MARK adds a slash to directories returned
+
+            foreach( $files as $file ){
+                $this->deleteFiles( $file );
+            }
+
+            if(is_dir($target)) {
+                rmdir( $target );
+            }
+        } elseif(is_file($target)) {
+            unlink( $target );
+        }
     }
 }

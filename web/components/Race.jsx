@@ -54,7 +54,16 @@ export default class Race extends React.Component {
 
         return <div id={this.state.isOver ? 'race-over' : ''}>
             <Banner {...this.props}/>
+            <section className="info-section">
+                <div className="container">
+                    <div className="row">
 
+                        <div className="col-lg-12 col-md-12 runners-container">
+                            <Runners {...this.props}/>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <InfoSection {...this.props}/>
 
             <section className="info-section">
@@ -77,11 +86,7 @@ export default class Race extends React.Component {
                             }
                         </div>
 
-                        <div className="col-lg-5 col-md-12 runners-container">
-                            <Runners {...this.props}/>
-                        </div>
-
-                        <div className="col-lg-7 col-md-12 nextQ5">
+                        <div className="col-lg-12 col-md-12 nextQ5">
                             {
                                 this.props.nextQ5
                                     ?

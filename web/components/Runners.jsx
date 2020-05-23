@@ -48,23 +48,28 @@ export default class Runners extends React.Component {
             listRunners = this.props.race.runners.map((runner) =>
                 <div key={runner.number} >
                     <div className="runner" onClick={() => this.selectRunner(runner)} style={{border:runner.doNotRun?'1px solid rgb(222, 43, 37)':0}}>
-                        <span className="runner-rank">{runner.number}</span>
-                        <span className="runner-img">
-                            {
-                                !runner.doNotRun
-                                ?
-                                    <img src={this.getCasaqueImgPath(this.props.race, runner)}/>
-                                :
-                                    <FontAwesomeIcon icon="user-slash" style={{color:'#de2b25',fontSize:26}} />
-                            }
+                        <div style={{display:'flex'}}>
+                            <span className="info-runner-icon">
+                                <FontAwesomeIcon icon="info-circle"/>
+                            </span>
+                            <span className="runner-rank">{runner.number}</span>
+                            <span className="runner-img">
+                                {
+                                    !runner.doNotRun
+                                    ?
+                                        <img src={this.getCasaqueImgPath(this.props.race, runner)}/>
+                                    :
+                                        <FontAwesomeIcon icon="user-slash" style={{color:'#de2b25',fontSize:26}} />
+                                }
 
-                        </span>
-                        <span className="runner-name">
-                            <p>{(runner.translation ? runner.translation.name : null) || runner.name}</p>
-                            <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey}</span>
-                        </span>
+                            </span>
+                            <span className="runner-name">
+                                <p>{(runner.translation ? runner.translation.name : null) || runner.name} {runner.music && ' - '+runner.music}</p>
+                                <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey}</span>
+                            </span>
+                        </div>
                         <span className="runner-cote">
-                            <span>{!runner.doNotRun ? runner.signs : null} {!runner.doNotRun ? runner.reportEvol : null}</span>
+                            <span>123{!runner.doNotRun ? runner.signs : null} {!runner.doNotRun ? runner.reportEvol : null}</span>
                         </span>
                     </div>
                     {

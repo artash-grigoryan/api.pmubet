@@ -5,6 +5,7 @@ import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import {Trans} from "react-i18next";
 import LanguageSelector from "./LanguageSelector";
 import {Link} from "react-router-dom";
+import DialogMenu from "./DialogMenu";
 
 
 class MainMenu extends React.Component {
@@ -149,6 +150,11 @@ class MainMenu extends React.Component {
         }))
     }
 
+    redirectUrl() {
+
+        console.log('ok');
+    }
+
     render() {
 
         return <nav className="navbar fixed-top navbar-expand-lg navbar-light">
@@ -162,15 +168,20 @@ class MainMenu extends React.Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent"  style={{display:this.state.navBarOpen?'block':'none'}}>
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <a className="nav-link" href={"/"+this.props.lang}><Trans i18nKey="Programs">Programs</Trans></a>
+                        <Link className="nav-link" to={"/"+this.props.lang}><Trans i18nKey="Programs">Programs</Trans></Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href={"/"+this.props.lang+"/calendar-results"}><Trans i18nKey="Calendar & Results">Calendar & Results</Trans></a>
+                        <Link className="nav-link" to={"/"+this.props.lang+"/how-to-bet"}><Trans i18nKey="How to bet">How to bet</Trans></Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href={"/"+this.props.lang+"/how-to-bet"}><Trans i18nKey="How to bet">How to bet</Trans></a>
+                        <DialogMenu/>
                     </li>
-
+                    <li className="nav-item">
+                        <Link className="nav-link" to={"/"+this.props.lang+"/calendar-results"}><Trans i18nKey="Calendar & Results">Calendar & Results</Trans></Link>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={()=>this.redirectUrl()}><Trans i18nKey="Pronostic VIP">Pronostic VIP</Trans></a>
+                    </li>
                 </ul>
                 <ul className="navbar-nav secondary">
                     <li className="nav-item m-0">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import '@fortawesome/fontawesome';
 
 import {Trans} from "react-i18next";
@@ -6,23 +6,22 @@ import Countdown from "react-countdown-now";
 import {bannerActions} from "../actions/banner";
 
 
-export default class Banner extends React.Component {
+const Banner = (props) => {
 
-    constructor(args) {
-        super(args);
-        this.state = {
-            image: false
-        };
-    }
+    const [state, setState] = useState({});
 
-    async componentWillMount() {
-
-        bannerActions.getLast(this.props.lang || 'hy').then((response) => {
-            this.setState(response);
+    useEffect(() => {
+        bannerActions.getLast(props.lang || 'hy').then((response) => {
+            setState(response);
         });
+    }, [props.lang]);
+
+
+    if(!state.text || (new Date(state.date)) < (new Date())) {
+        return null;
     }
 
-    renderer = ({ total, days, hours, minutes, seconds, milliseconds, completed }) => {
+    const renderer = ({ total, days, hours, minutes, seconds, milliseconds, completed }) => {
         if (completed) {
             // Render a completed state
             return null;
@@ -36,28 +35,25 @@ export default class Banner extends React.Component {
             </span>;
         }
     };
+    return (
 
-    render() {
+        <div>
+            <div className="inner-banner additional " style={{backgroundImage: "url('/img/banner/" + state.image + "')"}}>
+                <div className="container">
+                    <div className="text-holder">
+                        <h1>
+                            {state.text}
+                        </h1>
 
-        return <div>
-            { this.state.text && (new Date(this.state.date)) > (new Date()) ?
-                <div className="inner-banner additional " style={{backgroundImage: "url('/img/banner/" + this.state.image + "')"}}>
-                    <div className="container">
-                        <div className="text-holder">
-                            <h1>
-                                {this.state.text}
-                            </h1>
-
-                                <Countdown
-                                    date={this.state.date}
-                                    renderer={this.renderer}
-                                />
-                        </div>
+                            <Countdown
+                                date={state.date}
+                                renderer={renderer}
+                            />
                     </div>
                 </div>
-            :
-                null
-        }
+            </div>
         </div>
-    }
+    );
 }
+
+export default Banner;

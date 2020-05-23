@@ -1,6 +1,7 @@
 .idea
 .idea/vcs.xml
-
+recxml_done/*
+recxml_root/*
 *.log
 *.csv
 node_modules

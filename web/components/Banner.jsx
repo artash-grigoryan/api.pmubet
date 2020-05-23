@@ -1,19 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 import '@fortawesome/fontawesome';
 
 import {Trans} from "react-i18next";
 import Countdown from "react-countdown-now";
 import BannerAdmin from "./BannerAdmin";
-import _ from "lodash";
 
-export default class Banner extends React.Component {
+const Banner = (props) => {
 
-    componentWillReceiveProps(props) {
+    useEffect(() => {
+        props.race.labelLong = (props.race.translation ? props.race.translation.labelLong : null) || props.race.labelLong;
+    }, [props.race])
 
-        this.props.race.labelLong = (this.props.race.translation ? this.props.race.translation.labelLong : null) || this.props.race.labelLong;
-    }
-
-    renderer = ({ days, hours, minutes, seconds, completed }) => {
+    const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
             // Render a completed state
             return null;
@@ -25,32 +23,31 @@ export default class Banner extends React.Component {
         }
     };
 
-    render() {
+    return (
 
-        return <div className="banner inner-banner">
-
+        <div className="banner inner-banner">
             <div className="container">
                 <div className="text-holder">
                     <h1>
                         <time>
-                            {this.props.race.datePath === this.props.today ? <Trans
-                                i18nKey="Today">Today</Trans> : (this.props.race.datePath === this.props.tomorrow ?
+                            {props.race.datePath === props.today ? <Trans
+                                i18nKey="Today">Today</Trans> : (props.race.datePath === props.tomorrow ?
                                 <Trans
-                                    i18nKey="Tomorrow">Tomorrow</Trans> : (this.props.race.datePath === this.props.yesterday ?
+                                    i18nKey="Tomorrow">Tomorrow</Trans> : (props.race.datePath === props.yesterday ?
                                     <Trans i18nKey="Yesterday">
                                         Yesterday
-                                    </Trans> : this.props.race.day))} {this.props.race.timezoneTime}
+                                    </Trans> : props.race.day))} {props.race.timezoneTime}
                         </time>
                         <span className="label-name">
-                            <b>R{this.props.reunion.externNumber}C{this.props.race.number} </b>
-                            {this.props.race.labelLong}
+                            <b>R{props.reunion.externNumber}C{props.race.number} </b>
+                            {props.race.labelLong}
                         </span>
                     </h1>
 
                     <div className="btn-holder">
                         <Countdown
-                            date={this.props.race.date}
-                            renderer={this.renderer}
+                            date={props.race.date}
+                            renderer={renderer}
                         />
                     </div>
 
@@ -62,9 +59,14 @@ export default class Banner extends React.Component {
                             </Trans>
                         </a>
                     </div>
+                    {props.race.reunion.qn &&
+                        <i className="quinte-logo-banner widget__icon widget__icon--quinte" data-reactid="1068"></i>
+                    }
                 </div>
             </div>
-            <BannerAdmin {...this.props}/>
+            <BannerAdmin {...props}/>
         </div>
-    }
+    );
 }
+
+export default Banner;

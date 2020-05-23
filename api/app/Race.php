@@ -105,9 +105,9 @@ class Race extends Model
     public function reportersOthers()
     {
         return $this->reporters()
-            ->where('societe', '!=', 'PMU');
-            //->where('societe', '!=', 'AIP')
-            //->where('societe', '!=', 'geny.com');
+            ->where('societe', '!=', 'PMU')
+            ->where('societe', '!=', 'AIP')
+            ->where('societe', '!=', 'geny.com');
     }
 
     public function hasTranslation()

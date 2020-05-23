@@ -53,7 +53,7 @@ export default class PredictionTop extends React.Component {
 
         return <div className="prediction-top">
             <div className="title m-b-0">
-                <h3><Trans i18nKey="Dzio Predictions">Dzio Predictions</Trans></h3>
+                <h3><Trans i18nKey="PMUBET Predictions">PMUBET Predictions</Trans></h3>
             </div>
             <div className="prediction">
                 <div className="prediction-header">
