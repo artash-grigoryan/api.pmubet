@@ -315,7 +315,8 @@ class RecXMLService implements DataServiceInterface {
 
     public function deleteFilesFromYesterday() {
 
-        $this->deleteFiles(self::RECTXML_FOLDER_PATH_TODO. DIRECTORY_SEPARATOR .date('Ymd', strtotime($this->dayFolder .' -1DAY')));
+        $this->deleteFiles(self::RECTXML_FOLDER_PATH_TODO. DIRECTORY_SEPARATOR .date('Ymd', strtotime($this->dayFolder .' -10DAY')));
+        $this->deleteFiles(self::RECTXML_FOLDER_PATH_DONE. DIRECTORY_SEPARATOR .date('Ymd', strtotime($this->dayFolder .' -10DAY')));
     }
 
     function deleteFiles($target) {
