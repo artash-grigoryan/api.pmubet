@@ -11,9 +11,7 @@ import { raceActions } from '../actions/race';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import Calendar from "react-calendar";
 import Banner from "../components/Banner";
-import BannerAdmin from "../components/BannerAdmin";
 import {getIconBySpeciality} from "../helpers/iconsBySpeciality";
-import Race from "../components/Race";
 import i18next from "i18next";
 import {reunionActions} from "../actions/reunion";
 import Q5Icon from "../components/Q5Icon";
@@ -34,7 +32,7 @@ export default class CalendarResultsPage extends Component {
         date.setDate(date.getDate()+2);
         let tomorrow = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
 
-        let lang = (typeof this.props.match.params.lang !== 'undefined' ? this.props.match.params.lang : 'en');
+        let lang = this.props.match.params.lang ? this.props.match.params.lang : 'en';
         i18next.changeLanguage(lang);
 
         let dateCalendar = new Date();
@@ -43,7 +41,7 @@ export default class CalendarResultsPage extends Component {
 
         this.state = {
             timezoneOffset: timezoneOffset,
-            lang: this.props.match.params.lang,
+            lang: lang,
             yesterday: yesterday,
             today: today,
             tomorrow: tomorrow,

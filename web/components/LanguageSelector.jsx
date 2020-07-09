@@ -43,6 +43,9 @@ export default class LanguageSelector extends React.Component {
             </li>
         );
 
+        if(!this.props.lang) {
+            return null;
+        }
         return <div className="language-selector">
 
             <a href="javascript:;" onClick={() => {this.toggleSelector()}}>
