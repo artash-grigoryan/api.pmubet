@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Trans} from "react-i18next";
 
-const DialogMenu = () => {
+const BetButton = () => {
 
     const [dialogStatus, setDialogStatus] = useState('closed')
     const countries = [
@@ -44,7 +44,11 @@ const DialogMenu = () => {
 
     return (
         <React.Fragment>
-            <a className="nav-link" href="javascript:;" onClick={()=>setDialogStatus('opened')}><Trans i18nKey="Play online">Play online</Trans></a>
+            <a href="javascript:;" onClick={()=>setDialogStatus('opened')} className="btn btn-md">
+                <Trans i18nKey="Bet now">
+                    Bet now
+                </Trans>
+            </a>
             <div id="countries-menu-dialog" className={dialogStatus}>
                 <div className="overlay" onClick={() => setDialogStatus('closed')}></div>
                 <div className="container">
@@ -71,4 +75,4 @@ const DialogMenu = () => {
     );
 }
 
-export default DialogMenu;
+export default BetButton;

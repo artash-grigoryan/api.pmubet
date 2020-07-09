@@ -269,7 +269,7 @@ export default class HomePage extends Component {
                 listReunions = reunions.map((reunion) => {
                     return (
                         <li key={reunion.id} className={this.reunion && this.reunion.id === reunion.id ? 'active' : ''}>
-                            <Link to={"/" + reunion.datePath + "/R" + reunion.number} onClick={() => this.setFirstRaceByReunion(reunion.datePath, reunion.number)}>
+                            <Link to={"/" + this.state.lang + "/" + reunion.datePath + "/R" + reunion.number} onClick={() => this.setFirstRaceByReunion(reunion.datePath, reunion.number)}>
                                 <img src={getIconBySpeciality(reunion.speciality)}/> <b>R{reunion.number}</b> - {(reunion.translation ? reunion.translation.hippodromeName : null) || reunion.hippodromeName}
                             </Link>
                         </li>
@@ -290,7 +290,7 @@ export default class HomePage extends Component {
                     <li key={raceNumber}>
                         <Link className={this.state.race.number && this.state.race.number===raceNumber?'active':''} to={"/" + this.state.lang + "/" + this.state.date + "/R"+this.state.reunion.number+"/C" + raceNumber} onClick={() => this.setRace(this.state.date, this.state.reunion.number, raceNumber)}>
                             C{raceNumber}
-                            {raceNumber === this.state.reunion.qn ? <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i> : ''}
+                            {raceNumber === this.state.reunion.qn ? <i className="widget__icon widget__icon--quinte" data-reactid="1068"><img src={require('../assets/images/icons/pmu_QUINTE-PLUS_rvb.svg')}/></i> : ''}
                         </Link>
                     </li>
                 );

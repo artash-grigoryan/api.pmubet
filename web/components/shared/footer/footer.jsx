@@ -9,7 +9,7 @@ class Footer extends React.Component {
 
     render() {
         return <footer id="footer">
-            Copyright © 2020 Pmp® All rights reserved.
+            Copyright © 2020 PMUBET® All rights reserved.
         </footer>
     }
 

@@ -4,6 +4,8 @@ import '@fortawesome/fontawesome';
 import {Trans} from "react-i18next";
 import Countdown from "react-countdown-now";
 import BannerAdmin from "./BannerAdmin";
+import Q5Icon from "./Q5Icon";
+import BetButton from "./BetButton";
 
 const Banner = (props) => {
 
@@ -52,16 +54,11 @@ const Banner = (props) => {
                     </div>
 
                     <div style={{marginTop: "30px"}}>
-                        <a target="_blank" className="btn btn-md"
-                           href="https://www.vivarobet.am">
-                            <Trans i18nKey="Bet on Vivaro">
-                                Bet on Vivaro
-                            </Trans>
-                        </a>
+                        <BetButton/>
+                        {props.race.reunion.qn === props.race.number &&
+                            <Q5Icon className="banner-icon"/>
+                        }
                     </div>
-                    {props.race.reunion.qn &&
-                        <i className="quinte-logo-banner widget__icon widget__icon--quinte" data-reactid="1068"></i>
-                    }
                 </div>
             </div>
             <BannerAdmin {...props}/>

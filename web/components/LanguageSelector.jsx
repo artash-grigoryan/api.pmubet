@@ -38,7 +38,7 @@ export default class LanguageSelector extends React.Component {
         let unselectedLanguagesList = this.state.unselectedLanguages.map((lang) =>
             <li key={lang}>
                 <a href={"/"+lang+url} >
-                    <img src={"/img/flags/"+lang+".png"}/>
+                    <img src={require('./../assets/images/flags/'+lang+'.png')} alt={lang}/>
                 </a>
             </li>
         );
@@ -46,7 +46,7 @@ export default class LanguageSelector extends React.Component {
         return <div className="language-selector">
 
             <a href="javascript:;" onClick={() => {this.toggleSelector()}}>
-                <img src={"/img/flags/"+this.props.lang+".png"} alt=""/>
+                <img src={require("./../assets/images/flags/"+this.props.lang+".png")} alt=""/>
                 <FontAwesomeIcon style={{marginLeft: '5px'}} icon="angle-down" />
             </a>
             <ul className="language-options" style={{display:!this.state.selectorOpened ? 'none' : 'block'}}>

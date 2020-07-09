@@ -12,6 +12,11 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import Calendar from "react-calendar";
 import Banner from "../components/Banner";
 import BannerAdmin from "../components/BannerAdmin";
+import {getIconBySpeciality} from "../helpers/iconsBySpeciality";
+import Race from "../components/Race";
+import i18next from "i18next";
+import {reunionActions} from "../actions/reunion";
+import Q5Icon from "../components/Q5Icon";
 const { t, i18n } = useTranslation();
 
 export default class CalendarResultsPage extends Component {
@@ -28,6 +33,9 @@ export default class CalendarResultsPage extends Component {
         let yesterday = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
         date.setDate(date.getDate()+2);
         let tomorrow = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
+
+        let lang = (typeof this.props.match.params.lang !== 'undefined' ? this.props.match.params.lang : 'en');
+        i18next.changeLanguage(lang);
 
         let dateCalendar = new Date();
         let minDateCalendar = new Date().setMonth(new Date().getMonth()-2);
@@ -46,11 +54,21 @@ export default class CalendarResultsPage extends Component {
             minDateCalendar : minDateCalendar,
             maxDateCalendar : maxDateCalendar,
             races : null,
-            race: null
+            race: null,
+            reunions: false,
+            nextRace: false,
+            nextQ5: false,
+            reunion: false,
+            reunionSelectorOpened: false,
+            predictionTop: [],
+            runnerSelected: [],
+            predictions: []
         };
     }
 
     async componentWillMount() {
+
+        this.setReunions();
 
         raceActions.getNext(this.state.lang).then((response) => {
 
@@ -86,6 +104,33 @@ export default class CalendarResultsPage extends Component {
 
     redirect(target) {
         this.props.history.push(target);
+    }
+
+    setReunions(date) {
+
+        if(typeof date === 'undefined') {
+
+            reunionActions.getAll(this.state.lang).then((response) => {
+                let reunions = _.groupBy(response.reunions, 'datePath');
+                this.setState({reunions : reunions});
+            });
+        }
+        else {
+
+            if(!this.state.reunions[date]) {
+
+                reunionActions.get(this.state.lang, date).then((response) => {
+
+                    if(this.state.reunions) {
+                        this.state.reunions[date] = response.reunions;
+                    }
+                    else {
+                        this.state.reunions = _.groupBy(response.reunions, 'datePath');
+                    }
+                    this.setState({reunions : this.state.reunions});
+                });
+            }
+        }
     }
 
     setDate(date) {
@@ -131,6 +176,11 @@ export default class CalendarResultsPage extends Component {
         });
     }
 
+    toggleReunionSelector() {
+
+        this.setState({reunionSelectorOpened:!this.state.reunionSelectorOpened});
+    }
+
     toggleCalendarSelector() {
 
         this.setState({calendarSelectorOpened:!this.state.calendarSelectorOpened});
@@ -147,6 +197,44 @@ export default class CalendarResultsPage extends Component {
 
 	render() {
 
+        let listReunions = null;
+        if(this.state.reunions && this.state.date) {
+
+            let reunions = this.state.reunions[this.state.date];
+
+            if(reunions) {
+                let specialityLogo = null;
+                listReunions = reunions.map((reunion) => {
+                    return (
+                        <li key={reunion.id} className={this.reunion && this.reunion.id === reunion.id ? 'active' : ''}>
+                            <Link to={"/" + this.state.lang + "/" + reunion.datePath + "/R" + reunion.number} onClick={() => this.setFirstRaceByReunion(reunion.datePath, reunion.number)}>
+                                <img src={getIconBySpeciality(reunion.speciality)}/> <b>R{reunion.number}</b> - {(reunion.translation ? reunion.translation.hippodromeName : null) || reunion.hippodromeName}
+                            </Link>
+                        </li>
+                    );
+                });
+            }
+            else {
+                listReunions = null;
+            }
+        }
+
+        let listRaces = [];
+        if(this.state.date && this.state.reunion && this.state.race) {
+
+            for (let raceNumber = 1; raceNumber <= this.state.reunion.racesNumber; ++raceNumber) {
+
+                listRaces.push(
+                    <li key={raceNumber}>
+                        <Link className={this.state.race.number && this.state.race.number===raceNumber?'active':''} to={"/" + this.state.lang + "/" + this.state.date + "/R"+this.state.reunion.number+"/C" + raceNumber} onClick={() => this.setRace(this.state.date, this.state.reunion.number, raceNumber)}>
+                            C{raceNumber}
+                            {raceNumber === this.state.reunion.qn ? <Q5Icon/> : ''}
+                        </Link>
+                    </li>
+                );
+            }
+        }
+
 		return <div id="calendar-result">
             <header>
                 <MainMenu {...this.state}/>
@@ -161,13 +249,13 @@ export default class CalendarResultsPage extends Component {
                                 <ul>
 
                                     <li>
-                                        <Link className={this.state.date === this.state.yesterday?'active':''} to={"/"+ this.state.lang + "/calendar-results/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday)}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
+                                        <Link className={this.state.date === this.state.yesterday?'active':''} to={"/" + this.state.lang + "/calendar-results/" + this.state.yesterday} onClick={() => this.setDate(this.state.yesterday, 'first')}><Trans i18nKey="Yesterday">Yesterday</Trans></Link>
                                     </li>
                                     <li>
-                                        <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.lang + "/calendar-results/" + this.state.today} onClick={() => this.setDate(this.state.today)}><Trans i18nKey="Today">Today</Trans></Link>
+                                        <Link className={this.state.date === this.state.today?'active':''} to={"/" + this.state.lang + "/calendar-results/" + this.state.today} onClick={() => this.setDate(this.state.today, 'next')}><Trans i18nKey="Today">Today</Trans></Link>
                                     </li>
                                     <li>
-                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.lang + "/calendar-results/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow)}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
+                                        <Link className={this.state.date === this.state.tomorrow?'active':''} to={"/" + this.state.lang + "/calendar-results/" + this.state.tomorrow} onClick={() => this.setDate(this.state.tomorrow, 'next')}><Trans i18nKey="Tomorrow">Tomorrow</Trans></Link>
                                     </li>
                                 </ul>
                                 <ul className="calendar-selector">
@@ -180,7 +268,7 @@ export default class CalendarResultsPage extends Component {
                                                 ?
                                                 <Calendar
                                                     locale={this.state.lang}
-                                                    onClickDay={(date) => this.setDate(date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2))}
+                                                    onClickDay={(date) => this.setDate(date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2), 'first')}
                                                     value={new Date(this.state.dateCalendar)}
                                                     minDate={new Date(this.state.minDateCalendar)}
                                                     maxDate={new Date(this.state.maxDateCalendar)}
@@ -191,6 +279,47 @@ export default class CalendarResultsPage extends Component {
                                     </li>
                                 </ul>
                             </div>
+                            {
+                                this.state.reunions
+                                    ?
+                                    <div>
+                                        {
+                                            this.state.reunion
+                                                ?
+                                                <div className="meeting-selector">
+                                                    <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleReunionSelector()}>
+                                                        <FontAwesomeIcon icon="angle-double-down" className="selector-icon" />
+                                                        <img src={getIconBySpeciality(this.state.reunion.speciality)}/> <b>R{this.state.reunion.number}</b> - {(this.state.reunion.translation ? this.state.reunion.translation.hippodromeName : null) || this.state.reunion.hippodromeName}
+                                                    </a>
+                                                    <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
+                                                        {listReunions}
+                                                    </ul>
+                                                </div>
+                                                :
+                                                <div className="meeting-selector">
+                                                    <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleReunionSelector()}>
+                                                        <img src="https://www.equidia.fr/assets/img/icons-png/discipline_attele_w.png"/> <Trans i18nKey="Select a Reunion">Select a Reunion</Trans>
+                                                    </a>
+                                                    <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
+                                                        {listReunions}
+                                                    </ul>
+                                                </div>
+                                        }
+                                        <div className="race-selector">
+                                            {
+                                                this.state.date && this.state.reunion
+                                                    ?
+                                                    <ul>
+                                                        {listRaces}
+                                                    </ul>
+                                                    :
+                                                    null
+                                            }
+                                        </div>
+                                    </div>
+                                    :
+                                    null
+                            }
 
                         </div>
 
@@ -227,7 +356,7 @@ export default class CalendarResultsPage extends Component {
 
                                                         <div className="calendar-name" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                             R{race.reunion.number}C{race.number} - {race.labelLong}
-                                                            { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i> : ''}
+                                                            { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <Q5Icon/> : ''}
                                                         </div>
 
                                                         <div className="calendar-time" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
@@ -273,7 +402,7 @@ export default class CalendarResultsPage extends Component {
 
                                                         <div className="calendar-name" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                             R{race.reunion.number}C{race.number} - {race.labelLong}
-                                                            { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i> : ''}
+                                                            { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <Q5Icon/> : ''}
                                                         </div>
 
                                                         <div className="calendar-time" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
