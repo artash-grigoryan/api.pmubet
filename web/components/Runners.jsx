@@ -28,7 +28,7 @@ export default class Runners extends React.Component {
     getCasaqueImgPath(race, runner) {
 
         let date = new Date(this.props.race.date);
-        return '/img/casaques/'+date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2)+'-R'+race.reunion.number+'C'+race.number+'P'+runner.number+'.png';
+        return process.env.API_URL+'/img/casaques/'+date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2)+'-R'+race.reunion.number+'C'+race.number+'P'+runner.number+'.png';
     }
 
     selectRunner(runner) {
@@ -64,12 +64,12 @@ export default class Runners extends React.Component {
 
                             </span>
                             <span className="runner-name">
-                                <p>{(runner.translation ? runner.translation.name : null) || runner.name} {runner.music && ' - '+runner.music}</p>
-                                <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey}</span>
+                                <p>{(runner.translation ? runner.translation.name : null) || runner.name}</p>
+                                <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey} {runner.music && ' - '+runner.music}</span>
                             </span>
                         </div>
                         <span className="runner-cote">
-                            <span>123{!runner.doNotRun ? runner.signs : null} {!runner.doNotRun ? runner.reportEvol : null}</span>
+                            <span>{!runner.doNotRun ? runner.signs : null} {!runner.doNotRun ? runner.reportEvol : null}</span>
                         </span>
                     </div>
                     {
@@ -150,7 +150,7 @@ export default class Runners extends React.Component {
                 </div>
             );
         }
-        
+
         return <div>
 
             <div className="title double-title m-b-0">

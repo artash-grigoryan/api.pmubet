@@ -1,6 +1,7 @@
 import React from "react";
 import '@fortawesome/fontawesome';
 import {Trans} from "react-i18next";
+import Q5Icon from "./Q5Icon";
 
 
 export default class NextQ5 extends React.Component {
@@ -22,7 +23,7 @@ export default class NextQ5 extends React.Component {
                         <div className="widget-container">
                             <div className="widget__top">
                                 <p className="widget__sub-title" data-reactid="1067">{this.props.nextQ5.today ? <Trans i18nKey="Today">Today</Trans> : (this.props.nextQ5.tomorrow ? <Trans i18nKey="Tomorrow">Tomorrow</Trans> : this.props.nextQ5.day)}</p>
-                                <i className="widget__icon widget__icon--quinte" data-reactid="1068"></i>
+                                <Q5Icon/>
                             </div>
                             <header className="widget-flex-wrap">
                                 <p className="widget-race__text">{this.props.nextQ5.labelLong} - {this.props.nextQ5.time}</p>

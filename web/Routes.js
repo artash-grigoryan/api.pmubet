@@ -12,10 +12,10 @@ import NotFoundPage from "./containers/NotFoundPage";
 const Routes = () => (
     <Router>
         <Switch>
-            <Route exact path='/' component={HomePage}/>
+            <Route exact path='/' component={CalendarResultsPage}/>
             {/*<Route exact path='/news' component={NewsPage}/>*/}
             {/*<Route exact path='/news/:lang' component={NewsPage}/>*/}
-            <Route exact path='/:lang' component={HomePage}/>
+            <Route exact path='/:lang' component={CalendarResultsPage}/>
 
             <Route exact path='/:lang/predictions' component={PredictionsPage}/>
             <Route exact path='/:lang/calendar-results' component={CalendarResultsPage}/>

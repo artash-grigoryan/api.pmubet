@@ -158,7 +158,7 @@ class MainMenu extends React.Component {
     render() {
 
         return <nav className="navbar fixed-top navbar-expand-lg navbar-light">
-            <Link className={"navbar-brand"} to="/">
+            <Link className={"navbar-brand"} to={"/"+this.props.lang}>
                 <img className={"header-logo"} src={require('./../assets/images/logo.svg')} height="40" width="50" />
             </Link>
             <button className="navbar-toggler" type="button" onClick={() => this.handleClick()}>
@@ -168,7 +168,7 @@ class MainMenu extends React.Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent"  style={{display:this.state.navBarOpen?'block':'none'}}>
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <Link className="nav-link" to={"/"+this.props.lang}><Trans i18nKey="Programs">Programs</Trans></Link>
+                        <Link className="nav-link" to={"/"+this.props.lang}><Trans i18nKey="Programs & Results">Programs & Results</Trans></Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to={"/"+this.props.lang+"/how-to-bet"}><Trans i18nKey="How to bet">How to bet</Trans></Link>
@@ -176,26 +176,8 @@ class MainMenu extends React.Component {
                     <li className="nav-item">
                         <DialogMenu/>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to={"/"+this.props.lang+"/calendar-results"}><Trans i18nKey="Calendar & Results">Calendar & Results</Trans></Link>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" onClick={()=>this.redirectUrl()}><Trans i18nKey="Pronostic VIP">Pronostic VIP</Trans></a>
-                    </li>
                 </ul>
                 <ul className="navbar-nav secondary">
-                    <li className="nav-item m-0">
-                        <a className="btn-skew nav-link" href="javascript:;">
-                            <Trans i18nKey="Lives">Lives</Trans>
-                            <FontAwesomeIcon style={{marginLeft: '5px'}} icon="play-circle" />
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="javascript:;">
-                            <span className="text-minify"><Trans i18nKey="Account">Account</Trans></span>
-                            <FontAwesomeIcon icon="user" />
-                        </a>
-                    </li>
                     <li className="nav-item m-0">
 
                     </li>

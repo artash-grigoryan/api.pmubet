@@ -86,17 +86,6 @@ export default class Race extends React.Component {
                             }
                         </div>
 
-                        <div className="col-lg-12 col-md-12 nextQ5">
-                            {
-                                this.props.nextQ5
-                                    ?
-                                    <NextQ5 {...this.props}/>
-                                    :
-                                    ''
-                            }
-
-                        </div>
-
                         {
                             !this.state.isOver
                                 ?
