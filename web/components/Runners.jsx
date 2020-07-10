@@ -1,12 +1,11 @@
 import _ from "lodash";
 import React from "react";
-import '@fortawesome/fontawesome';
 
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Trans} from "react-i18next";
-import {Link} from "react-router-dom";
 
 import Carousel from 'react-bootstrap/Carousel'
+import {faInfoCircle, faUserSlash} from "@fortawesome/free-solid-svg-icons";
 
 
 export default class Runners extends React.Component {
@@ -50,7 +49,7 @@ export default class Runners extends React.Component {
                     <div className="runner" onClick={() => this.selectRunner(runner)} style={{border:runner.doNotRun?'1px solid rgb(222, 43, 37)':0}}>
                         <div style={{display:'flex'}}>
                             <span className="info-runner-icon">
-                                <FontAwesomeIcon icon="info-circle"/>
+                                <FontAwesomeIcon icon={faInfoCircle}/>
                             </span>
                             <span className="runner-rank">{runner.number}</span>
                             <span className="runner-img">
@@ -59,7 +58,7 @@ export default class Runners extends React.Component {
                                     ?
                                         <img src={this.getCasaqueImgPath(this.props.race, runner)}/>
                                     :
-                                        <FontAwesomeIcon icon="user-slash" style={{color:'#de2b25',fontSize:26}} />
+                                        <FontAwesomeIcon icon={faUserSlash} style={{color:'#de2b25',fontSize:26}} />
                                 }
 
                             </span>

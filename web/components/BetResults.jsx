@@ -1,6 +1,4 @@
-import _ from "lodash";
 import React from "react";
-import '@fortawesome/fontawesome';
 import {Trans} from "react-i18next";
 
 import BetResultsDetails from "./BetResultsDetails"

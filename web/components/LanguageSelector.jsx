@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React from "react";
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleDown} from "@fortawesome/free-solid-svg-icons";
 
 export default class LanguageSelector extends React.Component {
 
@@ -50,7 +51,7 @@ export default class LanguageSelector extends React.Component {
 
             <a href="javascript:;" onClick={() => {this.toggleSelector()}}>
                 <img src={require("./../assets/images/flags/"+this.props.lang+".png")} alt=""/>
-                <FontAwesomeIcon style={{marginLeft: '5px'}} icon="angle-down" />
+                <FontAwesomeIcon style={{marginLeft: '5px'}} icon={faAngleDown} />
             </a>
             <ul className="language-options" style={{display:!this.state.selectorOpened ? 'none' : 'block'}}>
                 {unselectedLanguagesList}

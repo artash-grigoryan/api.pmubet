@@ -1,5 +1,4 @@
 import React from "react";
-import '@fortawesome/fontawesome';
 import {Trans} from "react-i18next";
 
 export default class Predictions extends React.Component {
@@ -28,7 +27,7 @@ export default class Predictions extends React.Component {
                 </div>
             );
         }
-        
+
         return <div className="predictions">
             <div className="title" style={{marginBottom: 0}}>
                 <h3>{this.props.predictions.length} <Trans i18nKey="Best Predictions from France"> Best Predictions from France</Trans>

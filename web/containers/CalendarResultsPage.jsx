@@ -4,18 +4,18 @@ import MainMenu from "../components/MainMenu.jsx";
 import Footer from "../components/shared/footer/footer";
 import _ from "lodash";
 
-import { useTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import { raceActions } from '../actions/race';
 
-
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendarAlt, faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons'
 import Calendar from "react-calendar";
 import Banner from "../components/Banner";
 import {getIconBySpeciality} from "../helpers/iconsBySpeciality";
 import i18next from "i18next";
 import {reunionActions} from "../actions/reunion";
 import Q5Icon from "../components/Q5Icon";
-const { t, i18n } = useTranslation();
+import BetButton from "../components/BetButton";
 
 export default class CalendarResultsPage extends Component {
 
@@ -259,7 +259,7 @@ export default class CalendarResultsPage extends Component {
                                 <ul className="calendar-selector">
                                     <li>
                                         <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleCalendarSelector()}>
-                                            <FontAwesomeIcon icon="calendar-alt" />
+                                            <FontAwesomeIcon icon={faCalendarAlt} />
                                         </a>
                                         {
                                             this.state.calendarSelectorOpened
@@ -286,7 +286,7 @@ export default class CalendarResultsPage extends Component {
                                                 ?
                                                 <div className="meeting-selector">
                                                     <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleReunionSelector()}>
-                                                        <FontAwesomeIcon icon="angle-double-down" className="selector-icon" />
+                                                        <FontAwesomeIcon icon={faAngleDoubleDown} className="selector-icon" />
                                                         <img src={getIconBySpeciality(this.state.reunion.speciality)}/> <b>R{this.state.reunion.number}</b> - {(this.state.reunion.translation ? this.state.reunion.translation.hippodromeName : null) || this.state.reunion.hippodromeName}
                                                     </a>
                                                     <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">
@@ -415,9 +415,7 @@ export default class CalendarResultsPage extends Component {
                                                                         <Trans i18nKey="Results">Results</Trans>
                                                                     </a>
                                                                     :
-                                                                    <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
-                                                                        <Trans i18nKey="Bet now">Bet now</Trans>
-                                                                    </a>
+                                                                    <BetButton className="btn btn-access"/>
                                                             }
                                                         </div>
                                                     </div>

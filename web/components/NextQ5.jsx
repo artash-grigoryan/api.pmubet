@@ -1,5 +1,4 @@
 import React from "react";
-import '@fortawesome/fontawesome';
 import {Trans} from "react-i18next";
 import Q5Icon from "./Q5Icon";
 

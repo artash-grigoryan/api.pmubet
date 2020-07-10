@@ -3,13 +3,12 @@ import MainMenu from "../components/MainMenu.jsx";
 import Footer from "../components/shared/footer/footer";
 import { useTranslation, Trans } from "react-i18next";
 
-const { t, i18n } = useTranslation();
-
 export default class PredictionsPage extends Component {
 
     constructor(props) {
 
         super(props);
+        const { t, i18n } = useTranslation();
         this.state = {
             lang: this.props.match.params.lang,
         };

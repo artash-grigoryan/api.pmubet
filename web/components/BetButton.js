@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Trans} from "react-i18next";
 
-const BetButton = () => {
+const BetButton = (props) => {
 
     const [dialogStatus, setDialogStatus] = useState('closed')
     const countries = [
@@ -42,9 +42,10 @@ const BetButton = () => {
         },
     ]
 
+    console.log(props);
     return (
         <React.Fragment>
-            <a href="javascript:;" onClick={()=>setDialogStatus('opened')} className="btn btn-md">
+            <a href="javascript:;" onClick={()=>setDialogStatus('opened')} className={`btn btn-md ${props.className}`}>
                 <Trans i18nKey="Bet now">
                     Bet now
                 </Trans>

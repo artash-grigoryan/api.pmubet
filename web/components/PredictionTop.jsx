@@ -1,11 +1,6 @@
 import _ from "lodash";
 import React from "react";
-import '@fortawesome/fontawesome';
-
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import {Trans} from "react-i18next";
-import {reunionActions} from "../actions/reunion";
-import {raceActions} from "../actions/race";
 
 
 export default class PredictionTop extends React.Component {

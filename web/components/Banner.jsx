@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import '@fortawesome/fontawesome';
 
 import {Trans} from "react-i18next";
 import Countdown from "react-countdown-now";

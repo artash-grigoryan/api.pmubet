@@ -10,17 +10,17 @@ import { reunionActions } from '../actions/reunion';
 
 import "./../assets/css/main.scss";
 
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Race from "../components/Race";
 
-import { useTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import BannerAdmin from "../components/BannerAdmin";
 import {getIconBySpeciality} from "../helpers/iconsBySpeciality";
-const { t, i18n } = useTranslation();
-const i18next = require('i18next');
+import i18next from 'i18next';
+import {faAngleDoubleDown, faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
 
 
-export default class HomePage extends Component {
+export default class HomePage extends React.Component {
 
     constructor(props) {
 
@@ -323,7 +323,7 @@ export default class HomePage extends Component {
                                     <ul className="calendar-selector">
                                         <li>
                                             <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleCalendarSelector()}>
-                                                <FontAwesomeIcon icon="calendar-alt" />
+                                                <FontAwesomeIcon icon={faCalendarAlt} />
                                             </a>
                                             {
                                                 this.state.calendarSelectorOpened
@@ -350,7 +350,7 @@ export default class HomePage extends Component {
                                                 ?
                                                     <div className="meeting-selector">
                                                         <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleReunionSelector()}>
-                                                            <FontAwesomeIcon icon="angle-double-down" className="selector-icon" />
+                                                            <FontAwesomeIcon icon={faAngleDoubleDown} className="selector-icon" />
                                                             <img src={getIconBySpeciality(this.state.reunion.speciality)}/> <b>R{this.state.reunion.number}</b> - {(this.state.reunion.translation ? this.state.reunion.translation.hippodromeName : null) || this.state.reunion.hippodromeName}
                                                         </a>
                                                         <ul style={this.state.reunionSelectorOpened ? {display:'block'} : null} className="meeting-selector-list">

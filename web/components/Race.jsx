@@ -1,14 +1,11 @@
 
 import React from "react";
-import '@fortawesome/fontawesome';
 
 import Banner from "./Banner";
-import BannerAdmin from "./BannerAdmin";
 import InfoSection from "./InfoSection";
 import Runners from "./Runners";
 import Predictions from "./Predictions";
 import PredictionTop from "./PredictionTop";
-import NextQ5 from "./NextQ5";
 import Results from "./Results";
 import BetResults from "./BetResults";
 
