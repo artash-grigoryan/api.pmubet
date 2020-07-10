@@ -15,7 +15,7 @@ body {
   max-width: 1370px;
 }
 .primary-color {
-  color: #218850 !important;
+  color: #016a30 !important;
 }
 
 .hide-elem {
@@ -33,7 +33,7 @@ body {
   color: #fff;
   font-size: 14px;
   border-radius: 30px;
-  background: #218750;
+  background: #016a30;
 }
 
 .navbar-brand {
@@ -169,8 +169,8 @@ body {
 .banner .btn {
 
   transition: all .3s ease-in-out;
-  background: #218850;
-  border: 2px solid #218850;
+  background: #da2032;
+  border: 2px solid #da2032;
   display: inline-block;
   padding: 5px 20px;
   text-align: center;
@@ -295,10 +295,10 @@ body {
   left: auto;
   right: -12px;
   bottom: 0px;
-  border-right: 20px solid #218850;
+  border-right: 20px solid #016a30;
 }
 .navbar-nav li.nav-item a.nav-link.btn-skew {
-  background: #218850;
+  background: #016a30;
   color: #fff;
   border: 0;
   border-radius: 0;
@@ -428,7 +428,7 @@ body {
 #main .bar-selector .race-selector ul li a.active,
 #main .bar-selector .day-selector ul li a:hover,
 #main .bar-selector .race-selector ul li a:hover{
-  background-color: #218850;
+  background-color: #016a30;
   color: #fff;
 }
 #main .bar-selector ul.calendar-selector li a {
@@ -454,7 +454,7 @@ body {
   }
 }
 #main .bar-selector .react-calendar__tile--active {
-  background: #218750;
+  background: #016a30;
   color: white;
 }
 #main .react-calendar__navigation__prev2-button,
@@ -524,7 +524,7 @@ body {
 }
 
 .title h1, .title h2, .title h3, .title h4, .title strong {
-  background: #218750;
+  background: #016a30;
   color: #fff;
   position: relative;
   display: inline-block;
@@ -556,7 +556,7 @@ body {
   right: auto;
   left: -12px;
   bottom: 0px;
-  border-right: 20px solid #218850;
+  border-right: 20px solid #016a30;
 }
 */
 .title-dsg:after {
@@ -573,7 +573,7 @@ body {
   left: auto;
   right: -12px;
   bottom: 0px;
-  border-right: 20px solid #218850;
+  border-right: 20px solid #016a30;
 }
 .double-title {
   background: #f6a800;
@@ -681,7 +681,7 @@ body {
 
 .prediction-top .prediction-header ul li.active a,
 .prediction-top .prediction-header ul li a:hover {
-  background: #218850;
+  background: #016a30;
   color: #fff;
 }
 .prediction-top .prediction-body {
@@ -707,7 +707,7 @@ body {
   margin-bottom: 20px;
 }
 .predictions-container .predictions {
-  border-bottom: 1px solid #228650;
+  border-bottom: 1px solid #016a30;
   display: table;
   width: 100%;
 }
@@ -737,12 +737,12 @@ body {
   display: inline-block;
   width: 40px;
   height: 40px;
-  border: 2px solid #218750;
+  border: 2px solid #016a30;
   border-radius: 50%;
   text-align: center;
   line-height: 36px;
   font-size: 20px;
-  color: #218750;
+  color: #016a30;
   margin-left: 5px;
 }
 .predictions-container .predictions ul li span{}
@@ -977,16 +977,16 @@ body {
   color: #fff;
   font-size: 14px;
   border-radius: 30px;
-  background: #218750;
+  background: #016a30;
 
 }
 .btn-info {
-  background-color: #218750;
+  background-color: #016a30;
   margin-bottom: 10px;
-  border-color: #218750;
+  border-color: #016a30;
 }
 .btn-info:hover {
-  background: #218750;
+  background: #016a30;
   color: #fff;
 }
 .btn-primary {
@@ -1001,8 +1001,18 @@ body {
 }
 .btn-access:hover {
   color: #fff;
-  border-color: #218750 !important;
-  background-color: #218750 !important;
+  border-color: #016a30 !important;
+  background-color: #016a30 !important;
+}
+.btn-access.bet-now {
+  background: #da2032;
+  border: 2px solid #da2032;
+  width: 100%;
+}
+.btn-access.bet-now:hover {
+  color: #fff;
+  background: #da2032 !important;
+  border: 2px solid #da2032 !important;
 }
 .btn.active {
   background: #f6a800 !important;
@@ -1049,7 +1059,7 @@ body {
   padding: 0 0 10px;
 }
 .result-table .sort {
-  background: #218750;
+  background: #016a30;
   color: #fff !important;
   display: block;
   font-weight: 300;
@@ -1396,12 +1406,12 @@ body {
   padding: 20px;
 }
 .results-section .results-selection-tab tr td.result-selector.active{
-  background: #218850;
+  background: #016a30;
 }
 .results-section .results-selection-tab tr td img{}
 .results-section .results {
   width: 100%;
-  background: #218850;
+  background: #016a30;
   color: #000;
 }
 .results-section .results tr{}
@@ -1522,7 +1532,11 @@ body {
   border-bottom: 1px solid #bdbcbc;
   display: inline-block;
   width: 100%;
+  cursor: pointer;
   float: left;
+}
+#calendar-result .calendar-row:hover {
+  background: #f3f3f3;
 }
 #calendar-result .calendar-name {
   float: left;
@@ -1557,6 +1571,13 @@ body {
   display: inline-block;
   vertical-align: middle;
 }
+#calendar-result .calendar-waiting-results {
+  min-height: 40px;
+  & .calendar-results-numbers{
+    background: none !important;
+    border-right: 1px solid #bdbcbc;
+  }
+}
 #calendar-result .btn-access {
   border: 1px solid;
   width: 100%;
@@ -1567,11 +1588,12 @@ body {
   display: inline-block;
   float: left;
   width: 50%;
+  height: 35px;
   text-align: right !important;
-  background-color: #228650;
+  background-color: #016a30;
 }
 #calendar-result .calendar-results .calendar-results-numbers span{
-  color: #228650;
+  color: #016a30;
   width: 25px;
   display: inline-block;
   height: 25px;
@@ -1611,7 +1633,7 @@ body {
   line-height: 16px;
 }
 #how-to-bet .card-body a{
-  color: #218750;
+  color: #016a30;
   font-weight: bold;
   line-height: 17px;
   padding: 20px;
@@ -1652,7 +1674,7 @@ body {
   font-size: 17px;
   font-weight: bold;
   padding: 10px 0 0;
-  color: #218750;
+  color: #016a30;
 }
 .news-p .card-body i{
   text-align: right;
@@ -1665,7 +1687,7 @@ body {
   line-height: 16px;
 }
 .news-p .card-body a{
-  color: #218750;
+  color: #016a30;
   font-weight: bold;
   line-height: 17px;
   padding: 20px;
@@ -1971,7 +1993,7 @@ footer {
   .navbar-nav li.nav-item a.nav-link:hover,
   .navbar-nav li.nav-item a.nav-link.btn-skew:hover {
     color: #fff;
-    background-color: #218850;
+    background-color: #016a30;
   }
   .navbar-nav li.nav-item a.nav-link svg{
     display: none;

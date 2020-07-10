@@ -55,6 +55,11 @@ export default class Race extends React.Component {
                 <div className="container">
                     <div className="row">
 
+                        {this.state.isOver && (
+                            <div className="col-lg-12 col-md-12">
+                                <Results {...this.props}/>
+                            </div>
+                        )}
                         <div className="col-lg-12 col-md-12 runners-container">
                             <Runners {...this.props}/>
                         </div>
@@ -70,29 +75,19 @@ export default class Race extends React.Component {
                         <p style={{textAlign:'justify'}}>{this.props.race.description || this.props.race.comment}</p>
                     </div>
 
-                    <div className="row">
+                    {!this.state.isOver && (
 
-                        <div className="col-lg-12 col-md-12 top-container">
-                            {
-                                !this.state.isOver
-                                    ?
+                        <div className="row">
 
-                                    <PredictionTop {...this.props}/>
-                                    :
-                                    <Results {...this.props}/>
-                            }
+                            <div className="col-lg-12 col-md-12 top-container">
+                                <PredictionTop {...this.props}/>
+                            </div>
+
+                            <div className="col-lg-12 prono-container">
+                                <Predictions {...this.props}/>
+                            </div>
                         </div>
-
-                        {
-                            !this.state.isOver
-                                ?
-                                <div className="col-lg-12 prono-container">
-                                    <Predictions {...this.props}/>
-                                </div>
-                                :
-                                null
-                        }
-                    </div>
+                    )}
                 </div>
             </section>
 

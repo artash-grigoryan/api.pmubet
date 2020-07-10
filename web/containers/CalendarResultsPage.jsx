@@ -365,13 +365,11 @@ export default class CalendarResultsPage extends Component {
                                                             {
                                                                 Date.parse(race.date) < Date.now()
                                                                     ?
-                                                                    <a className="btn btn-access" href={"/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number}>
+                                                                    <Link className="btn btn-access" to={"/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number}>
                                                                         <Trans i18nKey="Results">Results</Trans>
-                                                                    </a>
+                                                                    </Link>
                                                                     :
-                                                                    <a target="_blank" className="btn btn-access" href="https://www.vivarobet.am">
-                                                                        <Trans i18nKey="Bet now">Bet now</Trans>
-                                                                    </a>
+                                                                    <BetButton className="btn btn-access bet-now"/>
                                                             }
                                                         </div>
                                                     </div>
@@ -415,7 +413,7 @@ export default class CalendarResultsPage extends Component {
                                                                         <Trans i18nKey="Results">Results</Trans>
                                                                     </a>
                                                                     :
-                                                                    <BetButton className="btn btn-access"/>
+                                                                    <BetButton className="btn btn-access bet-now"/>
                                                             }
                                                         </div>
                                                     </div>
@@ -433,7 +431,10 @@ export default class CalendarResultsPage extends Component {
                                                                 <div className="calendar-results-time"></div>
                                                             </div>
                                                         :
-                                                            null
+                                                            <div className="calendar-waiting-results calendar-results">
+                                                                <div className="calendar-results-numbers"></div>
+                                                                <div className="calendar-results-time"></div>
+                                                            </div>
                                                     }
                                                 </div>
                                             )
