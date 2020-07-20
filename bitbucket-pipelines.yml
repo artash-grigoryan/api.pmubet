@@ -14,11 +14,12 @@ pipelines:
             - docker
           script: # Modify the commands below to build your repository.
             - apt-get update && apt-get install -qy git curl libmcrypt-dev coreutils curl bash rsync openssh-client
-            - rsync -avzuh -e ssh ./api ec2-user@ec2-35-180-24-202.eu-west-3.compute.amazonaws.com:/var/www/api.pmubet.com --progress -O
             - yes | pecl install mcrypt-1.0.1
             - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
             - cd api
             - composer install
             - cp .env.example .env
             - php artisan key:generate
+            - cd ../
+            - rsync -avzuh -e ssh ./api/* ec2-user@ec2-35-180-24-202.eu-west-3.compute.amazonaws.com:/var/www/api.pmubet.com --progress -O
 
