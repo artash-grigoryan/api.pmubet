@@ -21,4 +21,4 @@ pipelines:
             - composer install
             - cp .env.example .env
             - php artisan key:generate
-            - sync -avzuh -e 'ssh  -i "Pmup.pem"' ./api ec2-user@ec2-35-180-24-202.eu-west-3.compute.amazonaws.com:/var/www/api.pmubet.com/public --progress
+            - rsync -avzuh -e 'ssh  -i "Pmup.pem"' ./api ec2-user@ec2-35-180-24-202.eu-west-3.compute.amazonaws.com:/var/www/api.pmubet.com/public --progress
