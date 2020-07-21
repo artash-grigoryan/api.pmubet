@@ -23,6 +23,6 @@ pipelines:
             - cd ../
 #            - mkdir -p ~/.ssh
 #            - (umask  077 ; echo $MY_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
-            - rsync -avzuh -e 'ssh  -i "./Pmup.pem"' ./api/* ec2-user@ec2-15-188-143-166.eu-west-3.compute.amazonaws.com:/var/www/api.pmubet.com --progress -O
-            - rsync -avzuh ./docker/recxml ec2-user@ec2-15-188-143-166.eu-west-3.compute.amazonaws.com:/var/www/docker --progress -O
+            - rsync -avzuh -e ssh ./api/* ec2-user@ec2-15-188-143-166.eu-west-3.compute.amazonaws.com:/var/www/api.pmubet.com --progress -O
+            - rsync -avzuh -e ssh ./docker/recxml ec2-user@ec2-15-188-143-166.eu-west-3.compute.amazonaws.com:/var/www/docker --progress -O
 
