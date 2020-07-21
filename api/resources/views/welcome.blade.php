@@ -1,19 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-<title>Pmp</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
-<link rel="stylesheet" href="http://localhost:2993/css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>API.PMUBET.COM</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+    <!-- Styles -->
+    <style>
+        html, body {
+            background-color: #fff;
+            color: #636b6f;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 200;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .full-height {
+            height: 100vh;
+        }
+
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .position-ref {
+            position: relative;
+        }
+
+        .top-right {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 84px;
+        }
+
+        .links > a {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .m-b-md {
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
-<div id = "app"></div>
-<script>
-    // WARNING: See the following for security issues around embedding JSON in HTML:
-    // http://redux.js.org/recipes/ServerRendering.html#security-considerations
-    window.__PRELOADED_STATE__ = '{}'.replace(/</g, '\\u003c');
-</script>
-<script src = "http://localhost:2993/js/bundle.js"></script>
+<div class="flex-center position-ref full-height">
+    <div class="content">
+        <div class="title m-b-md">
+            API.PMUBET.COM
+        </div>
+    </div>
+</div>
 </body>
 </html>

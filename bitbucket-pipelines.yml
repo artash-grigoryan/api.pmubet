@@ -17,9 +17,10 @@ pipelines:
             - yes | pecl install mcrypt-1.0.1
             - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
             - cd api
-            - composer install
+            - composer install --optimize-autoloader --no-dev
             - cp .env.example .env
             - php artisan key:generate
             - cd ../
             - rsync -avzuh -e ssh ./api/* ec2-user@ec2-35-180-24-202.eu-west-3.compute.amazonaws.com:/var/www/api.pmubet.com --progress -O
+            - rsync -avzuh -e ssh ./docker/recxml ec2-user@ec2-35-180-24-202.eu-west-3.compute.amazonaws.com:cd /home/ec2-user --progress -O
 
