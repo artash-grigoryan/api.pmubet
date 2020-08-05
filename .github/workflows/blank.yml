@@ -29,7 +29,7 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
       run: |
-        apt-get update && apt-get install -qy git curl libmcrypt-dev coreutils curl bash rsync openssh-client,
+        sudo apt-get update && apt-get install -qy git curl libmcrypt-dev coreutils curl bash rsync openssh-client,
         yes | pecl install mcrypt-1.0.1,
         curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer,
         cd api,
