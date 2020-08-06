@@ -48,10 +48,10 @@ task('deploy:secrets', function () {
 
 // Hosts
 
-host('api.pmubet.com')
+host('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com')
     ->hostname('15.236.238.84') // Hostname or IP address
     ->stage('production') // Deployment stage (production, staging, etc)
-    ->user('deploy') // SSH user
+    ->user('root') // SSH user
     ->set('deploy_path', '~/{{application}}');
 
 // Tasks
