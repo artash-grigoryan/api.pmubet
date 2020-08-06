@@ -1,33 +1,15 @@
 <?php
 namespace Deployer;
 
+// Include the Laravel & rsync recipes
 require 'recipe/laravel.php';
 require 'recipe/rsync.php';
-$projectFolder = '/var/www/api.pmubet.com';
-task('pwd', function () {
-    $result = run('pwd');
-    writeln("Current dir: $result");
-});
-desc('START');
-// Project name
+
 set('application', 'api.pmubet.com');
-desc('appplication set');
-// Project repository
-set('repository', 'git@github.com:artash-grigoryan/api.pmubet.git');
+set('ssh_multiplexing', true); // Speeds up deployments
 
-// [Optional] Allocate tty for git clone. Default value is false.
-set('git_tty', true);
-
-// Shared files/dirs between deploys
-add('shared_files', []);
-add('shared_dirs', []);
-
-// Writable dirs by web server
-add('writable_dirs', []);
-set('allow_anonymous_stats', false);
-desc('DIR FOLDER' . __DIR__);
 set('rsync_src', function () {
-    return __DIR__ . 'api'; // If your project isn't in the root, you'll need to change this.
+    return __DIR__.'/api'; // If your project isn't in the root, you'll need to change this.
 });
 
 // Configuring the rsync exclusions.
@@ -45,21 +27,18 @@ add('rsync', [
 ]);
 
 // Set up a deployer task to copy secrets to the server.
-// Grabs the dotenv file from the github secret
+// Since our secrets are stored in Gitlab, we can access them as env vars.
 task('deploy:secrets', function () {
-    file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
+    file_put_contents(__DIR__ . '/api/.env', getenv('DOT_ENV'));
     upload('.env', get('deploy_path') . '/shared');
 });
 
 // Hosts
-desc('Hosts part');
-host('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com')
-    ->hostname('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com') // Hostname or IP address
-    ->stage('production') // Deployment stage (production, staging, etc)
-    ->user('root') // SSH user
-    ->set('deploy_path', '/var/www/{{application}}');
-
-// Tasks
+host('api.pmubet.com') // Name of the server
+->hostname('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com') // Hostname or IP address
+->stage('production') // Deployment stage (production, staging, etc)
+->user('root') // SSH user
+->set('deploy_path', '/var/www/api.pmubet.com'); // Deploy path
 
 after('deploy:failed', 'deploy:unlock'); // Unlock after failed deploy
 
@@ -83,15 +62,3 @@ task('deploy', [
     'deploy:unlock',
     'cleanup',
 ]);
-
-//task('build', function () {
-//    run('cd {{release_path}} && build');
-//});
-//
-//// [Optional] if deploy fails automatically unlock.
-//after('deploy:failed', 'deploy:unlock');
-//
-//// Migrate database before symlink new release.
-//
-//before('deploy:symlink', 'artisan:migrate');
-
