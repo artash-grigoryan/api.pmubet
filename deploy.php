@@ -57,7 +57,7 @@ task('deploy', [
     'artisan:config:cache', // | Laravel specific steps
     'artisan:optimize',     // |
     'artisan:migrate',      // |
-    'artisan key:generate',      // |
+    'artisan:key:generate',      // |
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
