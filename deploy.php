@@ -1,6 +1,5 @@
 <?php
 namespace Deployer;
-
 // Include the Laravel & rsync recipes
 require 'recipe/laravel.php';
 require 'recipe/rsync.php';
