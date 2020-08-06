@@ -3,8 +3,12 @@ namespace Deployer;
 
 require 'recipe/laravel.php';
 require 'recipe/rsync.php';
-$projectFolder = __DIR__ . '/api';
-writeln('START' . __DIR__);
+$projectFolder = '/var/www/api.pmubet.com';
+task('pwd', function () {
+    $result = run('pwd');
+    writeln("Current dir: $result");
+});
+writeln('START');
 // Project name
 set('application', 'api.pmubet.com');
 writeln('appplication set');
