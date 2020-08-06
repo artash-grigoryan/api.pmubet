@@ -33,7 +33,7 @@ task('deploy:secrets', function () {
 });
 
 // Hosts
-host('api.pmubet.com') // Name of the server
+host('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com') // Name of the server
 ->hostname('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com') // Hostname or IP address
 ->stage('production') // Deployment stage (production, staging, etc)
 ->user('root') // SSH user
