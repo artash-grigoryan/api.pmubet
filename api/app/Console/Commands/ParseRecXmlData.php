@@ -33,10 +33,10 @@ class ParseRecXmlData extends Command
      *
      * @return void
      */
-    
+
     protected $dataService;
     protected $date;
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -77,6 +77,8 @@ class ParseRecXmlData extends Command
         $this->parsePrizeListXML();
 
         $this->dataService->deleteFilesFromYesterday();
+
+        return 0;
     }
 
     private function parseDayReunionsXML()
