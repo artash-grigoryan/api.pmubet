@@ -57,12 +57,12 @@ task('deploy', [
     'deploy:shared',
     'deploy:vendors',
     'deploy:writable',
+    'artisan:key:generate',      // |
     'artisan:storage:link', // |
     'artisan:view:cache',   // |
     'artisan:config:cache', // | Laravel specific steps
 //    'artisan:optimize',     // |
     'artisan:migrate',      // |
-    'artisan:key:generate',      // |
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
