@@ -3,11 +3,11 @@ namespace Deployer;
 
 require 'recipe/laravel.php';
 require 'recipe/rsync.php';
-
-desc('START');
+$projectFolder = __DIR__ . '/api';
+writeln('START' . __DIR__);
 // Project name
 set('application', 'api.pmubet.com');
-desc('appplication set');
+writeln('appplication set');
 // Project repository
 set('repository', 'git@github.com:artash-grigoryan/api.pmubet.git');
 
@@ -21,7 +21,7 @@ add('shared_dirs', []);
 // Writable dirs by web server
 add('writable_dirs', []);
 set('allow_anonymous_stats', false);
-desc('DIR FOLDER' . __DIR__);
+writeln('DIR FOLDER' . __DIR__);
 set('rsync_src', function () {
     return __DIR__; // If your project isn't in the root, you'll need to change this.
 });
@@ -48,7 +48,7 @@ task('deploy:secrets', function () {
 });
 
 // Hosts
-desc('Hosts part');
+writeln('Hosts part');
 host('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com')
     ->hostname('15.236.238.84') // Hostname or IP address
     ->stage('production') // Deployment stage (production, staging, etc)
@@ -59,6 +59,7 @@ host('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com')
 
 after('deploy:failed', 'deploy:unlock'); // Unlock after failed deploy
 
+writeln('Deploy the application');
 desc('Deploy the application');
 task('deploy', [
     'deploy:info',
