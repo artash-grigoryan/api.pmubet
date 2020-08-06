@@ -25,7 +25,7 @@ jobs:
           php-version: 7.3
           extension-csv: mbstring, bcmath
       - name: Access Source directory
-        run: cd api
+        run: ls -la && cd /api
       - name: Composer install
         run: composer install
       - name: Setup Deployer
