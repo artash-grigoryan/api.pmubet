@@ -19,6 +19,6 @@ COPY recxml.properties /opt/RecXML_V7_0_0_PROD/recxml.properties
 
 RUN chmod 755 /usr/local/bin/recXML_st*
 
-#CMD ["/usr/local/bin/recXML_start"]
+CMD ["/usr/local/bin/recXML_start"]
 
 EXPOSE 80

@@ -1,41 +1,49 @@
-# This is a basic workflow to help you get started with Actions
+name: CI-CD
 
-name: CI
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the deployment branch
 on:
   push:
-    branches: [ deployment ]
-  pull_request:
-    branches: [ master ]
+    branches: master
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  deploy:
+    name: Deploy to Production
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    if: github.ref == 'refs/heads/master'
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
+      - uses: actions/checkout@v2
+      - name: Download build assets
+        uses: actions/download-artifact@v1
+        with:
+          name: assets
+          path: public
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: 7.3
+          extension-csv: mbstring, bcmath
+      - name: Composer install
+        run: composer install
+      - name: Setup Deployer
+        uses: atymic/deployer-php-action@master
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+      - name: Deploy to Prod
+        env:
+          DOT_ENV: ${{ secrets.DOT_ENV }}
+        run: dep deploy production --tag=${{ env.GITHUB_REF }} -vvv
 
     # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        sudo apt-get update && apt-get install -qy git curl libmcrypt-dev coreutils curl bash rsync openssh-client,
-        yes | pecl install mcrypt-1.0.1,
-        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer,
-        cd api,
-        composer install --optimize-autoloader --no-dev,
-        cp .env.example .env,
-        php artisan key:generate,
-        cd ../,
-        rsync -crlOt -e ssh ./api/* ec2-user@ec2-15-236-238-84.eu-west-3.compute.amazonaws.com:/var/www/api.pmubet.com --progress,
-        rsync -avzuhO -e ssh ./docker/recxml ec2-user@ec2-15-236-238-84.eu-west-3.compute.amazonaws.com:/var/www/docker --progress
+#    - name: Run a multi-line script
+#      run: |
+#        sudo apt-get update && apt-get install -qy git curl libmcrypt-dev coreutils curl bash rsync openssh-client,
+#        yes | pecl install mcrypt-1.0.1,
+#        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer,
+#        cd api,
+#        composer install --optimize-autoloader --no-dev,
+#        cp .env.example .env,
+#        php artisan key:generate,
+#        cd ../,
+#        rsync -crlOt -e ssh ./api/* ec2-user@ec2-15-236-238-84.eu-west-3.compute.amazonaws.com:/var/www/api.pmubet.com --progress,
+#        rsync -avzuhO -e ssh ./docker/recxml ec2-user@ec2-15-236-238-84.eu-west-3.compute.amazonaws.com:/var/www/docker --progress
