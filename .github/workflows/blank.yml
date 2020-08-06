@@ -27,7 +27,7 @@ jobs:
       - name: Access Source directory
         run: ls -la && cd api
       - name: Composer install
-        run: ls -la && composer install
+        run: cd api && composer install
       - name: Setup Deployer
         uses: atymic/deployer-php-action@master
         with:
