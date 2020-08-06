@@ -36,7 +36,7 @@ task('deploy:secrets', function () {
 host('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com') // Name of the server
 ->hostname('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com') // Hostname or IP address
 ->stage('production') // Deployment stage (production, staging, etc)
-->user('root') // SSH user
+->user('ec2-user') // SSH user
 ->set('deploy_path', '/var/www/api.pmubet.com'); // Deploy path
 
 after('deploy:failed', 'deploy:unlock'); // Unlock after failed deploy
