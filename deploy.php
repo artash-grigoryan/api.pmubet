@@ -4,9 +4,10 @@ namespace Deployer;
 require 'recipe/laravel.php';
 require 'recipe/rsync.php';
 
+desc('START');
 // Project name
 set('application', 'api.pmubet.com');
-
+desc('appplication set');
 // Project repository
 set('repository', 'git@github.com:artash-grigoryan/api.pmubet.git');
 
