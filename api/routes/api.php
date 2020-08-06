@@ -28,7 +28,7 @@ Route::middleware(['cors'])->group(function () {
     Route::get('{locale}/banner/last',  "RaceController@lastBanner");
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
