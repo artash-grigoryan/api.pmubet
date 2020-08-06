@@ -13,34 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{date}/BINARY/photos', function ($date) {
+Route::get('/{date}/BINARY/photos', 'FluxController@photos');
 
-    $folderPath = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/BINARY/photos";
-    $content = ["message" => "File Not found" ] ;
-    if (is_dir($folderPath)) {
-        $content = scandir($folderPath);
-    }
+Route::get('/{date}/BINARY/photos/{file}', 'FluxController@photosFile');
 
-    return response()->json($content);
-});
-
-Route::get('/{date}/BINARY/photos/{file}', function ($date, $file) {
-
-    $filePath = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/BINARY/photos/" .$file;
-    $content = "File Not found";
-    if (file_exists($filePath)) {
-        return response()->file($filePath);
-    }
-    return response($content)->header('Content-Type', 'text/xml;charset=ISO-8859-1');
-});
-
-Route::get('/{date}/{parent}/{folder}/{fileName}', function ($date, $parent, $folder, $fileName) {
-
-    $path = dirname(dirname(__DIR__)) . "/recxml_root/" . $date . "/" .$parent . "/" .$folder . "/" . $fileName. "";
-    $content = "File Not found";
-    if (file_exists($path)) {
-        $content = file_get_contents($path);
-    }
-
-    return response($content)->header('Content-Type', 'text/xml;charset=ISO-8859-1');
-});
+Route::get('/{date}/{parent}/{folder}/{fileName}', 'FluxController@flux');
