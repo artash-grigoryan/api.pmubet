@@ -20,7 +20,7 @@ add('shared_dirs', []);
 // Writable dirs by web server
 add('writable_dirs', []);
 set('allow_anonymous_stats', false);
-
+desc('DIR FOLDER' . __DIR__);
 set('rsync_src', function () {
     return __DIR__; // If your project isn't in the root, you'll need to change this.
 });
@@ -47,7 +47,7 @@ task('deploy:secrets', function () {
 });
 
 // Hosts
-
+desc('Hosts part');
 host('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com')
     ->hostname('15.236.238.84') // Hostname or IP address
     ->stage('production') // Deployment stage (production, staging, etc)
