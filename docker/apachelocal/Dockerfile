@@ -27,7 +27,7 @@ RUN a2ensite default
 
 WORKDIR /var/www/
 
-#RUN cd dzio_api && composer install
+#RUN cd api && composer install
 
 RUN a2enmod rewrite
 

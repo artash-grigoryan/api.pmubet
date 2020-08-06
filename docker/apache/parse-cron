@@ -1,1 +1,1 @@
-* * * * * php /var/www/dzio_api/artisan recXML:parseData
+* * * * * php /var/www/api/artisan recXML:parseData

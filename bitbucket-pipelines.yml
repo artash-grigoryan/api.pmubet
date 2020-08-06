@@ -3,29 +3,26 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: agrigoryan/laravel:1.0
+image: php:7.2-fpm
 
 pipelines:
   branches:
-    master:
+    deployment:
       - step:
           deployment: production
           services:
             - docker
           script: # Modify the commands below to build your repository.
-            # Set $DOCKER_HUB_USERNAME and $DOCKER_HUB_PASSWORD as environment variables in repository settings
-            - export IMAGE_NAME=agrigoryan/pmp_api:$BITBUCKET_COMMIT
-            - export REACT_IMAGE=agrigoryan/pmp:$BITBUCKET_COMMIT
-            - export LATEST_IMAGE_NAME=agrigoryan/laravel:1c36e7bf1a2d83ada94311ecbdf01ec0d9de7e06
-            - export LATEST_REACT_IMAGE_NAME=agrigoryan/dzio:latest
-            # authenticate with the Docker Hub registry
-            - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
-            # build the Docker image (this will use the Dockerfile in the root of the repo)
-            #- docker pull $LATEST_IMAGE_NAME
-            - docker build -t $IMAGE_NAME -f ./docker/apache/Dockerfile .
-            - docker build -t $REACT_IMAGE -f ./docker/nodejs/Dockerfile .
-            #- docker run --rm -v $(pwd)/:/var/www/ -w /var/www/api $IMAGE_NAME bash -c "composer install;"
-            # push the new Docker image to the Docker registry
-            - docker push $IMAGE_NAME
-            - docker push $REACT_IMAGE
-            #- docker push $LATEST_IMAGE_NAME
+            - apt-get update && apt-get install -qy git curl libmcrypt-dev coreutils curl bash rsync openssh-client
+            - yes | pecl install mcrypt-1.0.1
+            - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+            - cd api
+            - composer install --optimize-autoloader --no-dev
+            - cp .env.example .env
+            - php artisan key:generate
+            - cd ../
+#            - mkdir -p ~/.ssh
+#            - (umask  077 ; echo $MY_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
+            - rsync -crlOt -e ssh ./api/* ec2-user@ec2-15-188-143-166.eu-west-3.compute.amazonaws.com:/var/www/api.pmubet.com --progress
+            - rsync -avzuhO -e ssh ./docker/recxml ec2-user@ec2-15-188-143-166.eu-west-3.compute.amazonaws.com:/var/www/docker --progress
+

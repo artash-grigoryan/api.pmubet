@@ -41,7 +41,7 @@ RUN cron
 
 WORKDIR /var/www/
 
-RUN cd dzio_api && composer install
+RUN cd api && composer install
 
 RUN a2enmod rewrite
 
