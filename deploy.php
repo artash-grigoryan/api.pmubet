@@ -57,8 +57,12 @@ task('deploy', [
     'artisan:config:cache', // | Laravel specific steps
     'artisan:optimize',     // |
     'artisan:migrate',      // |
-    'artisan:key:generate',      // |
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
 ]);
+
+desc('Generate key');
+task('artisan:key:generate', function () {
+    run('{{bin/php}} {{release_path}}/artisan key:generate');
+});
