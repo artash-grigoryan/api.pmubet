@@ -41,6 +41,11 @@ host('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com') // Name of the server
 
 after('deploy:failed', 'deploy:unlock'); // Unlock after failed deploy
 
+desc('Generate key');
+task('artisan:key:generate', function () {
+    run('{{bin/php}} {{release_path}}/artisan key:generate');
+});
+
 desc('Deploy the application');
 task('deploy', [
     'deploy:info',
@@ -57,12 +62,10 @@ task('deploy', [
     'artisan:config:cache', // | Laravel specific steps
     'artisan:optimize',     // |
     'artisan:migrate',      // |
+    'artisan:key:generate',      // |
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
 ]);
 
-desc('Generate key');
-task('artisan:key:generate', function () {
-    run('{{bin/php}} {{release_path}}/artisan key:generate');
-});
+
