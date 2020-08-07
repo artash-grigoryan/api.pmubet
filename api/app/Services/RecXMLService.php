@@ -15,7 +15,7 @@ use Sabre\Xml\Service;
 class RecXMLService implements DataServiceInterface {
 
     //const RECTXML_FOLDER_PATH = "/var/www/recxml_root";
-    const RECTXML_FOLDER_PATH_TODO = "./../recxml_root";
+    const RECTXML_FOLDER_PATH_TODO = "/var/www/docker/recxml_root";
     const RECTXML_FOLDER_PATH_DONE = "./../recxml_done";
 
     //UNUSED
