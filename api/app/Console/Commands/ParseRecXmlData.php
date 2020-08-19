@@ -72,6 +72,8 @@ class ParseRecXmlData extends Command
         $this->parseForcesPresenceXML();
         $this->parsePronoQ5XML();
 
+        //$this->parseRunnerPresentationXML();
+
         $this->parseNonRunnerXML();
         $this->parseLiveOddSSGXML();
         $this->parsePrizeListXML();
@@ -520,19 +522,13 @@ class ParseRecXmlData extends Command
                         if(!empty($reunion['value']["courses"])) {
                             foreach ($reunion['value']["courses"] as $race) {
 
-                                $raceArr = [
-                                    'id' => $race['value']["id_nav_course"],
-                                    'number' => $race['value']["num_course_pmu"],
-                                    "reunionId" => $reunionObj->id
-                                ];
-
+                                $raceObj = Race::where(['id' => $race['value']["id_nav_course"]])->first();
                                 try {
-                                    //Race::insert(
-                                    //    $raceArr
-                                    //);
+                                    $raceObj->time = $race['value']["temps_course"];
+                                    $raceObj->save();
                                 } catch (\Exception $e) {
+                                    print_r($e->getMessage());
                                 }
-                                $raceObj = new Race($raceArr);
 
                                 if(!empty($race['value']["partants"])) {
                                     foreach ($race['value']["partants"] as $runner) {
@@ -1388,6 +1384,90 @@ class ParseRecXmlData extends Command
                 }
                 // DELETE THE FILE
                 $this->dataService->mvFileDone($this->dataService->getForcesPresenceFolder() . DIRECTORY_SEPARATOR . $fileName);
+            }
+        }
+    }
+
+    private function parseRunnerPresentationXML()
+    {
+
+        $filesInfo = $this->dataService->scanFolder($this->dataService->getRunnerPresentationFolder());
+        foreach ($filesInfo["files"] as $fileName) {
+            if ($fileName !== "." && $fileName !== "..") {
+                $parsedXml = $this->dataService->parseXMLFileByPath(
+                    $filesInfo["path"] . DIRECTORY_SEPARATOR . $fileName,
+                    [
+                        "jours",
+                        "jour",
+                        "reunion",
+                        "course",
+                        "classement",
+                        "rang",
+                    ]
+                );
+
+                if(!empty($parsedXml["jour"]["reunions"])) {
+                    foreach ($parsedXml["jour"]["reunions"] as $reunion) {
+
+                        $reunionArr = [
+                            "id" => $reunion['value']["id_nav_reunion"]
+                        ];
+                        try {
+                            //Reunion::insert(
+                            //    $reunionArr
+                            //);
+                        } catch (\Exception $e) {
+
+                        }
+                        $reunionObj = new Reunion($reunionArr);
+
+                        if(!empty($reunion['value']["courses"])) {
+                            foreach ($reunion['value']["courses"] as $race) {
+
+                                $raceArr = [
+                                    'id' => $race['value']["id_nav_course"],
+                                ];
+
+                                try {
+                                    //Race::updateOrInsert(
+                                    //    ['id' => $race['value']["id_nav_course"]],
+                                    //    $raceArr
+                                    //);
+                                } catch (\Exception $e) {
+                                    print_r('
+        parseRacesXML => 
+        ');
+                                    print_r(array_merge($raceArr, ['id' => $race['value']["id_nav_course"]]));
+                                    print_r($e->getMessage());
+                                }
+                                $raceObj = new Race($raceArr);
+
+                                if(!empty($race['value']["classement"])) {
+                                    foreach ($race['value']["classement"] as $rang) {
+
+                                        if(!empty($rang['temps_part'])) {
+                                            dd($raceObj->id, $rang); //WE ALREADY HAVE IT
+                                        }
+                                        try {
+                                            //Race::updateOrInsert(
+                                            //    ['id' => $race['value']["id_nav_course"]],
+                                            //    $raceArr
+                                            //);
+                                        } catch (\Exception $e) {
+                                            print_r('
+        parseRacesXML => 
+        ');
+                                            print_r(array_merge($raceArr, ['id' => $race['value']["id_nav_course"]]));
+                                            print_r($e->getMessage());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                // DELETE THE FILE
+                $this->dataService->mvFileDone($this->dataService->getRunnerPresentationFolder() . DIRECTORY_SEPARATOR . $fileName);
             }
         }
     }

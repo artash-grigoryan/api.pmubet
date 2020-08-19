@@ -21,7 +21,6 @@ class RecXMLService implements DataServiceInterface {
     //UNUSED
     const MONTH_REUNIONS_FOLDER = "1_MONTH_MEETINGS"; // Toutes les réunions du mois
     const LAST_PERFORMANCES_FOLDER = "7_LAST_PERFORMANCES"; //Dernières perfs des partants
-    const RUNNERS_PRESENTATION_FOLDER = "11_RUNNERS_PRESENTATION"; //classement si course terminée
     const REPORT_CHASES_FOLDER = "23_REPORT_CHASES"; //Liste des arrivés non detaillé
     const STATS_RUNNERS1_FOLDER = "673"; //Statistiques detailées des partants, nb de victoires etc...
     const STATS_RUNNERS2_FOLDER = "690"; //Statistiques detailées des partants, nb de victoires etc...
@@ -47,6 +46,7 @@ class RecXMLService implements DataServiceInterface {
     const NON_RUNNER_FOLDER = "24_NON_RUNNER";
     const LIVE_ODDS_SG_FOLDER = "51_LIVE_ODDS_SG";
     const PRIZE_LIST_FOLDER = "8_PRIZE_LIST"; //Nombres de victoires par partants
+    const RUNNERS_PRESENTATION_FOLDER = "11_RUNNERS_PRESENTATION"; //classement si course terminée
 
     const CASAQUES_FOLDER = "casaques"; //Casaques
     const HIPPODROMES_FOLDER = "ParcoursHippodromes"; //Parcours Hippodromes
@@ -61,8 +61,8 @@ class RecXMLService implements DataServiceInterface {
 
         $this->dayFolder = (new \DateTime())->format("Ymd");
 
-        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE)) {
-            mkdir(self::RECTXML_FOLDER_PATH_DONE);
+        if(!is_dir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE))) {
+            mkdir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE));
         }
     }
 
@@ -80,28 +80,28 @@ class RecXMLService implements DataServiceInterface {
     public function setDayFolder(string $dayFolder)
     {
         $this->dayFolder = $dayFolder;
-        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder)) {
-            mkdir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder);
+        if(!is_dir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE) . DIRECTORY_SEPARATOR . $this->dayFolder)) {
+            mkdir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE) . DIRECTORY_SEPARATOR . $this->dayFolder);
         }
-        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML")) {
-            mkdir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML");
+        if(!is_dir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE) . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML")) {
+            mkdir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE) . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML");
         }
-        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY")) {
-            mkdir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY");
+        if(!is_dir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE) . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY")) {
+            mkdir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE) . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY");
         }
     }
 
     public function createIsNotDir($dir) {
 
-        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . $dir)) {
-            mkdir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . $dir);
+        if(!is_dir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE) . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . $dir)) {
+            mkdir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE) . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . $dir);
         }
     }
 
     public function createIsNotDirBinary($dir) {
 
-        if(!is_dir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . $dir)) {
-            mkdir(self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . $dir);
+        if(!is_dir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE) . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . $dir)) {
+            mkdir(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE) . DIRECTORY_SEPARATOR . $this->dayFolder . DIRECTORY_SEPARATOR . "BINARY" . DIRECTORY_SEPARATOR . $dir);
         }
     }
 
@@ -252,6 +252,15 @@ class RecXMLService implements DataServiceInterface {
     /**
      * @return string
      */
+    public function getRunnerPresentationFolder()
+    {
+        $this->createIsNotDir(self::RUNNERS_PRESENTATION_FOLDER);
+        return $this->dayFolder . DIRECTORY_SEPARATOR . "XML" . DIRECTORY_SEPARATOR . self::RUNNERS_PRESENTATION_FOLDER;
+    }
+
+    /**
+     * @return string
+     */
     public function getCasaquesFolder()
     {
         $this->createIsNotDirBinary(self::CASAQUES_FOLDER);
@@ -269,12 +278,12 @@ class RecXMLService implements DataServiceInterface {
 
     public function getTodoFolderPath($path) {
 
-        return self::RECTXML_FOLDER_PATH_TODO . DIRECTORY_SEPARATOR . $path;
+        return env('RECTXML_FOLDER_PATH_TODO', self::RECTXML_FOLDER_PATH_TODO) . DIRECTORY_SEPARATOR . $path;
     }
 
     public function getDoneFolderPath($path) {
 
-        return self::RECTXML_FOLDER_PATH_DONE . DIRECTORY_SEPARATOR . $path;
+        return env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE) . DIRECTORY_SEPARATOR . $path;
     }
 
     /**
@@ -310,13 +319,13 @@ class RecXMLService implements DataServiceInterface {
 
     public function mvFileDone($filePath) {
 
-        rename($this->getTodoFolderPath($filePath), $this->getDoneFolderPath($filePath));
+        //TODO rename($this->getTodoFolderPath($filePath), $this->getDoneFolderPath($filePath));
     }
 
     public function deleteFilesFromYesterday() {
 
-        $this->deleteFiles(self::RECTXML_FOLDER_PATH_TODO. DIRECTORY_SEPARATOR .date('Ymd', strtotime($this->dayFolder .' -10DAY')));
-        $this->deleteFiles(self::RECTXML_FOLDER_PATH_DONE. DIRECTORY_SEPARATOR .date('Ymd', strtotime($this->dayFolder .' -10DAY')));
+        //TODO $this->deleteFiles(env('RECTXML_FOLDER_PATH_TODO', self::RECTXML_FOLDER_PATH_TODO). DIRECTORY_SEPARATOR .date('Ymd', strtotime($this->dayFolder .' -10DAY')));
+        //TODO $this->deleteFiles(env('RECTXML_FOLDER_PATH_DONE', self::RECTXML_FOLDER_PATH_DONE). DIRECTORY_SEPARATOR .date('Ymd', strtotime($this->dayFolder .' -10DAY')));
     }
 
     function deleteFiles($target) {

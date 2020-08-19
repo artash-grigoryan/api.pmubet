@@ -38,6 +38,7 @@ class CreateRacesTable extends Migration
             $table->timestamp('date')->nullable();
             $table->char('countryCode', 3)->nullable();
             $table->longText('comment')->nullable();
+            $table->longText('time')->nullable();
             $table->integer('reunionId')->unsigned();
 
             $table->foreign('reunionId')

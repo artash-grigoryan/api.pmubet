@@ -81,7 +81,6 @@ body {
 .banner {
   position: relative;
   background-size: cover;
-  background-image: url('//api.dzio.am/img/banner/0.jpg');
   background-repeat: no-repeat;
   background-position: 0 -110px;
 }
@@ -2020,7 +2019,7 @@ footer {
   }
   #calendar-result #main .bar-selector {
     font-size: 14px;
-    height: 47px;
+    /*height: 47px;*/
   }
   #calendar-result .btn-holder {
     text-align: center;

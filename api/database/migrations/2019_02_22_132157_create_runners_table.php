@@ -44,6 +44,7 @@ class CreateRunnersTable extends Migration
             $table->text('signs')->nullable();
             $table->text('tendency')->nullable();
             $table->text('tendencySign')->nullable();
+            $table->text('music')->nullable();
             $table->tinyInteger('doNotRun')->default('0');
             $table->integer('raceId')->unsigned();
 

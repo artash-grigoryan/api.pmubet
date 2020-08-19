@@ -10,7 +10,7 @@ function getAxios() {
     // }
 
     return axios.create({
-        baseURL: API_URL,
+        baseURL: process.env.API_URL,
         // headers: {
         //     "Authorization": `Bearer ${token}`
         // }

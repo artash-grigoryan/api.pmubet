@@ -1,10 +1,17 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-require('dotenv').config({ path: '/run/secrets/envfile_website' });
+const dotenv = require('dotenv');
 
 const extractSass = new ExtractTextPlugin({
     filename: "css/style.css"
 });
+const env = dotenv.config().parsed;
+
+// reduce it to a nice object, the same as before
+const envKeys = Object.keys(env).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+}, {});
 
 const config = {
     entry: [
@@ -12,15 +19,18 @@ const config = {
         './main.js'
     ],
     output: {
-        path: __dirname + "/../api/public",
+        path: __dirname+'/build',
         filename: 'js/bundle.js',
-        publicPath: "http://127.0.0.1:2993/",
+        publicPath: "/",
     },
     devtool: 'source-map',
     devServer: {
         headers: { "Access-Control-Allow-Origin": "http://127.0.0.1" },
         inline: true,
-        port: 2993
+        port: 2993,
+        historyApiFallback: {
+            index: 'index.html'
+        }
     },
     resolve: {
         extensions: ['.js', '.jsx']
@@ -86,9 +96,7 @@ const config = {
         //     debug: true
         // }),
         // new webpack.optimize.UglifyJsPlugin(),
-        new webpack.DefinePlugin({
-            'API_URL': JSON.stringify(process.env.API_URL)
-        }),
+        new webpack.DefinePlugin(envKeys),
         extractSass
     ]
 

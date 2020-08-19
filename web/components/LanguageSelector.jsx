@@ -38,7 +38,7 @@ export default class LanguageSelector extends React.Component {
         }
         let unselectedLanguagesList = this.state.unselectedLanguages.map((lang) =>
             <li key={lang}>
-                <a href={"/"+lang+url} >
+                <a href={"/"+lang} >
                     <img src={require('./../assets/images/flags/'+lang+'.png')} alt={lang}/>
                 </a>
             </li>

@@ -8,6 +8,7 @@ import Predictions from "./Predictions";
 import PredictionTop from "./PredictionTop";
 import Results from "./Results";
 import BetResults from "./BetResults";
+import RunnersResults from "./RunnersResults";
 
 
 export default class Race extends React.Component {
@@ -56,13 +57,20 @@ export default class Race extends React.Component {
                     <div className="row">
 
                         {this.state.isOver && (
-                            <div className="col-lg-12 col-md-12">
-                                <Results {...this.props}/>
+                            <div>
+                                <div className="col-lg-12 col-md-12">
+                                    <Results {...this.props}/>
+                                </div>
+                                <div className="col-lg-12 col-md-12 runners-container">
+                                    <RunnersResults {...this.props}/>
+                                </div>
                             </div>
                         )}
-                        <div className="col-lg-12 col-md-12 runners-container">
-                            <Runners {...this.props}/>
-                        </div>
+                        {!this.state.isOver && (
+                            <div className="col-lg-12 col-md-12 runners-container">
+                                <Runners {...this.props}/>
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>

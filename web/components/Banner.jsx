@@ -26,7 +26,7 @@ const Banner = (props) => {
 
     return (
 
-        <div className="banner inner-banner">
+        <div className="banner inner-banner" style={{backgroundImage: `url(${process.env.API_URL}/img/banner/0.jpg)`}}>
             <div className="container">
                 <div className="text-holder">
                     <h1>
