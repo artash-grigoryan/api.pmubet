@@ -73,7 +73,7 @@ export default class RunnersResults extends React.Component {
                                     <FontAwesomeIcon icon={faTrophy} style={{fontSize: 30,color: parseInt(runner.rank) === 1 ? '#FFD700' : parseInt(runner.rank) === 2 ? '#D3D3D3' : '#CD7F32'}}/>
                                 )}
                                 <span>
-                                    {!runner.doNotRun && !runner.time ? "DAI" : runner.rank}
+                                    {runner.rank}
                                 </span>
                             </span>
                             <span className="runner-img">
