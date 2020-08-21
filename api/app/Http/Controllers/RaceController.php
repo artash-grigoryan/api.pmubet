@@ -44,7 +44,7 @@ class RaceController extends Controller
      */
     public function getAll($locale)
     {
-        $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $races = Race::select(DB::raw('races.*, races.time as raceTime, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->where([['date', '>=', date('Y-m-d', strtotime('-1 DAY'))], ['date', '<=', date('Y-m-d', strtotime('+2 DAY'))]])
             ->orderBy('date', 'ASC')
             ->with("bets")
@@ -72,7 +72,7 @@ class RaceController extends Controller
 
     public function getAllByDate($locale, $date)
     {
-        $races = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $races = Race::select(DB::raw('races.*, races.time as raceTime, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->where([['date', '>=', date('Y-m-d', strtotime($date.' + 1 HOUR'))], ['date', '<', date('Y-m-d', strtotime($date.' +1 DAY + 2 HOUR'))]])
             ->orderBy('date', 'ASC')
             ->with("bets")
@@ -100,7 +100,7 @@ class RaceController extends Controller
 
     public function getNext($locale)
     {
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, races.time as raceTime, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->whereRaw('date >= ADDDATE(NOW(), INTERVAL 1 HOUR)')
             ->orderBy('date', 'ASC')
             ->with("bets")
@@ -130,7 +130,7 @@ class RaceController extends Controller
 
     public function getNextQ5($locale)
     {
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, races.time as raceTime, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->whereRaw('date >= ADDDATE(NOW(), INTERVAL 1 HOUR)')
             ->whereHas('bets', function($query){
                 $query->whereLib('QN');
@@ -160,7 +160,7 @@ class RaceController extends Controller
 
     public function get($locale, $date, $reunionNumber, $raceNumber)
     {
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, races.time as raceTime, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->join('reunions', 'reunions.id', '=', 'races.reunionId')
             ->where([
                 [DB::raw('DATE(reunions.date)'), '=', date('Y-m-d', strtotime($date))],
@@ -241,7 +241,7 @@ class RaceController extends Controller
 
     public function getFirstByDate($locale, $date)
     {
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, races.time as raceTime, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->join('reunions', 'reunions.id', '=', 'races.reunionId')
             ->where([
                 [DB::raw('DATE(reunions.date)'), '=', date('Y-m-d', strtotime($date))]
@@ -321,7 +321,7 @@ class RaceController extends Controller
 
     public function getNextByDate($locale, $date)
     {
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, races.time as raceTime, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->join('reunions', 'reunions.id', '=', 'races.reunionId')
             ->where([
                 [DB::raw('DATE(reunions.date)'), '=', date('Y-m-d', strtotime($date))]
@@ -402,7 +402,7 @@ class RaceController extends Controller
 
     public function getNextQ5ByDate($locale, $date)
     {
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, races.time as raceTime, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->join('reunions', 'reunions.id', '=', 'races.reunionId')
             ->whereHas('bets', function($query){
                 $query->whereLib('QN');
@@ -481,7 +481,7 @@ class RaceController extends Controller
 
     public function getFirstByReunion($locale, $date, $reunionNumber)
     {
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, races.time as raceTime, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->join('reunions', 'reunions.id', '=', 'races.reunionId')
             ->where([
                 [DB::raw('DATE(reunions.date)'), '=', date('Y-m-d', strtotime($date))],
@@ -562,7 +562,7 @@ class RaceController extends Controller
 
     public function getNextQ5Minimalist($locale)
     {
-        $race = Race::select(DB::raw('races.*, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
+        $race = Race::select(DB::raw('races.*, races.time as raceTime, DATE_FORMAT(races.date,\'%Y%m%d\') as datePath, DATE_FORMAT(races.date,\'%Y-%m-%d\') as day, DATE_FORMAT(races.date,\'%H:%i\') as  time'))
             ->whereRaw('date >= ADDDATE(NOW(), INTERVAL 1 HOUR)')
             ->whereHas('bets', function($query){
                   $query->whereLib('QN');
