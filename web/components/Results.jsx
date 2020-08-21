@@ -33,7 +33,7 @@ export default class Results extends React.Component {
 
         return <div className="prediction-top">
             <div className="title m-b-0">
-                <h3><Trans i18nKey="Results">Results</Trans></h3>
+                <h3><Trans i18nKey="Final arrival">Final arrival</Trans></h3>
             </div>
             <div className="prediction">
                 <div className="prediction-header">
@@ -52,8 +52,7 @@ export default class Results extends React.Component {
                         ?
                             <div>
                                 <h2 className="text-uppercase">
-                                    <b className="primary-color">{this.state.runnerSelected.number}</b> -
-                                    <a href="">{this.state.runnerSelected.name}</a>
+                                    <b style={{color: "#000"}}><Trans i18nKey="Race time">Race time</Trans> <br/></b> <b className="primary-color" style={{fontSize: 44}}>{this.props.race.raceTime}</b>
                                 </h2>
                             </div>
                         :

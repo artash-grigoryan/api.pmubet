@@ -57,14 +57,14 @@ export default class Race extends React.Component {
                     <div className="row">
 
                         {this.state.isOver && (
-                            <div>
+                            <React.Fragment>
                                 <div className="col-lg-12 col-md-12">
                                     <Results {...this.props}/>
                                 </div>
                                 <div className="col-lg-12 col-md-12 runners-container">
                                     <RunnersResults {...this.props}/>
                                 </div>
-                            </div>
+                            </React.Fragment>
                         )}
                         {!this.state.isOver && (
                             <div className="col-lg-12 col-md-12 runners-container">

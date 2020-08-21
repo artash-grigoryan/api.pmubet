@@ -16,7 +16,7 @@ export default class RunnersResults extends React.Component {
         this.state = {
 
             runnerSelected : null,
-            runners: props.race.runners.sort((a, b) => {
+            runners: [...props.race.runners.filter(runner => !runner.doNotRun).sort((a, b) => {
                 if(a.rank === null) {
                     return 1;
                 }
@@ -24,13 +24,13 @@ export default class RunnersResults extends React.Component {
                     return -1;
                 }
                 return parseInt(a.rank) - parseInt(b.rank)
-            })
+            }), ...props.race.runners.filter(runner => runner.doNotRun)]
         }
     }
 
     componentWillReceiveProps(props) {
         this.setState({runnerSelected : null});
-        this.setState({runners: this.props.race.runners.sort((a, b) => {
+        this.setState({runners: [...props.race.runners.filter(runner => !runner.doNotRun).sort((a, b) => {
             if(a.rank === null) {
                 return 1;
             }
@@ -38,7 +38,7 @@ export default class RunnersResults extends React.Component {
                 return -1;
             }
             return parseInt(a.rank) - parseInt(b.rank)
-        })});
+        }), ...props.race.runners.filter(runner => runner.doNotRun)]});
     }
 
     getCasaqueImgPath(race, runner) {
@@ -72,7 +72,9 @@ export default class RunnersResults extends React.Component {
                                 {parseInt(runner.rank) <= 3 && (
                                     <FontAwesomeIcon icon={faTrophy} style={{fontSize: 30,color: parseInt(runner.rank) === 1 ? '#FFD700' : parseInt(runner.rank) === 2 ? '#D3D3D3' : '#CD7F32'}}/>
                                 )}
-                                <span>{runner.rank}</span>
+                                <span>
+                                    {!runner.doNotRun && !runner.time ? "DAI" : runner.rank}
+                                </span>
                             </span>
                             <span className="runner-img">
                                 {
@@ -86,11 +88,13 @@ export default class RunnersResults extends React.Component {
                             </span>
                             <span className="runner-name">
                                 <p>{runner.number}. {(runner.translation ? runner.translation.name : null) || runner.name}</p>
-                                <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey} {runner.music && ' - '+runner.music}</span>
+                                <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey}</span>
+                                <span className="music-divider">{runner.music && ' - '} </span>
+                                <span className="music">{runner.music && runner.music} </span>
                             </span>
                         </div>
                         <span className="runner-cote">
-                            <span>{!runner.doNotRun ? runner.signs : null} {!runner.doNotRun ? runner.reportEvol : null}</span>
+                            <span>{runner.time}</span>
                         </span>
                     </div>
                     {
@@ -175,7 +179,7 @@ export default class RunnersResults extends React.Component {
         return <div>
 
             <div className="title double-title m-b-0">
-                <h3>The runners</h3>
+                <h3><Trans i18nKey={"Ranking"}>Ranking</Trans></h3>
                 <span className="add-value"><img src="https://www.equidia.fr/assets/img/icons-png/discipline_trot.png" alt="Monté"/><span>R{this.props.reunion.externNumber} C{this.props.race.number}</span></span>
             </div>
             <div className="runners-tab">

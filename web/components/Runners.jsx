@@ -64,7 +64,9 @@ export default class Runners extends React.Component {
                             </span>
                             <span className="runner-name">
                                 <p>{(runner.translation ? runner.translation.name : null) || runner.name}</p>
-                                <span>{(runner.translation ? runner.translation.jokey : null) || runner.jokey} {runner.music && ' - '+runner.music}</span>
+                                <span className="jokey">{(runner.translation ? runner.translation.jokey : null) || runner.jokey} </span>
+                                <span className="music-divider">{runner.music && ' - '} </span>
+                                <span className="music">{runner.music && runner.music} </span>
                             </span>
                         </div>
                         <span className="runner-cote">
@@ -153,7 +155,7 @@ export default class Runners extends React.Component {
         return <div>
 
             <div className="title double-title m-b-0">
-                <h3>The runners</h3>
+                <h3><Trans i18nKey={"The runners"}>The runners</Trans></h3>
                 <span className="add-value"><img src="https://www.equidia.fr/assets/img/icons-png/discipline_trot.png" alt="Monté"/><span>R{this.props.reunion.externNumber} C{this.props.race.number}</span></span>
             </div>
             <div className="runners-tab">

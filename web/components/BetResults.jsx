@@ -15,7 +15,7 @@ export default class BetResults extends React.Component {
             this.props.race.betResults.map((bet) => {
 
                 listBets.push(
-                    <div key={bet.name} className="" style={{marginTop: 10}}>
+                    <div key={bet.name} className="" style={{marginBottom: 10}}>
                         <BetResultsDetails betSelected={bet.name} {...this.props} />
                     </div>
                 )

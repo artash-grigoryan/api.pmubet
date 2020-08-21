@@ -596,6 +596,7 @@ body {
 .race-comment > p {
   text-align: justify;
   padding: 20px;
+  margin-bottom: 0;
   background: #fff;
   border-bottom: 2px solid #f6a800;
   box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.24);
@@ -774,6 +775,10 @@ body {
   width: 50px;
   text-align: center;
 }
+.runners-tab .runner-rank {
+  font-weight: bold;
+  color: #000;
+}
 .runners-tab .runner-img{
   width: 50px;
   text-align: center;
@@ -785,6 +790,10 @@ body {
   /*width: 250px;*/
   white-space: nowrap;
   overflow: hidden;
+}
+.runners-tab .runner-name p {
+  color: #000;
+  font-weight: 500;
 }
 .runners-tab .runner-name .do-not-run{
   color: red;
@@ -808,9 +817,42 @@ body {
   font-size: 12px;
 }
 .runners-tab .info-runner-icon{}
+.runners-tab span.info-runner-icon {
+  padding-top: 3px;
+  margin-right: 10px;
+}
 .runners-tab .info-runner-icon svg{
   color: #f6a803;
   font-size: 20px;
+}
+@media (max-width: 600px) {
+  .runners-tab .info-runner-icon {
+    display: none;
+  }
+  .runners-tab .music-divider {
+    display: none;
+  }
+  .runners-tab .music {
+    display: block;
+  }
+  .table-striped .runner {
+    padding: 20px 20px 10px 20px;
+  }
+  .runners-tab .runner-rank {
+    width: 30px;
+  }
+  .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+    padding: 0;
+  }
+  .runners-container {
+    padding: 0
+  }
+  .block-race-condition, .race-comment > p {
+    box-shadow: none;
+  }
+  .info-section .container {
+    padding: 0;
+  }
 }
 .runners-tab .runner-details .carousel-item{
   height: 255px;
@@ -1391,6 +1433,7 @@ body {
 
 
 .results-section {
+  background: #f0f0f0;
 }
 .results-section .results-selection-tab{
   background: #FFF;
@@ -2088,7 +2131,7 @@ footer {
   #race-over .race-comment,
   #race-over .prediction-body.tab-content,
   #race-over .prediction-top .prediction-header ul li.active:before,
-  #race-over .runners-container {
+  {
     display: none;
   }
   #main .bar-selector .race-selector ul li a .widget__icon--quinte {

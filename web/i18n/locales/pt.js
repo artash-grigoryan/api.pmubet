@@ -38,12 +38,16 @@ export default {
     "FOR 1 EURO" : "Por 1 Euro",
 
     "Results":"Resultados",
+    "Race time":"Tempo de corrida",
     "Reports":"Relatórios",
     "Report":"Relatório",
     "Arrival":"Chegada",
     "Winner":"Vencedor",
     "Placed":"Podium",
     "Nb winning bets":"Apostas vencedoras",
+    "Final arrival":"Chegada final",
+    "The runners":"Os corredores",
+    "Ranking":"Ranking",
 
     "How to bet ?":"How to bet ?",
     "What is Quinte + ?":"What is Quinté + ?",

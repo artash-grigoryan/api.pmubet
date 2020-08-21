@@ -46,6 +46,10 @@ export default class PredictionTop extends React.Component {
 
     render() {
 
+        if(!this.props.predictionTop || this.props.predictionTop.predictions.length < 0 ) {
+            return null;
+        }
+
         return <div className="prediction-top">
             <div className="title m-b-0">
                 <h3><Trans i18nKey="PMUBET Predictions">PMUBET Predictions</Trans></h3>

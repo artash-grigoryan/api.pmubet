@@ -39,11 +39,15 @@ export default {
 
     "Results":"Valiny",
     "Reports":"Vokadalao",
+    "Race time":"Fotoanan'ny hazakazaka",
     "Report":"Vokadalao",
     "Arrival":"Fahatongavana",
     "Winner":"Mpandresy",
     "Placed":"Placé",
     "Nb winning bets":"Tsatsiom pandresena",
+    "Final arrival":"Fahatongavana farany",
+    "The runners":"Ny mpihazakazaka",
+    "Ranking":"Ambony",
 
     "How to bet ?":"Comment jouer ?",
     "What is Quinte + ?":"Qu'est ce que le Quinté+ ?",

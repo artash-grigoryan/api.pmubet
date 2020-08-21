@@ -38,12 +38,16 @@ export default {
     "FOR 1 EURO" : "FOR 1 EURO",
 
     "Results":"Results",
+    "Race time":"Race time",
     "Reports":"Winnings",
     "Report":"Winnings",
     "Arrival":"Arrival",
     "Winner":"Winner",
     "Placed":"Placed",
     "Nb winning bets":"Nb winning bets",
+    "Final arrival":"Final arrival",
+    "The runners":"The runners",
+    "Ranking":"Ranking",
 
     "How to bet ?":"How to bet ?",
     "What is Quinte + ?":"What is Quinté + ?",

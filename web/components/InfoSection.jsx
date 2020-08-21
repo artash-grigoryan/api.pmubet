@@ -13,7 +13,7 @@ export default class InfoSection extends React.Component {
     getHippodromeImgPath(race) {
 
         let date = new Date(this.props.race.date);
-        return '/img/hippodromes/'+date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2)+'_'+race.reunion.code+'-R'+race.reunion.number+'C'+race.number+'.png';
+        return process.env.REACT_APP_API_URL+'/img/hippodromes/'+date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2)+'_'+race.reunion.code+'-R'+race.reunion.number+'C'+race.number+'.png';
     }
 
     render() {

@@ -39,11 +39,15 @@ export default {
 
     "Results":"Résultats",
     "Reports":"Rapport",
+    "Race time":"Race time",
     "Report":"Rapports",
     "Arrival":"Arrivée",
     "Winner":"Gagnant",
     "Placed":"Placé",
     "Nb winning bets":"Nb de mises gagnantes",
+    "Final arrival":"Arrivée définitive",
+    "The runners":"Tableau des partants",
+    "Ranking":"Classement",
 
     "How to bet ?":"Comment jouer ?",
     "What is Quinte + ?":"Qu'est ce que le Quinté+ ?",
