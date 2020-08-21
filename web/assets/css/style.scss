@@ -702,6 +702,9 @@ body {
   /*float: right;*/
 }
 .prediction-top .prediction-body .prediction-info .reporter{}
+#race-over .prediction-top .race-time .primary-color {
+  font-size: 44px;
+}
 .predictions-container {
   background: #fff;
   margin-bottom: 20px;
@@ -2129,10 +2132,12 @@ footer {
 
   #race-over .block-race-condition,
   #race-over .race-comment,
-  #race-over .prediction-body.tab-content,
   #race-over .prediction-top .prediction-header ul li.active:before,
   {
     display: none;
+  }
+  #race-over .prediction-top .race-time .primary-color {
+    font-size: 26px;
   }
   #main .bar-selector .race-selector ul li a .widget__icon--quinte {
     position: absolute;

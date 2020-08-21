@@ -45,14 +45,14 @@ export default class Results extends React.Component {
                         }
                     </ul>
                 </div>
-                <div className="prediction-body tab-content">
+                <div className="prediction-body tab-content race-time">
 
                     {
                         this.state.runnerSelected
                         ?
                             <div>
                                 <h2 className="text-uppercase">
-                                    <b style={{color: "#000"}}><Trans i18nKey="Race time">Race time</Trans> <br/></b> <b className="primary-color" style={{fontSize: 44}}>{this.props.race.raceTime}</b>
+                                    <b style={{color: "#000"}}><Trans i18nKey="Race time">Race time</Trans> <br/></b> <b className="primary-color">{this.props.race.raceTime}</b>
                                 </h2>
                             </div>
                         :
