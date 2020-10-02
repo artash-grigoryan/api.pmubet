@@ -114,7 +114,7 @@ export default class HowToBetPage extends Component {
                                         </div>
 
                                         <div className="title m-b-0">
-                                            <h3><Trans i18nKey="USEFUL LINKS">USEFUL LINKS</Trans></h3>
+                                            <h3><Trans i18nKey="USEFUL LINKS">USEFUL LIN</Trans></h3>
                                         </div>
                                         <div className="card">
 
