@@ -198,6 +198,11 @@ export default class CalendarResultsPage extends Component {
         return (Date.parse(race.date) + (this.state.timezoneOffset*60*60*1000));
     }
 
+    getDateFilter = () => {
+        let elem = this;
+        return function(race){ return elem.getRaceDateWithOffset(race) > Date.now(); }
+    }
+
 	render() {
 
         let listReunions = null;
@@ -353,7 +358,7 @@ export default class CalendarResultsPage extends Component {
                                     ?
                                         this.state.filter === 'next'
                                         ?
-                                            _.filter(this.state.races[this.state.date], function(race){ return this.getRaceDateWithOffset(race) > Date.now(); }).map((race, indexRace) =>
+                                            _.filter(this.state.races[this.state.date], this.getDateFilter()).map((race, indexRace) =>
                                                 <div key={race.id} className="calendar-row">
                                                     <div>
 

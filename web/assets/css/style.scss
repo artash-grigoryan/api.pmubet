@@ -1646,7 +1646,7 @@ body {
   display: inline-block;
   float: left;
   width: 50%;
-  height: 25px;
+  height: 34px;
   text-align: right !important;
   background-color: #016a30;
 }
@@ -2174,6 +2174,9 @@ footer {
     text-transform: none;
   }
 
+  #calendar-result .calendar-results .calendar-results-numbers {
+    height: 27px;
+  }
   #calendar-result .calendar-results .calendar-results-numbers span {
     width: 21px;
     height: 21px;
@@ -2318,6 +2321,9 @@ footer {
     width: 15%;
     float: left;
     border-right: 1px solid #bdbcbc;
+    height: 24px;
+  }
+  #calendar-result .calendar-results .calendar-results-numbers {
     height: 24px;
   }
   #calendar-result .calendar-results .calendar-results-numbers span {
