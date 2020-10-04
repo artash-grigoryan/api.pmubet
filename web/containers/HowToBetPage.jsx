@@ -4,7 +4,6 @@ import Footer from "../components/shared/footer/footer";
 import { raceActions } from '../actions/race';
 import Banner from "../components/Banner";
 import { Trans } from "react-i18next";
-const i18next = require('i18next');
 
 export default class HowToBetPage extends Component {
 

@@ -33,6 +33,7 @@ export default {
 
     "Lives" : "Lalao Mivantana",
     "Account" : "Kaonty",
+    "day" : "andro",
     "days" : "andro",
     "Type" : "Karazany",
     "FOR 1 EURO" : "Ho any 1 euro",

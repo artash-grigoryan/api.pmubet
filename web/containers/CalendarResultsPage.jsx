@@ -193,6 +193,11 @@ export default class CalendarResultsPage extends Component {
         return timezoneHours + ':' + timezoneMinutes;
     }
 
+    getRaceDateWithOffset(race) {
+
+        return (Date.parse(race.date) + (this.state.timezoneOffset*60*60*1000));
+    }
+
 	render() {
 
         let listReunions = null;
@@ -348,7 +353,7 @@ export default class CalendarResultsPage extends Component {
                                     ?
                                         this.state.filter === 'next'
                                         ?
-                                            _.filter(this.state.races[this.state.date], function(race){ return Date.parse(race.date) > Date.now(); }).map((race, indexRace) =>
+                                            _.filter(this.state.races[this.state.date], function(race){ return this.getRaceDateWithOffset(race) > Date.now(); }).map((race, indexRace) =>
                                                 <div key={race.id} className="calendar-row">
                                                     <div>
 
@@ -363,7 +368,7 @@ export default class CalendarResultsPage extends Component {
                                                         <div className="calendar-runners" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></div>
                                                         <div className="calendar-btn">
                                                             {
-                                                                Date.parse(race.date) < Date.now()
+                                                                this.getRaceDateWithOffset(race) < Date.now()
                                                                     ?
                                                                     <Link className="btn btn-access" to={"/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number}>
                                                                         <Trans i18nKey="Results">Results</Trans>
@@ -407,7 +412,7 @@ export default class CalendarResultsPage extends Component {
                                                         <div className="calendar-runners" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></div>
                                                         <div className="calendar-btn">
                                                             {
-                                                                Date.parse(race.date) < Date.now()
+                                                                this.getRaceDateWithOffset(race) < Date.now()
                                                                     ?
                                                                     <a className="btn btn-access" href={"/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number}>
                                                                         <Trans i18nKey="Results">Results</Trans>

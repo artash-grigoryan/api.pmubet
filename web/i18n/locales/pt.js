@@ -33,6 +33,7 @@ export default {
 
     "Lives" : "Ao vivo",
     "Account" : "Conta",
+    "day" : "Dia",
     "days" : "Dias",
     "Type" : "Tipo",
     "FOR 1 EURO" : "Por 1 Euro",

@@ -70,7 +70,7 @@ export default class BetResultsDetails extends React.Component {
                     <tr>
                         <td className="bet-logo" colSpan="5">
                             <a href="javascript:;">
-                                <img src={this.getBetLogo(betSeleted)} alt=""/>
+                                <img src={`${process.env.API_URL}${this.getBetLogo(betSeleted)}`} alt=""/>
                                 {
                                     betSeleted === 'Simple'
                                     ?
@@ -119,7 +119,7 @@ export default class BetResultsDetails extends React.Component {
                     <tr>
                         <td className="bet-logo" colSpan="4">
                             <a href="javascript:;">
-                                <img src={this.getBetLogo(betSeleted)} alt=""/>
+                                <img src={`${process.env.API_URL}${this.getBetLogo(betSeleted)}`} alt=""/>
                             </a>
                         </td>
                     </tr>

@@ -33,6 +33,7 @@ export default {
 
     "Lives" : "Lives",
     "Account" : "Account",
+    "day" : "day",
     "days" : "days",
     "Type" : "Type",
     "FOR 1 EURO" : "FOR 1 EURO",
