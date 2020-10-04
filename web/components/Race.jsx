@@ -76,7 +76,7 @@ export default class Race extends React.Component {
             </section>
             <InfoSection {...this.props}/>
 
-            <section className="info-section">
+            <section className="info-section" style={{paddingBottom: 20}}>
                 <div className="container">
 
                     <div className="race-comment">
@@ -98,14 +98,6 @@ export default class Race extends React.Component {
                     )}
                 </div>
             </section>
-
-            {
-                this.state.isOver
-                    ?
-                    <BetResults {...this.props}/>
-                    :
-                    null
-            }
         </div>
     }
 }

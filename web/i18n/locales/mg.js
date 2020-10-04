@@ -52,9 +52,9 @@ export default {
 
     "How to bet ?":"Comment jouer ?",
     "What is Quinte + ?":"Qu'est ce que le Quinté+ ?",
-    "At Quinte + you have to find the first five horses of the race. This is the bet that meets the biggest success because it offers the biggest gains. It puts at stake a weekly piggy bank, to share among all the bettors having found the first five horses in the exact order. It is proposed, in principle, Sunday, day of the most prestigious meetings. The Quinte + takes place once a day on the most beautiful race of the day. We find the best horses and incredible suspense.":"At Quinté + you have to find the first five horses of the race. This is the bet that meets the biggest success because it offers the biggest gains. It puts at stake a weekly piggy bank, to share among all the bettors having found the first five horses in the exact order. It is proposed, in principle, Sunday, day of the most prestigious meetings. The Quinté + takes place once a day on the most beautiful race of the day. We find the best horses and incredible suspense.",
+    "whatIsQuinteText":"At Quinté + you have to find the first five horses of the race. This is the bet that meets the biggest success because it offers the biggest gains. It puts at stake a weekly piggy bank, to share among all the bettors having found the first five horses in the exact order. It is proposed, in principle, Sunday, day of the most prestigious meetings. The Quinté + takes place once a day on the most beautiful race of the day. We find the best horses and incredible suspense.",
     "What do the odds mean ?":"Qu'est ce que la cote ?",
-    "They represent the chances of victory of the horse and are calculated according to the total mass of the stakes. The odds allow to know the most played horses. A favorite horse will have a low rating (ex: 1.5). By betting on him, your chances of winning are important but you risk winning little. Conversely, a little played horse will have a big odds (ex: 35). It is an outsider and, by betting on him, you have less chances to win but he will pay you big in case of victory.":"Le principal indice est la cote. Elle vous permet de savoir à quel cheval les autres joueurs font confiance. Plus la cote est petite, plus il y a de parieurs qui misent sur ce cheval pensant qu’il est favori. Inversément, si la cote est grande, peu de joueurs ont sélectionné ce cheval car il n’affiche pas de signes éloquents de gagnant. C’est un outsider! Une petite cote signifie de grandes chances de petits gains. Une grande cote indique de petites chances de gros gains.",
+    "whatoddsMeanText":"Le principal indice est la cote. Elle vous permet de savoir à quel cheval les autres joueurs font confiance. Plus la cote est petite, plus il y a de parieurs qui misent sur ce cheval pensant qu’il est favori. Inversément, si la cote est grande, peu de joueurs ont sélectionné ce cheval car il n’affiche pas de signes éloquents de gagnant. C’est un outsider! Une petite cote signifie de grandes chances de petits gains. Une grande cote indique de petites chances de gros gains.",
     "Where can I see the live ?":"Comment regarder les courses en direct ?",
     "By going to the race page you can click on see the live in the top of the race at the top of the page":"Regarder gratuitement les courses sur le site de jeu en ligne de votre pays.",
     "HOW TO BET":"COMMENT JOUER",
@@ -77,6 +77,7 @@ export default {
     "runners":"Mpandray anjara",
 
     "Runner details":"Mombamomba ny mpandray anjara",
+    "Ancestry": "Razambeny",
     "Number of races":"Lalao natao",
     "Number of races won":"Lalao nandresena",
     "Number of places":"Isan'ny placé",
