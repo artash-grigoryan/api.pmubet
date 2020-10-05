@@ -40,7 +40,7 @@ export default {
 
     "Results":"Résultats",
     "Reports":"Rapport",
-    "Race time":"Race time",
+    "Race time":"Durée de la course",
     "Report":"Rapports",
     "Arrival":"Arrivée",
     "Winner":"Gagnant",
