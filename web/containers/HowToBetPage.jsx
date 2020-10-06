@@ -4,6 +4,7 @@ import Footer from "../components/shared/footer/footer";
 import { raceActions } from '../actions/race';
 import Banner from "../components/Banner";
 import { Trans } from "react-i18next";
+import {Helmet} from "react-helmet";
 
 export default class HowToBetPage extends Component {
 
@@ -41,6 +42,13 @@ export default class HowToBetPage extends Component {
 	render() {
 
 		return <div id="how-to-bet">
+
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>How to bet</title>
+                <link rel="canonical" href="http://www.pmubet.com/fr/how-to-bet" />
+            </Helmet>
+
             <header>
                 <MainMenu {...this.state}/>
             </header>
@@ -63,7 +71,7 @@ export default class HowToBetPage extends Component {
                                     <div className="col-md-8">
 
                                         <div className="title m-b-0">
-                                            <h3>How to bet</h3>
+                                            <h3><Trans i18nKey="How to bet">How to bet</Trans></h3>
                                         </div>
                                         <div className="card">
                                             <div className="card-body">

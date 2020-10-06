@@ -16,6 +16,7 @@ import i18next from "i18next";
 import {reunionActions} from "../actions/reunion";
 import Q5Icon from "../components/Q5Icon";
 import BetButton from "../components/BetButton";
+import {Helmet} from "react-helmet";
 
 export default class CalendarResultsPage extends Component {
 
@@ -244,6 +245,13 @@ export default class CalendarResultsPage extends Component {
         }
 
 		return <div id="calendar-result">
+
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Programs & Results</title>
+                <link rel="canonical" href="http://www.pmubet.com/" />
+            </Helmet>
+
             <header>
                 <MainMenu {...this.state}/>
             </header>

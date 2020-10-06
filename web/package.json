@@ -29,6 +29,7 @@
     "react-dates": "^16.4.0",
     "react-dom": "^16.8.4",
     "react-dropzone": "^4.2.8",
+    "react-helmet": "^6.1.0",
     "react-i18next": "^10.4.2",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",

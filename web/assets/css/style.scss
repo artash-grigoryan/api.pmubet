@@ -1984,7 +1984,18 @@ footer {
     order: -1;
   }
 
-
+  #countries-menu-dialog .container .country-list{
+    max-width: 100vw;
+    box-shadow: 0 1px 3px #1f1f1f;
+    background: #007315;
+    width: auto;
+    padding: 20px;
+    border: 2px solid;
+    margin: 50px auto;
+    max-height: calc(100vh - 50px);
+    color: #FFF;
+    overflow: auto;
+  }
 
   .language-selector {
     padding: 5px 20px 5px 0px;
