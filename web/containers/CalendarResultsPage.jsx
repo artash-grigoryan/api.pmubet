@@ -379,7 +379,7 @@ export default class CalendarResultsPage extends Component {
                                                                         <Trans i18nKey="Results">Results</Trans>
                                                                     </Link>
                                                                     :
-                                                                    <BetButton className="btn btn-access bet-now"/>
+                                                                    <BetButton className="btn btn-access bet-now" race={race}/>
                                                             }
                                                         </div>
                                                     </div>
@@ -423,7 +423,7 @@ export default class CalendarResultsPage extends Component {
                                                                         <Trans i18nKey="Results">Results</Trans>
                                                                     </a>
                                                                     :
-                                                                    <BetButton className="btn btn-access bet-now"/>
+                                                                    <BetButton className="btn btn-access bet-now" race={race}/>
                                                             }
                                                         </div>
                                                     </div>

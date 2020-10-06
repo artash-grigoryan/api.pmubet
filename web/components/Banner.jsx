@@ -53,7 +53,7 @@ const Banner = (props) => {
                     </div>
 
                     <div style={{marginTop: "30px"}}>
-                        <BetButton/>
+                        <BetButton race={props.race}/>
                         {props.race.reunion.qn === props.race.number &&
                             <Q5Icon className="banner-icon"/>
                         }

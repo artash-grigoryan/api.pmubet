@@ -1,20 +1,28 @@
 import React, {useState} from 'react';
 import {Trans} from "react-i18next";
 
-const BetButton = (props) => {
+const BetButton = ({race, className}) => {
 
     const [dialogStatus, setDialogStatus] = useState('closed')
     const countries = [
+        /*
         {
             name: <Trans i18nKey="Angola">Angola</Trans>,
             flag: 'angola',
             url: 'https://pmubet.cm/'
         },
+         */
         {
             name: <Trans i18nKey="Cameroun">Cameroun</Trans>,
             flag: 'cameroon',
-            url: 'https://pmubet.cm/'
+            url: `https://pmubet.cm/horseracing${race ? `/race/R${race.reunion.number}C${race.number}` : ''}`
         },
+        {
+            name: <Trans i18nKey="Madagascar">Madagascar</Trans>,
+            flag: 'madagascar',
+            url: `https://www.bet261.mg/horseracing${race ? `/race/R${race.reunion.number}C${race.number}` : ''}`
+        },
+        /*
         {
             name: <Trans i18nKey="Centrafrique">Centrafrique</Trans>,
             flag: 'central-african-republic',
@@ -35,17 +43,18 @@ const BetButton = (props) => {
             flag: 'nigeria',
             url: 'https://pmubet.cm/'
         },
+         */
         {
             name: <Trans i18nKey="Tchad">Tchad</Trans>,
             flag: 'chad',
-            url: 'https://pmubet.cm/'
+            url: `https://pariezcash-tchad.com/horseracing${race ? `/race/R${race.reunion.number}C${race.number}` : ''}`
         },
     ]
 
-    console.log(props);
+
     return (
         <React.Fragment>
-            <a href="javascript:;" onClick={()=>setDialogStatus('opened')} className={`btn btn-md ${props.className}`}>
+            <a href="javascript:;" onClick={()=>setDialogStatus('opened')} className={`btn btn-md ${className}`}>
                 <Trans i18nKey="Bet now">
                     Bet now
                 </Trans>
