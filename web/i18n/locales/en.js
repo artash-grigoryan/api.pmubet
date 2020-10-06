@@ -24,6 +24,7 @@ export default {
     "Next Predictions":"Next Predictions",
     "PMUBET Predictions":"PMUBET Predictions",
     "Programs":"Programs",
+    "Programs & Results":"Programs & Results",
     "Calendar & Results":"Calendar & Results",
     "How to bet":"How to bet",
     "Pronostic VIP":"VIP Predictions",

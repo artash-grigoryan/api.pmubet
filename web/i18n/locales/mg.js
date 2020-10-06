@@ -24,6 +24,7 @@ export default {
     "Next Predictions":"Sopapa manaraka",
     "PMUBET Predictions":"Sopapa PMUBET",
     "Programs":"Fandaharana",
+    "Programs & Results":"Fandaharana sy valiny",
     "Calendar & Results":"Alimanaka sy vokany",
     "How to bet":"Ahoana ny fomba filalaovana",
     "Pronostic VIP":"Sopapa VIP",

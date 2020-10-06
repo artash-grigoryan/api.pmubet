@@ -24,6 +24,7 @@ export default {
     "Next Predictions":"Proximos prognósticos",
     "PMUBET Predictions":"Prognósticos PMUBET",
     "Programs":"Programas",
+    "Programs & Results":"Programas e resultados",
     "Calendar & Results":"Calendário & Resultados",
     "How to bet":"Como apostar",
     "Pronostic VIP":"Prognósticos VIP",

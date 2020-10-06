@@ -5,7 +5,7 @@ import { raceActions } from '../actions/race';
 import Banner from "../components/Banner";
 import { Trans } from "react-i18next";
 import {Helmet} from "react-helmet";
-
+import {t} from "i18next";
 export default class HowToBetPage extends Component {
 
     constructor(props) {
@@ -45,8 +45,8 @@ export default class HowToBetPage extends Component {
 
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>How to bet</title>
-                <link rel="canonical" href="http://www.pmubet.com/fr/how-to-bet" />
+                <title>{t("How to bet")}</title>
+                <link rel="canonical" href="http://www.pmubet.com/en/how-to-bet" />
             </Helmet>
 
             <header>

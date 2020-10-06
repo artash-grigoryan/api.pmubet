@@ -12,11 +12,12 @@ import { faCalendarAlt, faAngleDoubleDown } from '@fortawesome/free-solid-svg-ic
 import Calendar from "react-calendar";
 import Banner from "../components/Banner";
 import {getIconBySpeciality} from "../helpers/iconsBySpeciality";
-import i18next from "i18next";
+import i18next, {t} from "i18next";
 import {reunionActions} from "../actions/reunion";
 import Q5Icon from "../components/Q5Icon";
 import BetButton from "../components/BetButton";
 import {Helmet} from "react-helmet";
+
 
 export default class CalendarResultsPage extends Component {
 
@@ -248,7 +249,7 @@ export default class CalendarResultsPage extends Component {
 
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>Programs & Results</title>
+                <title>{t("Programs & Results")}</title>
                 <link rel="canonical" href="http://www.pmubet.com/" />
             </Helmet>
 
