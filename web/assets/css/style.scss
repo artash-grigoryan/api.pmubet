@@ -36,6 +36,12 @@ body {
   background: #016a30;
 }
 
+h1.page-title {
+  height: 5px;
+  width: 1px;
+  overflow: hidden;
+}
+
 .navbar-brand {
 
   display: inline-block;

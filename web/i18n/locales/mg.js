@@ -91,6 +91,9 @@ export default {
     "Name of the mother":"Reny",
     "Name of the father":"Ray",
 
+    "lang" : "mg",
+    "canonical" : "http://www.pmubet.com/mg",
+    "canonicalhtb" : "http://www.pmubet.com/mg/how-to-bet",
     "Select your country":"Safidio ny Firenena",
     "Angola":"Angola",
     "Cameroun":"Cameroun",
@@ -99,4 +102,8 @@ export default {
     "Mauritius":"Maurice",
     "Nigeria":"Nigeria",
     "Tchad":"Tchad",
+
+    "meta title" : "Paris Hippiques PMUBET en Afrique - La Masse Commune PMU en Afrique",
+    "meta name" : "Jouer en Afrique sur les courses PMU en Masse Commune | PMUBET",
+    "meta description" : "Profiter des meilleurs informatiques hippiques et pronostiques Quinté+ pour les courses PMU en Afrique | PMUBET",
 };

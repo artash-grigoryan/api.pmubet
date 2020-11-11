@@ -91,6 +91,9 @@ export default {
     "Name of the mother":"Nome da mãe",
     "Name of the father":"Nome do pai",
 
+    "lang" : "pt",
+    "canonical" : "http://www.pmubet.com/pt",
+    "canonicalhtb" : "http://www.pmubet.com/pt/how-to-bet",
     "Select your country":"Selecione o seu país",
     "Angola":"Angola",
     "Cameroun":"Camarões",
@@ -99,4 +102,8 @@ export default {
     "Mauritius":"Maurícias",
     "Nigeria":"Nigéria",
     "Tchad":"Chad",
+
+    "meta title" : "Paris Hippiques PMUBET en Afrique - La Masse Commune PMU en Afrique",
+    "meta name" : "Jouer en Afrique sur les courses PMU en Masse Commune | PMUBET",
+    "meta description" : "Profiter des meilleurs informatiques hippiques et pronostiques Quinté+ pour les courses PMU en Afrique | PMUBET",
 };

@@ -248,9 +248,18 @@ export default class CalendarResultsPage extends Component {
 		return <div id="calendar-result">
 
             <Helmet>
-                <meta charSet="utf-8" />
+                <html lang={t("lang")}/>
                 <title>{t("Programs & Results")}</title>
-                <link rel="canonical" href="http://www.pmubet.com/" />
+                <link rel="canonical" href={t("canonical")} />
+
+                <meta name="title" content={t("meta title")}/>
+                <meta name="description" content={t("meta description")}/>
+                <meta itemProp="name" content={t("meta name")}/>
+                <meta itemProp="description" content={t("meta description")}/>
+                <meta property="og:title" content={t("meta title")}/>
+                <meta property="og:description" content={t("meta description")}/>
+                <meta property="twitter:title" content={t("meta title")}/>
+                <meta property="twitter:description" content={t("meta description")}/>
             </Helmet>
 
             <header>
@@ -260,6 +269,8 @@ export default class CalendarResultsPage extends Component {
             <div className="container-fluid">
                 <div id="wrapper">
                     <div id="main">
+
+                        <h1 class="page-title">{t("Programs & Results")}</h1>
 
                         <div className="bar-selector">
                             <div className="day-selector">

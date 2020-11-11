@@ -16,8 +16,9 @@ import Race from "../components/Race";
 import { Trans } from "react-i18next";
 import BannerAdmin from "../components/BannerAdmin";
 import {getIconBySpeciality} from "../helpers/iconsBySpeciality";
-import i18next from 'i18next';
+import i18next, {t} from 'i18next';
 import {faAngleDoubleDown, faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
+import {Helmet} from "react-helmet";
 
 
 export default class HomePage extends React.Component {
@@ -298,7 +299,24 @@ export default class HomePage extends React.Component {
         }
 
 		return (
+
+
 		    <div>
+
+                <Helmet>
+                    <html lang={t("lang")}/>
+                    <title>{t("Programs & Results")}</title>
+
+                    <meta name="title" content={t("meta title")}/>
+                    <meta name="description" content={t("meta description")}/>
+                    <meta itemProp="name" content={t("meta name")}/>
+                    <meta itemProp="description" content={t("meta description")}/>
+                    <meta property="og:title" content={t("meta title")}/>
+                    <meta property="og:description" content={t("meta description")}/>
+                    <meta property="twitter:title" content={t("meta title")}/>
+                    <meta property="twitter:description" content={t("meta description")}/>
+                </Helmet>
+
                 <header>
                     <MainMenu {...this.state}/>
                 </header>
