@@ -27,7 +27,7 @@ export default class HomePage extends React.Component {
 
         super(props);
 
-        let timezoneOffset = (new Date().getTimezoneOffset()*-1 - 60 - 60) / 60;
+        let timezoneOffset = (new Date().getTimezoneOffset() / 60 + 1) * -1;
 
         let date = new Date();
         let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
