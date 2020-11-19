@@ -5,8 +5,12 @@ import Countdown from "react-countdown-now";
 import BannerAdmin from "./BannerAdmin";
 import Q5Icon from "./Q5Icon";
 import BetButton from "./BetButton";
+import moment from "moment";
 
 const Banner = (props) => {
+
+    //let timezoneOffset = (moment().utcOffset() - moment().tz("Europe/Paris").utcOffset()) / 60;
+    //moment(props.race.date).add(props.timezoneOffset, 'hours').format()
 
     useEffect(() => {
         props.race.labelLong = (props.race.translation ? props.race.translation.labelLong : null) || props.race.labelLong;

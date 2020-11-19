@@ -9,7 +9,7 @@ import PredictionTop from "./PredictionTop";
 import Results from "./Results";
 import BetResults from "./BetResults";
 import RunnersResults from "./RunnersResults";
-
+import moment from "moment";
 
 export default class Race extends React.Component {
 
@@ -25,9 +25,9 @@ export default class Race extends React.Component {
         let timezoneMinutes = parseInt(this.props.race.time.substring(3,5));
         while (timezoneMinutes.toString().length < 2) {timezoneMinutes = "0" + timezoneMinutes;}
         this.props.race.timezoneTime = timezoneHours + ':' + timezoneMinutes;
-        this.props.race.date = new Date(this.props.race.day+' '+this.props.race.timezoneTime);
+        this.props.race.date = moment(this.props.race.day+' '+this.props.race.timezoneTime);
 
-        let raceDate = new Date(this.props.race.date);
+        let raceDate = moment(this.props.race.date);
         this.state = {
             isOver : raceDate < new Date()
         }
@@ -42,10 +42,11 @@ export default class Race extends React.Component {
         let timezoneMinutes = parseInt(this.props.race.time.substring(3,5));
         while (timezoneMinutes.toString().length < 2) {timezoneMinutes = "0" + timezoneMinutes;}
         this.props.race.timezoneTime = timezoneHours + ':' + timezoneMinutes;
-        this.props.race.date = new Date(this.props.race.day+' '+this.props.race.timezoneTime);
+        this.props.race.date = moment(this.props.race.day+' '+this.props.race.timezoneTime);
 
-        let raceDate = new Date(this.props.race.date);
+        let raceDate = moment(this.props.race.date);
         this.setState({isOver : raceDate < new Date()});
+
     }
 
     render() {
@@ -55,7 +56,6 @@ export default class Race extends React.Component {
             <section className="info-section">
                 <div className="container">
                     <div className="row">
-
                         {this.state.isOver && (
                             <React.Fragment>
                                 <div className="col-lg-12 col-md-12">

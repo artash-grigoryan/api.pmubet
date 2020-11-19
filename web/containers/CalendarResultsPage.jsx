@@ -17,7 +17,8 @@ import {reunionActions} from "../actions/reunion";
 import Q5Icon from "../components/Q5Icon";
 import BetButton from "../components/BetButton";
 import {Helmet} from "react-helmet";
-
+import moment from "moment";
+import tz from "moment-timezone";
 
 export default class CalendarResultsPage extends Component {
 
@@ -25,7 +26,7 @@ export default class CalendarResultsPage extends Component {
 
         super(props);
 
-        let timezoneOffset = (new Date().getTimezoneOffset() / 60 + 1) * -1;
+        let timezoneOffset = (moment().utcOffset() - moment().tz("Europe/Paris").utcOffset()) / 60;
 
         let date = new Date();
         let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);
@@ -197,7 +198,7 @@ export default class CalendarResultsPage extends Component {
 
     getRaceDateWithOffset(race) {
 
-        return (Date.parse(race.date) + (this.state.timezoneOffset*60*60*1000));
+        return (moment(race.date).valueOf() + (this.state.timezoneOffset*60*60*1000));
     }
 
     getDateFilter = () => {
@@ -443,6 +444,7 @@ export default class CalendarResultsPage extends Component {
                                                                         <Trans i18nKey="Results">Results</Trans>
                                                                     </a>
                                                                     :
+
                                                                     <BetButton className="btn btn-access bet-now" race={race}/>
                                                             }
                                                         </div>

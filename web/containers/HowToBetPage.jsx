@@ -6,13 +6,16 @@ import Banner from "../components/Banner";
 import { Trans } from "react-i18next";
 import {Helmet} from "react-helmet";
 import {t} from "i18next";
+import moment from "moment";
+import tz from "moment-timezone";
+
 export default class HowToBetPage extends Component {
 
     constructor(props) {
 
         super(props);
 
-        let timezoneOffset = (new Date().getTimezoneOffset()*-1 - 120) / 60;
+        let timezoneOffset = (moment().utcOffset() - moment().tz("Europe/Paris").utcOffset()) / 60;
 
         this.state = {
             timezoneOffset: timezoneOffset,
