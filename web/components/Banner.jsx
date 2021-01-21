@@ -36,11 +36,11 @@ const Banner = (props) => {
                     <h1>
                         <time>
                             {props.race.datePath === props.today ? <Trans
-                                i18nKey="Today">Today</Trans> : (props.race.datePath === props.tomorrow ?
+                                i18nKey="Today at">Today at</Trans> : (props.race.datePath === props.tomorrow ?
                                 <Trans
-                                    i18nKey="Tomorrow">Tomorrow</Trans> : (props.race.datePath === props.yesterday ?
-                                    <Trans i18nKey="Yesterday">
-                                        Yesterday
+                                    i18nKey="Tomorrow at">Tomorrow at</Trans> : (props.race.datePath === props.yesterday ?
+                                    <Trans i18nKey="Yesterday at">
+                                        Yesterday at
                                     </Trans> : props.race.day))} {props.race.timezoneTime}
                         </time>
                         <span className="label-name">

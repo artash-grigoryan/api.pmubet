@@ -158,6 +158,10 @@ export default class Runners extends React.Component {
                 <h3><Trans i18nKey={"The runners"}>The runners</Trans></h3>
                 <span className="add-value"><img src="https://www.equidia.fr/assets/img/icons-png/discipline_trot.png" alt="Monté"/><span>R{this.props.reunion.externNumber} C{this.props.race.number}</span></span>
             </div>
+            <div className="runners-tab-infos">
+                <span><Trans i18nKey={"Horses"}>Horses</Trans> / <Trans i18nKey={"Jockeys"}>Jockeys</Trans></span>
+                <span><Trans i18nKey={"Odds"}>Odds</Trans></span>
+            </div>
             <div className="runners-tab">
                 <div className="table-striped">
                     {listRunners}

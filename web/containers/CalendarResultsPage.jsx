@@ -19,6 +19,7 @@ import BetButton from "../components/BetButton";
 import {Helmet} from "react-helmet";
 import moment from "moment";
 import tz from "moment-timezone";
+import {faClock} from "@fortawesome/free-solid-svg-icons/faClock";
 
 export default class CalendarResultsPage extends Component {
 
@@ -250,8 +251,13 @@ export default class CalendarResultsPage extends Component {
 
             <Helmet>
                 <html lang={t("lang")}/>
-                <title>{t("Programs & Results")}</title>
+                <title>{t("meta title")}</title>
+
                 <link rel="canonical" href={t("canonical")} />
+                <link rel="alternate" href="http://www.pmubet.com/fr" hrefLang="fr"/>
+                <link rel="alternate" href="http://www.pmubet.com/en" hrefLang="en"/>
+                <link rel="alternate" href="http://www.pmubet.com/pt" hrefLang="pt"/>
+                <link rel="alternate" href="http://www.pmubet.com/mg" hrefLang="mg"/>
 
                 <meta name="title" content={t("meta title")}/>
                 <meta name="description" content={t("meta description")}/>
@@ -381,27 +387,36 @@ export default class CalendarResultsPage extends Component {
                                         ?
                                             _.filter(this.state.races[this.state.date], this.getDateFilter()).map((race, indexRace) =>
                                                 <div key={race.id} className="calendar-row">
-                                                    <div>
-
-                                                        <div className="calendar-name" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                            R{race.reunion.number}C{race.number} - {race.labelLong}
-                                                            { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <Q5Icon/> : ''}
+                                                    <div className="calendar-race" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                        <div className="calendar-race-rc">
+                                                            R{race.reunion.number}C{race.number}
                                                         </div>
-
-                                                        <div className="calendar-time" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                            {this.getRaceTime(race)}
+                                                        <div className="calendar-race-time" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            <div className="calendar-race-time-icon"><FontAwesomeIcon icon={faClock} /></div>
+                                                            <div className="calendar-race-time-text">
+                                                                <span>A</span>
+                                                                <span>{this.getRaceTime(race)}</span>
+                                                            </div>
                                                         </div>
-                                                        <div className="calendar-runners" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></div>
-                                                        <div className="calendar-btn">
-                                                            {
-                                                                this.getRaceDateWithOffset(race) < Date.now()
-                                                                    ?
-                                                                    <Link className="btn btn-access" to={"/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number}>
-                                                                        <Trans i18nKey="Results">Results</Trans>
-                                                                    </Link>
-                                                                    :
-                                                                    <BetButton className="btn btn-access bet-now" race={race}/>
-                                                            }
+                                                        <div className="calendar-race-label"> {race.labelLong} { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <Q5Icon/> : ''}</div>
+                                                        <div className="calendar-race-infos">
+                                                            <div>
+                                                                <span>Type</span>
+                                                                <span>{race.discipline}</span>
+                                                            </div>
+                                                            <div>
+                                                                <span>Partants</span>
+                                                                <span>{race.runners.length}</span>
+                                                            </div>
+                                                            <div>
+                                                                <span>Distance</span>
+                                                                <span>{race.distance}m</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="calendar-race-btn">
+
+                                                            <BetButton className="btn btn-access bet-now" race={race}/>
+
                                                         </div>
                                                     </div>
                                                     {
@@ -423,20 +438,35 @@ export default class CalendarResultsPage extends Component {
                                                 </div>
                                             )
                                         :
-                                            this.state.races[this.state.date].map((race, indexRace) =>
+                                            this.state.races[this.state.date] && this.state.races[this.state.date].map((race, indexRace) =>
                                                 <div key={race.id} className="calendar-row">
-                                                    <div>
-
-                                                        <div className="calendar-name" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                            R{race.reunion.number}C{race.number} - {race.labelLong}
-                                                            { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <Q5Icon/> : ''}
+                                                    <div className="calendar-race" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                        <div className="calendar-race-rc">
+                                                            R{race.reunion.number}C{race.number}
                                                         </div>
-
-                                                        <div className="calendar-time" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                            {this.getRaceTime(race)}
+                                                        <div className="calendar-race-time" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
+                                                            <div className="calendar-race-time-icon"><FontAwesomeIcon icon={faClock} /></div>
+                                                            <div className="calendar-race-time-text">
+                                                                <span>A</span>
+                                                                <span>{this.getRaceTime(race)}</span>
+                                                            </div>
                                                         </div>
-                                                        <div className="calendar-runners" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>{race.runners.length} <Trans i18nKey="runners">runners</Trans></div>
-                                                        <div className="calendar-btn">
+                                                        <div className="calendar-race-label"> {race.labelLong} { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <Q5Icon/> : ''}</div>
+                                                        <div className="calendar-race-infos">
+                                                            <div>
+                                                                <span>Type</span>
+                                                                <span>{race.discipline}</span>
+                                                            </div>
+                                                            <div>
+                                                                <span>Partants</span>
+                                                                <span>{race.runners.length}</span>
+                                                            </div>
+                                                            <div>
+                                                                <span>Distance</span>
+                                                                <span>{race.distance}m</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="calendar-race-btn">
                                                             {
                                                                 this.getRaceDateWithOffset(race) < Date.now()
                                                                     ?
@@ -448,7 +478,9 @@ export default class CalendarResultsPage extends Component {
                                                                     <BetButton className="btn btn-access bet-now" race={race}/>
                                                             }
                                                         </div>
+
                                                     </div>
+
                                                     {
                                                         race.results.length
                                                         ?
@@ -460,13 +492,9 @@ export default class CalendarResultsPage extends Component {
                                                                         )
                                                                     }
                                                                 </div>
-                                                                <div className="calendar-results-time"></div>
                                                             </div>
                                                         :
-                                                            <div className="calendar-waiting-results calendar-results">
-                                                                <div className="calendar-results-numbers"></div>
-                                                                <div className="calendar-results-time"></div>
-                                                            </div>
+                                                            <div></div>
                                                     }
                                                 </div>
                                             )

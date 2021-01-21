@@ -168,7 +168,7 @@ class MainMenu extends React.Component {
                         <Link className="nav-link" to={"/"+this.props.lang}><Trans i18nKey="Programs & Results">Programs & Results</Trans></Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to={"/"+this.props.lang+"/how-to-bet"}><Trans i18nKey="How to bet">How to bet</Trans></Link>
+                        <Link className="nav-link" to={"/"+this.props.lang+"/comment-jouer"}><Trans i18nKey="How to bet">How to bet</Trans></Link>
                     </li>
                     <li className="nav-item">
                         <DialogMenu race={this.props.race}/>

@@ -51,14 +51,10 @@ export default class HowToBetPage extends Component {
                 <title>{t("How to bet")}</title>
                 <link rel="canonical" href={t("canonicalhtb")} />
 
-                <meta name="title" content={t("meta title")}/>
-                <meta name="description" content={t("meta description")}/>
-                <meta itemProp="name" content={t("meta name")}/>
-                <meta itemProp="description" content={t("meta description")}/>
-                <meta property="og:title" content={t("meta title")}/>
-                <meta property="og:description" content={t("meta description")}/>
-                <meta property="twitter:title" content={t("meta title")}/>
-                <meta property="twitter:description" content={t("meta description")}/>
+                <link rel="alternate" href="http://www.pmubet.com/fr/how-to-bet" hrefLang="fr"/>
+                <link rel="alternate" href="http://www.pmubet.com/en/how-to-bet" hrefLang="en"/>
+                <link rel="alternate" href="http://www.pmubet.com/pt/how-to-bet" hrefLang="pt"/>
+                <link rel="alternate" href="http://www.pmubet.com/mg/how-to-bet" hrefLang="mg"/>
             </Helmet>
 
             <header>
@@ -130,7 +126,7 @@ export default class HowToBetPage extends Component {
 
                                             <div className="card-body">
                                                 <p><Trans i18nKey="If you have not found answers in the FAQ or in our game guides you can use our contact form. Our customer service is at your disposal to answer your questions.">If you have not found answers in the FAQ or in our game guides you can use our contact form. Our customer service is at your disposal to answer your questions.</Trans></p>
-                                                <a href="#"><Trans i18nKey="CONTACT US">CONTACT US</Trans></a>
+                                                <a href="https://www.facebook.com/PMUBETMC"><Trans i18nKey="CONTACT US">CONTACT US</Trans></a>
                                             </div>
                                         </div>
 

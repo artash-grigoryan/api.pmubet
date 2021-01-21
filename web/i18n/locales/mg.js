@@ -4,6 +4,9 @@ import React from "react";
 export default {
     "Predictions":"Sopapa",
     "Departure in":"Fiaingana amin'ny",
+    "Yesterday at":"Omaly",
+    "Today at":"Androany",
+    "Tomorrow at":"Rahampitso",
     Yesterday:"Omaly",
     Today:"Androany",
     Tomorrow:"Rahampitso",
@@ -103,7 +106,11 @@ export default {
     "Nigeria":"Nigeria",
     "Tchad":"Tchad",
 
-    "meta title" : "Paris Hippiques PMUBET en Afrique - La Masse Commune PMU en Afrique",
-    "meta name" : "Jouer en Afrique sur les courses PMU en Masse Commune | PMUBET",
-    "meta description" : "Profiter des meilleurs informatiques hippiques et pronostiques Quinté+ pour les courses PMU en Afrique | PMUBET",
+    "meta title" : "Filokana soavaly PMU: programa sy valiny",
+    "meta name" : "Filokana soavaly PMU: programa sy valiny",
+    "meta description" : "Jereo ny fandaharam-potoanan'ny hazakazaka PMU anio amin'ny tsindry iray monja amin'ny pmubet.com! Faminaniana, olana, fanombohana, fampisehoana ... ny fampahalalana rehetra amin'ny fotoana tena izy",
+
+    "Horses" : "Horses",
+    "Jockeys" : "Jockeys",
+    "Odds" : "Odds",
 };

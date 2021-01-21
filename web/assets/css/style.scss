@@ -63,6 +63,19 @@ h1.page-title {
 
 }
 
+a.nav-link.bet-online-button {
+  transition: all .3s ease-in-out;
+  background: #da2032;
+  color: #ffffff !important;
+  border-radius: 20px;
+}
+
+a.nav-link.bet-online-button:hover, a.nav-link.bet-online-button:focus {
+  background: #f6a800;
+  border-color: #f6a800;
+  color: #fff;
+}
+
 .language-selector {
   padding: 5px 20px 5px 0px;
 }
@@ -231,7 +244,7 @@ h1.page-title {
   background-color: #FFF;
   width: 100%;
   color: #333;
-  border-bottom: 2px solid #f6a800;
+  border-bottom: 2px solid #016a30;
   box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.24);
 }
 .picto-meteo {
@@ -529,7 +542,7 @@ h1.page-title {
 }
 
 .title h1, .title h2, .title h3, .title h4, .title strong {
-  background: #016a30;
+  background: #2a3538;
   color: #fff;
   position: relative;
   display: inline-block;
@@ -581,7 +594,7 @@ h1.page-title {
   border-right: 20px solid #016a30;
 }
 .double-title {
-  background: #f6a800;
+  background: #2a3538;
   color: #fff;
 }
 .double-title .add-value {
@@ -604,7 +617,7 @@ h1.page-title {
   padding: 20px;
   margin-bottom: 0;
   background: #fff;
-  border-bottom: 2px solid #f6a800;
+  border-bottom: 2px solid #016a30;
   box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.24);
 }
 .prediction-top {}
@@ -780,6 +793,23 @@ h1.page-title {
 .table-striped > div:nth-of-type(odd) {
   background-color: rgba(0,0,0,.05);
 }
+.runners-tab-infos {
+  height: 40px;
+  width: 100%;
+  background: #016a30;
+  color: #fff;
+  padding: 6px 21px;
+}
+.runners-tab-infos span:first-child {
+  float: left;
+}
+.runners-tab-infos span:nth-child(2) {
+  float: right;
+}
+span.runner-cote {
+  font-weight: 700;
+  color: #212529;
+}
 .runners-tab .runner-rank{
   width: 50px;
   text-align: center;
@@ -817,10 +847,10 @@ h1.page-title {
 .runners-tab .runner-name p{
   margin: 0;
   cursor: pointer;
-  line-height: 10px;
+  line-height: 14px;
 }
 .runners-tab .runner-name p:hover{
-  color: #f6a800;
+  color: #016a30;
 }
 .runners-tab .runner-name span{
   font-size: 12px;
@@ -831,7 +861,7 @@ h1.page-title {
   margin-right: 10px;
 }
 .runners-tab .info-runner-icon svg{
-  color: #f6a803;
+  color: #016a30;
   font-size: 20px;
 }
 @media (max-width: 600px) {
@@ -878,7 +908,7 @@ h1.page-title {
 }
 .runners-tab .runner-details .carousel-item{
   height: 255px;
-  border-bottom: 4px solid #f6a800;
+  border-bottom: 4px solid #016a30;
 }
 .runners-tab .runner-details .carousel-indicators{
   display: none;
@@ -897,7 +927,7 @@ h1.page-title {
   font-size: 18px;
   padding: 4px;
   margin: 0;
-  background: #f6a800;
+  background: #016a30;
   color: #fff;
 }
 .runners-tab .runner-details .carousel-caption ul {
@@ -1592,15 +1622,92 @@ h1.page-title {
   border-radius: 0;
   padding: 0;
 }
+
 #calendar-result .calendar-row {
-  border-bottom: 1px solid #bdbcbc;
   display: inline-block;
   width: 100%;
   cursor: pointer;
   float: left;
+  margin-bottom: 12px;
+  background: #f3f3f3;
+  border-radius: 4px;
+  padding-bottom: 4px;
 }
 #calendar-result .calendar-row:hover {
-  background: #f3f3f3;
+  background: #d0d0d0;
+}
+.calendar-race-rc {
+  width: 100%;
+  background: #2a3538;
+  padding: 5px 27px;
+  color: #fff;
+  border-radius: 4px 4px 0 0;
+  font-size: 17px;
+  font-weight: 500;
+}
+.calendar-race-time {
+  width: 7%;
+  display: inline-block;
+  padding-top: 5px;
+}
+.calendar-race-time-icon {
+  font-size: 22px;
+  color: #2a3538;
+}
+.calendar-race-time-text {
+  color: #2a3538;
+  font-weight: 700;
+}
+.calendar-race-time-text span:first-child {
+  font-size: 11px;
+  display: block;
+}
+.calendar-race-time-text span:nth-child(2) {
+  font-size: 17px;
+}
+.calendar-race-label {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 26px;
+  color: #016a30;
+  font-weight: 500;
+  width: 38%;
+  text-align: center;
+  font-size: 18px;
+}
+.calendar-race-infos {
+  display: inline-block;
+  width: 38%;
+  text-align: center;
+  vertical-align: top;
+  padding-top: 16px;
+}
+.calendar-race-infos div {
+  display: inline-block;
+  padding: 0 20px;
+}
+.calendar-race-infos div span {
+  display: block;
+}
+.calendar-race-infos div span:first-child {
+  color: #000;
+  font-size: 13px;
+}
+.calendar-race-infos div span:nth-child(2) {
+  font-weight: 600;
+  color: #000;
+  font-size: 18px;
+}
+.calendar-race-btn {
+  display: inline-block;
+  width: 17%;
+  vertical-align: top;
+  padding-top: 16px;
+}
+#calendar-result .btn-access {
+  max-width: 196px;
+  margin: auto;
+  display: block;
 }
 #calendar-result .calendar-name {
   float: left;
@@ -1643,22 +1750,20 @@ h1.page-title {
   }
 }
 #calendar-result .btn-access {
-  border: 1px solid;
-  width: 100%;
-  margin-bottom: 0;
-  margin-top: 5px;
+  max-width: 196px;
+  margin: auto;
+  display: block;
 }
-#calendar-result .calendar-results .calendar-results-numbers{
+#calendar-result .calendar-results .calendar-results-numbers {
   display: inline-block;
-  float: left;
-  width: 50%;
+  float: right;
+  width: 100%;
   height: 34px;
   text-align: right !important;
-  background-color: #016a30;
 }
-#calendar-result .calendar-results .calendar-results-numbers span{
+#calendar-result .calendar-results .calendar-results-numbers span {
   color: #016a30;
-  width: 25px;
+  width: 26px;
   display: inline-block;
   height: 25px;
   text-align: center;
@@ -1666,6 +1771,7 @@ h1.page-title {
   border-radius: 50%;
   font-size: 16px;
   margin: 5px;
+  font-weight: 700;
 }
 #calendar-result .calendar-results .calendar-results-time{
   width: 15%;
@@ -2054,8 +2160,8 @@ footer {
     text-transform: uppercase;
     font-size: 15px;
     color: #000;
-    padding: 10px;
     white-space: nowrap;
+    padding: 8px 14px;
   }
   .navbar-nav li.nav-item a.nav-link.btn-skew i {
     display: none;
@@ -2177,6 +2283,85 @@ footer {
   }
 }
 @media (max-width: 700px) {
+  .calendar-race-rc {
+    background: #2a3538;
+    padding: 5px 15px;
+    color: #fff;
+    border-radius: 4px 0px 0 0;
+    font-size: 17px;
+    font-weight: 500;
+    width: 50%;
+    float: left;
+  }
+  .calendar-race-time {
+    width: 50%;
+    display: inline-block;
+    float: right;
+    background: #2a3538;
+    padding: 5px;
+    font-size: 17px;
+    border-radius: 0 4px 0 0;
+    border-left: 1px solid #fff;
+  }
+  .calendar-race-time-icon {
+    font-size: 17px;
+    color: #fff;
+    display: inline-block;
+    padding-right: 10px;
+  }
+  .calendar-race-time-text {
+    color: #fff;
+    font-weight: 700;
+    display: inline-block;
+  }
+  .calendar-race-time-text span:first-child {
+    display: none;
+  }
+  .calendar-race-label {
+    display: block;
+    vertical-align: top;
+    padding-top: 46px;
+    color: #016a30;
+    font-weight: 500;
+    width: 100%;
+    text-align: left;
+    font-size: 17px;
+    padding-left: 15px;
+  }
+  .calendar-race-infos {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    vertical-align: top;
+    padding-top: 16px;
+  }
+  .calendar-race-btn {
+    display: none;
+  }
+  #calendar-result .calendar-results .calendar-results-numbers {
+    display: inline-block;
+    float: none;
+    width: 100%;
+    height: 34px;
+    text-align: left;
+    padding-left: 15px;
+    margin: 4px 0 10px;
+  }
+  #calendar-result .calendar-results .calendar-results-numbers span {
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    margin: 3px 2px;
+  }
+  .banner.inner-banner > .container .label-name {
+    transform: skew(-10deg, 0);
+    background-color: #FFF;
+    color: #000;
+    padding: 10px;
+    display: inline-block;
+    width: 90%;
+    font-size: 25px;
+  }
 
   .nextQ5 .widget-container {
     width: calc(100% - 30px);
@@ -2236,7 +2421,7 @@ footer {
 
   .title h3 {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
   }
 
   .inner-banner {
@@ -2265,8 +2450,8 @@ footer {
   }
 
   .double-title .add-value {
-    margin-left: 6px;
-    font-size: 21px;
+    margin-left: 4px;
+    font-size: 17px;
   }
   .double-title .add-value img {
     margin-right: 0px;

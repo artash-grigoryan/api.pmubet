@@ -3,7 +3,10 @@ import React from "react";
 
 export default {
     "Predictions":"Predictions",
-    "Departure in":"Departure",
+    "Departure in":"Departure in",
+    "Yesterday at":"Yesterday at",
+    "Today at":"Today at",
+    "Tomorrow at":"Tomorrow at",
     Yesterday:"Yesterday",
     Today:"Today",
     Tomorrow:"Tomorrow",
@@ -103,7 +106,11 @@ export default {
     "Nigeria":"Nigeria",
     "Tchad":"Tchad",
 
-    "meta title" : "Paris Hippiques PMUBET en Afrique - La Masse Commune PMU en Afrique",
-    "meta name" : "Jouer en Afrique sur les courses PMU en Masse Commune | PMUBET",
-    "meta description" : "Profiter des meilleurs informatiques hippiques et pronostiques Quinté+ pour les courses PMU en Afrique | PMUBET",
+    "meta title" : "Paris hippiques du PMU : programme et résultats",
+    "meta name" : "Paris hippiques du PMU : programme et résultats",
+    "meta description" : "Découvrez le programme des courses PMU du jour en un seul clic sur pmubet.com ! Pronostics, cotes, partants, performances… toute l'info en temps réel !",
+
+    "Horses" : "Horses",
+    "Jockeys" : "Jockeys",
+    "Odds" : "Odds",
 };

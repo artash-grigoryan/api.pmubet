@@ -16,7 +16,7 @@ const Routes = () => (
             <Route exact path='/:lang/predictions' component={PredictionsPage}/>
             <Route exact path='/:lang/calendar-results' component={CalendarResultsPage}/>
             <Route exact path='/:lang/calendar-results/:date' component={CalendarResultsPage}/>
-            <Route exact path='/:lang/how-to-bet' component={HowToBetPage}/>
+            <Route exact path='/:lang/comment-jouer' component={HowToBetPage}/>
             <Route exact path='/:lang/:date' component={HomePage}/>
             <Route exact path='/:lang/:date/R:reunionNumber' component={HomePage}/>
             <Route exact path='/:lang/:date/R:reunionNumber/C:raceNumber' component={HomePage}/>

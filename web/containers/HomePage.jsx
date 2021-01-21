@@ -19,15 +19,17 @@ import {getIconBySpeciality} from "../helpers/iconsBySpeciality";
 import i18next, {t} from 'i18next';
 import {faAngleDoubleDown, faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
 import {Helmet} from "react-helmet";
+import moment from "moment";
+import tz from "moment-timezone";
 
 
-export default class HomePage extends React.Component {
+export default class HomePage extends Component {
 
     constructor(props) {
 
         super(props);
 
-        let timezoneOffset = (new Date().getTimezoneOffset() / 60 + 1) * -1;
+        let timezoneOffset = (moment().utcOffset() - moment().tz("Europe/Paris").utcOffset()) / 60;
 
         let date = new Date();
         let today = date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2);

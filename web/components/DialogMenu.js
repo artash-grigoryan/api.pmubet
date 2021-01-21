@@ -53,7 +53,7 @@ const DialogMenu = ({race}) => {
 
     return (
         <React.Fragment>
-            <a className="nav-link" href="javascript:;" onClick={()=>setDialogStatus('opened')}><Trans i18nKey="Play online">Play online</Trans></a>
+            <a className="nav-link bet-online-button" href="javascript:;" onClick={()=>setDialogStatus('opened')}><Trans i18nKey="Play online">Play online</Trans></a>
             <div id="countries-menu-dialog" className={dialogStatus}>
                 <div className="overlay" onClick={() => setDialogStatus('closed')}></div>
                 <div className="container">
