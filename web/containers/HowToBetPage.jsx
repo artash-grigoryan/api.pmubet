@@ -8,6 +8,7 @@ import {Helmet} from "react-helmet";
 import {t} from "i18next";
 import moment from "moment";
 import tz from "moment-timezone";
+import SimpleBottomNavigation from "../components/SimpleBottomNavigation";
 
 export default class HowToBetPage extends Component {
 
@@ -60,7 +61,7 @@ export default class HowToBetPage extends Component {
             <header>
                 <MainMenu {...this.state}/>
             </header>
-
+            <SimpleBottomNavigation {...this.state}/>
             <div className="container-fluid">
                 <div id="wrapper">
                     <div id="main">
@@ -141,7 +142,7 @@ export default class HowToBetPage extends Component {
                 </div>
             </div>
 
-            <Footer />
+            <Footer {...this.state}/>
 		</div>;
 	}
 }

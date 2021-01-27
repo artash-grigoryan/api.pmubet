@@ -20,6 +20,7 @@ import {Helmet} from "react-helmet";
 import moment from "moment";
 import tz from "moment-timezone";
 import {faClock} from "@fortawesome/free-solid-svg-icons/faClock";
+import SimpleBottomNavigation from "../components/SimpleBottomNavigation";
 
 export default class CalendarResultsPage extends Component {
 
@@ -272,7 +273,7 @@ export default class CalendarResultsPage extends Component {
             <header>
                 <MainMenu {...this.state}/>
             </header>
-
+            <SimpleBottomNavigation {...this.state}/>
             <div className="container-fluid">
                 <div id="wrapper">
                     <div id="main">
@@ -387,8 +388,8 @@ export default class CalendarResultsPage extends Component {
                                         ?
                                             _.filter(this.state.races[this.state.date], this.getDateFilter()).map((race, indexRace) =>
                                                 <div key={race.id} className="calendar-row">
-                                                    <div className="calendar-race" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                        <div className="calendar-race-rc">
+                                                    <div className="calendar-race">
+                                                        <div className="calendar-race-rc" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                             R{race.reunion.number}C{race.number}
                                                         </div>
                                                         <div className="calendar-race-time" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
@@ -398,8 +399,8 @@ export default class CalendarResultsPage extends Component {
                                                                 <span>{this.getRaceTime(race)}</span>
                                                             </div>
                                                         </div>
-                                                        <div className="calendar-race-label"> {race.labelLong} { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <Q5Icon/> : ''}</div>
-                                                        <div className="calendar-race-infos">
+                                                        <div className="calendar-race-label" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}> {race.labelLong} { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <Q5Icon/> : ''}</div>
+                                                        <div className="calendar-race-infos" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                             <div>
                                                                 <span>Type</span>
                                                                 <span>{race.discipline}</span>
@@ -440,8 +441,8 @@ export default class CalendarResultsPage extends Component {
                                         :
                                             this.state.races[this.state.date] && this.state.races[this.state.date].map((race, indexRace) =>
                                                 <div key={race.id} className="calendar-row">
-                                                    <div className="calendar-race" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
-                                                        <div className="calendar-race-rc">
+                                                    <div className="calendar-race">
+                                                        <div className="calendar-race-rc" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                             R{race.reunion.number}C{race.number}
                                                         </div>
                                                         <div className="calendar-race-time" style={{textAlign:'center'}} onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
@@ -451,8 +452,8 @@ export default class CalendarResultsPage extends Component {
                                                                 <span>{this.getRaceTime(race)}</span>
                                                             </div>
                                                         </div>
-                                                        <div className="calendar-race-label"> {race.labelLong} { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <Q5Icon/> : ''}</div>
-                                                        <div className="calendar-race-infos">
+                                                        <div className="calendar-race-label" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}> {race.labelLong} { _.findIndex(race.bets, {lib : 'QN' }) !== -1 ? <Q5Icon/> : ''}</div>
+                                                        <div className="calendar-race-infos" onClick={()=>this.redirect("/"+ this.state.lang + "/" + race.datePath + "/R"+race.reunion.number+"/C" + race.number)}>
                                                             <div>
                                                                 <span>Type</span>
                                                                 <span>{race.discipline}</span>
@@ -507,7 +508,7 @@ export default class CalendarResultsPage extends Component {
                 </div>
             </div>
 
-            <Footer />
+            <Footer {...this.state}/>
 		</div>;
 	}
 }

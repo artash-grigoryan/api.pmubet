@@ -36,6 +36,8 @@ export default {
     "Play online":"Jouer en ligne",
     "News":"Actualités",
     "Best Predictions from France":"Synthèse Presse",
+    "Help": "Aide",
+    "Forbidden to minors": "Interdit aux mineurs",
 
     "Lives" : "Live",
     "Account" : "Compte",

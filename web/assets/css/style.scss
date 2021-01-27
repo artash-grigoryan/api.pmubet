@@ -103,6 +103,13 @@ a.nav-link.bet-online-button:hover, a.nav-link.bet-online-button:focus {
   background-repeat: no-repeat;
   background-position: 0 -110px;
 }
+.MuiBottomNavigation-root {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  z-index: 9999;
+  display: none !important;
+}
 
 @media (max-width: 1250px) {
 
@@ -470,6 +477,13 @@ a.nav-link.bet-online-button:hover, a.nav-link.bet-online-button:focus {
   #main .bar-selector .react-calendar {
     right: 0;
   }
+  .MuiBottomNavigation-root {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 9999;
+    display: flex !important;
+  }
 }
 #main .bar-selector .react-calendar__tile--active {
   background: #016a30;
@@ -802,9 +816,11 @@ a.nav-link.bet-online-button:hover, a.nav-link.bet-online-button:focus {
 }
 .runners-tab-infos span:first-child {
   float: left;
+  padding: 4px 0px 0 22px;
 }
 .runners-tab-infos span:nth-child(2) {
   float: right;
+  padding: 4px 22px 0 0px;
 }
 span.runner-cote {
   font-weight: 700;
@@ -1772,6 +1788,7 @@ span.runner-cote {
   font-size: 16px;
   margin: 5px;
   font-weight: 700;
+  line-height: 26px;
 }
 #calendar-result .calendar-results .calendar-results-time{
   width: 15%;
@@ -1947,6 +1964,10 @@ a {
   text-decoration: none !important;
 }
 
+a:hover {
+  color: #016a30;
+}
+
 
 footer {
   margin: 20px 40px;
@@ -1963,12 +1984,12 @@ footer {
   margin-left: 20px;
   font-weight: bold;
 }
-
 #whatsapp-button {
-  width: 70px;
+  width: 50px;
   position: fixed;
-  bottom: 10px;
+  bottom: 65px;
   right: 10px;
+  z-index: 9999;
 }
 #whatsapp-button a{
   border: none;
@@ -1976,6 +1997,10 @@ footer {
 }
 #whatsapp-button a img{
   width: 100%;
+}
+.MuiBottomNavigationAction-root.Mui-selected {
+  color: #016a30 !important;
+  padding-top: 6px;
 }
 
 
@@ -2079,7 +2104,15 @@ footer {
 }
 
 @media (max-width: 991px) {
-
+  footer {
+    padding-bottom: 50px;
+  }
+  .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-4 {
+    border-top: 1px solid;
+  }
+  .footer-logo {
+    display: none;
+  }
   .nextQ5 .widget-overlay {
     width: calc(100% - 30px);
   }
@@ -2343,15 +2376,9 @@ footer {
     float: none;
     width: 100%;
     height: 34px;
-    text-align: left;
+    text-align: left !important;
     padding-left: 15px;
     margin: 4px 0 10px;
-  }
-  #calendar-result .calendar-results .calendar-results-numbers span {
-    width: 25px;
-    height: 25px;
-    font-size: 15px;
-    margin: 3px 2px;
   }
   .banner.inner-banner > .container .label-name {
     transform: skew(-10deg, 0);
@@ -2376,15 +2403,6 @@ footer {
     text-transform: none;
   }
 
-  #calendar-result .calendar-results .calendar-results-numbers {
-    height: 27px;
-  }
-  #calendar-result .calendar-results .calendar-results-numbers span {
-    width: 21px;
-    height: 21px;
-    font-size: 14px;
-    margin: 3px 2px;
-  }
   #calendar-result .calendar-results .calendar-results-time {
     width: 15%;
     float: left;
@@ -2529,10 +2547,11 @@ footer {
     height: 24px;
   }
   #calendar-result .calendar-results .calendar-results-numbers span {
-    width: 15px;
-    height: 15px;
-    font-size: 11px;
-    margin: 3px 2px;
+    width: 25px;
+    height: 25px;
+    font-size: 13px;
+    margin: 8px 2px;
+    line-height: 25px;
   }
 
 }

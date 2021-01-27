@@ -34,6 +34,8 @@ export default {
     "Play online":"Bet online",
     "News":"News",
     "Best Predictions from France":"Best Predictions from France",
+    "Help": "Help",
+    "Forbidden to minors": "Forbidden to minors",
 
     "Lives" : "Lives",
     "Account" : "Account",

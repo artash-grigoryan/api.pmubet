@@ -34,6 +34,8 @@ export default {
     "Play online":"Milalaova an tserasera",
     "News":"Vaovao farany",
     "Best Predictions from France":"Ny Sopapa tsara indrindra any Frantsa",
+    "Help": "Vonjeo",
+    "Forbidden to minors": "Voarara ny zaza tsy ampy taona",
 
     "Lives" : "Lalao Mivantana",
     "Account" : "Kaonty",

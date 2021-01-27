@@ -21,6 +21,7 @@ import {faAngleDoubleDown, faCalendarAlt} from "@fortawesome/free-solid-svg-icon
 import {Helmet} from "react-helmet";
 import moment from "moment";
 import tz from "moment-timezone";
+import SimpleBottomNavigation from "../components/SimpleBottomNavigation";
 
 
 export default class HomePage extends Component {
@@ -322,7 +323,7 @@ export default class HomePage extends Component {
                 <header>
                     <MainMenu {...this.state}/>
                 </header>
-
+                <SimpleBottomNavigation {...this.state}/>
                 <div className="container-fluid">
                     <div id="wrapper">
                         <div id="main">
@@ -416,7 +417,7 @@ export default class HomePage extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer />
+                <Footer {...this.state}/>
             </div>
         );
 	}

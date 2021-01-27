@@ -34,6 +34,7 @@ export default {
     "Play online":"Aposte online",
     "News":"Novidades",
     "Best Predictions from France":"Melhores prognósticos á partir de França",
+    "Forbidden to minors": "Proibido para menores",
 
     "Lives" : "Ao vivo",
     "Account" : "Conta",
@@ -93,6 +94,7 @@ export default {
     "Birthday":"Data de nascimento",
     "Name of the mother":"Nome da mãe",
     "Name of the father":"Nome do pai",
+    "Help": "Socorro",
 
     "lang" : "pt",
     "canonical" : "http://www.pmubet.com/pt",
