@@ -7,6 +7,7 @@ ROOT=${BASH_SOURCE%/*}
 PATH_BUILD=/var/www/api/build
 PATH_RELEASES=/var/www/api/releases
 CURRENT_RELEASE_LINK=/var/www/api.pmubet.com
+SHARED_PATH=/var/www/api.pmubet.com/shared
 
 KEEP_RELEASES=5
 
@@ -32,6 +33,9 @@ fi
 
 title "Creating release $CURRENT_RELEASE"
 mv "$PATH_BUILD" "$PATH_RELEASES/$CURRENT_RELEASE"
+
+title "Copying to shared img folder"
+mv "$CURRENT_RELEASE_LINK/public/img" "$SHARED_PATH"
 
 # move "current" link to current release
 title "Publishing release"
