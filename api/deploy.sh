@@ -16,6 +16,6 @@ done
 
 # move "current" link to current release
 echo "copying shared"
-cp -s "$SHARED_PATH/img" "$API_PATH/current/public"
+ln -s "$SHARED_PATH/img" "$API_PATH/current/public"
 
 echo ""
