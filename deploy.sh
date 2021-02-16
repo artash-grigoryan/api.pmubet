@@ -35,12 +35,13 @@ title "Creating release $CURRENT_RELEASE"
 mv "$PATH_BUILD" "$PATH_RELEASES/$CURRENT_RELEASE"
 
 title "Copying to shared img folder"
-mv "$CURRENT_RELEASE_LINK/public/img" "$SHARED_PATH"
+cp "$CURRENT_RELEASE_LINK/public/img" "$SHARED_PATH"
 
 # move "current" link to current release
 title "Publishing release"
 rm -f "$CURRENT_RELEASE_LINK"
 ln -s "$PATH_RELEASES/$CURRENT_RELEASE" "$CURRENT_RELEASE_LINK"
+cp -s "$SHARED_PATH/img" "$CURRENT_RELEASE_LINK/current/public"
 
 # remove old releases
 title "Removing old releases:"
