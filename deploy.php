@@ -32,6 +32,15 @@ task('deploy:secrets', function () {
     upload('.env', get('deploy_path') . '/shared');
 });
 
+desc('Copying img folder');
+task('copy:files:beforDeploy', function () {
+    run('cp {{deploy_path}}/current/public/img {{deploy_path}}/shared');
+});
+desc('Copying img folder');
+task('copy:files:afterDeploy', function () {
+    run('cp {{deploy_path}}/shared/img {{release_path}}/current/public');
+});
+
 // Hosts
 host('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com') // Name of the server
 ->hostname('ec2-15-236-238-84.eu-west-3.compute.amazonaws.com') // Hostname or IP address
@@ -51,6 +60,7 @@ task('deploy', [
     'deploy:info',
     'deploy:prepare',
     'deploy:lock',
+    'copy:files:beforDeploy',
     'deploy:release',
     'rsync', // Deploy code & built assets
     'deploy:secrets', // Deploy secrets
@@ -66,6 +76,7 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
+    'copy:files:afterDeploy'
 ]);
 
 
