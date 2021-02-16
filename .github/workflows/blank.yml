@@ -36,8 +36,16 @@ jobs:
       - name: Deploy to Prod
         env:
           DOT_ENV: ${{ secrets.DOT_ENV }}
-        run: dep deploy production --tag=${{ env.GITHUB_REF }} -vvv
+        run: dep deploy production --tag=${{ env.GITHUB_REF }} -vvv &&
 
+      - name: Executing versioning script
+          uses: appleboy/ssh-action@master
+          with:
+            host: ec2-15-236-238-84.eu-west-3.compute.amazonaws.com
+            username: ec2-user
+            key: ${{secrets.SSH_PRIVATE_KEY}}
+            port: 22
+            script: cd /var/www/api.pmubet.com && sudo deploy.sh
     # Runs a set of commands using the runners shell
 #    - name: Run a multi-line script
 #      run: |
