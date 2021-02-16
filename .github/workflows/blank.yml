@@ -37,4 +37,4 @@ jobs:
           username: ec2-user
           key: ${{secrets.SSH_PRIVATE_KEY}}
           port: 22
-          script: cd /var/www/api.pmubet.com/current && sudo deploy.sh
+          script: cd /var/www/api.pmubet.com && sudo sh current/deploy.sh
