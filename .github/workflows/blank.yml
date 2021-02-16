@@ -14,19 +14,11 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
-#      - name: Download build assets
-#        uses: actions/download-artifact@v1
-#        with:
-#          name: assets
-#          path: public
       - name: Setup PHP
         uses: shivammathur/setup-php@master
         with:
           php-version: 7.3
           extension-csv: mbstring, bcmath
-
-#      - name: Composer install
-#        run: cd api && composer install
 
       - name: Setup Deployer
         uses: atymic/deployer-php-action@master
@@ -39,23 +31,10 @@ jobs:
         run: dep deploy production --tag=${{ env.GITHUB_REF }} -vvv
 
       - name: Executing versioning script
-          uses: appleboy/ssh-action@master
-          with:
-            host: ec2-15-236-238-84.eu-west-3.compute.amazonaws.com
-            username: ec2-user
-            key: ${{secrets.SSH_PRIVATE_KEY}}
-            port: 22
-            script: cd /var/www/api.pmubet.com/current && sudo deploy.sh
-    # Runs a set of commands using the runners shell
-#    - name: Run a multi-line script
-#      run: |
-#        sudo apt-get update && apt-get install -qy git curl libmcrypt-dev coreutils curl bash rsync openssh-client,
-#        yes | pecl install mcrypt-1.0.1,
-#        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer,
-#        cd api,
-#        composer install --optimize-autoloader --no-dev,
-#        cp .env.example .env,
-#        php artisan key:generate,
-#        cd ../,
-#        rsync -crlOt -e ssh ./api/* ec2-user@ec2-15-236-238-84.eu-west-3.compute.amazonaws.com:/var/www/api.pmubet.com --progress,
-#        rsync -avzuhO -e ssh ./docker/recxml ec2-user@ec2-15-236-238-84.eu-west-3.compute.amazonaws.com:/var/www/docker --progress
+        uses: appleboy/ssh-action@master
+        with:
+          host: ec2-15-236-238-84.eu-west-3.compute.amazonaws.com
+          username: ec2-user
+          key: ${{secrets.SSH_PRIVATE_KEY}}
+          port: 22
+          script: cd /var/www/api.pmubet.com/current && sudo deploy.sh
