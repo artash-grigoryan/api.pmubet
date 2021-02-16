@@ -4,14 +4,13 @@ API_PATH=/var/www/api.pmubet.com
 PATH_RELEASES=/var/www/api.pmubet.com/releases
 SHARED_PATH=/var/www/api.pmubet.com/shared
 
-
 # remove old releases
 echo "Sharing images"
-
-for d in */; do
-
-    echo "  Copying $d"
-    cp -R "$PATH_RELEASES/$d/public/img" "$SHARED_PATH"
+for d in $PATH_RELEASES; do
+    echo "  Copying $PATH_RELEASES/${d}public/img"
+    if [ -d "$PATH_RELEASES/${d}public/img" ]; then
+      cp -R "$PATH_RELEASES/${d}public/img" "$SHARED_PATH"
+    fi
 done
 
 # move "current" link to current release
