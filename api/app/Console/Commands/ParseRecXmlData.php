@@ -1529,7 +1529,7 @@ class ParseRecXmlData extends Command
         $filesInfo = $this->dataService->scanFolder($this->dataService->getCasaquesFolder());
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
-
+                try {
                 $zip = new \ZipArchive();
                 if ($zip->open($filesInfo['path'] . '/' . $fileName) === TRUE) {
                     $zip->extractTo(__DIR__ . '/../../../public/img/casaques');
@@ -1538,6 +1538,9 @@ class ParseRecXmlData extends Command
                     $this->dataService->mvFileDone($this->dataService->getCasaquesFolder() . DIRECTORY_SEPARATOR . $fileName);
                 } else {
                     echo 'unzip error';
+                }
+                } catch (\Exception $e) {
+                    dump($e->getMessage());
                 }
             }
         }
@@ -1549,13 +1552,17 @@ class ParseRecXmlData extends Command
         foreach ($filesInfo["files"] as $fileName) {
             if ($fileName !== "." && $fileName !== "..") {
                 $zip = new \ZipArchive();
-                if ($zip->open($filesInfo['path'] . '/' . $fileName) === TRUE) {
-                    $zip->extractTo(__DIR__ . '/../../../public/img/hippodromes');
-                    $zip->close();
-                    // unlink($this->dataService->getHippodromesFolder().'/'.$fileName);
-                    $this->dataService->mvFileDone($this->dataService->getHippodromesFolder() . DIRECTORY_SEPARATOR . $fileName);
-                } else {
-                    echo 'unzip error';
+                try {
+                    if ($zip->open($filesInfo['path'] . '/' . $fileName) === TRUE) {
+                        $zip->extractTo(__DIR__ . '/../../../public/img/hippodromes');
+                        $zip->close();
+                        // unlink($this->dataService->getHippodromesFolder().'/'.$fileName);
+                        $this->dataService->mvFileDone($this->dataService->getHippodromesFolder() . DIRECTORY_SEPARATOR . $fileName);
+                    } else {
+                        echo 'unzip error';
+                    }
+                } catch (\Exception $e) {
+                    dump($e->getMessage());
                 }
             }
         }
