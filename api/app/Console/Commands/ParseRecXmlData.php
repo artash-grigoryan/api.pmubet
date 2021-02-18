@@ -45,7 +45,7 @@ class ParseRecXmlData extends Command
 
     /**
      * @param DataServiceInterface $dataService
-     * @throws \Exception
+     * @return int
      */
     public function handle(DataServiceInterface $dataService)
     {
@@ -1532,7 +1532,7 @@ class ParseRecXmlData extends Command
 
                 $zip = new \ZipArchive();
                 if ($zip->open($filesInfo['path'] . '/' . $fileName) === TRUE) {
-                    $zip->extractTo(__DIR__ . '/../../../public/img/casaques/');
+                    $zip->extractTo(__DIR__ . '/../../../public/img/casaques');
                     $zip->close();
                     // unlink($this->dataService->getCasaquesFolder().'/'.$fileName);
                     $this->dataService->mvFileDone($this->dataService->getCasaquesFolder() . DIRECTORY_SEPARATOR . $fileName);
@@ -1550,7 +1550,7 @@ class ParseRecXmlData extends Command
             if ($fileName !== "." && $fileName !== "..") {
                 $zip = new \ZipArchive();
                 if ($zip->open($filesInfo['path'] . '/' . $fileName) === TRUE) {
-                    $zip->extractTo(__DIR__ . '/../../../public/img/hippodromes/');
+                    $zip->extractTo(__DIR__ . '/../../../public/img/hippodromes');
                     $zip->close();
                     // unlink($this->dataService->getHippodromesFolder().'/'.$fileName);
                     $this->dataService->mvFileDone($this->dataService->getHippodromesFolder() . DIRECTORY_SEPARATOR . $fileName);
