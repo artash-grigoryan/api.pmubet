@@ -35,7 +35,10 @@ export default {
     "News":"Vaovao farany",
     "Best Predictions from France":"Ny Sopapa tsara indrindra any Frantsa",
     "Help": "Vonjeo",
+    "Bet online": "Miloka amin'ny Internet",
+    "General informations": "Fampahalalana ankapobeny",
     "Forbidden to minors": "Voarara ny zaza tsy ampy taona",
+    "Read the program": "Diniho ny programa",
 
     "Lives" : "Lalao Mivantana",
     "Account" : "Kaonty",

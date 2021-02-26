@@ -4,8 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import {Trans} from "react-i18next";
 import {Link} from "react-router-dom";
 import BetButtonFooter from "../../BetButtonFooter";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-
 
 const Footer = (props) => {
 
@@ -38,14 +36,14 @@ const Footer = (props) => {
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid item sm={4} xs={12}>
-                    <h3 className={classes.footerTitle}>Informations générales</h3>
+                    <h3 className={classes.footerTitle}><Trans i18nKey="General informations">General informations</Trans></h3>
                     <ul className={classes.footerUl}>
                         <li className={classes.footerLi}><Link to={"/"+props.lang}><Trans i18nKey="Programs & Results">Programs & Results</Trans></Link></li>
                         <li className={classes.footerLi}><Link to={"/"+props.lang+"/comment-jouer"}><Trans i18nKey="How to bet">How to bet</Trans></Link></li>
                     </ul>
                 </Grid>
                 <Grid item sm={4} xs={12}>
-                    <h3 className={classes.footerTitle}>Paris en ligne</h3>
+                    <h3 className={classes.footerTitle}><Trans i18nKey="Bet online">Bet online</Trans></h3>
                     <ul className={classes.footerUl}>
                         <li className={classes.footerLi}>
                             <BetButtonFooter race={props.race}/>
@@ -53,7 +51,7 @@ const Footer = (props) => {
                     </ul>
                 </Grid>
                 <Grid item sm={4} xs={12}>
-                    <h3 className={classes.footerTitle}>Aide</h3>
+                    <h3 className={classes.footerTitle}><Trans i18nKey="Help">Help</Trans></h3>
                     <ul className={classes.footerUl}>
                         <li className={classes.footerLi}>
                             <a href="https://www.facebook.com/PMUBETMC"><Trans i18nKey="CONTACT US">CONTACT US</Trans></a>

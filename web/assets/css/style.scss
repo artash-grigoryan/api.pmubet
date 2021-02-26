@@ -199,9 +199,9 @@ a.nav-link.bet-online-button:hover, a.nav-link.bet-online-button:focus {
   display: inline-block;
   padding: 5px 20px;
   text-align: center;
-  border-radius: 0;
   margin: 0;
   font-size: 18px;
+  border-radius: 4px;
 
 }
 .banner .btn:hover,
@@ -2002,7 +2002,6 @@ footer {
   color: #016a30 !important;
   padding-top: 6px;
 }
-
 
 @media (max-width: 1400px) {
 

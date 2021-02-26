@@ -37,7 +37,10 @@ export default {
     "News":"Actualités",
     "Best Predictions from France":"Synthèse Presse",
     "Help": "Aide",
+    "Bet online": "Jouez en ligne",
+    "General informations": "Informations générales",
     "Forbidden to minors": "Interdit aux mineurs",
+    "Read the program": "Consulter le programme",
 
     "Lives" : "Live",
     "Account" : "Compte",
@@ -75,7 +78,7 @@ export default {
     "Some players are specialists who know the racing world very well. They are interested in horses, jockeys and coaches. They make their bets according to a multitude of criteria. They spend time on racetracks and study the race to make their predictions. A turfist, in the final strategist, weighting risk and gain. These specialist issues make an important contribution to the spOt selections and vary the ratings.":"Certains joueurs sont des spécialistes qui connaissent très bien le monde des courses. Ils s’intéressent aux chevaux, aux jockeys et aux entraîneurs. Ils effectuent leurs paris en fonction d’une multitude de critères. Ils passent du temps sur les hippodromes et étudient la course pour établir leurs pronostics. Un turfiste, en fin stratège, pondère risque et gain. Ces enjeux de spécialistes apportent une contribution importante aux sélections spOt et font varier les cotes.",
     "NEED HELP ?":"BESOIN D'AIDE ?",
     "If you have not found answers in the FAQ or in our game guides you can use our contact form. Our customer service is at your disposal to answer your questions.":"Si vous n'avez pas trouvé de réponses à vos questions dans le guide vous pouvez utiliser notre formulaire de contact. Notre service client vous répondra.",
-    "CONTACT US":"CONTACTER NOUS",
+    "CONTACT US":"CONTACTEZ NOUS",
     "USEFUL LINKS":"LIENS UTILES",
     "USEFUL DOCUMENTS":"DOCUMENTS UTILES",
 

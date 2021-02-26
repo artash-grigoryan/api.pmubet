@@ -33,8 +33,11 @@ export default {
     "Pronostic VIP":"Prognósticos VIP",
     "Play online":"Aposte online",
     "News":"Novidades",
+    "Bet online": "Aposta online",
+    "General informations": "Informações gerais",
     "Best Predictions from France":"Melhores prognósticos á partir de França",
     "Forbidden to minors": "Proibido para menores",
+    "Read the program": "Consulte o programa",
 
     "Lives" : "Ao vivo",
     "Account" : "Conta",

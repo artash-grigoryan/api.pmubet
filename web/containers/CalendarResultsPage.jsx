@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import { Link } from 'react-router-dom'
 import MainMenu from "../components/MainMenu.jsx";
 import Footer from "../components/shared/footer/footer";
@@ -40,9 +40,11 @@ export default class CalendarResultsPage extends Component {
         let lang = this.props.match.params.lang ? this.props.match.params.lang : 'en';
         i18next.changeLanguage(lang);
 
-        let dateCalendar = new Date();
+        let dateCalendar = moment().format();
         let minDateCalendar = new Date().setMonth(new Date().getMonth()-2);
         let maxDateCalendar = new Date().setDate(new Date().getDate()+1);
+
+        let dateProgram = moment().format("YYYY-MM-DD");
 
         this.state = {
             timezoneOffset: timezoneOffset,
@@ -50,23 +52,23 @@ export default class CalendarResultsPage extends Component {
             yesterday: yesterday,
             today: today,
             tomorrow: tomorrow,
-            date : today,
-            filter : 'all',
+            date: today,
+            filter: 'all',
             calendarSelectorOpened: false,
-            dateCalendar : dateCalendar,
-            minDateCalendar : minDateCalendar,
-            maxDateCalendar : maxDateCalendar,
-            races : null,
+            dateProgram: dateProgram,
+            dateCalendar: dateCalendar,
+            minDateCalendar: minDateCalendar,
+            maxDateCalendar: maxDateCalendar,
+            races: null,
             race: null,
             reunions: false,
             nextRace: false,
             nextQ5: false,
-            reunion: false,
             reunionSelectorOpened: false,
             predictionTop: [],
             runnerSelected: [],
             predictions: []
-        };
+        }
     }
 
     async componentWillMount() {
@@ -81,7 +83,7 @@ export default class CalendarResultsPage extends Component {
             while (timezoneMinutes.toString().length < 2) {timezoneMinutes = "0" + timezoneMinutes;}
 
             response.race.timezoneTime = timezoneHours + ':' + timezoneMinutes;
-            response.race.date = new Date(response.race.day+' '+response.race.timezoneTime);
+            response.race.date = moment(response.race.day+' '+response.race.timezoneTime).format();
 
             this.setState({
                 date : response.race.datePath,
@@ -137,7 +139,6 @@ export default class CalendarResultsPage extends Component {
     }
 
     setDate(date) {
-
         if(!this.state.races || !this.state.races[date]) {
 
             raceActions.getAllByDate(this.state.lang, date).then((response) => {
@@ -154,6 +155,7 @@ export default class CalendarResultsPage extends Component {
                         races : this.state.races,
                         date : date,
                         dateCalendar : this.state.races[date][0].day,
+                        dateProgram : this.state.races[date][0].day,
                         filter : 'all',
                         calendarSelectorOpened: false,
                     });
@@ -166,9 +168,11 @@ export default class CalendarResultsPage extends Component {
                 date : date,
                 filter : 'all',
                 dateCalendar : this.state.races[date][0].day,
+                dateProgram : this.state.races[date][0].day,
                 calendarSelectorOpened: false,
             });
         }
+
         this.props.history.push("/"+this.state.lang+"/calendar-results/"+date);
     }
 
@@ -299,12 +303,12 @@ export default class CalendarResultsPage extends Component {
                                         <a className="meeting-selected" href="javascript:;" onClick={() => this.toggleCalendarSelector()}>
                                             <FontAwesomeIcon icon={faCalendarAlt} />
                                         </a>
-                                        {
-                                            this.state.calendarSelectorOpened
+
+                                        {this.state.calendarSelectorOpened
                                                 ?
                                                 <Calendar
                                                     locale={this.state.lang}
-                                                    onClickDay={(date) => this.setDate(date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2), 'first')}
+                                                    onClickDay={(date) => this.setDate(moment(date).format("YYYYMMDD"))}
                                                     value={new Date(this.state.dateCalendar)}
                                                     minDate={new Date(this.state.minDateCalendar)}
                                                     maxDate={new Date(this.state.maxDateCalendar)}

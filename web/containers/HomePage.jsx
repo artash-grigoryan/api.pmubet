@@ -42,9 +42,11 @@ export default class HomePage extends Component {
         let lang = (typeof this.props.match.params.lang !== 'undefined' ? this.props.match.params.lang : 'en');
         i18next.changeLanguage(lang);
 
-        let dateCalendar = new Date();
+        let dateCalendar = moment().format();
         let minDateCalendar = new Date().setMonth(new Date().getMonth()-2);
         let maxDateCalendar = new Date().setDate(new Date().getDate()+1);
+
+        let dateProgram = moment().format("YYYY-MM-DD");
 
         this.state = {
 
@@ -61,6 +63,7 @@ export default class HomePage extends Component {
             race: false,
             reunionSelectorOpened: false,
             calendarSelectorOpened: false,
+            dateProgram : dateProgram,
             dateCalendar : dateCalendar,
             minDateCalendar : minDateCalendar,
             maxDateCalendar : maxDateCalendar,
@@ -136,10 +139,10 @@ export default class HomePage extends Component {
     setNextRace() {
 
         raceActions.getNext(this.state.lang).then((response) => {
-
             this.setState({
                 date : response.race.datePath,
-                dateCalendar : response.race.date,
+                dateCalendar : moment(response.race.date).format(),
+                dateProgram : moment(response.race.date).format("YYYY-MM-DD"),
                 reunion : response.race.reunion,
                 race : response.race,
                 predictionTop : response.race.reporters_top,
@@ -151,12 +154,11 @@ export default class HomePage extends Component {
     setFirstRaceByDate(date) {
 
         raceActions.getFirstByDate(this.state.lang, date).then((response) => {
-
             if(response.race) {
-
                 this.setState({
                     date : response.race.datePath,
-                    dateCalendar : response.race.date,
+                    dateCalendar : moment(response.race.date).format(),
+                    dateProgram : moment(response.race.date).format("YYYY-MM-DD"),
                     reunion : response.race.reunion,
                     race : response.race,
                     predictionTop : response.race.reporters_top,
@@ -177,7 +179,8 @@ export default class HomePage extends Component {
 
                 this.setState({
                     date : response.race.datePath,
-                    dateCalendar : response.race.date,
+                    dateCalendar : moment(response.race.date).format(),
+                    dateProgram : moment(response.race.date).format("YYYY-MM-DD"),
                     reunion : response.race.reunion,
                     race : response.race,
                     predictionTop : response.race.reporters_top,
@@ -199,7 +202,8 @@ export default class HomePage extends Component {
 
             this.setState({
                 date : response.race.datePath,
-                dateCalendar : response.race.date,
+                dateCalendar : moment(response.race.date).format(),
+                dateProgram : moment(response.race.date).format("YYYY-MM-DD"),
                 reunion : response.race.reunion,
                 race : response.race,
                 predictionTop : response.race.reporters_top,
@@ -219,7 +223,8 @@ export default class HomePage extends Component {
 
                 this.setState({
                     date : response.race.datePath,
-                    dateCalendar : response.race.date,
+                    dateCalendar : moment(response.race.date).format(),
+                    dateProgram : moment(response.race.date).format("YYYY-MM-DD"),
                     reunion : response.race.reunion,
                     race : response.race,
                     predictionTop : response.race.reporters_top,
@@ -349,9 +354,10 @@ export default class HomePage extends Component {
                                             {
                                                 this.state.calendarSelectorOpened
                                                 ?
+
                                                     <Calendar
                                                         locale={this.state.lang}
-                                                        onClickDay={(date) => this.setDate(date.getFullYear()+("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2), 'first')}
+                                                        onClickDay={(date) => this.setDate(moment(date).format("YYYYMMDD"), "first")}
                                                         value={new Date(this.state.dateCalendar)}
                                                         minDate={new Date(this.state.minDateCalendar)}
                                                         maxDate={new Date(this.state.maxDateCalendar)}

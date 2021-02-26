@@ -35,7 +35,10 @@ export default {
     "News":"News",
     "Best Predictions from France":"Best Predictions from France",
     "Help": "Help",
+    "Bet online": "Bet online",
+    "General informations": "General informations",
     "Forbidden to minors": "Forbidden to minors",
+    "Read the program": "Consult the program",
 
     "Lives" : "Lives",
     "Account" : "Account",
