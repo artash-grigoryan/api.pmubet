@@ -15,6 +15,8 @@ export default class Results extends React.Component {
 
             runnerSelected : runnerSelected
         }
+
+        console.log(this.props.race.results)
     }
 
     componentWillReceiveProps(props) {
