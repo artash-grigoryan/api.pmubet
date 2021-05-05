@@ -1,5 +1,16 @@
 import React, {useState} from 'react';
 import {Trans} from "react-i18next";
+import Button from "@material-ui/core/Button";
+import {withStyles} from "@material-ui/core";
+
+const RedButton = withStyles((theme) => ({
+    root: {
+        width: "100%",
+        [theme.breakpoints.down('sm')]: {
+            margin: "8px",
+        },
+    },
+}))(Button);
 
 const DialogMenu = ({race}) => {
 
@@ -53,7 +64,9 @@ const DialogMenu = ({race}) => {
 
     return (
         <React.Fragment>
-            <a className="nav-link bet-online-button" href="javascript:;" onClick={()=>setDialogStatus('opened')}><Trans i18nKey="Play online">Play online</Trans></a>
+            <RedButton variant={"contained"} color={"secondary"} onClick={()=>setDialogStatus('opened')}>
+                <Trans i18nKey="Play online">Play online</Trans>
+            </RedButton>
             <div id="countries-menu-dialog" className={dialogStatus}>
                 <div className="overlay" onClick={() => setDialogStatus('closed')}></div>
                 <div className="container">

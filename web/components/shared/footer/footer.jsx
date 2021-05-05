@@ -40,6 +40,7 @@ const Footer = (props) => {
                     <ul className={classes.footerUl}>
                         <li className={classes.footerLi}><Link to={"/"+props.lang}><Trans i18nKey="Programs & Results">Programs & Results</Trans></Link></li>
                         <li className={classes.footerLi}><Link to={"/"+props.lang+"/comment-jouer"}><Trans i18nKey="How to bet">How to bet</Trans></Link></li>
+                        <li className={classes.footerLi}><a href={"https://wariprono.com/"} target={"_blank"}><Trans i18nKey="Predictions">Predictions</Trans></a></li>
                     </ul>
                 </Grid>
                 <Grid item sm={4} xs={12}>
